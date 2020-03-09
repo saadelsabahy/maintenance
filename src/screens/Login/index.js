@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { CustomInput, CustomButton, CustomText } from '../../components';
 import LoginHeaderImage from '../../assets/images/login_header.png';
@@ -6,6 +6,7 @@ import { MAIN_COLOR, WHITE_COLOR } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { inputsChange } from '../../redux/actions/Auth/AuthActions';
 const Login = () => {
+   const passwordInput = useRef(null);
    const dispatch = useDispatch();
    const { name, password } = useSelector(state => ({
       name: state.Auth.loginUserName,
@@ -13,17 +14,20 @@ const Login = () => {
    }));
 
    return (
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
-         <View style={styles.container}>
-            <View style={styles.imageContainer}>
-               <Image source={LoginHeaderImage} style={styles.headerImage} />
-            </View>
+      <View style={styles.container}>
+         <View style={styles.imageContainer}>
+            <Image source={LoginHeaderImage} style={styles.headerImage} />
+         </View>
 
-            <View style={styles.formContainer}>
+         <View style={styles.formContainer}>
+            <ScrollView
+               style={{ flex: 1 }}
+               contentContainerStyle={{ flexGrow: 1, alignItems: 'center' }}>
                <CustomText text={'تسجيل الدخول'} textStyle={styles.loginText} />
                <CustomInput
-                  iconType={'material-community'}
                   iconStartName={'account-outline'}
+                  iconType={'material-community'}
+                  iconStartBackGround
                   iconStartSize={30}
                   startIconColor={WHITE_COLOR}
                   placeholder={'اسم المستخدم'}
@@ -32,6 +36,9 @@ const Login = () => {
                         dispatch(inputsChange('loginName', loginName));
                      },
                      value: name,
+                     returnKeyType: 'next',
+                     onSubmitEditing: () => passwordInput.current.focus(),
+                     blurOnSubmit: false,
                   }}
                   /*  error={true}
                   errorText={'حدث خطا مابيياريالاتا'} */
@@ -40,6 +47,7 @@ const Login = () => {
                <CustomInput
                   iconType={'feather'}
                   iconStartName="lock"
+                  iconStartBackGround
                   iconStartSize={30}
                   startIconColor={WHITE_COLOR}
                   placeholder={'كلمه المرور'}
@@ -49,13 +57,15 @@ const Login = () => {
                         dispatch(inputsChange('loginPassword', loginPassword));
                      },
                      value: password,
+                     ref: passwordInput,
+                     returnKeyType: 'go',
                   }}
                   iconStartStyle={styles.icon}
                />
                <CustomButton buttonTitle="دخول" />
-            </View>
+            </ScrollView>
          </View>
-      </ScrollView>
+      </View>
    );
 };
 const styles = StyleSheet.create({
@@ -66,8 +76,7 @@ const styles = StyleSheet.create({
    imageContainer: { width: '100%', height: '40%' },
    headerImage: { width: '100%', height: '100%', resizeMode: 'cover' },
    formContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
+      flex: 1,
    },
    loginText: {
       color: MAIN_COLOR,

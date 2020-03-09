@@ -14,12 +14,14 @@ const Icon = props => {
       reverse,
       reverseColor,
       iconContainerStyle,
+      iconBackGround,
    } = props;
 
    const IconComponent = getIconType(type);
 
    return (
-      <View style={[styles.container, iconContainerStyle]}>
+      <View
+         style={[iconBackGround ? styles.container : {}, iconContainerStyle]}>
          <IconComponent
             testID="iconIcon"
             style={[iconStyle]}

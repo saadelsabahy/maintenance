@@ -4,3 +4,6 @@ export * from './Button';
 export * from './customText';
 export * from './DrawerItemsList';
 export * from './RoundedImage';
+export * from './triangle';
+export * from './Header';
+export * from './IconButton';

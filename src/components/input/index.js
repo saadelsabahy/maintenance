@@ -9,7 +9,7 @@ const CustomInput = ({
    inputContainerStyle,
    inputStyle,
    iconStartName,
-   IconEndName,
+   iconEndName,
    iconStartStyle,
    iconEndStyle,
    iconStartSize,
@@ -21,7 +21,11 @@ const CustomInput = ({
    iconType,
    EndIconColor,
    startIconColor,
+   iconStartBackGround,
+   iconEndBackGround,
 }) => {
+   console.log(iconStartName, iconType);
+
    return (
       <View style={{ marginVertical: 10 }}>
          <View style={[styles.container, inputContainerStyle]}>
@@ -32,6 +36,7 @@ const CustomInput = ({
                   size={iconStartSize || 17}
                   color={startIconColor}
                   type={iconType}
+                  iconBackGround={iconStartBackGround}
                />
             )}
             <TextInput
@@ -39,13 +44,14 @@ const CustomInput = ({
                style={[styles.input, inputStyle]}
                {...inputProps}
             />
-            {IconEndName && (
+            {iconEndName && (
                <Icon
-                  name={IconEndName}
+                  name={iconEndName}
                   style={[styles.EndIcon, iconEndStyle]}
                   size={iconEndSize || 17}
                   type={iconType}
                   color={EndIconColor}
+                  iconBackGround={iconEndBackGround}
                />
             )}
          </View>
@@ -69,9 +75,9 @@ const styles = StyleSheet.create({
    input: {
       flex: 1,
       backgroundColor: INPUT_COLOR,
-      borderRadius: 5,
       fontSize: 18,
       textAlign: I18nManager.isRTL ? 'right' : 'left',
+      borderRadius: 3,
    },
    StartIcon: {
       marginHorizontal: 5,

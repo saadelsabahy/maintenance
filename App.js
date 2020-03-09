@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
 import DrawerItemsList from './src/components/DrawerItemsList';
-import { CustomImage } from './src/components';
+import { CustomImage, Triangle, Header } from './src/components';
 YellowBox.ignoreWarnings(['Remote debugger']);
 const App = () => {
    useEffect(() => {
@@ -17,13 +17,20 @@ const App = () => {
       <Provider store={store}>
          <View style={styles.container}>
             <StatusBar backgroundColor={MAIN_COLOR} />
-            {/* <Login /> */}
+            <Login />
             {/* <DrawerItemsList /> */}
-            <CustomImage
+            {/*  <CustomImage
                imageSource={
                   'https://www.whittierfirstday.org/wp-content/uploads/default-user-image-e1501670968910.png'
                }
-            />
+            /> */}
+            {/*  <Triangle />
+            <Header
+               iconEnd={'account'}
+               iconEndType={'material-community'}
+               iconStart={'heart'}
+               iconStartType={'material-community'}
+            /> */}
          </View>
       </Provider>
    );
