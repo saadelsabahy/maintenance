@@ -6,7 +6,7 @@ const Triangle = () => {
    return (
       <View style={styles.container}>
          <View style={styles.TriangleShape}>
-            <Image
+            {/* <Image
                source={require('../../assets/images/mm_wared.png')}
                style={{ width: '100%', height: '100%' }}
             />
@@ -31,7 +31,7 @@ const Triangle = () => {
                   color: '#fff',
                   top: 40,
                }}
-            />
+            /> */}
          </View>
       </View>
    );
@@ -46,19 +46,17 @@ const styles = StyleSheet.create({
    },
 
    TriangleShape: {
-      width: 115,
-      height: 100,
-      /*   borderLeftWidth: 60,
-      borderRightWidth: 80,
-      borderBottomWidth: 200,
-      borderStyle: 'solid',
+      width: 0,
+      height: 0,
       backgroundColor: 'transparent',
+      borderStyle: 'solid',
+      borderLeftWidth: 15,
+      borderRightWidth: 15,
+      borderBottomWidth: 20,
       borderLeftColor: 'transparent',
       borderRightColor: 'transparent',
-      borderBottomColor: '#7852',
-      transform: [{ rotate: '90deg' }],
-      alignItems: 'center',
-      justifyContent: 'flex-start', */
+      borderBottomColor: 'grey',
+      transform: [{ rotate: '-90deg' }],
    },
 });
 export { Triangle };

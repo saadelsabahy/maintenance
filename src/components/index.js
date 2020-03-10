@@ -7,3 +7,6 @@ export * from './RoundedImage';
 export * from './triangle';
 export * from './Header';
 export * from './IconButton';
+export * from './swiper';
+export * from './map';
+export * from './orderTrackCard';

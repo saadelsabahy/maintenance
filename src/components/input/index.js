@@ -24,8 +24,6 @@ const CustomInput = ({
    iconStartBackGround,
    iconEndBackGround,
 }) => {
-   console.log(iconStartName, iconType);
-
    return (
       <View style={{ marginVertical: 10 }}>
          <View style={[styles.container, inputContainerStyle]}>

@@ -6,7 +6,14 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
 import DrawerItemsList from './src/components/DrawerItemsList';
-import { CustomImage, Triangle, Header } from './src/components';
+import {
+   CustomImage,
+   Triangle,
+   Header,
+   CustomSwiper,
+   CustomMap,
+   OrderTrackCard,
+} from './src/components';
 YellowBox.ignoreWarnings(['Remote debugger']);
 const App = () => {
    useEffect(() => {
@@ -17,7 +24,7 @@ const App = () => {
       <Provider store={store}>
          <View style={styles.container}>
             <StatusBar backgroundColor={MAIN_COLOR} />
-            <Login />
+            {/*  <Login /> */}
             {/* <DrawerItemsList /> */}
             {/*  <CustomImage
                imageSource={
@@ -31,6 +38,9 @@ const App = () => {
                iconStart={'heart'}
                iconStartType={'material-community'}
             /> */}
+            {/* <CustomSwiper /> */}
+            <CustomMap />
+            <OrderTrackCard />
          </View>
       </Provider>
    );
@@ -38,7 +48,6 @@ const App = () => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#fff',
    },
 });
 
