@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   TouchableOpacity,
-   Platform,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Linking } from 'react-native';
+
+
 const CustomMap = ({ mapStyle, mapContainerStyle, location }) => {
    const region = {
       latitude: 30.03,
@@ -16,16 +12,19 @@ const CustomMap = ({ mapStyle, mapContainerStyle, location }) => {
       longitudeDelta: 0.092,
       locationLabel: 'location name',
    };
+
    const scheme = Platform.select({
       ios: 'maps:0,0?q=',
       android: 'geo:0,0?q=',
    });
+
    const latLng = `${region.latitude},${region.longitude}`;
    const label = region.locationLabel;
    const url = Platform.select({
       ios: `${scheme}${label}@${region.longitude}`,
       android: `${scheme}${latLng}(${label})`,
    });
+   
    return (
       <TouchableOpacity
          style={[styles.container, mapContainerStyle]}

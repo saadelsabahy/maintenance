@@ -5,7 +5,10 @@ import LoginHeaderImage from '../../assets/images/login_header.png';
 import { MAIN_COLOR, WHITE_COLOR } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { inputsChange } from '../../redux/actions/Auth/AuthActions';
-const Login = () => {
+
+
+
+const Login = ({navigation}) => {
    const passwordInput = useRef(null);
    const dispatch = useDispatch();
    const { name, password } = useSelector(state => ({
@@ -62,7 +65,7 @@ const Login = () => {
                   }}
                   iconStartStyle={styles.icon}
                />
-               <CustomButton buttonTitle="دخول" />
+               <CustomButton onButtonPressed={() => navigation.navigate('Map')} buttonTitle="دخول" />
             </ScrollView>
          </View>
       </View>
