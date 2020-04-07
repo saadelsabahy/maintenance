@@ -10,7 +10,7 @@ const Icon = props => {
       name,
       size,
       color,
-      iconStyle,
+      style,
       reverse,
       reverseColor,
       iconContainerStyle,
@@ -20,11 +20,10 @@ const Icon = props => {
    const IconComponent = getIconType(type);
 
    return (
-      <View
-         style={[iconBackGround ? styles.container : {}, iconContainerStyle]}>
+      <View style={[styles.container, iconContainerStyle]}>
          <IconComponent
             testID="iconIcon"
-            style={[iconStyle]}
+            style={[style]}
             size={size}
             name={name}
             color={reverse ? reverseColor : color}
@@ -34,13 +33,9 @@ const Icon = props => {
 };
 const styles = StyleSheet.create({
    container: {
-      width: 50,
-      height: 50,
+      flex: 0.3,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: MAIN_COLOR,
-      borderTopStartRadius: 5,
-      borderBottomStartRadius: 5,
    },
 });
 

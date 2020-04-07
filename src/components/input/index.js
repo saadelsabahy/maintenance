@@ -1,6 +1,10 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, I18nManager } from 'react-native';
-import { INPUT_COLOR, ERROR_RED_COLOR } from '../../constants/colors';
+import {
+   INPUT_COLOR,
+   ERROR_RED_COLOR,
+   TEXT_COLOR,
+} from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
 
@@ -34,7 +38,6 @@ const CustomInput = ({
                   size={iconStartSize || 17}
                   color={startIconColor}
                   type={iconType}
-                  iconBackGround={iconStartBackGround}
                />
             )}
             <TextInput
@@ -49,7 +52,6 @@ const CustomInput = ({
                   size={iconEndSize || 17}
                   type={iconType}
                   color={EndIconColor}
-                  iconBackGround={iconEndBackGround}
                />
             )}
          </View>
@@ -65,23 +67,27 @@ const CustomInput = ({
 const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
-      width: '90%',
-      height: 60,
+      width: '100%',
+      height: 50,
       alignItems: 'center',
       justifyContent: 'space-between',
+      backgroundColor: INPUT_COLOR,
+      borderWidth: 0.9,
+      borderRadius: 25,
+      borderColor: TEXT_COLOR,
    },
    input: {
       flex: 1,
-      backgroundColor: INPUT_COLOR,
       fontSize: 18,
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       borderRadius: 3,
+      color: TEXT_COLOR,
    },
    StartIcon: {
-      marginHorizontal: 5,
+      marginHorizontal: 10,
    },
    EndIcon: {
-      marginHorizontal: 5,
+      marginHorizontal: 10,
    },
    errorText: {
       color: ERROR_RED_COLOR,

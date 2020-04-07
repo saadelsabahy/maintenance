@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, I18nManager, StatusBar } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   I18nManager,
+   StatusBar,
+   SafeAreaView,
+} from 'react-native';
 import { MAIN_COLOR } from './src/constants/colors';
 import Login from './src/screens/Login';
 import { Provider } from 'react-redux';
@@ -16,15 +23,15 @@ import {
 } from './src/components';
 YellowBox.ignoreWarnings(['Remote debugger']);
 const App = () => {
+   I18nManager.forceRTL(true);
    useEffect(() => {
-      I18nManager.forceRTL(true);
       return () => {};
    }, []);
    return (
       <Provider store={store}>
-         <View style={styles.container}>
+         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={MAIN_COLOR} />
-            {/*  <Login /> */}
+            <Login />
             {/* <DrawerItemsList /> */}
             {/*  <CustomImage
                imageSource={
@@ -39,9 +46,9 @@ const App = () => {
                iconStartType={'material-community'}
             /> */}
             {/* <CustomSwiper /> */}
-            <CustomMap />
-            <OrderTrackCard />
-         </View>
+            {/*  <CustomMap />
+            <OrderTrackCard /> */}
+         </SafeAreaView>
       </Provider>
    );
 };

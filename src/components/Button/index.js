@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { MAIN_COLOR, WHITE_COLOR } from '../../constants/colors';
 import { CustomText } from '../customText';
+import { Icon } from '../Icon';
 
 const CustomButton = ({
    buttonTitle,
@@ -18,6 +19,10 @@ const CustomButton = ({
    onButtonPressed,
    buttonContainerStyle,
    buttonActiveOpacity,
+   icon,
+   iconColor,
+   iconType,
+   iconSize,
 }) => {
    return (
       <TouchableOpacity
@@ -31,10 +36,28 @@ const CustomButton = ({
                color={spinnerColor}
             />
          ) : (
-            <CustomText
-               textStyle={[styles.text, buttonTitleStyle]}
-               text={buttonTitle}
-            />
+            <View
+               style={{
+                  flex: 1,
+                  width: '100%',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+               }}>
+               {icon && (
+                  <Icon
+                     name={icon}
+                     color={iconColor}
+                     type={iconType}
+                     style={{}}
+                     size={iconSize || 20}
+                  />
+               )}
+               <CustomText
+                  textStyle={[styles.text, buttonTitleStyle]}
+                  text={buttonTitle}
+               />
+            </View>
          )}
       </TouchableOpacity>
    );
@@ -46,14 +69,17 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: MAIN_COLOR,
-      borderRadius: 7,
+      borderRadius: 25,
       marginVertical: 10,
    },
    text: {
       color: WHITE_COLOR,
       textTransform: 'capitalize',
-      fontSize: 20,
+      fontSize: 15,
       letterSpacing: 0.8,
+      marginHorizontal: 10,
+      alignSelf: 'center',
+      textAlign: 'center',
    },
 });
 

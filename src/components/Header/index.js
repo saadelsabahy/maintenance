@@ -32,7 +32,9 @@ const Header = ({
                   icoBackGround={iconStartBackGround}
                />
             )}
-            <CustomText text={headerText} textStyle={styles.headerText} />
+            {headerText && (
+               <CustomText text={headerText} textStyle={styles.headerText} />
+            )}
             {iconEnd && (
                <IconButton
                   iconName={iconEnd}
