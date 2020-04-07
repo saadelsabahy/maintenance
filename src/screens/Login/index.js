@@ -18,7 +18,10 @@ import {
 } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { inputsChange } from '../../redux/actions/Auth/AuthActions';
-const Login = () => {
+
+
+
+const Login = ({navigation}) => {
    const passwordInput = useRef(null);
    const dispatch = useDispatch();
    const { name, password } = useSelector(state => ({
@@ -120,6 +123,10 @@ const Login = () => {
                   iconColor={WHITE_COLOR}
                   iconType={'material-community'}
                />
+<<<<<<< HEAD
+=======
+               <CustomButton onButtonPressed={() => navigation.navigate('Map')} buttonTitle="دخول" />
+>>>>>>> 6b552287323637288e0c3d76ccec54e4076453bc
             </ScrollView>
          </View>
       </View>

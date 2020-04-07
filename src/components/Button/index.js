@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-   View,
-   Text,
-   TouchableOpacity,
-   StyleSheet,
-   ActivityIndicator,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { MAIN_COLOR, WHITE_COLOR } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { Icon } from '../Icon';
