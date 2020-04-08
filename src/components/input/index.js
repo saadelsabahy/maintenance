@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
       borderWidth: 0.9,
       borderRadius: 25,
       borderColor: TEXT_COLOR,
+      overflow: 'hidden',
    },
    input: {
       flex: 1,
@@ -82,6 +83,10 @@ const styles = StyleSheet.create({
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       borderRadius: 3,
       color: TEXT_COLOR,
+      fontFamily: 'DroidArabicKufi',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 10,
    },
    StartIcon: {
       marginHorizontal: 10,

@@ -10,3 +10,4 @@ export * from './IconButton';
 export * from './swiper';
 export * from './map';
 export * from './orderTrackCard';
+export * from './DashboardItem';

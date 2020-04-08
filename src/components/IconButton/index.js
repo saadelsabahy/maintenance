@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Icon } from '../Icon';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const IconButton = ({
    onIconPressed,
    iconContainerStyle,
@@ -23,24 +24,24 @@ const IconButton = ({
          <Icon
             name={iconName}
             color={iconColor}
-            size={iconSize || 20}
+            size={iconSize || responsiveFontSize(2.5)}
             style={[iconStyle]}
             type={iconType}
             icoBackGround={icoBackGround}
          />
-         {iconButtonText && (
-            <Text style={[styles.text, buttonTextStyle]}>{iconButtonText}</Text>
-         )}
+
+         <Text style={[styles.text, buttonTextStyle]}>weghtkurjj</Text>
       </TouchableOpacity>
    );
 };
 const styles = StyleSheet.create({
    iconContainer: {
-      width: 40,
+      /*   width: 40,
       height: 40,
-      borderRadius: 20,
+      borderRadius: 20, */
       justifyContent: 'center',
       alignItems: 'center',
+      backgroundColor: '#ddd',
    },
    text: {
       fontSize: 15,

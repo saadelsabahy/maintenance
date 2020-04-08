@@ -1,20 +1,15 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Login from '../screens/Login';
-import {CustomMap} from '../components';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import DrawerNavigator from './Drawer';
 
+const AppNavigation = () => {
+   const Stack = createStackNavigator();
+   return (
+      <NavigationContainer>
+         <DrawerNavigator />
+      </NavigationContainer>
+   );
+};
 
-const MainNavigator = () => {
-    const Stack = createStackNavigator();
-    return (
-        <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
-            <Stack.Screen name="Map" component={CustomMap} options={{headerShown: false}} />
-        </Stack.Navigator>
-        </NavigationContainer>
-    )
-}
-
-export default MainNavigator
+export default AppNavigation;

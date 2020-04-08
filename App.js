@@ -14,8 +14,16 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
 import DrawerItemsList from './src/components/DrawerItemsList';
-import { CustomImage, Triangle, Header, CustomSwiper, CustomMap, OrderTrackCard } from './src/components';
-import MainNavigator from './src/navigation/MainNavigator';
+import {
+   CustomImage,
+   Triangle,
+   Header,
+   CustomSwiper,
+   CustomMap,
+   OrderTrackCard,
+} from './src/components';
+import DashBoard from './src/screens/Dashboard';
+import AppNavigation from './src/navigation/MainNavigator';
 
 YellowBox.ignoreWarnings(['Remote debugger']);
 
@@ -29,35 +37,17 @@ const App = () => {
       <Provider store={store}>
          <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={MAIN_COLOR} />
-<<<<<<< HEAD
-            <Login />
-            {/* <DrawerItemsList /> */}
-            {/*  <CustomImage
-               imageSource={
-                  'https://www.whittierfirstday.org/wp-content/uploads/default-user-image-e1501670968910.png'
-               }
-            /> */}
-            {/*  <Triangle />
-            <Header
-               iconEnd={'account'}
-               iconEndType={'material-community'}
-               iconStart={'heart'}
-               iconStartType={'material-community'}
-            /> */}
-            {/* <CustomSwiper /> */}
-            {/*  <CustomMap />
-            <OrderTrackCard /> */}
+            <AppNavigation />
+            {/*  <Login /> */}
+            {/*  <DashBoard />*/}
          </SafeAreaView>
-=======
-            <MainNavigator />
-         </View>
->>>>>>> 6b552287323637288e0c3d76ccec54e4076453bc
       </Provider>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
+      backgroundColor: MAIN_COLOR,
    },
 });
 

@@ -12,18 +12,12 @@ import {
    DRAWER_DIVIDER,
    DRAWER_TEXT,
    MAIN_COLOR,
+   SECONDART_COLOR,
+   TEXT_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 
-const DrawerItemsList = ({ onDrawerItemPressed }) => {
-   const data = [
-      { name: 'الرئيسيه', iconType: 'fontawsome', iconName: 'home' },
-      {
-         name: 'البلاغات',
-         iconType: 'material-community',
-         iconName: 'file-eye-outline',
-      },
-   ];
+const DrawerItemsList = ({ onDrawerItemPressed, data }) => {
    return (
       <View style={[styles.container]}>
          <View style={[styles.contentContainer]}>
@@ -31,13 +25,12 @@ const DrawerItemsList = ({ onDrawerItemPressed }) => {
                style={{ flex: 1 }}
                contentContainerStyle={{
                   flexGrow: 1,
-                  justifyContent: 'center',
                }}
                data={data}
                keyExtractor={(item, index) => `${index}`}
                renderItem={({
                   item,
-                  item: { name, iconName, iconType },
+                  // item: { name, iconName, iconType },
                   index,
                }) => {
                   return (
@@ -45,14 +38,14 @@ const DrawerItemsList = ({ onDrawerItemPressed }) => {
                         style={styles.itemContainer}
                         activeOpacity={0.7}
                         onPress={onDrawerItemPressed}>
-                        <Icon
+                        {/*  <Icon
                            type={iconType}
                            name={iconName}
                            iconContainerStyle={styles.iconContainer}
                            size={30}
                            color={MAIN_COLOR}
-                        />
-                        <CustomText text={name} textStyle={styles.text} />
+                        /> */}
+                        <CustomText text={item} />
                      </TouchableOpacity>
                   );
                }}
@@ -64,12 +57,12 @@ const DrawerItemsList = ({ onDrawerItemPressed }) => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: DRAWER_BACKGROUND,
+      backgroundColor: SECONDART_COLOR,
    },
    contentContainer: {
-      flex: 1,
+      width: '100%',
+      height: '100%',
       justifyContent: 'center',
-      width: '90%',
       alignSelf: 'flex-end',
    },
    itemContainer: {
@@ -83,10 +76,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent',
       justifyContent: 'flex-end',
    },
-   text: {
-      color: DRAWER_TEXT,
-      fontSize: 18,
-   },
+   text: {},
 });
 
 export default DrawerItemsList;

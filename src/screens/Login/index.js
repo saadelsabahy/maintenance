@@ -1,15 +1,8 @@
 import React, { useRef } from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   Image,
-   ScrollView,
-   Keyboard,
-} from 'react-native';
+import { View, Image, ScrollView, Keyboard } from 'react-native';
 import { CustomInput, CustomButton, CustomText } from '../../components';
 import Svg, { Rect, G } from 'react-native-svg';
-import LoginHeaderImage from '../../assets/images/login_header.png';
+import LoginHeaderImage from '../../assets/images/gear.png';
 import {
    MAIN_COLOR,
    WHITE_COLOR,
@@ -18,10 +11,9 @@ import {
 } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { inputsChange } from '../../redux/actions/Auth/AuthActions';
-
-
-
-const Login = ({navigation}) => {
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import styles from './style';
+const Login = ({ navigation }) => {
    const passwordInput = useRef(null);
    const dispatch = useDispatch();
    const { name, password } = useSelector(state => ({
@@ -33,20 +25,18 @@ const Login = ({navigation}) => {
       <View style={styles.container}>
          <View style={styles.imageContainer}>
             <Image source={LoginHeaderImage} style={styles.headerImage} />
+            <CustomText text="تطبيق الصيانات" textStyle={styles.logoText} />
          </View>
 
          <View style={styles.formContainer}>
             <Svg width="100%" height="100%" style={styles.svg}>
-               <G rotation="10">
-                  <Rect
-                     x="0"
-                     y="0"
-                     width="100%"
-                     height="100%"
-                     fill={SECONDART_COLOR}
-                     strokeWidth="3"
-                  />
-               </G>
+               <Rect
+                  x="0"
+                  y="2%"
+                  width="100%"
+                  height="100%"
+                  fill={SECONDART_COLOR}
+               />
             </Svg>
             <ScrollView
                style={{ flex: 1 }}
@@ -71,7 +61,7 @@ const Login = ({navigation}) => {
                      iconType={'material-community'}
                      iconStartBackGround
                      placeholderTextColor={TEXT_COLOR}
-                     iconStartSize={30}
+                     iconStartSize={responsiveFontSize(2.5)}
                      startIconColor={MAIN_COLOR}
                      placeholder={'اسم المستخدم'}
                      inputProps={{
@@ -92,7 +82,7 @@ const Login = ({navigation}) => {
                      iconStartName="lock"
                      iconStartBackGround
                      placeholderTextColor={TEXT_COLOR}
-                     iconStartSize={30}
+                     iconStartSize={responsiveFontSize(2.5)}
                      startIconColor={MAIN_COLOR}
                      placeholder={'كلمه المرور'}
                      inputProps={{
@@ -118,44 +108,16 @@ const Login = ({navigation}) => {
                      width: '50%',
                      alignSelf: 'flex-start',
                      justifyContent: 'space-between',
+                     marginBottom: 5,
                   }}
-                  icon={'arrow-right'}
+                  icon={'long-arrow-right'}
                   iconColor={WHITE_COLOR}
-                  iconType={'material-community'}
+                  iconType={'font-awesome'}
                />
-<<<<<<< HEAD
-=======
-               <CustomButton onButtonPressed={() => navigation.navigate('Map')} buttonTitle="دخول" />
->>>>>>> 6b552287323637288e0c3d76ccec54e4076453bc
             </ScrollView>
          </View>
       </View>
    );
 };
-const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      backgroundColor: MAIN_COLOR,
-   },
-   imageContainer: {
-      width: '80%',
-      height: '30%',
-      alignItems: 'flex-end',
-      alignSelf: 'center',
-   },
-   headerImage: { width: '40%', height: '100%', resizeMode: 'contain' },
-   formContainer: {
-      flex: 1,
-      borderRadius: 30,
-      justifyContent: 'center',
-   },
-   svg: { position: 'absolute' /* transform: [{ rotate: '-120deg' }] */ },
-   loginText: {
-      color: TEXT_COLOR,
-      fontSize: 22,
-      fontFamily: 'DroidArabicKufi',
-      alignSelf: 'flex-start',
-   },
-});
 
 export default Login;

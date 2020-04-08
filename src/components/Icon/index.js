@@ -3,6 +3,7 @@ import React from 'react';
 import getIconType from '../../utils/getIconType';
 import { View, StyleSheet } from 'react-native';
 import { MAIN_COLOR } from '../../constants/colors';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const Icon = props => {
    const {
@@ -15,6 +16,7 @@ const Icon = props => {
       reverseColor,
       iconContainerStyle,
       iconBackGround,
+      onPress,
    } = props;
 
    const IconComponent = getIconType(type);
@@ -24,16 +26,17 @@ const Icon = props => {
          <IconComponent
             testID="iconIcon"
             style={[style]}
-            size={size}
+            size={size || responsiveFontSize(3.5)}
             name={name}
             color={reverse ? reverseColor : color}
+            onPress={onPress}
          />
       </View>
    );
 };
 const styles = StyleSheet.create({
    container: {
-      flex: 0.3,
+      flex: 0.2,
       alignItems: 'center',
       justifyContent: 'center',
    },
