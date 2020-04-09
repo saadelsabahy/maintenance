@@ -34,9 +34,9 @@ const DrawerNavigator = () => {
             iconContainerStyle={{
                flex: 0,
                backgroundColor: MAIN_COLOR,
-               width: 45,
-               height: 45,
-               borderRadius: 45 / 2,
+               width: '18%',
+               height: '100%',
+               borderRadius: 60,
             }}
          />
       ),
@@ -44,7 +44,11 @@ const DrawerNavigator = () => {
    return (
       <Drawer.Navigator
          initialRouteName="DashBoard"
-         drawerStyle={{ borderTopEndRadius: 75, overflow: 'hidden' }}
+         drawerStyle={{
+            borderTopEndRadius: 75,
+            overflow: 'hidden',
+            width: '75%',
+         }}
          drawerContent={props => <CustomDrawer {...props} />}
          drawerContentOptions={{
             activeTintColor: MAIN_COLOR,
@@ -55,7 +59,7 @@ const DrawerNavigator = () => {
             itemStyle: {
                borderBottomColor: DRAWER_DIVIDER,
                borderBottomWidth: 1,
-               height: 55,
+               height: '50%',
                width: '100%',
                justifyContent: 'center',
                margin: 0,

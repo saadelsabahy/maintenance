@@ -22,8 +22,6 @@ import {
 import { Icon, CustomText } from '../../components';
 import DrawerItemsList from '../../components/DrawerItemsList';
 const CustomDrawer = props => {
-   console.log(props);
-
    return (
       <View style={styles.container}>
          <View style={styles.DrawerHeader}>

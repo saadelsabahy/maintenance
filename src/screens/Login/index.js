@@ -49,12 +49,17 @@ const Login = ({ navigation }) => {
                }}
                keyboardShouldPersistTaps="always"
                keyboardDismissMode="on-drag">
-               <CustomText text={'تسجيل الدخول'} textStyle={styles.loginText} />
+               <View style={styles.textContainer}>
+                  <CustomText
+                     text={'تسجيل الدخول'}
+                     textStyle={styles.loginText}
+                  />
+               </View>
                <View
                   style={{
+                     flex: 0.2,
                      width: '100%',
-                     justifyContent: 'center',
-                     marginVertical: 15,
+                     justifyContent: 'space-evenly',
                   }}>
                   <CustomInput
                      iconStartName={'account-outline'}
@@ -99,21 +104,23 @@ const Login = ({ navigation }) => {
                      iconStartStyle={styles.icon}
                   />
                </View>
-               <CustomButton
-                  buttonTitle="دخول"
-                  onButtonPressed={() => {
-                     Keyboard.dismiss();
-                  }}
-                  buttonContainerStyle={{
-                     width: '50%',
-                     alignSelf: 'flex-start',
-                     justifyContent: 'space-between',
-                     marginBottom: 5,
-                  }}
-                  icon={'long-arrow-right'}
-                  iconColor={WHITE_COLOR}
-                  iconType={'font-awesome'}
-               />
+               <View style={styles.buttonContainer}>
+                  <CustomButton
+                     buttonTitle="دخول"
+                     onButtonPressed={() => {
+                        Keyboard.dismiss();
+                     }}
+                     buttonContainerStyle={{
+                        width: '50%',
+                        alignSelf: 'flex-start',
+                        justifyContent: 'space-between',
+                        height: '60%',
+                     }}
+                     icon={'long-arrow-right'}
+                     iconColor={WHITE_COLOR}
+                     iconType={'font-awesome'}
+                  />
+               </View>
             </ScrollView>
          </View>
       </View>

@@ -4,6 +4,7 @@ import {
    WHITE_COLOR,
    MAIN_COLOR,
    DASHBOARD_ITEM_ICON_CONTAINER,
+   SCREEN_HEIGHT,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
    textStyle: {
       textAlign: 'right',
       fontSize: responsiveFontSize(2.7),
-      lineHeight: 30,
+      lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
    },
 });
 

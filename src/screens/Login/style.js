@@ -44,6 +44,16 @@ const styles = StyleSheet.create({
       fontSize: responsiveFontSize(2.2),
       color: WHITE_COLOR,
    },
+   textContainer: {
+      width: '100%',
+      height: '10%',
+      justifyContent: 'center',
+   },
+   buttonContainer: {
+      width: '100%',
+      height: '20%',
+      justifyContent: 'center',
+   },
 });
 
 export default styles;

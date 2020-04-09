@@ -24,6 +24,10 @@ const CustomButton = ({
    iconColor,
    iconType,
    iconSize,
+   iconEnd,
+   iconEndColor,
+   iconEndSize,
+   iconEndType,
 }) => {
    return (
       <TouchableOpacity
@@ -57,6 +61,14 @@ const CustomButton = ({
                   textStyle={[styles.text, buttonTitleStyle]}
                   text={buttonTitle}
                />
+               {/*  {iconEnd && (
+                  <Icon
+                     name={iconEnd}
+                     color={iconEndColor}
+                     type={iconEndType}
+                     size={iconEndSize || responsiveFontSize(2.5)}
+                  />
+               )} */}
             </View>
          )}
       </TouchableOpacity>

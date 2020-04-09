@@ -7,6 +7,7 @@ import {
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const CustomInput = ({
    placeholder,
@@ -29,13 +30,19 @@ const CustomInput = ({
    iconEndBackGround,
 }) => {
    return (
-      <View style={{ marginVertical: 10 }}>
+      <View
+         style={{
+            height: '40%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+         }}>
          <View style={[styles.container, inputContainerStyle]}>
             {iconStartName && (
                <Icon
                   name={iconStartName}
                   style={[styles.StartIcon, iconStartStyle]}
-                  size={iconStartSize || 17}
+                  size={iconStartSize}
                   color={startIconColor}
                   type={iconType}
                />
@@ -49,7 +56,7 @@ const CustomInput = ({
                <Icon
                   name={iconEndName}
                   style={[styles.EndIcon, iconEndStyle]}
-                  size={iconEndSize || 17}
+                  size={iconEndSize}
                   type={iconType}
                   color={EndIconColor}
                />
@@ -68,25 +75,25 @@ const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
       width: '100%',
-      height: 50,
+      height: '100%',
       alignItems: 'center',
       justifyContent: 'space-between',
       backgroundColor: INPUT_COLOR,
       borderWidth: 0.9,
       borderRadius: 25,
       borderColor: TEXT_COLOR,
-      overflow: 'hidden',
    },
    input: {
       flex: 1,
-      fontSize: 18,
+      height: '100%',
+      fontSize: responsiveFontSize(2),
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       borderRadius: 3,
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingHorizontal: 10,
+      padding: 5,
    },
    StartIcon: {
       marginHorizontal: 10,
