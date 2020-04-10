@@ -20,7 +20,6 @@ import {
    DrawerItem,
 } from '@react-navigation/drawer';
 import { Icon, CustomText } from '../../components';
-import DrawerItemsList from '../../components/DrawerItemsList';
 const CustomDrawer = props => {
    return (
       <View style={styles.container}>

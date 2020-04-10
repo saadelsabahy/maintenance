@@ -5,6 +5,7 @@ import {
    StyleSheet,
    Dimensions,
    KeyboardAvoidingView,
+   Platform,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -41,7 +42,11 @@ const SearchModal = ({
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}>
-         <KeyboardAvoidingView style={styles.modalContentContainer}>
+         <KeyboardAvoidingView
+            style={styles.modalContentContainer}
+            /*  behavior={Platform.OS == 'ios' ? 'padding' : undefined}
+            enabled */
+         >
             <CustomText
                text={'بحث'}
                textStyle={{ margin: 20, fontSize: responsiveFontSize(2.5) }}
@@ -83,6 +88,7 @@ const SearchModal = ({
 };
 const styles = StyleSheet.create({
    container: {
+      flex: 1,
       width: SCREEN_WIDTH,
       marginBottom: 0,
       marginStart: 0,

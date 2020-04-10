@@ -13,16 +13,7 @@ import Login from './src/screens/Login';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
-import DrawerItemsList from './src/components/DrawerItemsList';
-import {
-   CustomImage,
-   Triangle,
-   Header,
-   CustomSwiper,
-   CustomMap,
-   OrderTrackCard,
-} from './src/components';
-import DashBoard from './src/screens/Dashboard';
+
 import AppNavigation from './src/navigation/MainNavigator';
 
 YellowBox.ignoreWarnings(['Remote debugger']);

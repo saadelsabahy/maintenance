@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DrawerNavigator from './Drawer';
 
 const AppNavigation = () => {
-   const Stack = createStackNavigator();
    return (
       <NavigationContainer>
          <DrawerNavigator />

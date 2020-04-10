@@ -69,6 +69,7 @@ const DashboardHeader = ({ navigation }) => {
                      textStyle={{
                         color: WHITE_COLOR,
                         fontSize: responsiveFontSize(2.7),
+                        marginStart: 15,
                      }}
                   />
                </View>

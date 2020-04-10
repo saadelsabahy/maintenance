@@ -9,6 +9,9 @@ import DashBoardItem from '../../components/DashboardItem';
 import DashboardHeader from './DashboardHeader';
 
 const DashBoard = ({ navigation }) => {
+   const onDashboardItemPressed = text => {
+      navigation.navigate('DashboardComplains', { headerText: text });
+   };
    return (
       <View style={styles.container}>
          <DashboardHeader navigation={navigation} />
@@ -27,30 +30,35 @@ const DashBoard = ({ navigation }) => {
                   number={'55'}
                   icon={'download'}
                   iconTtype={'antdesign'}
+                  onDashboardItemPressed={onDashboardItemPressed}
                />
                <DashBoardItem
                   text={'قيد التعميد'}
                   number={'20'}
                   icon={'stopwatch'}
                   iconTtype={'entypo'}
+                  onDashboardItemPressed={onDashboardItemPressed}
                />
                <DashBoardItem
                   text={'قيد التنفيذ'}
                   number={'100'}
                   icon={'gears'}
                   iconTtype={'font-awesome'}
+                  onDashboardItemPressed={onDashboardItemPressed}
                />
                <DashBoardItem
                   text={'تم الحل'}
                   number={'30'}
                   icon={'checkcircleo'}
                   iconTtype={'antdesign'}
+                  onDashboardItemPressed={onDashboardItemPressed}
                />
                <DashBoardItem
                   text={'مرفوض'}
                   number={'10'}
                   icon={'closecircleo'}
                   iconTtype={'antdesign'}
+                  onDashboardItemPressed={onDashboardItemPressed}
                />
             </View>
          </View>

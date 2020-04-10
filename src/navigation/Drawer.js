@@ -14,7 +14,39 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText, Icon } from '../components';
 
 const Drawer = createDrawerNavigator();
+import { createStackNavigator } from '@react-navigation/stack';
+import ComplainsDetailes from '../screens/cmplainsDetails';
 
+const Stack = createStackNavigator();
+
+const DashboardStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{
+            headerShown: false,
+         }}
+         initialRouteName={'Dashboard'}>
+         <Stack.Screen name={'Dashboard'} component={DashBoard} />
+         <Stack.Screen name={'DashboardComplains'} component={Complains} />
+      </Stack.Navigator>
+   );
+};
+
+const ComplainsStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{
+            headerShown: false,
+         }}
+         initialRouteName={Complains}>
+         <Stack.Screen name={'Complains'} component={Complains} />
+         <Stack.Screen
+            name={'ComplainDetailes'}
+            component={ComplainsDetailes}
+         />
+      </Stack.Navigator>
+   );
+};
 const DrawerNavigator = () => {
    const dawerDefaultOptions = (text, iconName, iconType) => ({
       drawerLabel: () => (
@@ -43,7 +75,7 @@ const DrawerNavigator = () => {
    });
    return (
       <Drawer.Navigator
-         initialRouteName="DashBoard"
+         initialRouteName="DashBoardStack"
          drawerStyle={{
             borderTopEndRadius: 75,
             overflow: 'hidden',
@@ -69,8 +101,8 @@ const DrawerNavigator = () => {
             },
          }}>
          <Drawer.Screen
-            name="DashBoard"
-            component={DashBoard}
+            name="DashBoardStack"
+            component={DashboardStack}
             options={{
                ...dawerDefaultOptions(
                   'الرئيسيه',
@@ -80,8 +112,8 @@ const DrawerNavigator = () => {
             }}
          />
          <Drawer.Screen
-            name="Complains"
-            component={Complains}
+            name="ComplainsStack"
+            component={ComplainsStack}
             options={{
                ...dawerDefaultOptions(
                   'البلاغات',

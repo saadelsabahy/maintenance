@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { WHITE_COLOR } from '../../constants/colors';
 import { CustomText } from '../customText';
 
@@ -11,9 +11,24 @@ const ComplainsItem = ({
    vehicleType,
    contractorNumber,
    indicatorColor,
+   onComplainPressed,
+   containerStyle,
 }) => {
    return (
-      <View style={styles.container}>
+      <TouchableOpacity
+         style={[styles.container, containerStyle]}
+         activeOpacity={0.9}
+         onPress={() =>
+            onComplainPressed({
+               complainNumber,
+               complainDate,
+               vehicleCode,
+               vehicleNumber,
+               vehicleType,
+               contractorNumber,
+               indicatorColor,
+            })
+         }>
          <View
             style={[styles.indicator, { backgroundColor: indicatorColor }]}
          />
@@ -25,7 +40,7 @@ const ComplainsItem = ({
             <CustomText text={`رقم اللوحه : ${vehicleNumber}`} />
             <CustomText text={`العقد : ${contractorNumber}`} />
          </View>
-      </View>
+      </TouchableOpacity>
    );
 };
 const styles = StyleSheet.create({
@@ -50,6 +65,7 @@ const styles = StyleSheet.create({
       flex: 0.97,
       alignSelf: 'center',
       lineHeight: 20,
+      justifyContent: 'space-evenly',
    },
 });
 

@@ -14,14 +14,16 @@ import {
    CustomText,
    Icon,
 } from '../../components';
-const Complains = () => {
+const Complains = ({ navigation, route }) => {
    const [isModalVisible, setisModalVisible] = useState(false);
    const [filterLabel, setfilterLabel] = useState('');
    const menuRef = useRef(null);
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
-
+   const onComplainPressed = data => {
+      navigation.navigate('ComplainDetailes', { data });
+   };
    return (
       <View style={styles.container}>
          <Header>
@@ -40,7 +42,11 @@ const Complains = () => {
                   justifyContent: 'center',
                }}>
                <CustomText
-                  text={'البلاغات'}
+                  text={
+                     route.params && route.params.hasOwnProperty('headerText')
+                        ? route.params.headerText
+                        : 'البلاغات'
+                  }
                   textStyle={{
                      color: WHITE_COLOR,
                      fontSize: responsiveFontSize(2.7),
@@ -60,13 +66,12 @@ const Complains = () => {
                         name={'filter-outline'}
                         type={'material-community'}
                         color={WHITE_COLOR}
-                        iconContainerStyle={{ flex: 1 }}
+                        iconContainerStyle={{ flex: 0 }}
                         onPress={() => menuRef.current.show()}
                      />
                   }
                   refrence={menuRef}
                />
-               <CustomText text={filterLabel} />
             </View>
          </Header>
          <View style={styles.listContainer}>
@@ -79,6 +84,7 @@ const Complains = () => {
                   vehicleType={'jsubn282'}
                   contractorNumber={81}
                   indicatorColor={'#0f0'}
+                  onComplainPressed={onComplainPressed}
                />
                <ComplainsItem
                   complainNumber={254555}
@@ -88,6 +94,7 @@ const Complains = () => {
                   vehicleType={'jsubn282'}
                   contractorNumber={81}
                   indicatorColor={'#f00'}
+                  onComplainPressed={onComplainPressed}
                />
             </View>
          </View>
