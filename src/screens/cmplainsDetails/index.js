@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Header, Icon, ComplainsItem, ImageCarousel } from '../../components';
 import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
 import ChechBox from '../../components/checkBox';
+import Gurantee from '../../components/insideAndOutsideGuarantee';
 
 const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
@@ -43,10 +44,13 @@ const ComplainsDetailes = ({ route, navigation }) => {
             }}>
             <ImageCarousel />
          </View> */}
+         {/*  <ChechBox />
          <ChechBox />
          <ChechBox />
-         <ChechBox />
-         <ChechBox />
+         <ChechBox /> */}
+         <View style={{ flex: 1 }}>
+            <Gurantee />
+         </View>
       </View>
    );
 };

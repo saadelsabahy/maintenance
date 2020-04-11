@@ -19,3 +19,6 @@ export * from './complainsItem';
 export * from './SearchModal';
 export * from './imageCarousel';
 export * from './checkBox';
+export * from './insideAndOutsideGuarantee';
+export * from './TextArea';
+export * from './BottomSheet';

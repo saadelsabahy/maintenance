@@ -28,15 +28,20 @@ const CustomInput = ({
    startIconColor,
    iconStartBackGround,
    iconEndBackGround,
+   inputWrapper,
+   ...res
 }) => {
    return (
       <View
-         style={{
-            height: '40%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-         }}>
+         style={[
+            {
+               height: 50,
+               alignItems: 'center',
+               justifyContent: 'center',
+               width: '100%',
+            },
+            inputWrapper,
+         ]}>
          <View style={[styles.container, inputContainerStyle]}>
             {iconStartName && (
                <Icon
@@ -50,7 +55,7 @@ const CustomInput = ({
             <TextInput
                placeholder={placeholder}
                style={[styles.input, inputStyle]}
-               {...inputProps}
+               {...res}
             />
             {iconEndName && (
                <Icon

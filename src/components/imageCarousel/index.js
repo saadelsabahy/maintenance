@@ -4,7 +4,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { SCREEN_WIDTH } from '../../constants/colors';
 
 const ITEM_WIDTH = Math.round(SCREEN_WIDTH * 0.8);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 4);
+const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 2);
 const ImageCarousel = () => {
    const carouselRef = useRef(null);
    const [activeSlide, setactiveSlide] = useState(0);
@@ -25,9 +25,9 @@ const ImageCarousel = () => {
    return (
       <View
          style={{
-            justifyContent: 'space-between',
             width: '100%',
             height: '100%',
+            justifyContent: 'space-between',
          }}>
          <Carousel
             ref={carouselRef}
@@ -47,6 +47,7 @@ const ImageCarousel = () => {
             inverted={I18nManager.isRTL}
          />
          <Pagination
+            containerStyle={{ padding: 0, margin: 0 }}
             dotsLength={data.length}
             activeDotIndex={activeSlide}
             dotStyle={{
@@ -64,7 +65,6 @@ const ImageCarousel = () => {
                backgroundColor: 'rgba(0, 0, 0, 0.92)',
             }}
             inactiveDotOpacity={0.4}
-            inactiveDotScale={0.6}
          />
       </View>
    );
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
    carouselContainer: {
       /* justifyContent: 'center',
       alignSelf: 'center', */
-      marginTop: 20,
+      flex: 1,
    },
    itemContainer: {
       alignItems: 'center',

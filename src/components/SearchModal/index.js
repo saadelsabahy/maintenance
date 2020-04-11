@@ -6,6 +6,7 @@ import {
    Dimensions,
    KeyboardAvoidingView,
    Platform,
+   ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -53,23 +54,30 @@ const SearchModal = ({
             />
 
             <View style={styles.inputsContainer}>
-               <CustomInput
-                  inputContainerStyle={styles.input}
-                  placeholder={'رقم البلاغ'}
-               />
-               <CustomDropDown
-                  onDropDownPressed={() => menuRef.current.show()}
-                  menuStyle={styles.menuStyle}
-                  onMenuItemPressed={label => {
-                     setdropDownText(label);
-                     menuRef.current.hide();
-                  }}
-                  menuContainerStyle={styles.menuContainerStyle}
-                  labels={searchDropdownLabels}
-                  refrence={menuRef}
-                  dropDownText={dropDownText}
-               />
-               <SearchDuration />
+               <ScrollView
+                  style={{ flex: 1 }}
+                  contentContainerStyle={{
+                     flexGrow: 1,
+                     justifyContent: 'space-between',
+                  }}>
+                  <CustomInput
+                     inputContainerStyle={styles.input}
+                     placeholder={'رقم البلاغ'}
+                  />
+                  <CustomDropDown
+                     onDropDownPressed={() => menuRef.current.show()}
+                     menuStyle={styles.menuStyle}
+                     onMenuItemPressed={label => {
+                        setdropDownText(label);
+                        menuRef.current.hide();
+                     }}
+                     menuContainerStyle={styles.menuContainerStyle}
+                     labels={searchDropdownLabels}
+                     refrence={menuRef}
+                     dropDownText={dropDownText}
+                  />
+                  <SearchDuration />
+               </ScrollView>
             </View>
 
             <View style={styles.buttonsContainer}>
@@ -104,7 +112,6 @@ const styles = StyleSheet.create({
    inputsContainer: {
       width: '90%',
       height: '45%',
-      justifyContent: 'space-between',
    },
    buttonsContainer: {
       flexDirection: 'row',
@@ -121,7 +128,6 @@ const styles = StyleSheet.create({
    },
    input: {
       backgroundColor: WHITE_COLOR,
-      height: '65%',
    },
    dropDwonButton: {
       width: '100%',
@@ -130,12 +136,12 @@ const styles = StyleSheet.create({
    },
    menuContainerStyle: {
       width: '100%',
-      height: '25%',
       paddingHorizontal: 5,
       backgroundColor: '#fff',
       borderRadius: 50,
       borderColor: TEXT_COLOR,
       borderWidth: 1,
+      height: 50,
    },
    menuStyle: {
       width: SCREEN_WIDTH - 50,
