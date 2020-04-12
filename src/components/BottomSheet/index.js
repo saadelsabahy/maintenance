@@ -13,7 +13,7 @@ const CustomBottomSheet = () => {
    const renderInner = () => (
       <View style={styles.panel}>
          <View style={styles.panelHandle} />
-         <View style={{ flex: 0.8, marginBottom: 10 }}>
+         <View style={{ flex: 0.8, width: '90%', marginBottom: 10 }}>
             <FlatList
                style={{ flex: 1 }}
                contentContainerStyle={{ flexGrow: 1 }}
@@ -55,7 +55,11 @@ const CustomBottomSheet = () => {
    return (
       <View style={{ flex: 1 }}>
          <BottomSheet
-            snapPoints={[185, '90%', 185]}
+            snapPoints={
+               SCREEN_HEIGHT > 800
+                  ? ['25%', '90%', '25%']
+                  : ['30%', '90%', '30%']
+            }
             renderContent={renderInner}
             renderHeader={renderHeader}
             enabledInnerScrolling={false}
@@ -84,7 +88,6 @@ const styles = StyleSheet.create({
    },
    panel: {
       height: SCREEN_HEIGHT - 50,
-      padding: 20,
       backgroundColor: SECONDART_COLOR,
       paddingTop: 20,
       borderTopLeftRadius: 40,
@@ -116,6 +119,8 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       width: '100%',
       height: 45,
+      width: '90%',
+      alignSelf: 'center',
       alignItems: 'center',
    },
 });

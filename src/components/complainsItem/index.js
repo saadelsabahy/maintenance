@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { WHITE_COLOR } from '../../constants/colors';
+import { WHITE_COLOR, SCREEN_HEIGHT } from '../../constants/colors';
 import { CustomText } from '../customText';
 
 const ComplainsItem = ({
@@ -46,7 +46,7 @@ const ComplainsItem = ({
 const styles = StyleSheet.create({
    container: {
       width: '100%',
-      height: '38%',
+      height: SCREEN_HEIGHT / 4.5,
       backgroundColor: WHITE_COLOR,
       borderRadius: 10,
       flexDirection: 'row',

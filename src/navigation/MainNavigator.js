@@ -5,7 +5,6 @@ import DrawerNavigator from './Drawer';
 import Login from '../screens/Login';
 import AsyncStorage from '@react-native-community/async-storage';
 import Splash from '../screens/Splash';
-
 const Stack = createStackNavigator();
 
 const LoginStack = () => {
@@ -34,7 +33,9 @@ const AppNavigation = () => {
    }, []);
    return (
       <NavigationContainer>
-         {showSplash ? <Splash /> : <DrawerNavigator />}
+         {/*  <LoginStack /> */}
+         <DrawerNavigator />
+         {/*  {showSplash ? <Splash /> : <DrawerNavigator />} */}
       </NavigationContainer>
    );
 };

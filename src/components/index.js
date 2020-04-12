@@ -22,3 +22,4 @@ export * from './checkBox';
 export * from './insideAndOutsideGuarantee';
 export * from './TextArea';
 export * from './BottomSheet';
+export * from './ImageSelector';

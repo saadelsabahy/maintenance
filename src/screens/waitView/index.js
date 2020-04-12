@@ -6,6 +6,7 @@ import {
    ComplainsItem,
    ImageCarousel,
    CustomButton,
+   ImageSelector,
 } from '../../components';
 import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
 import Gurantee from '../../components/insideAndOutsideGuarantee';
@@ -30,7 +31,6 @@ const ComplainsDetailes = ({ route, navigation }) => {
             console.log('image picker error', e);
          });
    };
-   console.log(images);
 
    return (
       <View style={styles.container}>
@@ -61,7 +61,14 @@ const ComplainsDetailes = ({ route, navigation }) => {
                containerStyle={styles.complainsItem}
             />
          </View>
-         <CustomButton onButtonPressed={onImagePickerPressed} />
+         <View style={{ width: '100%', height: '15%', alignItems: 'center' }}>
+            <View style={{ height: '100%', width: '95%', alignSelf: 'center' }}>
+               <ImageSelector
+                  onSelectImagesPressed={onImagePickerPressed}
+                  images={images}
+               />
+            </View>
+         </View>
 
          <View style={{ flex: 1 }}>
             <Gurantee />

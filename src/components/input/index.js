@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, I18nManager } from 'react-native';
+import { View, Text, StyleSheet, I18nManager } from 'react-native';
 import {
    INPUT_COLOR,
    ERROR_RED_COLOR,
    TEXT_COLOR,
+   SCREEN_HEIGHT,
+   SCREEN_WIDTH,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 const CustomInput = ({
    placeholder,
@@ -35,7 +38,7 @@ const CustomInput = ({
       <View
          style={[
             {
-               height: 50,
+               height: SCREEN_HEIGHT / 14,
                alignItems: 'center',
                justifyContent: 'center',
                width: '100%',
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       backgroundColor: INPUT_COLOR,
       borderWidth: 0.9,
-      borderRadius: 25,
+      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
       borderColor: TEXT_COLOR,
    },
    input: {

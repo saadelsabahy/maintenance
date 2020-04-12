@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Image, ScrollView, Keyboard } from 'react-native';
+import { View, Image, ScrollView, Keyboard, TextInput } from 'react-native';
 import { CustomInput, CustomButton, CustomText } from '../../components';
 import Svg, { Rect, G } from 'react-native-svg';
 import LoginHeaderImage from '../../assets/images/gear.png';
@@ -23,32 +23,24 @@ const Login = ({ navigation }) => {
 
    return (
       <View style={styles.container}>
-         <View style={styles.imageContainer}>
-            <Image source={LoginHeaderImage} style={styles.headerImage} />
-            <CustomText text="تطبيق الصيانات" textStyle={styles.logoText} />
-         </View>
+         <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={styles.imageContainer}>
+               <Image source={LoginHeaderImage} style={styles.headerImage} />
+               <CustomText text="تطبيق الصيانات" textStyle={styles.logoText} />
+            </View>
 
-         <View style={styles.formContainer}>
-            <Svg width="100%" height="100%" style={styles.svg}>
-               <Rect
-                  x="0"
-                  y="2%"
-                  width="100%"
-                  height="100%"
-                  fill={SECONDART_COLOR}
-               />
-            </Svg>
-            <ScrollView
-               style={{ flex: 1 }}
-               contentContainerStyle={{
-                  flexGrow: 1,
-                  width: '80%',
-                  alignSelf: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-               }}
-               keyboardShouldPersistTaps="always"
-               keyboardDismissMode="on-drag">
+            <View style={styles.formContainer}>
+               <Svg width="100%" height="100%" style={styles.svg}>
+                  <Rect
+                     x="0"
+                     y="2%"
+                     width="100%"
+                     height="100%"
+                     fill={SECONDART_COLOR}
+                  />
+               </Svg>
                <View style={styles.textContainer}>
                   <CustomText
                      text={'تسجيل الدخول'}
@@ -58,8 +50,9 @@ const Login = ({ navigation }) => {
                <View
                   style={{
                      flex: 0.2,
-                     width: '100%',
+                     width: '85%',
                      justifyContent: 'space-evenly',
+                     alignSelf: 'center',
                   }}>
                   <CustomInput
                      iconStartName={'account-outline'}
@@ -104,26 +97,21 @@ const Login = ({ navigation }) => {
                      iconStartStyle={styles.icon}
                   />
                </View>
+
                <View style={styles.buttonContainer}>
                   <CustomButton
                      buttonTitle="دخول"
                      onButtonPressed={() => {
-                        navigation.navigate('DashBoardStack');
                         Keyboard.dismiss();
                      }}
-                     buttonContainerStyle={{
-                        width: '50%',
-                        alignSelf: 'flex-start',
-                        justifyContent: 'space-between',
-                        height: '60%',
-                     }}
+                     buttonContainerStyle={styles.button}
                      icon={'long-arrow-right'}
                      iconColor={WHITE_COLOR}
                      iconType={'font-awesome'}
                   />
                </View>
-            </ScrollView>
-         </View>
+            </View>
+         </ScrollView>
       </View>
    );
 };

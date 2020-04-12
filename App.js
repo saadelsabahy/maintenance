@@ -9,13 +9,11 @@ import {
    SafeAreaView,
 } from 'react-native';
 import { MAIN_COLOR } from './src/constants/colors';
-import Login from './src/screens/Login';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
 
-import AppNavigation, { LoginStack } from './src/navigation/MainNavigator';
-import WaitApproval from './src/screens/WaitingApproval';
+import AppNavigation from './src/navigation/MainNavigator';
 
 YellowBox.ignoreWarnings(['Remote debugger']);
 

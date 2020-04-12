@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import {
    WHITE_COLOR,
    MAIN_COLOR,
@@ -89,25 +89,31 @@ const Complains = ({ navigation, route }) => {
          </Header>
          <View style={styles.listContainer}>
             <View style={styles.contentContainer}>
-               <ComplainsItem
-                  complainNumber={254555}
-                  complainDate={'25/5/2020'}
-                  vehicleCode={'2548as4'}
-                  vehicleNumber={25}
-                  vehicleType={'jsubn282'}
-                  contractorNumber={81}
-                  indicatorColor={'#0f0'}
-                  onComplainPressed={onComplainPressed}
-               />
-               <ComplainsItem
-                  complainNumber={254555}
-                  complainDate={'25/5/2020'}
-                  vehicleCode={'2548as4'}
-                  vehicleNumber={25}
-                  vehicleType={'jsubn282'}
-                  contractorNumber={81}
-                  indicatorColor={'#f00'}
-                  onComplainPressed={onComplainPressed}
+               <FlatList
+                  data={[
+                     'bla',
+                     'bla bla',
+                     'tytyy',
+                     'gfgfgfg',
+                     'tytyty',
+                     'tyytty',
+                  ]}
+                  keyExtractor={(item, index) => `${index}`}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item, index }) => {
+                     return (
+                        <ComplainsItem
+                           complainNumber={254555}
+                           complainDate={'25/5/2020'}
+                           vehicleCode={'2548as4'}
+                           vehicleNumber={25}
+                           vehicleType={'jsubn282'}
+                           contractorNumber={81}
+                           indicatorColor={'#0f0'}
+                           onComplainPressed={onComplainPressed}
+                        />
+                     );
+                  }}
                />
             </View>
          </View>

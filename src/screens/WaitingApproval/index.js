@@ -13,6 +13,8 @@ import {
    MAIN_COLOR,
    SECONDART_COLOR,
    DASHBOARD_ITEM_ICON_CONTAINER,
+   SCREEN_HEIGHT,
+   SCREEN_WIDTH,
 } from '../../constants/colors';
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
@@ -109,9 +111,9 @@ const styles = StyleSheet.create({
       backgroundColor: MAIN_COLOR,
    },
    headerIconContainer: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
+      width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
+      height: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
+      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
       backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
       alignItems: 'center',
       justifyContent: 'center',
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
    },
    button: {
       width: '45%',
-      height: 45,
+      height: SCREEN_HEIGHT / 18,
    },
 });
 

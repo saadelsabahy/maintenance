@@ -9,6 +9,8 @@ import {
    DRAWER_DIVIDER,
    MAIN_COLOR,
    WHITE_COLOR,
+   SCREEN_HEIGHT,
+   SCREEN_WIDTH,
 } from '../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText, Icon } from '../components';
@@ -70,9 +72,9 @@ const DrawerNavigator = () => {
             iconContainerStyle={{
                flex: 0,
                backgroundColor: MAIN_COLOR,
-               width: '18%',
-               height: '100%',
-               borderRadius: 60,
+               width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 10,
+               height: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 10,
+               borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
             }}
          />
       ),

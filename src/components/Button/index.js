@@ -6,7 +6,7 @@ import {
    StyleSheet,
    ActivityIndicator,
 } from 'react-native';
-import { MAIN_COLOR, WHITE_COLOR } from '../../constants/colors';
+import { MAIN_COLOR, WHITE_COLOR, SCREEN_HEIGHT } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { Icon } from '../Icon';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
@@ -77,7 +77,7 @@ const CustomButton = ({
 const styles = StyleSheet.create({
    container: {
       width: '85%',
-      height: 50,
+      height: SCREEN_HEIGHT / 12,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: MAIN_COLOR,

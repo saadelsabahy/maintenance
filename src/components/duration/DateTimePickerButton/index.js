@@ -48,23 +48,22 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       borderColor: TEXT_COLOR,
       borderWidth: 1,
-      borderRadius: 40,
+      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
       paddingHorizontal: 10,
       paddingEnd: 0,
       backgroundColor: WHITE_COLOR,
    },
    textContainer: {
-      flex: 0.9,
+      flex: 0.8,
       alignItems: 'center',
    },
    iconContainer: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
+      width: '30%',
+      height: '100%',
+      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: MAIN_COLOR,
    },
 });
-
 export default DateTimeButton;
