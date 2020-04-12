@@ -22,7 +22,20 @@ const Complains = ({ navigation, route }) => {
       setisModalVisible(!isModalVisible);
    };
    const onComplainPressed = data => {
-      navigation.navigate('ComplainDetailes', { data });
+      if (route.params && route.params.hasOwnProperty('distination')) {
+         const { distination } = route.params;
+
+         switch (route.params.distination) {
+            case 'waitView':
+               navigation.navigate('waitView', { data });
+               break;
+            default:
+               navigation.navigate('waitAprroval', { data, distination });
+               break;
+         }
+      } else {
+         navigation.navigate('waitAprroval', { data, distination: 'nothing' });
+      }
    };
    return (
       <View style={styles.container}>

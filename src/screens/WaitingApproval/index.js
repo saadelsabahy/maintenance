@@ -6,13 +6,59 @@ import {
    Icon,
    ComplainsItem,
    CustomBottomSheet,
+   CustomButton,
 } from '../../components';
 import {
    WHITE_COLOR,
    MAIN_COLOR,
    SECONDART_COLOR,
+   DASHBOARD_ITEM_ICON_CONTAINER,
 } from '../../constants/colors';
-const WaitApproval = ({ navigation }) => {
+const WaitApproval = ({ navigation, route }) => {
+   const { data, distination } = route.params;
+
+   const renderButtons = () => {
+      switch (distination) {
+         case 'waitExcution':
+            return (
+               <CustomButton
+                  buttonContainerStyle={{ ...styles.button, width: '90%' }}
+                  buttonTitle={'تم الحل'}
+               />
+            );
+            break;
+         case 'finished':
+            return null;
+            break;
+         case 'rejected':
+            return (
+               <CustomButton
+                  buttonContainerStyle={{ ...styles.button, width: '90%' }}
+                  buttonTitle={'تعميد'}
+               />
+            );
+            break;
+         default:
+            return (
+               <View
+                  style={{
+                     ...styles.buttonsContainer,
+                     flexDirection: 'row',
+                     justifyContent: 'space-between',
+                  }}>
+                  <CustomButton
+                     buttonContainerStyle={styles.button}
+                     buttonTitle={'تعميد'}
+                  />
+                  <CustomButton
+                     buttonContainerStyle={styles.button}
+                     buttonTitle={'رفض'}
+                  />
+               </View>
+            );
+            break;
+      }
+   };
    return (
       <View style={styles.container}>
          <Header>
@@ -35,36 +81,38 @@ const WaitApproval = ({ navigation }) => {
                />
             </View>
          </Header>
-         <View style={{ width: '100%', height: '40%' }}>
+         <View
+            style={{
+               width: '100%',
+               height: '40%',
+               backgroundColor: MAIN_COLOR,
+            }}>
             <ImageCarousel />
          </View>
          <View style={styles.detailesContainer}>
             <ComplainsItem
                containerStyle={styles.complainsItemContainer}
-               complainNumber={254555}
-               complainDate={'25/5/2020'}
-               vehicleCode={'2548as4'}
-               vehicleNumber={25}
-               vehicleType={'jsubn282'}
-               contractorNumber={81}
-               indicatorColor={'#0f0'}
+               {...data}
+               onComplainPressed={() => {}}
             />
-            <View style={styles.bottomSheetContainer}>
-               <CustomBottomSheet />
-            </View>
          </View>
+         <View style={styles.bottomSheetContainer}>
+            <CustomBottomSheet />
+         </View>
+         <View style={styles.buttonsContainer}>{renderButtons()}</View>
       </View>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
+      backgroundColor: MAIN_COLOR,
    },
    headerIconContainer: {
       width: 40,
       height: 40,
       borderRadius: 20,
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
       alignItems: 'center',
       justifyContent: 'center',
       elevation: 2,
@@ -75,17 +123,32 @@ const styles = StyleSheet.create({
    },
    detailesContainer: {
       flex: 1,
+      paddingHorizontal: 10,
       backgroundColor: WHITE_COLOR,
       borderTopStartRadius: 50,
-      paddingHorizontal: 10,
    },
    complainsItemContainer: {
       flex: 1,
+      height: '100%',
       borderRadius: 0,
       borderTopStartRadius: 50,
+      marginBottom: 0,
    },
    bottomSheetContainer: {
       flex: 1,
+      backgroundColor: WHITE_COLOR,
+   },
+   buttonsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 5,
+      width: '90%',
+      alignSelf: 'center',
+   },
+   button: {
+      width: '45%',
+      height: 45,
    },
 });
 

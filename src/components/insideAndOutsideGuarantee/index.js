@@ -6,7 +6,7 @@ import TextArea from '../TextArea';
 import ChechBox from '../checkBox';
 
 const Gurantee = () => {
-   const [selectedButton, setselectedButton] = useState(0);
+   const [selectedButton, setselectedButton] = useState(null);
    return (
       <View style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
          <View style={styles.inputsContainer}>
@@ -43,6 +43,7 @@ const Gurantee = () => {
          </View>
          <View style={{ width: '100%' }}>
             <FlatList
+               style={{ width: '90%', alignSelf: 'center' }}
                data={['1', '2', '3', '4']}
                keyExtractor={(item, index) => `${index}`}
                renderItem={({ item, index }) => {
@@ -50,9 +51,10 @@ const Gurantee = () => {
                }}
             />
          </View>
-         <TextArea />
+         <TextArea placeholder={selectedButton == 0 ? 'الحل' : 'الوصف'} />
          <CustomButton
             buttonContainerStyle={{ alignSelf: 'center', height: 45 }}
+            buttonTitle={selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'}
          />
       </View>
    );

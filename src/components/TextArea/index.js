@@ -3,15 +3,16 @@ import { View, Text, StyleSheet, I18nManager, TextInput } from 'react-native';
 import Textarea from 'react-native-textarea';
 import { INPUT_COLOR, TEXT_COLOR } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-const TextArea = () => {
+const TextArea = ({ placeholder, ...res }) => {
    return (
       <View style={styles.textareaContainer}>
          <TextInput
             style={styles.textarea}
             maxLength={120}
-            placeholder={'الحل'}
+            placeholder={placeholder}
             placeholderTextColor={TEXT_COLOR}
             underlineColorAndroid={'transparent'}
+            {...res}
          />
       </View>
    );

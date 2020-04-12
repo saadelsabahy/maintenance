@@ -21,7 +21,7 @@ const DashBoardItem = ({
       <TouchableOpacity
          style={styles.container}
          onPress={() => onDashboardItemPressed(text)}
-         activeOpacity={0.9}>
+         activeOpacity={1}>
          <View style={styles.iconContainer}>
             <Icon
                name={icon}

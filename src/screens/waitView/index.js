@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Header, Icon, ComplainsItem, CustomButton } from '../../components';
+import {
+   Header,
+   Icon,
+   ComplainsItem,
+   ImageCarousel,
+   CustomButton,
+} from '../../components';
 import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
-import ChechBox from '../../components/checkBox';
 import Gurantee from '../../components/insideAndOutsideGuarantee';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
+   const [images, setImages] = useState([]);
+   const onImagePickerPressed = () => {
+      ImagePicker.openPicker({
+         width: 200,
+         height: 200,
+         cropping: false,
+         multiple: true,
+      })
+         .then(seletedImages => {
+            const images = [];
+            images.push(...seletedImages);
+            setImages(images);
+         })
+         .catch(e => {
+            console.log('image picker error', e);
+         });
+   };
+   console.log(images);
 
    return (
       <View style={styles.container}>
@@ -37,6 +61,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
                containerStyle={styles.complainsItem}
             />
          </View>
+         <CustomButton onButtonPressed={onImagePickerPressed} />
 
          <View style={{ flex: 1 }}>
             <Gurantee />

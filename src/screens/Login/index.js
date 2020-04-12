@@ -108,6 +108,7 @@ const Login = ({ navigation }) => {
                   <CustomButton
                      buttonTitle="دخول"
                      onButtonPressed={() => {
+                        navigation.navigate('DashBoardStack');
                         Keyboard.dismiss();
                      }}
                      buttonContainerStyle={{

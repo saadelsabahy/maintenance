@@ -16,6 +16,8 @@ import { CustomText, Icon } from '../components';
 const Drawer = createDrawerNavigator();
 import { createStackNavigator } from '@react-navigation/stack';
 import ComplainsDetailes from '../screens/cmplainsDetails';
+import WaitingView from '../screens/waitView';
+import WaitApproval from '../screens/WaitingApproval';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +30,8 @@ const DashboardStack = () => {
          initialRouteName={'Dashboard'}>
          <Stack.Screen name={'Dashboard'} component={DashBoard} />
          <Stack.Screen name={'DashboardComplains'} component={Complains} />
+         <Stack.Screen name={'waitView'} component={WaitingView} />
+         <Stack.Screen name={'waitAprroval'} component={WaitApproval} />
       </Stack.Navigator>
    );
 };

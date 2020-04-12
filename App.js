@@ -14,13 +14,14 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
 
-import AppNavigation from './src/navigation/MainNavigator';
+import AppNavigation, { LoginStack } from './src/navigation/MainNavigator';
 import WaitApproval from './src/screens/WaitingApproval';
 
 YellowBox.ignoreWarnings(['Remote debugger']);
 
 const App = () => {
    I18nManager.forceRTL(true);
+
    useEffect(() => {
       return () => {};
    }, []);
@@ -29,10 +30,7 @@ const App = () => {
       <Provider store={store}>
          <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={MAIN_COLOR} />
-            {/* <AppNavigation /> */}
-            {/*  <Login /> */}
-            {/*  <DashBoard />*/}
-            <WaitApproval />
+            <AppNavigation />
          </SafeAreaView>
       </Provider>
    );

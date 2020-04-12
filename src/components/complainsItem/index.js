@@ -17,7 +17,7 @@ const ComplainsItem = ({
    return (
       <TouchableOpacity
          style={[styles.container, containerStyle]}
-         activeOpacity={0.9}
+         activeOpacity={1}
          onPress={() =>
             onComplainPressed({
                complainNumber,

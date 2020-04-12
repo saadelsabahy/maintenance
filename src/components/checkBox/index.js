@@ -25,7 +25,6 @@ const ChechBox = ({ onItemPressed, text }) => {
 };
 const styles = StyleSheet.create({
    container: {
-      backgroundColor: '#cfe',
       flexDirection: 'row',
       alignItems: 'center',
       marginVertical: 3,

@@ -9,8 +9,11 @@ import DashBoardItem from '../../components/DashboardItem';
 import DashboardHeader from './DashboardHeader';
 
 const DashBoard = ({ navigation }) => {
-   const onDashboardItemPressed = text => {
-      navigation.navigate('DashboardComplains', { headerText: text });
+   const onDashboardItemPressed = (text, distination) => {
+      navigation.navigate('DashboardComplains', {
+         headerText: text,
+         distination,
+      });
    };
    return (
       <View style={styles.container}>
@@ -30,35 +33,45 @@ const DashBoard = ({ navigation }) => {
                   number={'55'}
                   icon={'download'}
                   iconTtype={'antdesign'}
-                  onDashboardItemPressed={onDashboardItemPressed}
+                  onDashboardItemPressed={headerName =>
+                     onDashboardItemPressed(headerName, 'waitView')
+                  }
                />
                <DashBoardItem
                   text={'قيد التعميد'}
                   number={'20'}
                   icon={'stopwatch'}
                   iconTtype={'entypo'}
-                  onDashboardItemPressed={onDashboardItemPressed}
+                  onDashboardItemPressed={headerName =>
+                     onDashboardItemPressed(headerName, 'waitApproval')
+                  }
                />
                <DashBoardItem
                   text={'قيد التنفيذ'}
                   number={'100'}
                   icon={'gears'}
                   iconTtype={'font-awesome'}
-                  onDashboardItemPressed={onDashboardItemPressed}
+                  onDashboardItemPressed={headerName =>
+                     onDashboardItemPressed(headerName, 'waitExcution')
+                  }
                />
                <DashBoardItem
                   text={'تم الحل'}
                   number={'30'}
                   icon={'checkcircleo'}
                   iconTtype={'antdesign'}
-                  onDashboardItemPressed={onDashboardItemPressed}
+                  onDashboardItemPressed={headerName =>
+                     onDashboardItemPressed(headerName, 'finished')
+                  }
                />
                <DashBoardItem
                   text={'مرفوض'}
                   number={'10'}
                   icon={'closecircleo'}
                   iconTtype={'antdesign'}
-                  onDashboardItemPressed={onDashboardItemPressed}
+                  onDashboardItemPressed={headerName =>
+                     onDashboardItemPressed(headerName, 'rejected')
+                  }
                />
             </View>
          </View>
