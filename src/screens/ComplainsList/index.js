@@ -68,7 +68,7 @@ const Complains = ({ navigation, route }) => {
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                <CustomDropDown
-                  labels={['this week', 'last month']}
+                  labels={['الاقدم', 'الاحدث']}
                   onMenuItemPressed={label => {
                      setfilterLabel(label);
                      menuRef.current.hide();
@@ -87,36 +87,29 @@ const Complains = ({ navigation, route }) => {
                />
             </View>
          </Header>
-         <View style={styles.listContainer}>
-            <View style={styles.contentContainer}>
-               <FlatList
-                  data={[
-                     'bla',
-                     'bla bla',
-                     'tytyy',
-                     'gfgfgfg',
-                     'tytyty',
-                     'tyytty',
-                  ]}
-                  keyExtractor={(item, index) => `${index}`}
-                  showsVerticalScrollIndicator={false}
-                  renderItem={({ item, index }) => {
-                     return (
-                        <ComplainsItem
-                           complainNumber={254555}
-                           complainDate={'25/5/2020'}
-                           vehicleCode={'2548as4'}
-                           vehicleNumber={25}
-                           vehicleType={'jsubn282'}
-                           contractorNumber={81}
-                           indicatorColor={'#0f0'}
-                           onComplainPressed={onComplainPressed}
-                        />
-                     );
-                  }}
-               />
-            </View>
+         <View style={styles.listContainer} />
+         <View style={styles.contentContainer}>
+            <FlatList
+               data={['bla', 'bla bla', 'tytyy', 'gfgfgfg', 'tytyty', 'tyytty']}
+               keyExtractor={(item, index) => `${index}`}
+               showsVerticalScrollIndicator={false}
+               renderItem={({ item, index }) => {
+                  return (
+                     <ComplainsItem
+                        complainNumber={254555}
+                        complainDate={'25/5/2020'}
+                        vehicleCode={'2548as4'}
+                        vehicleNumber={25}
+                        vehicleType={'jsubn282'}
+                        contractorNumber={81}
+                        indicatorColor={'#0f0'}
+                        onComplainPressed={onComplainPressed}
+                     />
+                  );
+               }}
+            />
          </View>
+
          <SearchModal
             isModalVisible={isModalVisible}
             onBackdropPress={toggleSearchModal}
@@ -145,11 +138,10 @@ const styles = StyleSheet.create({
    },
    contentContainer: {
       width: '90%',
-      height: '100%',
+      height: '90%',
+      position: 'absolute',
       alignSelf: 'center',
       bottom: 0,
-      top: '-5%',
-      marginBottom: 5,
    },
 });
 

@@ -58,6 +58,7 @@ const CustomInput = ({
             <TextInput
                placeholder={placeholder}
                style={[styles.input, inputStyle]}
+               underlineColorAndroid="transparent"
                {...res}
             />
             {iconEndName && (

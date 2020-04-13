@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default DashBoardItem;
+export { DashBoardItem };

@@ -23,3 +23,5 @@ export * from './insideAndOutsideGuarantee';
 export * from './TextArea';
 export * from './BottomSheet';
 export * from './ImageSelector';
+export * from './DashboardFilter';
+export * from './DashboardItem';

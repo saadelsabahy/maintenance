@@ -16,16 +16,14 @@ import {
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
-const ImageSelector = ({ images, onSelectImagesPressed }) => {
-   console.log('images...', images);
-
+const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
    const EmptyLiImageList = () => {
       return ['1', '2', '3'].map((item, index) => {
          return <View style={styles.imageContainer} key={item} />;
       });
    };
    return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
          <TouchableOpacity
             style={styles.IconContainer}
             onPress={onSelectImagesPressed}
@@ -39,7 +37,7 @@ const ImageSelector = ({ images, onSelectImagesPressed }) => {
          </TouchableOpacity>
          <View
             style={{
-               flex: 0.95,
+               flex: 0.85,
                alignItems: 'center',
                justifyContent: 'center',
             }}>
@@ -78,7 +76,7 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
    },
    IconContainer: {
       width: SCREEN_WIDTH / 6,
@@ -87,6 +85,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: MAIN_COLOR,
+      marginEnd: 5,
    },
    imageContainer: {
       width: 70,

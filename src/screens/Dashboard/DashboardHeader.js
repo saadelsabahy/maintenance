@@ -8,7 +8,7 @@ import {
 } from '../../constants/colors';
 import { Header, Icon, CustomText } from '../../components';
 
-const DashboardHeader = ({ navigation }) => {
+const DashboardHeader = ({ navigation, onFilterPressed, onRefreshPressed }) => {
    return (
       <View style={{ width: '100%', height: '25%' }}>
          <Header headerWrapperStyle={styles.headerIconsContainer}>
@@ -28,6 +28,7 @@ const DashboardHeader = ({ navigation }) => {
                   type={'material-community'}
                   color={WHITE_COLOR}
                   iconContainerStyle={{ flex: 1 }}
+                  onPress={onFilterPressed}
                />
 
                <View
@@ -41,6 +42,7 @@ const DashboardHeader = ({ navigation }) => {
                      type={'material-community'}
                      color={WHITE_COLOR}
                      iconContainerStyle={{ flex: 1 }}
+                     onPress={onRefreshPressed}
                   />
                </View>
             </View>

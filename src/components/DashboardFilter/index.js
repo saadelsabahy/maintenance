@@ -23,8 +23,7 @@ import { SearchDuration } from '../duration';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomDropDown } from '../dropDown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Icon } from '../Icon';
-const SearchModal = ({
+const DashboardFilter = ({
    isModalVisible,
    coverScreen,
    backdropColor,
@@ -46,25 +45,19 @@ const SearchModal = ({
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}>
          <View style={styles.modalContentContainer}>
-            <View
+            <KeyboardAwareScrollView
                style={{
-                  position: 'absolute',
-                  start: 5,
-                  top: 20,
-                  zIndex: 100000,
-               }}>
-               <Icon
-                  name={'close'}
-                  type={'material-community'}
-                  onPress={onBackdropPress}
-                  iconContainerStyle={{ flex: 1 }}
-               />
-            </View>
-            <KeyboardAwareScrollView style={{ flex: 1 }} enableOnAndroid={true}>
+                  flex: 1,
+               }}
+               contentContainerStyle={{
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+               }}
+               enableOnAndroid={true}>
                <View
                   style={{
                      width: '100%',
-                     height: 40,
+                     height: SCREEN_HEIGHT / 15,
                      justifyContent: 'center',
                      alignItems: 'center',
                   }}>
@@ -80,33 +73,9 @@ const SearchModal = ({
                <View style={styles.inputsContainer}>
                   <CustomInput
                      inputContainerStyle={styles.input}
-                     placeholder={'رقم البلاغ'}
-                  />
-                  <CustomInput
-                     inputContainerStyle={styles.input}
                      placeholder={'رقم العقد'}
                   />
-                  <CustomInput
-                     inputContainerStyle={styles.input}
-                     placeholder={'حاله البلاغ'}
-                  />
 
-                  <CustomInput
-                     inputContainerStyle={styles.input}
-                     placeholder={'رقم اللوحه'}
-                  />
-                  <CustomDropDown
-                     onDropDownPressed={() => menuRef.current.show()}
-                     menuStyle={styles.menuStyle}
-                     onMenuItemPressed={label => {
-                        setdropDownText(label);
-                        menuRef.current.hide();
-                     }}
-                     menuContainerStyle={styles.menuContainerStyle}
-                     labels={searchDropdownLabels}
-                     refrence={menuRef}
-                     dropDownText={dropDownText}
-                  />
                   <View
                      style={{
                         height: '20%',
@@ -142,24 +111,22 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-end',
    },
    modalContentContainer: {
-      height: SCREEN_HEIGHT * 0.9,
+      flex: 0.7,
       backgroundColor: SECONDART_COLOR,
       borderTopStartRadius: 20,
       borderTopEndRadius: 20,
       alignItems: 'center',
    },
    inputsContainer: {
-      height: SCREEN_HEIGHT * 0.7,
-      width: '95%',
-      alignSelf: 'center',
+      width: '90%',
+      height: SCREEN_HEIGHT / 4,
       justifyContent: 'space-evenly',
-      alignItems: 'center',
    },
    buttonsContainer: {
       flexDirection: 'row',
       width: '90%',
-      height: SCREEN_HEIGHT / 10,
       alignSelf: 'center',
+      height: SCREEN_HEIGHT / 7,
       justifyContent: 'space-between',
       alignItems: 'center',
    },
@@ -171,25 +138,6 @@ const styles = StyleSheet.create({
    input: {
       backgroundColor: WHITE_COLOR,
    },
-   dropDwonButton: {
-      width: '100%',
-      backgroundColor: 'transparent',
-      marginHorizontal: 0,
-   },
-   menuContainerStyle: {
-      width: '100%',
-      paddingHorizontal: 5,
-      backgroundColor: '#fff',
-      borderRadius: 50,
-      borderColor: TEXT_COLOR,
-      borderWidth: 1,
-      height: 50,
-   },
-   menuStyle: {
-      width: SCREEN_WIDTH - 50,
-      alignSelf: 'center',
-      overflow: 'scroll',
-   },
 });
 
-export { SearchModal };
+export { DashboardFilter };

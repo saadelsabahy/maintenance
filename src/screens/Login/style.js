@@ -11,11 +11,12 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const styles = StyleSheet.create({
    container: {
       flex: 1,
+      height: SCREEN_HEIGHT,
       backgroundColor: MAIN_COLOR,
    },
    imageContainer: {
-      width: '80%',
-      height: '30%',
+      width: SCREEN_WIDTH - 30,
+      height: SCREEN_HEIGHT * 0.3,
       justifyContent: 'center',
       alignItems: 'flex-end',
       alignSelf: 'center',
@@ -26,15 +27,18 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
    },
    formContainer: {
-      flex: 1,
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT * 0.7,
       justifyContent: 'center',
    },
    svg: {
       position: 'absolute',
       transform: [
          {
-            rotate: '-120deg',
+            rotate: '-30deg',
          },
+         { translateX: 50 },
+         { translateY: 120 },
       ],
    },
    loginText: {
@@ -44,7 +48,6 @@ const styles = StyleSheet.create({
       alignSelf: 'flex-start',
    },
    logoText: {
-      width: '40%',
       textAlign: 'center',
       fontSize: responsiveFontSize(2.2),
       color: WHITE_COLOR,
@@ -57,12 +60,12 @@ const styles = StyleSheet.create({
    },
    buttonContainer: {
       width: '90%',
-      height: '20%',
+      height: '10%',
       justifyContent: 'center',
       alignSelf: 'center',
    },
    button: {
-      width: '50%',
+      width: '45%',
       alignSelf: 'flex-start',
       justifyContent: 'space-between',
       borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),

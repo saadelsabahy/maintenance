@@ -7,15 +7,17 @@ import {
    ImageCarousel,
    CustomButton,
    ImageSelector,
+   CustomText,
 } from '../../components';
 import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
 import Gurantee from '../../components/insideAndOutsideGuarantee';
 import ImagePicker from 'react-native-image-crop-picker';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
    const [images, setImages] = useState([]);
-   const onImagePickerPressed = () => {
+   const onSelectImagesPressed = () => {
       ImagePicker.openPicker({
          width: 200,
          height: 200,
@@ -40,17 +42,23 @@ const ComplainsDetailes = ({ route, navigation }) => {
                   name={'ios-arrow-back'}
                   type={'ionicon'}
                   color={WHITE_COLOR}
-                  iconContainerStyle={{ flex: 0 }}
+                  iconContainerStyle={{ flex: 1 }}
                   style={{ transform: [{ rotateY: '-180deg' }] }}
                   onPress={() => navigation.goBack()}
+                  size={responsiveFontSize(4)}
                />
             </View>
+            <CustomText
+               text={data.complainNumber}
+               textStyle={{ color: WHITE_COLOR }}
+            />
             <View>
                <Icon
                   name={'list-unordered'}
                   type={'octicon'}
                   color={WHITE_COLOR}
-                  iconContainerStyle={{ flex: 0 }}
+                  iconContainerStyle={{ flex: 1 }}
+                  size={responsiveFontSize(4)}
                />
             </View>
          </Header>
@@ -61,17 +69,12 @@ const ComplainsDetailes = ({ route, navigation }) => {
                containerStyle={styles.complainsItem}
             />
          </View>
-         <View style={{ width: '100%', height: '15%', alignItems: 'center' }}>
-            <View style={{ height: '100%', width: '95%', alignSelf: 'center' }}>
-               <ImageSelector
-                  onSelectImagesPressed={onImagePickerPressed}
-                  images={images}
-               />
-            </View>
-         </View>
 
          <View style={{ flex: 1 }}>
-            <Gurantee />
+            <Gurantee
+               onSelectImagesPressed={onSelectImagesPressed}
+               images={images}
+            />
          </View>
       </View>
    );
@@ -80,6 +83,7 @@ const styles = StyleSheet.create({
    container: {
       flex: 1,
       width: '100%',
+      backgroundColor: WHITE_COLOR,
    },
    complainsItem: {
       width: '100%',

@@ -42,7 +42,7 @@ const DateTimeButton = ({
 const styles = StyleSheet.create({
    container: {
       width: '47%',
-      height: '70%',
+      height: SCREEN_HEIGHT / 12,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
    },
    iconContainer: {
-      width: '30%',
-      height: '100%',
+      width: SCREEN_WIDTH / 7,
+      height: SCREEN_HEIGHT / 12,
       borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
       alignItems: 'center',
       justifyContent: 'center',

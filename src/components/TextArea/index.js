@@ -20,7 +20,7 @@ const TextArea = ({ placeholder, ...res }) => {
 const styles = StyleSheet.create({
    textareaContainer: {
       width: '90%',
-      height: '30%',
+      height: '40%',
       backgroundColor: INPUT_COLOR,
       alignSelf: 'center',
       alignItems: 'flex-start',

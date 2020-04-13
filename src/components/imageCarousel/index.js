@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, I18nManager } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { SCREEN_WIDTH } from '../../constants/colors';
+import { SCREEN_WIDTH, WHITE_COLOR } from '../../constants/colors';
 
 const ITEM_WIDTH = Math.round(SCREEN_WIDTH * 0.8);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 2);
@@ -28,6 +28,7 @@ const ImageCarousel = () => {
             width: '100%',
             height: '100%',
             justifyContent: 'space-between',
+            zIndex: 99,
          }}>
          <Carousel
             ref={carouselRef}
@@ -46,26 +47,18 @@ const ImageCarousel = () => {
             onSnapToItem={index => setactiveSlide(index)}
             inverted={I18nManager.isRTL}
          />
-         <Pagination
-            containerStyle={{ padding: 0, margin: 0 }}
-            dotsLength={data.length}
-            activeDotIndex={activeSlide}
-            dotStyle={{
-               width: 10,
-               height: 10,
-               borderRadius: 5,
-               marginHorizontal: 8,
-               backgroundColor: 'rgba(255, 255, 255, 0.92)',
-            }}
-            inactiveDotStyle={{
-               width: 10,
-               height: 10,
-               borderRadius: 5,
-               marginHorizontal: 8,
-               backgroundColor: 'rgba(0, 0, 0, 0.92)',
-            }}
-            inactiveDotOpacity={0.4}
-         />
+         {
+            <Pagination
+               containerStyle={{
+                  paddingVertical: 10,
+               }}
+               dotsLength={data.length}
+               activeDotIndex={activeSlide}
+               dotStyle={styles.activeDot}
+               inactiveDotStyle={{}}
+               inactiveDotOpacity={0.4}
+            />
+         }
       </View>
    );
 };
@@ -73,7 +66,7 @@ const styles = StyleSheet.create({
    carouselContainer: {
       /* justifyContent: 'center',
       alignSelf: 'center', */
-      flex: 1,
+      flex: 2,
    },
    itemContainer: {
       alignItems: 'center',
@@ -90,6 +83,20 @@ const styles = StyleSheet.create({
       fontSize: 30,
       fontWeight: 'bold',
       textAlign: 'center',
+   },
+   activeDot: {
+      width: 15,
+      height: 15,
+      borderRadius: 7.5,
+      backgroundColor: WHITE_COLOR,
+      zIndex: 1000,
+   },
+   inactiveDot: {
+      width: 20,
+      height: 20,
+      borderRadius: 10,
+      backgroundColor: '#000',
+      zIndex: 1000,
    },
 });
 

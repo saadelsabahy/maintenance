@@ -73,7 +73,7 @@ const IMAGE_SIZE = 200;
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#2c2c2f',
+      backgroundColor: SECONDART_COLOR,
    },
    box: {
       width: IMAGE_SIZE,

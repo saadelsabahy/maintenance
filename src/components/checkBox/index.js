@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginVertical: 3,
+      marginHorizontal: 5,
+      /*  marginVertical: 3,
+      marginHorizontal: 5, */
    },
 });
 

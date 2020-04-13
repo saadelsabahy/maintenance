@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {
    WHITE_COLOR,
    SECONDART_COLOR,
    MAIN_COLOR,
 } from '../../constants/colors';
-import DashBoardItem from '../../components/DashboardItem';
+import { DashBoardItem, DashboardFilter } from '../../components';
 import DashboardHeader from './DashboardHeader';
 
 const DashBoard = ({ navigation }) => {
@@ -15,9 +15,13 @@ const DashBoard = ({ navigation }) => {
          distination,
       });
    };
+   const [showFilterModal, setshowFilterModal] = useState(false);
    return (
       <View style={styles.container}>
-         <DashboardHeader navigation={navigation} />
+         <DashboardHeader
+            navigation={navigation}
+            onFilterPressed={() => setshowFilterModal(!showFilterModal)}
+         />
          <View style={styles.itemsWrapper}>
             <View
                style={{
@@ -75,6 +79,10 @@ const DashBoard = ({ navigation }) => {
                />
             </View>
          </View>
+         <DashboardFilter
+            isModalVisible={showFilterModal}
+            onBackdropPress={() => setshowFilterModal(!showFilterModal)}
+         />
       </View>
    );
 };
