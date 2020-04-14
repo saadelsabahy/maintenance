@@ -12,9 +12,8 @@ import {
 } from './complainsListTypes';
 import Api from '../../../apis';
 /////////////////////////////complains feed
-export const getAllComplainsList = () => async (dispatch, getState) => {
+export const getAllComplainsList = statusId => async (dispatch, getState) => {
    const {
-      statusId,
       platNumber,
       dateFrom,
       dateTo,

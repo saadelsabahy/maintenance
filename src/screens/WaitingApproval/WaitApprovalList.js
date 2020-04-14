@@ -31,11 +31,8 @@ const WaitApprovalList = ({ navigation, route }) => {
    const menuRef = useRef(null);
 
    useEffect(() => {
-      
-      return () => {
-         
-      }
-   }, [isFocused])
+      return () => {};
+   }, [isFocused]);
 
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
@@ -93,7 +90,7 @@ const WaitApprovalList = ({ navigation, route }) => {
          </Header>
          <View style={styles.listContainer} />
          <View style={styles.contentContainer}>
-            <ListAndLoading navigation={navigation} route={route} list={} loading={} error={} paginationLoading={} onEndReached={}/>
+            {/*  <ListAndLoading navigation={navigation} route={route} list={} loading={} error={} paginationLoading={} onEndReached={}/> */}
          </View>
 
          <SearchModal

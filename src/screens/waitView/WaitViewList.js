@@ -31,17 +31,21 @@ const WaitViewList = ({ navigation, route }) => {
    const menuRef = useRef(null);
 
    useEffect(() => {
-      dispatch(getWaitViewComplains())
-      return () => {
-
-      }
-   }, [isFocused])
+      dispatch(getWaitViewComplains());
+      return () => {};
+   }, [isFocused]);
 
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
 
-   const { waitViewComplainsListErorr, waitViewComplainsListLoading, waitViewPaginationLoading, waitViewPaginationError, waitViewComplains } = useSelector(state => ({
+   const {
+      waitViewComplainsListErorr,
+      waitViewComplainsListLoading,
+      waitViewPaginationLoading,
+      waitViewPaginationError,
+      waitViewComplains,
+   } = useSelector(state => ({
       waitViewComplains: state.loading.waitViewComplains,
       waitViewComplainsListLoading: state.WaitView.waitViewComplainsListLoading,
       waitViewComplainsListErorr: state.WaitView.waitViewComplainsListErorr,
@@ -100,7 +104,15 @@ const WaitViewList = ({ navigation, route }) => {
          </Header>
          <View style={styles.listContainer} />
          <View style={styles.contentContainer}>
-            <ListAndLoading navigation={navigation} route={route} list={waitViewComplains} loading={waitViewComplainsListLoading} error={waitViewComplainsListErorr} paginationLoading={waitViewPaginationLoading} paginationError={waitViewPaginationError} />
+            <ListAndLoading
+               navigation={navigation}
+               route={route}
+               list={waitViewComplains}
+               loading={waitViewComplainsListLoading}
+               error={waitViewComplainsListErorr}
+               paginationLoading={waitViewPaginationLoading}
+               paginationError={waitViewPaginationError}
+            />
          </View>
 
          <SearchModal

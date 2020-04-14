@@ -47,24 +47,26 @@ const Complains = ({ navigation, route }) => {
       paginationError: state.Complains.paginationError,
    }));
    useEffect(() => {
-      if (route.params && route.params.hasOwnProperty('distination')) {
-         const { distination } = route.params;
-         switch (distination) {
-            case 1:
-               dispatch(getWaitViewComplains(distination));
-               break;
+      if (isFocused) {
+         if (route.params && route.params.hasOwnProperty('distination')) {
+            const { distination } = route.params;
+            dispatch(getAllComplainsList(distination));
+         } else {
+            dispatch(getAllComplainsList(null));
          }
       } else {
-         dispatch(getAllComplainsList());
+         return;
       }
 
       return () => {
-         /* dispatch(emptyListOnUnmount()); */
+         dispatch(emptyListOnUnmount());
       };
    }, [isFocused]);
    const onListEndReached = () => {
       dispatch(LoadPagination());
    };
+   console.log('complainsList', complainsList);
+
    return (
       <View style={styles.container}>
          <Header>
@@ -122,7 +124,13 @@ const Complains = ({ navigation, route }) => {
                route={route}
                loading={getComplainsListLoading}
                error={getComplainsListErorr}
-               list={complainsList}
+               list={
+                  route.params && route.params.hasOwnProperty('distination')
+                     ? complainsList.filter(
+                          item => (item.statusId = route.params.distination)
+                       )
+                     : complainsList
+               }
                onEndReached={onListEndReached}
                paginationLoading={paginationLoading}
             />

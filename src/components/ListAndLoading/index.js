@@ -13,9 +13,11 @@ import {
    SECONDART_COLOR,
    INDICATOR_YELLOW,
    INDICATOR_RED,
+   SCREEN_HEIGHT,
 } from '../../constants/colors';
 import { useDispatch } from 'react-redux';
 import { onComplainPressed } from '../../redux/actions';
+import { EmptyList } from '../noData';
 
 const ListAndLoading = ({
    navigation,
@@ -27,7 +29,7 @@ const ListAndLoading = ({
    onEndReached,
 }) => {
    const dispatch = useDispatch();
-
+   console.log('ff', list);
    const renderListFooter = () => {
       return paginationLoading ? (
          <ActivityIndicator color={MAIN_COLOR} />
@@ -85,6 +87,15 @@ const ListAndLoading = ({
                onEndReached={onEndReached}
                onEndReachedThreshold={1}
                ListFooterComponent={renderListFooter}
+               ListEmptyComponent={
+                  <View
+                     style={{
+                        flex: 1,
+                        height: SCREEN_HEIGHT - 70,
+                     }}>
+                     <EmptyList />
+                  </View>
+               }
             />
          )}
       </View>

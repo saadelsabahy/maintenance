@@ -67,33 +67,9 @@ export default (state = initialState, { type, payload }) => {
          return { ...state, paginationLoading: false, paginationError: true };
          break;
 
-      /*       case GET_DASHBOARD_COMPLAINS_SPINNER:
-         return {
-            ...state,
-            getComplainsListLoading: true,
-            getComplainsListErorr: false,
-         };
-         break;
-
-      case GET_DASHBOARD_COMPLAINS_SUCCESS:
-         return {
-            ...state,
-            getComplainsListLoading: false,
-            getComplainsListErorr: false,
-            complainsList: payload,
-            pageNumber: state.pageNumber + 1,
-         };
-         break;
-
-      case GET_DASHBOARD_COMPLAINS_FAILED:
-         return {
-            ...state,
-            getComplainsListLoading: false,
-            getComplainsListErorr: true,
-         };
-         break;
       case UNMOUNT_EMPTY:
-         return { ...initialState }; */
+         return { ...initialState };
+         break;
       default:
          return state;
    }
