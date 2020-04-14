@@ -21,7 +21,7 @@ const WaitApproval = ({ navigation, route }) => {
 
    const renderButtons = () => {
       switch (distination) {
-         case 'waitExcution':
+         case 3:
             return (
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}
@@ -29,10 +29,10 @@ const WaitApproval = ({ navigation, route }) => {
                />
             );
             break;
-         case 'finished':
+         case 4:
             return null;
             break;
-         case 'rejected':
+         case 5:
             return (
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}

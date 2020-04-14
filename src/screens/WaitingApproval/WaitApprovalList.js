@@ -21,50 +21,26 @@ import {
    onComplainPressed,
    getComplainsForDashboardTypes,
    emptyListOnUnmount,
-   LoadPagination,
 } from '../../redux/actions';
 import { getWaitViewComplains } from '../../redux/actions/waitView';
-const Complains = ({ navigation, route }) => {
+const WaitApprovalList = ({ navigation, route }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
    const [isModalVisible, setisModalVisible] = useState(false);
    const [filterLabel, setfilterLabel] = useState('');
    const menuRef = useRef(null);
+
+   useEffect(() => {
+      
+      return () => {
+         
+      }
+   }, [isFocused])
+
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
-   const {
-      complainsList,
-      getComplainsListErorr,
-      getComplainsListLoading,
-      paginationLoading,
-      paginationError,
-   } = useSelector(state => ({
-      complainsList: state.Complains.complainsList,
-      getComplainsListLoading: state.Complains.getComplainsListLoading,
-      getComplainsListErorr: state.Complains.getComplainsListErorr,
-      paginationLoading: state.Complains.paginationLoading,
-      paginationError: state.Complains.paginationError,
-   }));
-   useEffect(() => {
-      if (route.params && route.params.hasOwnProperty('distination')) {
-         const { distination } = route.params;
-         switch (distination) {
-            case 1:
-               dispatch(getWaitViewComplains(distination));
-               break;
-         }
-      } else {
-         dispatch(getAllComplainsList());
-      }
-
-      return () => {
-         /* dispatch(emptyListOnUnmount()); */
-      };
-   }, [isFocused]);
-   const onListEndReached = () => {
-      dispatch(LoadPagination());
-   };
+   const {} = useSelector(state => ({}));
    return (
       <View style={styles.container}>
          <Header>
@@ -117,15 +93,7 @@ const Complains = ({ navigation, route }) => {
          </Header>
          <View style={styles.listContainer} />
          <View style={styles.contentContainer}>
-            <ListAndLoading
-               navigation={navigation}
-               route={route}
-               loading={getComplainsListLoading}
-               error={getComplainsListErorr}
-               list={complainsList}
-               onEndReached={onListEndReached}
-               paginationLoading={paginationLoading}
-            />
+            <ListAndLoading navigation={navigation} route={route} list={} loading={} error={} paginationLoading={} onEndReached={}/>
          </View>
 
          <SearchModal
@@ -163,4 +131,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default Complains;
+export default WaitApprovalList;

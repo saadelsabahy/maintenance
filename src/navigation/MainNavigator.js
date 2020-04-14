@@ -33,7 +33,7 @@ const AppNavigation = () => {
    }, []);
    return (
       <NavigationContainer>
-         {/* <LoginStack /> */}
+         {/*  <LoginStack /> */}
          {/*   <DrawerNavigator /> */}
          {showSplash ? <Splash /> : <DrawerNavigator />}
       </NavigationContainer>

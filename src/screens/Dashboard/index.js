@@ -38,7 +38,7 @@ const DashBoard = ({ navigation }) => {
                   icon={'download'}
                   iconTtype={'antdesign'}
                   onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 'waitView')
+                     onDashboardItemPressed(headerName, 1)
                   }
                />
                <DashBoardItem
@@ -47,7 +47,7 @@ const DashBoard = ({ navigation }) => {
                   icon={'stopwatch'}
                   iconTtype={'entypo'}
                   onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 'waitApproval')
+                     onDashboardItemPressed(headerName, 2)
                   }
                />
                <DashBoardItem
@@ -56,7 +56,7 @@ const DashBoard = ({ navigation }) => {
                   icon={'gears'}
                   iconTtype={'font-awesome'}
                   onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 'waitExcution')
+                     onDashboardItemPressed(headerName, 3)
                   }
                />
                <DashBoardItem
@@ -65,7 +65,7 @@ const DashBoard = ({ navigation }) => {
                   icon={'checkcircleo'}
                   iconTtype={'antdesign'}
                   onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 'finished')
+                     onDashboardItemPressed(headerName, 4)
                   }
                />
                <DashBoardItem
@@ -74,7 +74,7 @@ const DashBoard = ({ navigation }) => {
                   icon={'closecircleo'}
                   iconTtype={'antdesign'}
                   onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 'rejected')
+                     onDashboardItemPressed(headerName, 5)
                   }
                />
             </View>

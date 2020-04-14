@@ -20,6 +20,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ComplainsDetailes from '../screens/cmplainsDetails';
 import WaitingView from '../screens/waitView';
 import WaitApproval from '../screens/WaitingApproval';
+import WaitApprovalList from '../screens/WaitingApproval/WaitApprovalList';
+import WaitViewList from '../screens/waitView/WaitViewList';
 
 const Stack = createStackNavigator();
 
@@ -31,7 +33,11 @@ const DashboardStack = () => {
          }}
          initialRouteName={'Dashboard'}>
          <Stack.Screen name={'Dashboard'} component={DashBoard} />
-         <Stack.Screen name={'DashboardComplains'} component={Complains} />
+         <Stack.Screen
+            name={'waitApprovalComplains'}
+            component={WaitApprovalList}
+         />
+         <Stack.Screen name={'waitViewList'} component={WaitViewList} />
          <Stack.Screen name={'waitView'} component={WaitingView} />
          <Stack.Screen name={'waitAprroval'} component={WaitApproval} />
       </Stack.Navigator>

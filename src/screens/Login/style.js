@@ -11,7 +11,6 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      height: SCREEN_HEIGHT,
       backgroundColor: MAIN_COLOR,
    },
    imageContainer: {
