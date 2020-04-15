@@ -17,7 +17,7 @@ const LoaderAndRetry = ({
          {loading && (
             <View style={styles.contentContainer}>
                <ActivityIndicator size="large" color={MAIN_COLOR} />
-               <CustomText text={loadingText || 'جار تحميل البيانات'} />
+               <CustomText text={loadingText || 'جاري تحميل البيانات'} />
             </View>
          )}
          {error && (

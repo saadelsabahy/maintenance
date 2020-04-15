@@ -1,83 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {
    WHITE_COLOR,
    SECONDART_COLOR,
    MAIN_COLOR,
 } from '../../constants/colors';
-import { DashBoardItem, DashboardFilter } from '../../components';
+import {
+   DashBoardItem,
+   DashboardFilter,
+   LoaderAndRetry,
+} from '../../components';
 import DashboardHeader from './DashboardHeader';
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDashBoardData } from '../../redux/actions/Dashboard';
 
 const DashBoard = ({ navigation }) => {
+   const isFocused = useIsFocused();
+   const {
+      dashboardSpinner,
+      dashboardError,
+      dashboardData,
+      lastUpdate,
+   } = useSelector(state => ({
+      dashboardSpinner: state.Dashboard.dashboardSpinner,
+      dashboardError: state.Dashboard.dashboardError,
+      dashboardData: state.Dashboard.dashboardData,
+      lastUpdate: state.Dashboard.lastUpdate,
+   }));
+   const dispatch = useDispatch();
    const onDashboardItemPressed = (text, distination) => {
       navigation.navigate('DashboardComplains', {
          headerText: text,
          distination,
       });
    };
+   useEffect(() => {
+      dispatch(getDashBoardData());
+      return () => {};
+   }, []);
    const [showFilterModal, setshowFilterModal] = useState(false);
    return (
       <View style={styles.container}>
          <DashboardHeader
             navigation={navigation}
             onFilterPressed={() => setshowFilterModal(!showFilterModal)}
+            lastUpdate={lastUpdate}
+            onRefreshPressed={() => dispatch(getDashBoardData())}
          />
          <View style={styles.itemsWrapper}>
-            <View
-               style={{
-                  width: '100%',
-                  height: '100%',
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-evenly',
-                  top: '-8%',
-               }}>
-               <DashBoardItem
-                  text={'قيد المعاينه'}
-                  number={'55'}
-                  icon={'download'}
-                  iconTtype={'antdesign'}
-                  onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 1)
-                  }
+            {dashboardSpinner || dashboardError ? (
+               <LoaderAndRetry
+                  loading={dashboardSpinner}
+                  error={dashboardError}
                />
-               <DashBoardItem
-                  text={'قيد التعميد'}
-                  number={'20'}
-                  icon={'stopwatch'}
-                  iconTtype={'entypo'}
-                  onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 2)
-                  }
-               />
-               <DashBoardItem
-                  text={'قيد التنفيذ'}
-                  number={'100'}
-                  icon={'gears'}
-                  iconTtype={'font-awesome'}
-                  onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 3)
-                  }
-               />
-               <DashBoardItem
-                  text={'تم الحل'}
-                  number={'30'}
-                  icon={'checkcircleo'}
-                  iconTtype={'antdesign'}
-                  onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 4)
-                  }
-               />
-               <DashBoardItem
-                  text={'مرفوض'}
-                  number={'10'}
-                  icon={'closecircleo'}
-                  iconTtype={'antdesign'}
-                  onDashboardItemPressed={headerName =>
-                     onDashboardItemPressed(headerName, 5)
-                  }
-               />
-            </View>
+            ) : (
+               <View
+                  style={{
+                     width: '100%',
+                     height: '100%',
+                     flexDirection: 'row',
+                     flexWrap: 'wrap',
+                     justifyContent: 'space-evenly',
+                     top: '-8%',
+                  }}>
+                  <DashBoardItem
+                     text={'قيد المعاينه'}
+                     number={isNaN(dashboardData[0]) ? 0 : dashboardData[0]}
+                     icon={'download'}
+                     iconTtype={'antdesign'}
+                     onDashboardItemPressed={headerName =>
+                        onDashboardItemPressed(headerName, 1)
+                     }
+                  />
+                  <DashBoardItem
+                     text={'قيد التعميد'}
+                     number={'20'}
+                     icon={'stopwatch'}
+                     iconTtype={'entypo'}
+                     onDashboardItemPressed={headerName =>
+                        onDashboardItemPressed(headerName, 2)
+                     }
+                  />
+                  <DashBoardItem
+                     text={'قيد التنفيذ'}
+                     number={'100'}
+                     icon={'gears'}
+                     iconTtype={'font-awesome'}
+                     onDashboardItemPressed={headerName =>
+                        onDashboardItemPressed(headerName, 3)
+                     }
+                  />
+                  <DashBoardItem
+                     text={'تم الحل'}
+                     number={'30'}
+                     icon={'checkcircleo'}
+                     iconTtype={'antdesign'}
+                     onDashboardItemPressed={headerName =>
+                        onDashboardItemPressed(headerName, 4)
+                     }
+                  />
+                  <DashBoardItem
+                     text={'مرفوض'}
+                     number={'10'}
+                     icon={'closecircleo'}
+                     iconTtype={'antdesign'}
+                     onDashboardItemPressed={headerName =>
+                        onDashboardItemPressed(headerName, 5)
+                     }
+                  />
+               </View>
+            )}
          </View>
          <DashboardFilter
             isModalVisible={showFilterModal}

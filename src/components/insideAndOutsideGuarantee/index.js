@@ -18,7 +18,7 @@ const Gurantee = ({ onSelectImagesPressed, images }) => {
    const [selectedButton, setselectedButton] = useState(null);
    const bottomSheetRef = useRef(null);
    const onButtonsPressed = index => {
-      console.log(index);
+
 
       setselectedButton(index);
       bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
@@ -111,7 +111,7 @@ const Gurantee = ({ onSelectImagesPressed, images }) => {
                      renderItem={({ item, index }) => {
                         return <ChechBox />;
                      }}
-                     /* numColumns={2} */
+                  /* numColumns={2} */
                   />
                </View>
                <View

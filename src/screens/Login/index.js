@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
    View,
    Image,
@@ -23,14 +23,31 @@ import styles from './style';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const Login = ({ navigation }) => {
    const passwordInput = useRef(null);
+   const keyboardAvoidingRef = useRef();
+   const [keyBoardShow, setkeyBoardShow] = useState(false);
    const dispatch = useDispatch();
    const { name, password } = useSelector(state => ({
       name: state.Auth.loginUserName,
       password: state.Auth.loginUserPassword,
    }));
+   const onKeyboardShow = () => {
+      setkeyBoardShow(true);
+      // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 500, animated: true })
 
+   };
+   const onKeyboardHide = () => {
+      setkeyBoardShow(false);
+      // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 0, animated: true })
+
+   };
    return (
-      <KeyboardAwareScrollView style={styles.container} enableOnAndroid={true}>
+      <KeyboardAwareScrollView
+         style={styles.container}
+         enableOnAndroid={true}
+         scrollEnabled={keyBoardShow}
+         onKeyboardDidShow={onKeyboardShow}
+         onKeyboardDidHide={onKeyboardHide}
+         ref={ref => ref = keyboardAvoidingRef}>
          <View style={styles.imageContainer}>
             <Image source={LoginHeaderImage} style={styles.headerImage} />
             <CustomText text="تطبيق الصيانات" textStyle={styles.logoText} />
@@ -75,8 +92,8 @@ const Login = ({ navigation }) => {
                      onSubmitEditing: () => passwordInput.current.focus(),
                      blurOnSubmit: false,
                   }}
-                  /*  error={true}
-                  errorText={'حدث خطا مابيياريالاتا'} */
+               /*  error={true}
+            errorText={'حدث خطا مابيياريالاتا'} */
                />
 
                <CustomInput

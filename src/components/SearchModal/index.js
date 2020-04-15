@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
    View,
    Text,
@@ -24,6 +24,8 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomDropDown } from '../dropDown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Icon } from '../Icon';
+import { useDispatch, useSelector } from 'react-redux';
+import { onSearchInputsChange } from '../../redux/actions';
 const SearchModal = ({
    isModalVisible,
    coverScreen,
@@ -32,20 +34,39 @@ const SearchModal = ({
    onModalShow,
    backdropOpacity,
    searchDropdownLabels,
+   onSearchPressed
 }) => {
+   const dispatch = useDispatch();
    const menuRef = useRef(null);
    const [dropDownText, setdropDownText] = useState('');
+   const [keyboardShow, setKeyboardShow] = useState(false);
+   useEffect(() => {
+
+      return () => {
+         onKeyboardWillHide()
+      }
+   }, [])
+   const onKeyboardWillShow = () => {
+
+      setKeyboardShow(true)
+   }
+   const onKeyboardWillHide = () => {
+      setKeyboardShow(false)
+   }
+   const HideModal = () => {
+      onKeyboardWillHide()
+      onBackdropPress()
+   }
    return (
       <Modal
          testID={'modal'}
          style={styles.container}
          isVisible={isModalVisible}
-         onBackdropPress={onBackdropPress}
-         onBackButtonPress={onBackdropPress}
+         onBackdropPress={HideModal}
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}>
-         <View style={styles.modalContentContainer}>
+         <View style={keyboardShow ? { ...styles.modalContentContainer, height: SCREEN_HEIGHT * .5 } : styles.modalContentContainer} >
             <View
                style={{
                   position: 'absolute',
@@ -56,11 +77,12 @@ const SearchModal = ({
                <Icon
                   name={'close'}
                   type={'material-community'}
-                  onPress={onBackdropPress}
+                  onPress={HideModal}
                   iconContainerStyle={{ flex: 1 }}
                />
             </View>
-            <KeyboardAwareScrollView style={{ flex: 1 }} enableOnAndroid={true}>
+            <KeyboardAwareScrollView style={{ flex: 1 }} enableOnAndroid={true} onKeyboardDidShow={() => onKeyboardWillShow()}
+               onKeyboardDidHide={() => onKeyboardWillHide()}>
                <View
                   style={{
                      width: '100%',
@@ -81,31 +103,40 @@ const SearchModal = ({
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم البلاغ'}
+                     keyboardType={'numeric'}
+                     onChangeText={(text) => dispatch(onSearchInputsChange('complainNumber', text))}
                   />
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم العقد'}
+                     keyboardType={'numeric'}
+                     onChangeText={(text) => dispatch(onSearchInputsChange('contructorId', text))}
                   />
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'حاله البلاغ'}
+                     onChangeText={(text) => dispatch(onSearchInputsChange('complainStatus', text))}
                   />
 
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم اللوحه'}
+                     onChangeText={(text) => dispatch(onSearchInputsChange('plateNumber', text))}
                   />
                   <CustomDropDown
                      onDropDownPressed={() => menuRef.current.show()}
                      menuStyle={styles.menuStyle}
                      onMenuItemPressed={label => {
-                        setdropDownText(label);
+                        dispatch(onSearchInputsChange('complainType', label.id))
+                        setdropDownText(label.text)
                         menuRef.current.hide();
+
                      }}
                      menuContainerStyle={styles.menuContainerStyle}
                      labels={searchDropdownLabels}
                      refrence={menuRef}
                      dropDownText={dropDownText}
+
                   />
                   <View
                      style={{
@@ -122,10 +153,12 @@ const SearchModal = ({
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'بحث'}
+                     onButtonPressed={onSearchPressed}
                   />
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'إلغاء'}
+                     onButtonPressed={HideModal}
                   />
                </View>
             </KeyboardAwareScrollView>
@@ -149,7 +182,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
    },
    inputsContainer: {
-      height: SCREEN_HEIGHT * 0.7,
+      height: SCREEN_HEIGHT * 0.65,
       width: '95%',
       alignSelf: 'center',
       justifyContent: 'space-evenly',

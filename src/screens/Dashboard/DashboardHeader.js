@@ -8,7 +8,12 @@ import {
 } from '../../constants/colors';
 import { Header, Icon, CustomText } from '../../components';
 
-const DashboardHeader = ({ navigation, onFilterPressed, onRefreshPressed }) => {
+const DashboardHeader = ({
+   navigation,
+   onFilterPressed,
+   onRefreshPressed,
+   lastUpdate,
+}) => {
    return (
       <View style={{ width: '100%', height: '25%' }}>
          <Header headerWrapperStyle={styles.headerIconsContainer}>
@@ -65,13 +70,13 @@ const DashboardHeader = ({ navigation, onFilterPressed, onRefreshPressed }) => {
                   style={{
                      flex: 1,
                      alignItems: 'center',
+                     justifyContent: 'center',
                   }}>
                   <CustomText
                      text={'تطبيق الصيانات'}
                      textStyle={{
                         color: WHITE_COLOR,
-                        fontSize: responsiveFontSize(2.7),
-                        marginStart: 15,
+                        fontSize: responsiveFontSize(2.8),
                      }}
                   />
                </View>
@@ -84,7 +89,7 @@ const DashboardHeader = ({ navigation, onFilterPressed, onRefreshPressed }) => {
                      }}
                   />
                   <CustomText
-                     text={'6.15 مساء'}
+                     text={lastUpdate}
                      textStyle={{
                         color: WHITE_COLOR,
                         fontSize: responsiveFontSize(1.5),

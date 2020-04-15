@@ -9,6 +9,18 @@ import {
    GET_DASHBOARD_COMPLAINS_SPINNER,
    GET_DASHBOARD_COMPLAINS_FAILED,
    UNMOUNT_EMPTY,
+   COMPLAIN_NUMBER_CHANGE,
+   COMPLAIN_STATUS_CHANGE,
+   COMPLAIN_TYPE_CHANGE,
+   CONTRUCTOR_ID_CHANGE,
+   START_DATE_CHANGE,
+   END_DATE_CHANGE,
+   SEARCH_SPINNER,
+   SEARCH_SUCCESS,
+   SEARCH_FAILED,
+   SEARCH_PAGINATION_SPINNER,
+   SEARCH_PAGINATION_FAILED,
+   SEARCH_PAGINATION_SUCCESS,
 } from '../../actions/ComplainsList/complainsListTypes';
 
 const initialState = {
@@ -24,6 +36,22 @@ const initialState = {
    getComplainsListErorr: false,
    paginationLoading: false,
    paginationError: false,
+   ////search
+   search: false,
+   searchLoading: false,
+   searchError: false,
+   complainNumber: null,
+   contructorId: null,
+   complainStatus: null,
+   plateNumber: null,
+   complainType: null,
+   startDate: null,
+   endDate: null,
+   searchRowsNumber: 25,
+   searchPageNumber: 0,
+   searchData: [],
+   SearchPaginationLoading: false,
+   SearchPaginationError: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -66,6 +94,54 @@ export default (state = initialState, { type, payload }) => {
       case GET_COMPLAINS_LIST_PAGINATION_FAILED:
          return { ...state, paginationLoading: false, paginationError: true };
          break;
+      case COMPLAIN_NUMBER_CHANGE:
+         return { ...state, complainNumber: payload };
+         break;
+      case COMPLAIN_STATUS_CHANGE:
+         return { ...state, complainStatus: payload };
+         break;
+      case COMPLAIN_TYPE_CHANGE:
+         return { ...state, complainType: payload };
+         break;
+      case CONTRUCTOR_ID_CHANGE:
+         return { ...state, contructorId: payload };
+         break;
+      case START_DATE_CHANGE:
+         return { ...state, startDate: payload };
+         break;
+      case END_DATE_CHANGE:
+         return { ...state, endDate: payload };
+         break;
+
+      case SEARCH_SPINNER:
+         return { ...state, search: true, searchLoading: true, searchError: false }
+         break;
+      case SEARCH_SUCCESS:
+         return { ...state, search: true, searchLoading: false, searchError: false, complainsList: payload, searchPageNumber: state.searchPageNumber + 1 }
+         break;
+      case SEARCH_FAILED:
+         return { ...state, search: true, searchLoading: false, searchError: true }
+         break;
+
+      case SEARCH_PAGINATION_SPINNER:
+         return { ...state, SearchPaginationLoading: true, SearchPaginationError: false };
+         break;
+      case SEARCH_PAGINATION_SUCCESS:
+         return {
+            ...state,
+            SearchPaginationLoading: false,
+            SearchPaginationError: false,
+            complainsList: [...state.complainsList, ...payload],
+            searchPageNumber: state.searchPageNumber + 1,
+         };
+         break;
+      case SEARCH_PAGINATION_FAILED:
+         return {
+            ...state, SearchPaginationLoading: false,
+            SearchPaginationError: true,
+         };
+         break;
+
 
       case UNMOUNT_EMPTY:
          return { ...initialState };

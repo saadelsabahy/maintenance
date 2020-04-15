@@ -5,31 +5,25 @@ import {
    MAIN_COLOR,
    SECONDART_COLOR,
 } from '../../constants/colors';
-import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import {
-   SearchModal,
-   CustomDropDown,
-   Header,
-   CustomText,
-   Icon,
-   ListAndLoading,
-} from '../../components';
+import { SearchModal, ListAndLoading } from '../../components';
 import { useIsFocused } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import {
    getAllComplainsList,
-   onComplainPressed,
-   getComplainsForDashboardTypes,
+   onSearchPressed,
    emptyListOnUnmount,
    LoadPagination,
+   LoadSearchPagination,
 } from '../../redux/actions';
 import { getWaitViewComplains } from '../../redux/actions/waitView';
+import ListHeader from './Header';
 const Complains = ({ navigation, route }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
    const [isModalVisible, setisModalVisible] = useState(false);
-   const [filterLabel, setfilterLabel] = useState('');
    const menuRef = useRef(null);
+   const [filterLabel, setfilterLabel] = useState(null);
+   const [dateSearch, setDateSearch] = useState(2);
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
@@ -39,12 +33,20 @@ const Complains = ({ navigation, route }) => {
       getComplainsListLoading,
       paginationLoading,
       paginationError,
+      search,
+      searchError,
+      searchLoading,
+      SearchPaginationLoading,
    } = useSelector(state => ({
       complainsList: state.Complains.complainsList,
       getComplainsListLoading: state.Complains.getComplainsListLoading,
       getComplainsListErorr: state.Complains.getComplainsListErorr,
       paginationLoading: state.Complains.paginationLoading,
       paginationError: state.Complains.paginationError,
+      searchLoading: state.Complains.searchLoading,
+      searchError: state.Complains.searchError,
+      search: state.Complains.search,
+      SearchPaginationLoading: state.Complains.SearchPaginationLoading,
    }));
    useEffect(() => {
       if (isFocused) {
@@ -63,76 +65,63 @@ const Complains = ({ navigation, route }) => {
       };
    }, [isFocused]);
    const onListEndReached = () => {
-      dispatch(LoadPagination());
+      if (search) {
+         if (route.params && route.params.hasOwnProperty('distination')) {
+            const { distination } = route.params;
+            dispatch(LoadSearchPagination(distination));
+         } else {
+            dispatch(LoadSearchPagination(null));
+         }
+      } else {
+         dispatch(LoadPagination());
+      }
    };
-   console.log('complainsList', complainsList);
-
+   const onSearch = () => {
+      if (isFocused) {
+         if (route.params && route.params.hasOwnProperty('distination')) {
+            const { distination } = route.params;
+            dispatch(onSearchPressed(distination));
+         } else {
+            dispatch(onSearchPressed(null));
+         }
+      } else {
+         return;
+      }
+      toggleSearchModal();
+   };
+   const onFilterItemPressed = label => {
+      setfilterLabel(label);
+      menuRef.current.hide();
+      setDateSearch(label.id)
+   };
    return (
       <View style={styles.container}>
-         <Header>
-            <Icon
-               name={'search'}
-               type={'feather'}
-               color={WHITE_COLOR}
-               iconContainerStyle={{ flex: 0 }}
-               onPress={toggleSearchModal}
-            />
-
-            <View
-               style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-               }}>
-               <CustomText
-                  text={
-                     route.params && route.params.hasOwnProperty('headerText')
-                        ? route.params.headerText
-                        : 'البلاغات'
-                  }
-                  textStyle={{
-                     color: WHITE_COLOR,
-                     fontSize: responsiveFontSize(2.7),
-                  }}
-               />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-               <CustomDropDown
-                  labels={['الاقدم', 'الاحدث']}
-                  onMenuItemPressed={label => {
-                     setfilterLabel(label);
-                     menuRef.current.hide();
-                  }}
-                  selectedItem={filterLabel}
-                  button={
-                     <Icon
-                        name={'filter-outline'}
-                        type={'material-community'}
-                        color={WHITE_COLOR}
-                        iconContainerStyle={{ flex: 0 }}
-                        onPress={() => menuRef.current.show()}
-                     />
-                  }
-                  refrence={menuRef}
-               />
-            </View>
-         </Header>
+         <ListHeader
+            route={route}
+            toggleSearchModal={toggleSearchModal}
+            menuRef={menuRef}
+            filterLabel={filterLabel}
+            onMenuItemPressed={onFilterItemPressed}
+         />
          <View style={styles.listContainer} />
          <View style={styles.contentContainer}>
             <ListAndLoading
                navigation={navigation}
                route={route}
-               loading={getComplainsListLoading}
-               error={getComplainsListErorr}
+               loading={search ? searchLoading : getComplainsListLoading}
+               error={search ? searchError : getComplainsListErorr}
                list={
                   route.params && route.params.hasOwnProperty('distination')
                      ? complainsList.filter(
-                          item => (item.statusId = route.params.distination)
-                       )
+                        item => (item.statusId = route.params.distination)
+                     )
                      : complainsList
                }
                onEndReached={onListEndReached}
-               paginationLoading={paginationLoading}
+               paginationLoading={
+                  search ? SearchPaginationLoading : paginationLoading
+               }
+               dateSearch={dateSearch}
             />
          </View>
 
@@ -140,13 +129,13 @@ const Complains = ({ navigation, route }) => {
             isModalVisible={isModalVisible}
             onBackdropPress={toggleSearchModal}
             searchDropdownLabels={[
-               'bla',
-               'bla bla',
-               'tytyy',
-               'gfgfgfg',
-               'tytyty',
-               'tyytty',
+               { id: '1', text: 'قيد المعاينه' },
+               { id: '2', text: 'قيد التعميد' },
+               { id: '3', text: 'قيد التنفيذ' },
+               { id: '4', text: 'تم الحل' },
+               { id: '5', text: 'مرفوض' },
             ]}
+            onSearchPressed={onSearch}
          />
       </View>
    );

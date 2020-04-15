@@ -43,11 +43,11 @@ const CustomDropDown = ({
                            onMenuItemPressed(label);
                         }}
                         style={
-                           label === selectedItem
+                           selectedItem && label.id === selectedItem.id
                               ? styles.selectedItem
                               : styles.notSelectedItem
                         }>
-                        {label}
+                        {label.text}
                      </MenuItem>
                   </View>
                );

@@ -41,7 +41,7 @@ const AppNavigation = () => {
 };
 
 export default AppNavigation;
-/* 
+/*
   ) : token ? (
             <DrawerNavigator />
          ) : (

@@ -1,5 +1,6 @@
 import React from 'react';
-import { ComplainsItem, LoaderAndRetry } from '..';
+import { ComplainsItem } from '../complainsItem';
+import { LoaderAndRetry } from '../LoaderAndRetry';
 import {
    View,
    Text,
@@ -27,9 +28,10 @@ const ListAndLoading = ({
    list,
    paginationLoading,
    onEndReached,
+   dateSearch,
 }) => {
    const dispatch = useDispatch();
-   console.log('ff', list);
+
    const renderListFooter = () => {
       return paginationLoading ? (
          <ActivityIndicator color={MAIN_COLOR} />
@@ -42,7 +44,13 @@ const ListAndLoading = ({
             <LoaderAndRetry loading={loading} error={error} />
          ) : (
             <FlatList
-               data={list}
+               data={
+                  list
+                  // dateSearch == 1
+                  //    ? list.sort((a, b) => new Date() - new Date(b.CretaedOn))
+                  //    : list.sort((a, b) => new Date(b.CretaedOn) - new Date())
+               }
+               extraData={dateSearch}
                keyExtractor={(item, index) => `${index}`}
                showsVerticalScrollIndicator={false}
                renderItem={({

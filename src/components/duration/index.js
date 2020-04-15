@@ -3,9 +3,13 @@ import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import DateTimeButton from './DateTimePickerButton';
 import CustomDateTimePicker from './DateTimePicker';
 import { WHITE_COLOR } from '../../constants/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { onSearchInputsChange } from '../../redux/actions';
+
 const now = new Date();
 
 const SearchDuration = () => {
+   const dispatch = useDispatch();
    const colorScheme = useColorScheme();
    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
    const [currentActive, setCurrentActive] = useState('');
@@ -29,10 +33,12 @@ const SearchDuration = () => {
       switch (currentActive) {
          case 'startDate':
             setStartDate(date.toLocaleDateString());
+            dispatch(onSearchInputsChange('startDate', date))
             break;
 
          case 'endDate':
             setEndDate(date.toLocaleDateString());
+            dispatch(onSearchInputsChange('endDate', date))
             break;
       }
    };

@@ -31,7 +31,7 @@ const DashBoardItem = ({
             />
          </View>
          <View style={styles.cardDetailesContainer}>
-            <CustomText text={number} textStyle={styles.textStyle} />
+            <CustomText text={`${number}`} textStyle={styles.textStyle} />
             <CustomText text={text} textStyle={styles.textStyle} />
          </View>
       </TouchableOpacity>
