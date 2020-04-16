@@ -4,22 +4,17 @@ import CheckBox from 'react-native-check-box';
 import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
 import { CustomText } from '../customText';
 
-const ChechBox = ({ onItemPressed, text }) => {
-   const [isChecked, setIsChecked] = useState(false);
+const ChechBox = ({ onItemPressed, text, checked }) => {
    return (
-      <TouchableOpacity
-         style={styles.container}
-         onPress={() => setIsChecked(!isChecked)}>
+      <TouchableOpacity style={styles.container} onPress={onItemPressed}>
          <CheckBox
             uncheckedCheckBoxColor={MAIN_COLOR}
             checkedCheckBoxColor={MAIN_COLOR}
             style={{ alignItems: 'flex-start' }}
-            onClick={() => {
-               setIsChecked(!isChecked);
-            }}
-            isChecked={isChecked}
+            onClick={onItemPressed}
+            isChecked={checked}
          />
-         <CustomText text={'قطع الغيار'} />
+         <CustomText text={text} />
       </TouchableOpacity>
    );
 };

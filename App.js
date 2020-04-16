@@ -12,8 +12,9 @@ import { MAIN_COLOR } from './src/constants/colors';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { YellowBox } from 'react-native';
-
+import FlashMessage from 'react-native-flash-message';
 import AppNavigation from './src/navigation/MainNavigator';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 YellowBox.ignoreWarnings(['Remote debugger']);
 
@@ -29,6 +30,13 @@ const App = () => {
          <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={MAIN_COLOR} />
             <AppNavigation />
+            <FlashMessage
+               position="bottom"
+               style={styles.flashMessage}
+               duration={2500}
+               textStyle={styles.flashText}
+               titleStyle={styles.flashText}
+            />
          </SafeAreaView>
       </Provider>
    );
@@ -37,6 +45,17 @@ const styles = StyleSheet.create({
    container: {
       flex: 1,
       backgroundColor: MAIN_COLOR,
+   },
+   flashMessage: {
+      width: '100%',
+      height: '5%',
+      alignSelf: 'center',
+      justifyContent: 'center',
+   },
+   flashText: {
+      fontFamily: 'DroidArabicKufi',
+      textTransform: 'capitalize',
+      fontSize: responsiveFontSize(1.8),
    },
 });
 

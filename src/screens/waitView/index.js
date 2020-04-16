@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {
    Header,
@@ -11,28 +11,31 @@ import {
 } from '../../components';
 import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
 import Gurantee from '../../components/insideAndOutsideGuarantee';
-import ImagePicker from 'react-native-image-crop-picker';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+   getSpareParts,
+   onSelectImagesPressed,
+   closeBottomSheet,
+   handleCheckItem,
+} from '../../redux/actions/waitView';
+import { useIsFocused } from '@react-navigation/native';
 
 const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
-   const [images, setImages] = useState([]);
-   const onSelectImagesPressed = () => {
-      ImagePicker.openPicker({
-         width: 200,
-         height: 200,
-         cropping: false,
-         multiple: true,
+   const isFocused = useIsFocused();
+   const dispatch = useDispatch();
+   const { images, guaranteeSpares, outGuaranteeSpares } = useSelector(
+      state => ({
+         images: state.WaitView.images,
+         guaranteeSpares: state.WaitView.inGuaranteeSpares,
+         outGuaranteeSpares: state.WaitView.outGuaranteeSpares,
       })
-         .then(seletedImages => {
-            const images = [];
-            images.push(...seletedImages);
-            setImages(images);
-         })
-         .catch(e => {
-            console.log('image picker error', e);
-         });
-   };
+   );
+   useEffect(() => {
+      dispatch(getSpareParts());
+      return () => {};
+   }, [isFocused]);
 
    return (
       <View style={styles.container}>
@@ -72,8 +75,14 @@ const ComplainsDetailes = ({ route, navigation }) => {
 
          <View style={{ flex: 1 }}>
             <Gurantee
-               onSelectImagesPressed={onSelectImagesPressed}
+               onSelectImagesPressed={() => dispatch(onSelectImagesPressed())}
                images={images}
+               inGuaranteeSpares={guaranteeSpares}
+               outGuaranteeSpares={outGuaranteeSpares}
+               oncloseBottomSheet={() => dispatch(closeBottomSheet())}
+               onCheckItem={(index, Id, selectedButton) => {
+                  dispatch(handleCheckItem(index, Id, selectedButton));
+               }}
             />
          </View>
       </View>

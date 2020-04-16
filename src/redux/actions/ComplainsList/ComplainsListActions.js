@@ -35,7 +35,6 @@ export const getAllComplainsList = statusId => async (dispatch, getState) => {
       pageNumber,
    } = getState().Complains;
 
-
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
@@ -98,40 +97,42 @@ export const onComplainPressed = (data, navigation, route) => () => {
             break;
 
          default:
-            navigation.navigate('waitView', { data, distination: data.statusId });
+            navigation.navigate('waitView', {
+               data,
+               distination: data.statusId,
+            });
             break;
       }
    }
 };
 /////////////////////////////////////////////search
-export const onSearchInputsChange = (inputName, inputValue) => (dispatch) => {
+export const onSearchInputsChange = (inputName, inputValue) => dispatch => {
    switch (inputName) {
       case 'complainNumber':
-         dispatch({ type: COMPLAIN_NUMBER_CHANGE, payload: inputValue })
+         dispatch({ type: COMPLAIN_NUMBER_CHANGE, payload: inputValue });
          break;
       case 'contructorId':
-         dispatch({ type: CONTRUCTOR_ID_CHANGE, payload: inputValue })
+         dispatch({ type: CONTRUCTOR_ID_CHANGE, payload: inputValue });
          break;
       case 'complainStatus':
-         dispatch({ type: COMPLAIN_STATUS_CHANGE, payload: inputValue })
+         dispatch({ type: COMPLAIN_STATUS_CHANGE, payload: inputValue });
          break;
       case 'plateNumber':
-         dispatch({ type: PLATE_NUMBER_CHANGE, payload: inputValue })
+         dispatch({ type: PLATE_NUMBER_CHANGE, payload: inputValue });
          break;
       case 'complainType':
-         dispatch({ type: COMPLAIN_TYPE_CHANGE, payload: inputValue })
+         dispatch({ type: COMPLAIN_TYPE_CHANGE, payload: inputValue });
          break;
       case 'startDate':
-         dispatch({ type: START_DATE_CHANGE, payload: inputValue })
+         dispatch({ type: START_DATE_CHANGE, payload: inputValue });
          break;
       case 'endDate':
-         dispatch({ type: END_DATE_CHANGE, payload: inputValue })
+         dispatch({ type: END_DATE_CHANGE, payload: inputValue });
          break;
-
    }
-}
+};
 
-export const onSearchPressed = (source) => async (dispatch, getState) => {
+export const onSearchPressed = source => async (dispatch, getState) => {
    const {
       complainNumber,
       contructorId,
@@ -140,8 +141,9 @@ export const onSearchPressed = (source) => async (dispatch, getState) => {
       complainType,
       startDate,
       searchRowsNumber,
-      endDate, searchPageNumber } = getState().Complains
-
+      endDate,
+      searchPageNumber,
+   } = getState().Complains;
 
    try {
       dispatch({ type: SEARCH_SPINNER });
@@ -160,11 +162,9 @@ export const onSearchPressed = (source) => async (dispatch, getState) => {
       console.log('search error', error);
       dispatch({ type: SEARCH_FAILED });
    }
-}
+};
 
-
-
-export const LoadSearchPagination = (source) => async (dispatch, getState) => {
+export const LoadSearchPagination = source => async (dispatch, getState) => {
    const {
       complainNumber,
       contructorId,
@@ -173,7 +173,9 @@ export const LoadSearchPagination = (source) => async (dispatch, getState) => {
       complainType,
       startDate,
       searchRowsNumber,
-      endDate, searchPageNumber } = getState().Complains
+      endDate,
+      searchPageNumber,
+   } = getState().Complains;
    try {
       dispatch({ type: SEARCH_PAGINATION_SPINNER });
       const searchPaginationtResponse = await Api.get(

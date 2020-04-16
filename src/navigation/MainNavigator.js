@@ -5,6 +5,7 @@ import DrawerNavigator from './Drawer';
 import Login from '../screens/Login';
 import AsyncStorage from '@react-native-community/async-storage';
 import Splash from '../screens/Splash';
+import { useSelector } from 'react-redux';
 const Stack = createStackNavigator();
 
 const LoginStack = () => {
@@ -19,8 +20,9 @@ const LoginStack = () => {
    );
 };
 const AppNavigation = () => {
+   const logedIn = useSelector(state => state.Auth.logedIn);
    const [token, settoken] = useState(
-      AsyncStorage.getItem('userToken', (err, res) => settoken(res))
+      AsyncStorage.getItem('userId', (err, res) => settoken(res))
    );
    const [showSplash, setshowSplash] = useState(true);
    useEffect(() => {
@@ -33,9 +35,13 @@ const AppNavigation = () => {
    }, []);
    return (
       <NavigationContainer>
-         {/*  <LoginStack /> */}
-         {/*   <DrawerNavigator /> */}
-         {showSplash ? <Splash /> : <DrawerNavigator />}
+         {showSplash ? (
+            <Splash />
+         ) : token ? (
+            <DrawerNavigator />
+         ) : (
+            <LoginStack />
+         )}
       </NavigationContainer>
    );
 };

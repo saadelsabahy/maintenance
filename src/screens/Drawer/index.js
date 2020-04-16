@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
    View,
    Text,
@@ -20,7 +20,22 @@ import {
    DrawerItem,
 } from '@react-navigation/drawer';
 import { Icon, CustomText } from '../../components';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { onLogoutPressed } from '../../redux/actions';
 const CustomDrawer = props => {
+   const dispatch = useDispatch();
+   const [userName, setuserName] = useState('');
+
+   useEffect(() => {
+      getName();
+      return () => {};
+   }, []);
+   const getName = async () => {
+      let name = await AsyncStorage.getItem('userName');
+
+      setuserName(name);
+   };
    return (
       <View style={styles.container}>
          <View style={styles.DrawerHeader}>
@@ -46,10 +61,7 @@ const CustomDrawer = props => {
                   }}
                />
                <CustomText text={'اهلا بك'} textStyle={styles.headerText} />
-               <CustomText
-                  text={'محمد احمد علي'}
-                  textStyle={styles.headerText}
-               />
+               <CustomText text={userName} textStyle={styles.headerText} />
             </View>
             <View style={{ ...styles.editIconContainer, width: '95%' }}>
                <Icon
@@ -60,6 +72,7 @@ const CustomDrawer = props => {
                      flex: 1,
                      alignItems: 'flex-end',
                   }}
+                  onPress={() => dispatch(onLogoutPressed())}
                />
             </View>
          </View>

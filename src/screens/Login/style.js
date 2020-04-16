@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
    },
    headerImage: {
       width: '40%',
-      height: '50%',
+      height: '45%',
       resizeMode: 'contain',
    },
    formContainer: {

@@ -17,28 +17,33 @@ import {
    SECONDART_COLOR,
 } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
-import { inputsChange } from '../../redux/actions/Auth/AuthActions';
+import {
+   inputsChange,
+   onLoginPressed,
+} from '../../redux/actions/Auth/AuthActions';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import styles from './style';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const Login = ({ navigation }) => {
-   const passwordInput = useRef(null);
+   const passwordInput = useRef();
    const keyboardAvoidingRef = useRef();
    const [keyBoardShow, setkeyBoardShow] = useState(false);
    const dispatch = useDispatch();
-   const { name, password } = useSelector(state => ({
-      name: state.Auth.loginUserName,
-      password: state.Auth.loginUserPassword,
-   }));
+   const { userName, userPassword, loginSpinner, loginError } = useSelector(
+      state => ({
+         userName: state.Auth.userName,
+         userPassword: state.Auth.userPassword,
+         loginSpinner: state.Auth.loginSpinner,
+         loginError: state.Auth.loginError,
+      })
+   );
    const onKeyboardShow = () => {
       setkeyBoardShow(true);
       // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 500, animated: true })
-
    };
    const onKeyboardHide = () => {
       setkeyBoardShow(false);
       // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 0, animated: true })
-
    };
    return (
       <KeyboardAwareScrollView
@@ -47,7 +52,8 @@ const Login = ({ navigation }) => {
          scrollEnabled={keyBoardShow}
          onKeyboardDidShow={onKeyboardShow}
          onKeyboardDidHide={onKeyboardHide}
-         ref={ref => ref = keyboardAvoidingRef}>
+         ref={ref => (ref = keyboardAvoidingRef)}
+         keyboardShouldPersistTaps="always">
          <View style={styles.imageContainer}>
             <Image source={LoginHeaderImage} style={styles.headerImage} />
             <CustomText text="تطبيق الصيانات" textStyle={styles.logoText} />
@@ -83,16 +89,15 @@ const Login = ({ navigation }) => {
                   iconStartSize={responsiveFontSize(2.5)}
                   startIconColor={MAIN_COLOR}
                   placeholder={'اسم المستخدم'}
-                  inputProps={{
-                     onChangeText: loginName => {
-                        dispatch(inputsChange('loginName', loginName));
-                     },
-                     value: name,
-                     returnKeyType: 'next',
-                     onSubmitEditing: () => passwordInput.current.focus(),
-                     blurOnSubmit: false,
+                  onChangeText={loginName => {
+                     dispatch(inputsChange('loginName', loginName));
                   }}
-               /*  error={true}
+                  value={userName}
+                  returnKeyType="next"
+                  onSubmitEditing={() => passwordInput.current.focus()}
+                  blurOnSubmit={false}
+
+                  /*  error={true}
             errorText={'حدث خطا مابيياريالاتا'} */
                />
 
@@ -104,15 +109,13 @@ const Login = ({ navigation }) => {
                   iconStartSize={responsiveFontSize(2.5)}
                   startIconColor={MAIN_COLOR}
                   placeholder={'كلمه المرور'}
-                  inputProps={{
-                     secureTextEntry: true,
-                     onChangeText: loginPassword => {
-                        dispatch(inputsChange('loginPassword', loginPassword));
-                     },
-                     value: password,
-                     ref: passwordInput,
-                     returnKeyType: 'go',
+                  secureTextEntry={true}
+                  onChangeText={loginPassword => {
+                     dispatch(inputsChange('loginPassword', loginPassword));
                   }}
+                  value={userPassword}
+                  referance={passwordInput}
+                  returnKeyType="go"
                   iconStartStyle={styles.icon}
                />
             </View>
@@ -121,12 +124,19 @@ const Login = ({ navigation }) => {
                <CustomButton
                   buttonTitle="دخول"
                   onButtonPressed={() => {
+                     dispatch(onLoginPressed());
                      Keyboard.dismiss();
                   }}
-                  buttonContainerStyle={styles.button}
+                  buttonContainerStyle={
+                     !loginSpinner
+                        ? styles.button
+                        : { ...styles.button, justifyContent: 'center' }
+                  }
                   icon={'long-arrow-right'}
                   iconColor={WHITE_COLOR}
                   iconType={'font-awesome'}
+                  loading={loginSpinner}
+                  spinnerColor={WHITE_COLOR}
                />
             </View>
          </View>

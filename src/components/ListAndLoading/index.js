@@ -53,6 +53,11 @@ const ListAndLoading = ({
                extraData={dateSearch}
                keyExtractor={(item, index) => `${index}`}
                showsVerticalScrollIndicator={false}
+               scrollEventThrottle={100}
+               maxToRenderPerBatch={30}
+               updateCellsBatchingPeriod={1000}
+               windowSize={101}
+               initialNumToRender={10}
                renderItem={({
                   item,
                   item: {
@@ -93,7 +98,7 @@ const ListAndLoading = ({
                   );
                }}
                onEndReached={onEndReached}
-               onEndReachedThreshold={1}
+               onEndReachedThreshold={0.5}
                ListFooterComponent={renderListFooter}
                ListEmptyComponent={
                   <View

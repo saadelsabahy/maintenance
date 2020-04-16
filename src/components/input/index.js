@@ -32,6 +32,7 @@ const CustomInput = ({
    iconStartBackGround,
    iconEndBackGround,
    inputWrapper,
+   referance,
    ...res
 }) => {
    return (
@@ -59,6 +60,7 @@ const CustomInput = ({
                placeholder={placeholder}
                style={[styles.input, inputStyle]}
                underlineColorAndroid="transparent"
+               ref={referance}
                {...res}
             />
             {iconEndName && (

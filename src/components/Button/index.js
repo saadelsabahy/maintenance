@@ -39,6 +39,7 @@ const CustomButton = ({
                size={spinnerSize || 'small'}
                animating
                color={spinnerColor}
+               style={{ alignSelf: 'center' }}
             />
          ) : (
             <View

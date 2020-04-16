@@ -13,13 +13,18 @@ import ChechBox from '../checkBox';
 import { ImageSelector } from '../ImageSelector';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-const Gurantee = ({ onSelectImagesPressed, images }) => {
+
+const Gurantee = ({
+   onSelectImagesPressed,
+   images,
+   outGuaranteeSpares,
+   inGuaranteeSpares,
+   oncloseBottomSheet,
+   onCheckItem,
+}) => {
    const [selectedButton, setselectedButton] = useState(null);
    const bottomSheetRef = useRef(null);
    const onButtonsPressed = index => {
-
-
       setselectedButton(index);
       bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
    };
@@ -37,7 +42,10 @@ const Gurantee = ({ onSelectImagesPressed, images }) => {
             }}>
             <View style={{ flex: 1, alignItems: 'center' }}>
                <ImageSelector
-                  onSelectImagesPressed={onSelectImagesPressed}
+                  onSelectImagesPressed={async () => {
+                     await bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
+                     onSelectImagesPressed();
+                  }}
                   images={images}
                />
             </View>
@@ -106,12 +114,30 @@ const Gurantee = ({ onSelectImagesPressed, images }) => {
                         width: '90%',
                         alignSelf: 'center',
                      }}
-                     data={['1', '2', '3', '4', '6', '7', '8', '9', '10']}
+                     data={
+                        selectedButton == 0
+                           ? inGuaranteeSpares
+                           : outGuaranteeSpares
+                     }
                      keyExtractor={(item, index) => `${index}`}
-                     renderItem={({ item, index }) => {
-                        return <ChechBox />;
+                     renderItem={({
+                        item,
+                        item: { Id, NameAr, checked },
+                        index,
+                     }) => {
+                        return (
+                           <ChechBox
+                              index={index}
+                              text={NameAr}
+                              Id={Id}
+                              checked={checked}
+                              onItemPressed={() =>
+                                 onCheckItem(index, Id, selectedButton)
+                              }
+                           />
+                        );
                      }}
-                  /* numColumns={2} */
+                     /* numColumns={2} */
                   />
                </View>
                <View
@@ -162,7 +188,10 @@ const Gurantee = ({ onSelectImagesPressed, images }) => {
             enabledBottomInitialAnimation
             ref={bottomSheetRef}
             initialSnap={2}
-            onCloseEnd={() => setselectedButton(null)}
+            onCloseEnd={() => {
+               oncloseBottomSheet();
+               setselectedButton(null);
+            }}
             enabledInnerScrolling={true}
             enabledContentGestureInteraction={false}
          />

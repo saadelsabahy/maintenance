@@ -1,51 +1,45 @@
 import {
-   GET_WAITVIEW_COMPLAINS_SPINNER,
-   GET_WAITVIEW_COMPLAINS_SUCCESS,
-   GET_WAITVIEW_COMPLAINS_FAILED,
+   GET_SPAREPARTS,
+   SELECT_IMAGES_SUCCESS,
+   CLOSE_BOTTOM_SHEET,
+   IN_GUARANTEE_ITEM_CHECKED,
+   OUT_GUARANTEE_ITEM_CHECKED,
 } from '../../actions/waitView/waitViewTypes';
 
 const initialState = {
-   statusId: null,
-   platNumber: null,
-   dateFrom: null,
-   dateTo: null,
-   contractorId: null,
-   rowsNumber: 10,
-   pageNumber: 0,
-   waitViewComplains: [],
-   waitViewComplainsListLoading: false,
-   waitViewComplainsListErorr: false,
-   waitViewPaginationLoading: false,
-   waitViewPaginationError: false,
+   getSparesLoading: false,
+   getSparesError: false,
+   inGuaranteeSpares: [],
+   outGuaranteeSpares: [],
+   images: [],
 };
 
 export default (state = initialState, { type, payload }) => {
    switch (type) {
-      case GET_WAITVIEW_COMPLAINS_SPINNER:
+      case GET_SPAREPARTS:
          return {
             ...state,
-            waitViewComplainsListLoading: true,
-            waitViewComplainsListErorr: false,
+            inGuaranteeSpares: payload.in,
+            outGuaranteeSpares: payload.out,
          };
          break;
 
-      case GET_WAITVIEW_COMPLAINS_SUCCESS:
+      case SELECT_IMAGES_SUCCESS:
          return {
             ...state,
-            waitViewComplainsListLoading: false,
-            waitViewComplainsListErorr: false,
-            waitViewComplains: payload,
+            images: payload,
          };
          break;
 
-      case GET_WAITVIEW_COMPLAINS_FAILED:
-         return {
-            ...state,
-            waitViewComplainsListLoading: false,
-            waitViewComplainsListErorr: true,
-         };
+      case CLOSE_BOTTOM_SHEET:
+         return { ...state, images: [] };
          break;
-
+      case IN_GUARANTEE_ITEM_CHECKED:
+         return { ...state, inGuaranteeSpares: payload };
+         break;
+      case OUT_GUARANTEE_ITEM_CHECKED:
+         return { ...state, outGuaranteeSpares: payload };
+         break;
       default:
          return state;
    }
