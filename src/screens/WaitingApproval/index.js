@@ -16,8 +16,15 @@ import {
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
 } from '../../constants/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+   onExcutionDone,
+   onAcceptThePreview,
+   onRejectThePreview,
+} from '../../redux/actions';
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
+   const dispatch = useDispatch();
 
    const renderButtons = () => {
       switch (distination) {
@@ -26,6 +33,7 @@ const WaitApproval = ({ navigation, route }) => {
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}
                   buttonTitle={'تم الحل'}
+                  onButtonPressed={() => dispatch(onExcutionDone())}
                />
             );
             break;
@@ -37,6 +45,7 @@ const WaitApproval = ({ navigation, route }) => {
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}
                   buttonTitle={'تعميد'}
+                  onButtonPressed={() => dispatch(onAcceptThePreview())}
                />
             );
             break;
@@ -51,10 +60,12 @@ const WaitApproval = ({ navigation, route }) => {
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'تعميد'}
+                     onButtonPressed={() => dispatch(onAcceptThePreview())}
                   />
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'رفض'}
+                     onButtonPressed={() => dispatch(onRejectThePreview())}
                   />
                </View>
             );
@@ -99,7 +110,7 @@ const WaitApproval = ({ navigation, route }) => {
             />
          </View>
          <View style={styles.bottomSheetContainer}>
-            <CustomBottomSheet />
+            <CustomBottomSheet source={distination} />
          </View>
          <View style={styles.buttonsContainer}>{renderButtons()}</View>
       </View>

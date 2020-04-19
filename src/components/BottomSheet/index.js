@@ -9,45 +9,81 @@ import {
 } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { FlatList } from 'react-native-gesture-handler';
-const CustomBottomSheet = () => {
+import { ImageSelector } from '../ImageSelector';
+import ChechBox from '../checkBox';
+const CustomBottomSheet = ({ source }) => {
    const renderInner = () => (
       <View style={styles.panel}>
          <View style={styles.panelHandle} />
-         <View style={{ flex: 0.8, width: '90%', marginBottom: 10 }}>
-            <FlatList
-               style={{ flex: 1 }}
-               contentContainerStyle={{ flexGrow: 1 }}
-               data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
-               keyExtractor={(item, index) => `${index}`}
-               renderItem={({ item, index }) => {
-                  return (
-                     <View style={styles.bottomSheetItem}>
-                        <CustomText text={'تغيير أنتنه'} />
-                        <CustomText text={'100 ريال'} />
-                     </View>
-                  );
-               }}
-            />
-         </View>
-         <View style={styles.bottomSheetItem}>
-            <CustomText text={'ثمن الزياره'} />
-            <CustomText text={'100 ريال'} />
-         </View>
-         <View
-            style={[
-               styles.bottomSheetItem,
-               {
-                  backgroundColor: TEXT_COLOR,
-                  paddingHorizontal: 10,
-                  backgroundColor: TEXT_COLOR,
-               },
-            ]}>
-            <CustomText
-               text={'المجموع الكلي'}
-               textStyle={{ color: WHITE_COLOR }}
-            />
-            <CustomText text={'100 ريال'} textStyle={{ color: WHITE_COLOR }} />
-         </View>
+         {source === 3 ? (
+            <>
+               <View
+                  style={{ height: '20%', width: '90%', alignSelf: 'center' }}>
+                  <ImageSelector />
+               </View>
+               <View style={{ flex: 0.8, width: '90%', marginBottom: 10 }}>
+                  <FlatList
+                     style={{ flex: 1 }}
+                     contentContainerStyle={{ flexGrow: 1 }}
+                     data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+                     keyExtractor={(item, index) => `${index}`}
+                     renderItem={({ item, index }) => {
+                        return (
+                           <View
+                              style={{
+                                 ...styles.bottomSheetItem,
+                                 justifyContent: 'flex-start',
+                              }}>
+                              <ChechBox />
+                              <CustomText text={'تغيير أنتنه'} />
+                           </View>
+                        );
+                     }}
+                  />
+               </View>
+            </>
+         ) : (
+            <>
+               <View style={{ flex: 0.8, width: '90%', marginBottom: 10 }}>
+                  <FlatList
+                     style={{ flex: 1 }}
+                     contentContainerStyle={{ flexGrow: 1 }}
+                     data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+                     keyExtractor={(item, index) => `${index}`}
+                     renderItem={({ item, index }) => {
+                        return (
+                           <View style={styles.bottomSheetItem}>
+                              <CustomText text={'تغيير أنتنه'} />
+                              <CustomText text={'100 ريال'} />
+                           </View>
+                        );
+                     }}
+                  />
+               </View>
+               <View style={styles.bottomSheetItem}>
+                  <CustomText text={'ثمن الزياره'} />
+                  <CustomText text={'100 ريال'} />
+               </View>
+               <View
+                  style={[
+                     styles.bottomSheetItem,
+                     {
+                        backgroundColor: TEXT_COLOR,
+                        paddingHorizontal: 10,
+                        backgroundColor: TEXT_COLOR,
+                     },
+                  ]}>
+                  <CustomText
+                     text={'المجموع الكلي'}
+                     textStyle={{ color: WHITE_COLOR }}
+                  />
+                  <CustomText
+                     text={'100 ريال'}
+                     textStyle={{ color: WHITE_COLOR }}
+                  />
+               </View>
+            </>
+         )}
       </View>
    );
 

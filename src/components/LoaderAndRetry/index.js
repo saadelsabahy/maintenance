@@ -28,6 +28,7 @@ const LoaderAndRetry = ({
                   size={responsiveFontSize(4)}
                   type={'material-community'}
                   color={MAIN_COLOR}
+                  size={responsiveFontSize(4)}
                />
                <CustomText
                   text={errorText || 'حدث خطأ ما برجاء اعاده المحاوله'}

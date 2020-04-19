@@ -9,14 +9,18 @@ import {
    DashBoardItem,
    DashboardFilter,
    LoaderAndRetry,
+   CustomText,
 } from '../../components';
 import DashboardHeader from './DashboardHeader';
 import { useIsFocused } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDashBoardData } from '../../redux/actions/Dashboard';
+import NetInfo from '@react-native-community/netinfo';
 
 const DashBoard = ({ navigation }) => {
    const isFocused = useIsFocused();
+   const [netConnected, setNetConnected] = useState(null);
+
    const {
       dashboardSpinner,
       dashboardError,
@@ -36,12 +40,31 @@ const DashBoard = ({ navigation }) => {
       });
    };
    useEffect(() => {
+      const unsubscribe = NetInfo.addEventListener(state => {
+         setNetConnected(state.isConnected);
+      });
       dispatch(getDashBoardData());
-      return () => {};
+      return () => {
+         unsubscribe();
+      };
    }, []);
+   const renderNetSignOffline = () => (
+      <View
+         style={{
+            width: '100%',
+            alignItems: 'center',
+            backgroundColor: 'red',
+         }}>
+         <CustomText
+            text={'لايوجد اتصال بالإنترنت'}
+            textStyle={{ color: WHITE_COLOR }}
+         />
+      </View>
+   );
    const [showFilterModal, setshowFilterModal] = useState(false);
    return (
       <View style={styles.container}>
+         {!netConnected && renderNetSignOffline()}
          <DashboardHeader
             navigation={navigation}
             onFilterPressed={() => setshowFilterModal(!showFilterModal)}
@@ -53,6 +76,7 @@ const DashBoard = ({ navigation }) => {
                <LoaderAndRetry
                   loading={dashboardSpinner}
                   error={dashboardError}
+                  onRetryPressed={() => dispatch(getDashBoardData())}
                />
             ) : (
                <View

@@ -50,7 +50,8 @@ const DashboardFilter = ({
                   flex: 1,
                }}
                contentContainerStyle={{
-                  justifyContent: 'space-evenly',
+                  flexGrow: 1,
+                  justifyContent: 'center',
                   alignItems: 'center',
                }}
                enableOnAndroid={true}>
@@ -75,16 +76,6 @@ const DashboardFilter = ({
                      inputContainerStyle={styles.input}
                      placeholder={'رقم العقد'}
                   />
-
-                  <View
-                     style={{
-                        height: '20%',
-                        justifyContent: 'center',
-                        width: '100%',
-                        alignItems: 'center',
-                     }}>
-                     <SearchDuration />
-                  </View>
                </View>
 
                <View style={styles.buttonsContainer}>
@@ -111,16 +102,17 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-end',
    },
    modalContentContainer: {
-      flex: 0.7,
+      flex: 0.4,
       backgroundColor: SECONDART_COLOR,
       borderTopStartRadius: 20,
       borderTopEndRadius: 20,
       alignItems: 'center',
+      justifyContent: 'center',
    },
    inputsContainer: {
       width: '90%',
-      height: SCREEN_HEIGHT / 4,
-      justifyContent: 'space-evenly',
+      height: SCREEN_HEIGHT / 10,
+      justifyContent: 'center',
    },
    buttonsContainer: {
       flexDirection: 'row',
@@ -137,6 +129,7 @@ const styles = StyleSheet.create({
    },
    input: {
       backgroundColor: WHITE_COLOR,
+      paddingHorizontal: 10,
    },
 });
 

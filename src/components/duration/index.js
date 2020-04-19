@@ -14,8 +14,8 @@ const SearchDuration = () => {
    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
    const [currentActive, setCurrentActive] = useState('');
    const [mode, setMode] = useState('date');
-   const [startDate, setStartDate] = useState(now.toLocaleDateString());
-   const [endDate, setEndDate] = useState(now.toLocaleDateString());
+   const [startDate, setStartDate] = useState('');
+   const [endDate, setEndDate] = useState('');
 
    const showDatePicker = duration => {
       setDatePickerVisibility(true);
@@ -33,26 +33,26 @@ const SearchDuration = () => {
       switch (currentActive) {
          case 'startDate':
             setStartDate(date.toLocaleDateString());
-            dispatch(onSearchInputsChange('startDate', date))
+            dispatch(onSearchInputsChange('startDate', date));
             break;
 
          case 'endDate':
             setEndDate(date.toLocaleDateString());
-            dispatch(onSearchInputsChange('endDate', date))
+            dispatch(onSearchInputsChange('endDate', date));
             break;
       }
    };
    return (
       <View style={[styles.container]}>
          <DateTimeButton
-            text={startDate}
+            text={startDate == '' ? 'من تاريخ' : startDate}
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
             onPress={() => showDatePicker('startDate')}
          />
          <DateTimeButton
-            text={endDate}
+            text={endDate == '' ? 'إلي تاريخ' : endDate}
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
