@@ -21,6 +21,7 @@ const Gurantee = ({
    inGuaranteeSpares,
    oncloseBottomSheet,
    onCheckItem,
+   handlePerview,
 }) => {
    const [selectedButton, setselectedButton] = useState(null);
    const bottomSheetRef = useRef(null);
@@ -156,6 +157,7 @@ const Gurantee = ({
                      buttonTitle={
                         selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
                      }
+                     onButtonPressed={handlePerview}
                   />
                </View>
 

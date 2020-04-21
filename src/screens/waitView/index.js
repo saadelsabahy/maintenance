@@ -18,6 +18,7 @@ import {
    onSelectImagesPressed,
    closeBottomSheet,
    handleCheckItem,
+   handlePerview,
 } from '../../redux/actions/waitView';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -83,6 +84,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
                onCheckItem={(index, Id, selectedButton) => {
                   dispatch(handleCheckItem(index, Id, selectedButton));
                }}
+               handlePerview={() => dispatch(handlePerview(data))}
             />
          </View>
       </View>

@@ -43,11 +43,18 @@ const DashBoard = ({ navigation }) => {
       const unsubscribe = NetInfo.addEventListener(state => {
          setNetConnected(state.isConnected);
       });
-      dispatch(getDashBoardData());
+      getDashboardData();
       return () => {
          unsubscribe();
       };
-   }, []);
+   }, [netConnected, isFocused]);
+   const getDashboardData = () => {
+      if (netConnected) {
+         dispatch(getDashBoardData());
+      } else {
+         return;
+      }
+   };
    const renderNetSignOffline = () => (
       <View
          style={{
@@ -69,14 +76,14 @@ const DashBoard = ({ navigation }) => {
             navigation={navigation}
             onFilterPressed={() => setshowFilterModal(!showFilterModal)}
             lastUpdate={lastUpdate}
-            onRefreshPressed={() => dispatch(getDashBoardData())}
+            onRefreshPressed={() => getDashboardData()}
          />
          <View style={styles.itemsWrapper}>
             {dashboardSpinner || dashboardError ? (
                <LoaderAndRetry
                   loading={dashboardSpinner}
                   error={dashboardError}
-                  onRetryPressed={() => dispatch(getDashBoardData())}
+                  onRetryPressed={() => getDashboardData()}
                />
             ) : (
                <View

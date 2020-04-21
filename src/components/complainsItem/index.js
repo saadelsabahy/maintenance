@@ -13,6 +13,7 @@ const ComplainsItem = ({
    indicatorColor,
    onComplainPressed,
    containerStyle,
+   complainStatus,
 }) => {
    return (
       <TouchableOpacity
@@ -27,6 +28,7 @@ const ComplainsItem = ({
                vehicleType,
                contractorNumber,
                indicatorColor,
+               complainStatus,
             })
          }>
          <View

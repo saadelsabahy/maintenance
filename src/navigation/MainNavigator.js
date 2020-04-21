@@ -19,7 +19,7 @@ const LoginStack = () => {
       </Stack.Navigator>
    );
 };
-const AppNavigation = () => {
+const AppNavigation = ({ screenProps }) => {
    const logedIn = useSelector(state => state.Auth.logedIn);
    const [token, settoken] = useState(
       AsyncStorage.getItem('userId', (err, res) => settoken(res))
@@ -34,7 +34,7 @@ const AppNavigation = () => {
       };
    }, []);
    return (
-      <NavigationContainer>
+      <NavigationContainer screenProps={screenProps}>
          {showSplash ? (
             <Splash />
          ) : token ? (

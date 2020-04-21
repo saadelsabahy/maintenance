@@ -68,6 +68,33 @@ export const handleCheckItem = (index, Id, selectedButton) => (
       });
    }
 };
+
+export const handlePerview = ({ complainNumber, complainStatus }) => async (
+   dispatch,
+   getState
+) => {
+   const { images } = getState().WaitView;
+
+   try {
+      const form = new FormData();
+      images.map(({ mime, path }, index) => {
+         form.append('image', {
+            uri: Platform.OS == 'android' ? path : path.replace('file://', ''),
+            type: mime,
+            name: `picture${index}`,
+         });
+      });
+      const uploadImageResponse = await Api.post(
+         `DamageComplain/UploadComplianImage?ComplianId=${+complainNumber}&StatusId=${`${+complainStatus}`}`,
+         form,
+         { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
+      Reactotron.log(uploadImageResponse);
+   } catch (error) {
+      console.log('preview error', error);
+   }
+};
+
 export const closeBottomSheet = () => dispatch => {
    dispatch({ type: CLOSE_BOTTOM_SHEET });
 };

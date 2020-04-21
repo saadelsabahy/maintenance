@@ -84,6 +84,7 @@ const ListAndLoading = ({
                         vehicleNumber={PlateNumber}
                         vehicleType={'ضاغط'}
                         contractorNumber={ContractorId}
+                        complainStatus={StatusId}
                         indicatorColor={
                            StatusId < 2
                               ? INDICATOR_RED

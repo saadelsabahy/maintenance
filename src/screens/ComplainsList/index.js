@@ -15,9 +15,9 @@ import {
    LoadPagination,
    LoadSearchPagination,
 } from '../../redux/actions';
-import { getWaitViewComplains } from '../../redux/actions/waitView';
 import ListHeader from './Header';
-const Complains = ({ navigation, route }) => {
+import withObservables from '@nozbe/with-observables';
+const Complains = ({ navigation, route, complains }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
    const [isModalVisible, setisModalVisible] = useState(false);
@@ -92,8 +92,9 @@ const Complains = ({ navigation, route }) => {
    const onFilterItemPressed = label => {
       setfilterLabel(label);
       menuRef.current.hide();
-      setDateSearch(label.id)
+      setDateSearch(label.id);
    };
+
    return (
       <View style={styles.container}>
          <ListHeader
@@ -113,8 +114,8 @@ const Complains = ({ navigation, route }) => {
                list={
                   route.params && route.params.hasOwnProperty('distination')
                      ? complainsList.filter(
-                        item => (item.statusId = route.params.distination)
-                     )
+                          item => item.StatusId === route.params.distination
+                       )
                      : complainsList
                }
                onEndReached={onListEndReached}
@@ -159,5 +160,8 @@ const styles = StyleSheet.create({
       bottom: 0,
    },
 });
+/* const enhance = withObservables(['complains'], ({ complains }) => ({
+   complains,
+})); */
 
 export default Complains;

@@ -34,29 +34,27 @@ const SearchModal = ({
    onModalShow,
    backdropOpacity,
    searchDropdownLabels,
-   onSearchPressed
+   onSearchPressed,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
    const [dropDownText, setdropDownText] = useState('');
    const [keyboardShow, setKeyboardShow] = useState(false);
    useEffect(() => {
-
       return () => {
-         onKeyboardWillHide()
-      }
-   }, [])
+         onKeyboardWillHide();
+      };
+   }, []);
    const onKeyboardWillShow = () => {
-
-      setKeyboardShow(true)
-   }
+      setKeyboardShow(true);
+   };
    const onKeyboardWillHide = () => {
-      setKeyboardShow(false)
-   }
+      setKeyboardShow(false);
+   };
    const HideModal = () => {
-      onKeyboardWillHide()
-      onBackdropPress()
-   }
+      onKeyboardWillHide();
+      onBackdropPress();
+   };
    return (
       <Modal
          testID={'modal'}
@@ -66,12 +64,20 @@ const SearchModal = ({
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}>
-         <View style={keyboardShow ? { ...styles.modalContentContainer, height: SCREEN_HEIGHT * .5 } : styles.modalContentContainer} >
+         <View
+            style={
+               keyboardShow
+                  ? {
+                       ...styles.modalContentContainer,
+                       height: SCREEN_HEIGHT * 0.5,
+                    }
+                  : styles.modalContentContainer
+            }>
             <View
                style={{
                   position: 'absolute',
-                  start: 5,
-                  top: 20,
+                  start: 10,
+                  top: 10,
                   zIndex: 100000,
                }}>
                <Icon
@@ -79,9 +85,13 @@ const SearchModal = ({
                   type={'material-community'}
                   onPress={HideModal}
                   iconContainerStyle={{ flex: 1 }}
+                  color={TEXT_COLOR}
                />
             </View>
-            <KeyboardAwareScrollView style={{ flex: 1 }} enableOnAndroid={true} onKeyboardDidShow={() => onKeyboardWillShow()}
+            <KeyboardAwareScrollView
+               style={{ flex: 1 }}
+               enableOnAndroid={true}
+               onKeyboardDidShow={() => onKeyboardWillShow()}
                onKeyboardDidHide={() => onKeyboardWillHide()}>
                <View
                   style={{
@@ -104,39 +114,47 @@ const SearchModal = ({
                      inputContainerStyle={styles.input}
                      placeholder={'رقم البلاغ'}
                      keyboardType={'numeric'}
-                     onChangeText={(text) => dispatch(onSearchInputsChange('complainNumber', text))}
+                     onChangeText={text =>
+                        dispatch(onSearchInputsChange('complainNumber', text))
+                     }
                   />
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم العقد'}
                      keyboardType={'numeric'}
-                     onChangeText={(text) => dispatch(onSearchInputsChange('contructorId', text))}
+                     onChangeText={text =>
+                        dispatch(onSearchInputsChange('contructorId', text))
+                     }
                   />
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'حاله البلاغ'}
-                     onChangeText={(text) => dispatch(onSearchInputsChange('complainStatus', text))}
+                     onChangeText={text =>
+                        dispatch(onSearchInputsChange('complainStatus', text))
+                     }
                   />
 
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم اللوحه'}
-                     onChangeText={(text) => dispatch(onSearchInputsChange('plateNumber', text))}
+                     onChangeText={text =>
+                        dispatch(onSearchInputsChange('plateNumber', text))
+                     }
                   />
                   <CustomDropDown
                      onDropDownPressed={() => menuRef.current.show()}
                      menuStyle={styles.menuStyle}
                      onMenuItemPressed={label => {
-                        dispatch(onSearchInputsChange('complainType', label.id))
-                        setdropDownText(label.text)
+                        dispatch(
+                           onSearchInputsChange('complainType', label.id)
+                        );
+                        setdropDownText(label.text);
                         menuRef.current.hide();
-
                      }}
                      menuContainerStyle={styles.menuContainerStyle}
                      labels={searchDropdownLabels}
                      refrence={menuRef}
                      dropDownText={dropDownText}
-
                   />
                   <View
                      style={{
@@ -203,6 +221,7 @@ const styles = StyleSheet.create({
    },
    input: {
       backgroundColor: WHITE_COLOR,
+      paddingHorizontal: 10,
    },
    dropDwonButton: {
       width: '100%',
@@ -216,7 +235,7 @@ const styles = StyleSheet.create({
       borderRadius: 50,
       borderColor: TEXT_COLOR,
       borderWidth: 1,
-      height: 50,
+      height: SCREEN_HEIGHT / 13,
    },
    menuStyle: {
       width: SCREEN_WIDTH - 50,
