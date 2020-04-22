@@ -17,7 +17,7 @@ import FlashMessage from 'react-native-flash-message';
 import AppNavigation from './src/navigation/MainNavigator';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 YellowBox.ignoreWarnings(['Remote debugger']);
-// import database from './src/models'
+// import database from './src/models';
 const App = () => {
    I18nManager.forceRTL(true);
    useEffect(() => {
@@ -30,7 +30,7 @@ const App = () => {
             <SafeAreaView style={styles.container}>
                <StatusBar backgroundColor={MAIN_COLOR} />
 
-               <AppNavigation />
+               <AppNavigation /* screenProps={{ database }} */ />
                <FlashMessage
                   position="bottom"
                   style={styles.flashMessage}

@@ -10,7 +10,8 @@ const adapter = new SQLiteAdapter({
 
 const database = new Database({
    adapter,
-   modelClasses: [Complains],
+   modelClasses: [],
    actionsEnabled: true,
 });
+debugger;
 export default database;

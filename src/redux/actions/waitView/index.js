@@ -5,6 +5,8 @@ import {
    CLOSE_BOTTOM_SHEET,
    IN_GUARANTEE_ITEM_CHECKED,
    OUT_GUARANTEE_ITEM_CHECKED,
+   PERVIEW_SPINNER,
+   PERVIEW_FAILED,
 } from './waitViewTypes';
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -76,6 +78,7 @@ export const handlePerview = ({ complainNumber, complainStatus }) => async (
    const { images } = getState().WaitView;
 
    try {
+      dispatch({ type: PERVIEW_SPINNER });
       const form = new FormData();
       images.map(({ mime, path }, index) => {
          form.append('image', {
@@ -92,6 +95,7 @@ export const handlePerview = ({ complainNumber, complainStatus }) => async (
       Reactotron.log(uploadImageResponse);
    } catch (error) {
       console.log('preview error', error);
+      dispatch({ type: PERVIEW_FAILED });
    }
 };
 
