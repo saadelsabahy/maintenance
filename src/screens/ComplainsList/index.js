@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
       bottom: 0,
    },
 });
-/* const enhance = withObservables(['complains'], ({ complains }) => ({
+const enhance = withObservables(['complains'], ({ complains }) => ({
    complains,
-})); */
+}));
 
-export default Complains;
+export default enhance(Complains);

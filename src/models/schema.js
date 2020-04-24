@@ -11,7 +11,7 @@ export const mySchema = appSchema({
             { name: 'Status_id', type: 'string' },
             { name: 'Cretaed_on', type: 'string' },
             { name: 'Vehicle_id', type: 'string' },
-            { name: 'Plate_umber', type: 'string' },
+            { name: 'Plate_number', type: 'string' },
             { name: 'Vehicle_type', type: 'string' },
          ],
       }),

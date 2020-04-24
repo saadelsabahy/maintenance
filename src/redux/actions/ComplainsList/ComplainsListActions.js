@@ -24,6 +24,9 @@ import {
    SEARCH_PAGINATION_SUCCESS,
 } from './complainsListTypes';
 import Api from '../../../apis';
+import database from '../../../models';
+import Reactotron from 'reactotron-react-native';
+import { Q } from '@nozbe/watermelondb';
 /////////////////////////////complains feed
 export const getAllComplainsList = statusId => async (dispatch, getState) => {
    const {
@@ -42,6 +45,20 @@ export const getAllComplainsList = statusId => async (dispatch, getState) => {
       );
       if (getComplainsListResponse.status == 200) {
          const { data } = getComplainsListResponse;
+
+         await database.action(async () => {
+            data.map(async (item, index) => {
+               database.collections.get('complains').create(complain => {
+                  complain.complain_id = item.Id;
+                  complain.Contractor_id = item.ContractorId;
+                  complain.Status_id = item.StatusId;
+                  complain.Cretaed_on = item.CretaedOn;
+                  complain.Vehicle_id = item.VehicleId;
+                  complain.Plate_number = item.PlateNumber;
+                  complain.Vehicle_type = 'ddd';
+               });
+            });
+         });
          dispatch({ type: GET_COMPLAINS_LIST_SUCCESS, payload: data });
       }
    } catch (error) {
