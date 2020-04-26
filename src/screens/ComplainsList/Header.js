@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
 import {
    SearchModal,
    CustomDropDown,
@@ -14,11 +14,14 @@ import {
    MAIN_COLOR,
    SECONDART_COLOR,
 } from '../../constants/colors';
-const ListHeader = ({ route, toggleSearchModal, menuRef, filterLabel, onMenuItemPressed }) => {
-
-
+const ListHeader = ({
+   route,
+   toggleSearchModal,
+   menuRef,
+   filterLabel,
+   onMenuItemPressed,
+}) => {
    return (
-
       <Header>
          <Icon
             name={'search'}
@@ -48,9 +51,11 @@ const ListHeader = ({ route, toggleSearchModal, menuRef, filterLabel, onMenuItem
          </View>
          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <CustomDropDown
-               labels={[{ id: 1, text: 'الاقدم' }, { id: 2, text: 'الأحدث' }]}
+               labels={[{ id: 1, text: 'الاقدم' }, { id: 0, text: 'الأحدث' }]}
                onMenuItemPressed={onMenuItemPressed}
-               selectedItem={filterLabel ? filterLabel : { id: 2, text: 'الأحدث' }}
+               selectedItem={
+                  filterLabel ? filterLabel : { id: 0, text: 'الأحدث' }
+               }
                button={
                   <Icon
                      name={'filter-outline'}
@@ -64,8 +69,7 @@ const ListHeader = ({ route, toggleSearchModal, menuRef, filterLabel, onMenuItem
             />
          </View>
       </Header>
+   );
+};
 
-   )
-}
-
-export default ListHeader
+export default ListHeader;

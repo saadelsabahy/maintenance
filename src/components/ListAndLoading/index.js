@@ -15,6 +15,7 @@ import {
    INDICATOR_YELLOW,
    INDICATOR_RED,
    SCREEN_HEIGHT,
+   INDICATOR_GREEN,
 } from '../../constants/colors';
 import { useDispatch } from 'react-redux';
 import { onComplainPressed } from '../../redux/actions';
@@ -37,6 +38,8 @@ const ListAndLoading = ({
          <ActivityIndicator color={MAIN_COLOR} />
       ) : null;
    };
+   const Ids = [...new Set(list.map(item => item.Id))];
+   const notRedundency = Ids.map(id => list.find(order => order.Id == id));
 
    return (
       <View style={{ flex: 1 }}>
@@ -45,13 +48,13 @@ const ListAndLoading = ({
          ) : (
             <FlatList
                data={
-                  list
+                  notRedundency
                   // dateSearch == 1
                   //    ? list.sort((a, b) => new Date() - new Date(b.CretaedOn))
                   //    : list.sort((a, b) => new Date(b.CretaedOn) - new Date())
                }
                extraData={dateSearch}
-               keyExtractor={(item, index) => `${index}`}
+               keyExtractor={(item, index) => `${item.Id}`}
                showsVerticalScrollIndicator={false}
                scrollEventThrottle={100}
                maxToRenderPerBatch={30}
@@ -86,9 +89,9 @@ const ListAndLoading = ({
                         contractorNumber={ContractorId}
                         complainStatus={StatusId}
                         indicatorColor={
-                           StatusId < 2
-                              ? INDICATOR_RED
-                              : StatusId > 2
+                           StatusId > 4
+                              ? INDICATOR_GREEN
+                              : StatusId >= 2
                               ? INDICATOR_YELLOW
                               : INDICATOR_RED
                         }

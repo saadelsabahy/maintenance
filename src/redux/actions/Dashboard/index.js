@@ -7,10 +7,14 @@ import Api from '../../../apis';
 export const getDashBoardData = () => async (dispatch, getState) => {
    try {
       dispatch({ type: GET_DASHBOARD_DATA_SPINNER });
-      const getDashboardResponse = await Api.get(`DamageComplain/GetDashboard`);
+      const getDashboardResponse = await Api.get(
+         `Complians/DashboardStatistics`
+      );
 
       if (getDashboardResponse.status == 200) {
-         const { data } = getDashboardResponse;
+         const {
+            data: { data },
+         } = getDashboardResponse;
          const totals = data.map(item => item.Total);
 
          dispatch({ type: GET_DASHBOARD_DATA_SUCCESS, payload: totals });

@@ -29,7 +29,7 @@ const initialState = {
    dateFrom: null,
    dateTo: null,
    contractorId: null,
-   rowsNumber: 10,
+   rowsNumber: 20,
    pageNumber: 0,
    complainsList: [],
    getComplainsListLoading: false,
@@ -69,7 +69,6 @@ export default (state = initialState, { type, payload }) => {
             getComplainsListLoading: false,
             getComplainsListErorr: false,
             complainsList: payload,
-            pageNumber: state.pageNumber + 1,
          };
          break;
       case GET_COMPLAINS_LIST_FAILED:
@@ -87,8 +86,8 @@ export default (state = initialState, { type, payload }) => {
             ...state,
             paginationLoading: false,
             paginationError: false,
-            complainsList: [...state.complainsList, ...payload],
-            pageNumber: state.pageNumber + 1,
+            complainsList: [...state.complainsList, ...payload.data],
+            pageNumber: payload.pageNumber,
          };
          break;
       case GET_COMPLAINS_LIST_PAGINATION_FAILED:
@@ -114,34 +113,54 @@ export default (state = initialState, { type, payload }) => {
          break;
 
       case SEARCH_SPINNER:
-         return { ...state, search: true, searchLoading: true, searchError: false }
+         return {
+            ...state,
+            search: true,
+            searchLoading: true,
+            searchError: false,
+         };
          break;
       case SEARCH_SUCCESS:
-         return { ...state, search: true, searchLoading: false, searchError: false, complainsList: payload, searchPageNumber: state.searchPageNumber + 1 }
+         return {
+            ...state,
+            search: true,
+            searchLoading: false,
+            searchError: false,
+            complainsList: payload,
+         };
          break;
       case SEARCH_FAILED:
-         return { ...state, search: true, searchLoading: false, searchError: true }
+         return {
+            ...state,
+            search: true,
+            searchLoading: false,
+            searchError: true,
+         };
          break;
 
       case SEARCH_PAGINATION_SPINNER:
-         return { ...state, SearchPaginationLoading: true, SearchPaginationError: false };
+         return {
+            ...state,
+            SearchPaginationLoading: true,
+            SearchPaginationError: false,
+         };
          break;
       case SEARCH_PAGINATION_SUCCESS:
          return {
             ...state,
             SearchPaginationLoading: false,
             SearchPaginationError: false,
-            complainsList: [...state.complainsList, ...payload],
-            searchPageNumber: state.searchPageNumber + 1,
+            complainsList: [...state.complainsList, ...payload.data],
+            searchPageNumber: payload.pageNumber,
          };
          break;
       case SEARCH_PAGINATION_FAILED:
          return {
-            ...state, SearchPaginationLoading: false,
+            ...state,
+            SearchPaginationLoading: false,
             SearchPaginationError: true,
          };
          break;
-
 
       case UNMOUNT_EMPTY:
          return { ...initialState };

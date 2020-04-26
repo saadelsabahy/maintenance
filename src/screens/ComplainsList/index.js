@@ -17,13 +17,13 @@ import {
 } from '../../redux/actions';
 import ListHeader from './Header';
 import withObservables from '@nozbe/with-observables';
-const Complains = ({ navigation, route, complains }) => {
+const Complains = ({ navigation, route, complain }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
    const [isModalVisible, setisModalVisible] = useState(false);
    const menuRef = useRef(null);
    const [filterLabel, setfilterLabel] = useState(null);
-   const [dateSearch, setDateSearch] = useState(2);
+   const [dateSearch, setDateSearch] = useState(0);
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
@@ -52,9 +52,9 @@ const Complains = ({ navigation, route, complains }) => {
       if (isFocused) {
          if (route.params && route.params.hasOwnProperty('distination')) {
             const { distination } = route.params;
-            dispatch(getAllComplainsList(distination));
+            dispatch(getAllComplainsList(distination, dateSearch));
          } else {
-            dispatch(getAllComplainsList(null));
+            dispatch(getAllComplainsList(null, dateSearch));
          }
       } else {
          return;
@@ -63,17 +63,22 @@ const Complains = ({ navigation, route, complains }) => {
       return () => {
          dispatch(emptyListOnUnmount());
       };
-   }, [isFocused]);
+   }, [isFocused, dateSearch]);
    const onListEndReached = () => {
       if (search) {
          if (route.params && route.params.hasOwnProperty('distination')) {
             const { distination } = route.params;
-            dispatch(LoadSearchPagination(distination));
+            dispatch(LoadSearchPagination(distination, dateSearch));
          } else {
-            dispatch(LoadSearchPagination(null));
+            dispatch(LoadSearchPagination(null, dateSearch));
          }
       } else {
-         dispatch(LoadPagination());
+         if (route.params && route.params.hasOwnProperty('distination')) {
+            const { distination } = route.params;
+            dispatch(LoadPagination(distination, dateSearch));
+         } else {
+            dispatch(LoadPagination(null, dateSearch));
+         }
       }
    };
    const onSearch = () => {
@@ -160,8 +165,9 @@ const styles = StyleSheet.create({
       bottom: 0,
    },
 });
-const enhance = withObservables(['complains'], ({ complains }) => ({
-   complains,
+
+const enhance = withObservables(['complains'], ({ complain }) => ({
+   complain,
 }));
 
-export default enhance(Complains);
+export default Complains;

@@ -28,7 +28,10 @@ import database from '../../../models';
 import Reactotron from 'reactotron-react-native';
 import { Q } from '@nozbe/watermelondb';
 /////////////////////////////complains feed
-export const getAllComplainsList = statusId => async (dispatch, getState) => {
+export const getAllComplainsList = (statusId, sort) => async (
+   dispatch,
+   getState
+) => {
    const {
       platNumber,
       dateFrom,
@@ -37,16 +40,19 @@ export const getAllComplainsList = statusId => async (dispatch, getState) => {
       rowsNumber,
       pageNumber,
    } = getState().Complains;
-
+   Reactotron.log(pageNumber, rowsNumber);
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `DamageComplain/GetPaging?statusId=${statusId}&platNumber=${platNumber}&dateFrom=${dateFrom}&dateTo=${dateTo}&contractorId=${contractorId}&rowsNumber=${rowsNumber}&pageNumber=${pageNumber}`
+         `Complians/Get?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${statusId}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&Index=${pageNumber}&PageSize=${rowsNumber}&Sort=${sort}`
       );
+      Reactotron.log(getComplainsListResponse);
       if (getComplainsListResponse.status == 200) {
-         const { data } = getComplainsListResponse;
+         const {
+            data: { data },
+         } = getComplainsListResponse;
 
-         await database.action(async () => {
+         /* await database.action(async () => {
             data.map(async (item, index) => {
                database.collections.get('complains').create(complain => {
                   complain.complain_id = item.Id;
@@ -58,17 +64,23 @@ export const getAllComplainsList = statusId => async (dispatch, getState) => {
                   complain.Vehicle_type = 'ddd';
                });
             });
+         }); */
+
+         dispatch({
+            type: GET_COMPLAINS_LIST_SUCCESS,
+            payload: data ? data : [],
          });
-         dispatch({ type: GET_COMPLAINS_LIST_SUCCESS, payload: data });
       }
    } catch (error) {
       console.log('get complains list error', error);
       dispatch({ type: GET_COMPLAINS_LIST_FAILED });
    }
 };
-export const LoadPagination = () => async (dispatch, getState) => {
+export const LoadPagination = (statusId, sort) => async (
+   dispatch,
+   getState
+) => {
    const {
-      statusId,
       platNumber,
       dateFrom,
       dateTo,
@@ -76,17 +88,22 @@ export const LoadPagination = () => async (dispatch, getState) => {
       rowsNumber,
       pageNumber,
    } = getState().Complains;
+   Reactotron.log(pageNumber);
+
    try {
       dispatch({ type: GET_COMPLAINS_LIST_PAGINATION_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `DamageComplain/GetPaging?statusId=${statusId}&platNumber=${platNumber}&dateFrom=${dateFrom}&dateTo=${dateTo}&contractorId=${contractorId}&rowsNumber=${rowsNumber}&pageNumber=${pageNumber}`
+         `Complians/Get?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${statusId}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&Index=${pageNumber +
+            1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
 
       if (getComplainsListResponse.status == 200) {
-         const { data } = getComplainsListResponse;
+         const {
+            data: { data },
+         } = getComplainsListResponse;
          dispatch({
             type: GET_COMPLAINS_LIST_PAGINATION_SUCCESS,
-            payload: data,
+            payload: { data: data ? data : [], pageNumber: pageNumber + 1 },
          });
       }
    } catch (error) {
@@ -149,7 +166,7 @@ export const onSearchInputsChange = (inputName, inputValue) => dispatch => {
    }
 };
 
-export const onSearchPressed = source => async (dispatch, getState) => {
+export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
    const {
       complainNumber,
       contructorId,
@@ -165,14 +182,16 @@ export const onSearchPressed = source => async (dispatch, getState) => {
    try {
       dispatch({ type: SEARCH_SPINNER });
       const getSearchListResponse = await Api.get(
-         `DamageComplain/GetPaging?statusId=${source}&platNumber=${plateNumber}&dateFrom=${startDate}&dateTo=${endDate}&contractorId=${contructorId}&rowsNumber=${searchRowsNumber}&pageNumber=${searchPageNumber}`
+         `Complians/Get?From=${startDate}&To=${endDate}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${plateNumber}&StatusId=${source}&ContractorId=${contructorId}&Index=${searchPageNumber}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
       if (getSearchListResponse.status == 200) {
-         const { data } = getSearchListResponse;
+         const {
+            data: { data },
+         } = getSearchListResponse;
          dispatch({
             type: SEARCH_SUCCESS,
-            payload: data,
+            payload: data ? data : [],
          });
       }
    } catch (error) {
@@ -181,7 +200,10 @@ export const onSearchPressed = source => async (dispatch, getState) => {
    }
 };
 
-export const LoadSearchPagination = source => async (dispatch, getState) => {
+export const LoadSearchPagination = (source, sort) => async (
+   dispatch,
+   getState
+) => {
    const {
       complainNumber,
       contructorId,
@@ -196,14 +218,20 @@ export const LoadSearchPagination = source => async (dispatch, getState) => {
    try {
       dispatch({ type: SEARCH_PAGINATION_SPINNER });
       const searchPaginationtResponse = await Api.get(
-         `DamageComplain/GetPaging?statusId=${source}&platNumber=${plateNumber}&dateFrom=${startDate}&dateTo=${endDate}&contractorId=${contructorId}&rowsNumber=${searchRowsNumber}&pageNumber=${searchPageNumber}`
+         `Complians/Get?From=${startDate}&To=${endDate}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${plateNumber}&StatusId=${source}&ContractorId=${contructorId}&Index=${searchPageNumber +
+            1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
       if (searchPaginationtResponse.status == 200) {
-         const { data } = searchPaginationtResponse;
+         const {
+            data: { data },
+         } = searchPaginationtResponse;
          dispatch({
             type: SEARCH_PAGINATION_SUCCESS,
-            payload: data,
+            payload: {
+               data: data ? data : [],
+               pageNumber: searchPageNumber + 1,
+            },
          });
       }
    } catch (error) {
