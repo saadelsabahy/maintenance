@@ -7,7 +7,7 @@ export const REJECT_FAILED = 'REJECT_FAILED';
 export const REJECT_SUCCESS = 'REJECT_SUCCESS';
 export const REJECT_SPINNER = 'REJECT_SPINNER';
 ///wait EXCUTION
-
+export const SELECT_EXCUTION_IMAGES = 'SELECT_EXCUTION_IMAGES';
 //solved
 
 //rjected

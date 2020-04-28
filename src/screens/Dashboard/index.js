@@ -69,6 +69,7 @@ const DashBoard = ({ navigation }) => {
       </View>
    );
    const [showFilterModal, setshowFilterModal] = useState(false);
+
    return (
       <View style={styles.container}>
          {!netConnected && renderNetSignOffline()}
@@ -106,7 +107,7 @@ const DashBoard = ({ navigation }) => {
                   />
                   <DashBoardItem
                      text={'قيد التعميد'}
-                     number={'20'}
+                     number={isNaN(dashboardData[1]) ? 0 : dashboardData[1]}
                      icon={'stopwatch'}
                      iconTtype={'entypo'}
                      onDashboardItemPressed={headerName =>
@@ -115,7 +116,7 @@ const DashBoard = ({ navigation }) => {
                   />
                   <DashBoardItem
                      text={'قيد التنفيذ'}
-                     number={'100'}
+                     number={isNaN(dashboardData[2]) ? 0 : dashboardData[2]}
                      icon={'gears'}
                      iconTtype={'font-awesome'}
                      onDashboardItemPressed={headerName =>
@@ -124,7 +125,7 @@ const DashBoard = ({ navigation }) => {
                   />
                   <DashBoardItem
                      text={'تم الحل'}
-                     number={'30'}
+                     number={isNaN(dashboardData[3]) ? 0 : dashboardData[3]}
                      icon={'checkcircleo'}
                      iconTtype={'antdesign'}
                      onDashboardItemPressed={headerName =>
@@ -133,7 +134,7 @@ const DashBoard = ({ navigation }) => {
                   />
                   <DashBoardItem
                      text={'مرفوض'}
-                     number={'10'}
+                     number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
                      icon={'closecircleo'}
                      iconTtype={'antdesign'}
                      onDashboardItemPressed={headerName =>

@@ -57,7 +57,7 @@ const DashboardHeader = ({
             style={{
                alignSelf: 'center',
                width: '100%',
-               height: '15%',
+               height: '68%',
             }}>
             <View
                style={{
@@ -70,7 +70,6 @@ const DashboardHeader = ({
                   style={{
                      flex: 1,
                      alignItems: 'center',
-                     justifyContent: 'center',
                   }}>
                   <CustomText
                      text={'تطبيق الصيانات'}

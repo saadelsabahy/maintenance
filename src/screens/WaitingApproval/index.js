@@ -21,11 +21,14 @@ import {
    onExcutionDone,
    onAcceptThePreview,
    onRejectThePreview,
+   selectExcutionPhotos,
 } from '../../redux/actions';
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
    const dispatch = useDispatch();
-
+   const { images } = useSelector(state => ({
+      images: state.UpdateComplainsStatus.images,
+   }));
    const renderButtons = () => {
       switch (distination) {
          case 3:
@@ -110,7 +113,11 @@ const WaitApproval = ({ navigation, route }) => {
             />
          </View>
          <View style={styles.bottomSheetContainer}>
-            <CustomBottomSheet source={distination} />
+            <CustomBottomSheet
+               source={distination}
+               excutionImages={images}
+               onSelectExcutionImages={() => dispatch(selectExcutionPhotos())}
+            />
          </View>
          <View style={styles.buttonsContainer}>{renderButtons()}</View>
       </View>

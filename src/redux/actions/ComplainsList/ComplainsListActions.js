@@ -39,32 +39,22 @@ export const getAllComplainsList = (statusId, sort) => async (
       contractorId,
       rowsNumber,
       pageNumber,
+      complainType,
    } = getState().Complains;
-   Reactotron.log(pageNumber, rowsNumber);
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians/Get?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${statusId}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&Index=${pageNumber}&PageSize=${rowsNumber}&Sort=${sort}`
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${pageNumber}&PageSize=${rowsNumber}&Sort=${sort}`
       );
-      Reactotron.log(getComplainsListResponse);
       if (getComplainsListResponse.status == 200) {
          const {
             data: { data },
          } = getComplainsListResponse;
 
-         /* await database.action(async () => {
-            data.map(async (item, index) => {
-               database.collections.get('complains').create(complain => {
-                  complain.complain_id = item.Id;
-                  complain.Contractor_id = item.ContractorId;
-                  complain.Status_id = item.StatusId;
-                  complain.Cretaed_on = item.CretaedOn;
-                  complain.Vehicle_id = item.VehicleId;
-                  complain.Plate_number = item.PlateNumber;
-                  complain.Vehicle_type = 'ddd';
-               });
-            });
-         }); */
+         /* await saveDataForOffline(data);
+         const base = database.collections.get('complains');
+         const cached = await base.query().fetch();
+         Reactotron.log(cached); */
 
          dispatch({
             type: GET_COMPLAINS_LIST_SUCCESS,
@@ -88,7 +78,6 @@ export const LoadPagination = (statusId, sort) => async (
       rowsNumber,
       pageNumber,
    } = getState().Complains;
-   Reactotron.log(pageNumber);
 
    try {
       dispatch({ type: GET_COMPLAINS_LIST_PAGINATION_SPINNER });
@@ -239,7 +228,23 @@ export const LoadSearchPagination = (source, sort) => async (
       dispatch({ type: SEARCH_PAGINATION_FAILED });
    }
 };
-
+///////////////////////////////////////////save in db
+const saveDataForOffline = async data => {
+   await database.action(async () => {
+      data.map(async (item, index) => {
+         database.collections.get('complains').update;
+         database.collections.get('complains').create(complain => {
+            complain.complain_id = item.Id;
+            complain.Contractor_id = item.ContractorId;
+            complain.Status_id = item.StatusId;
+            complain.Cretaed_on = item.CretaedOn;
+            complain.Vehicle_id = item.VehicleId;
+            complain.Plate_number = item.PlateNumber;
+            complain.Vehicle_type = 'ddd';
+         });
+      });
+   });
+};
 /////////////////////////////////////////////////////delete data
 export const emptyListOnUnmount = () => (dispatch, getState) => {
    dispatch({ type: UNMOUNT_EMPTY });

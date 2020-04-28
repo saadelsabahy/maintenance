@@ -11,7 +11,11 @@ import { CustomText } from '../customText';
 import { FlatList } from 'react-native-gesture-handler';
 import { ImageSelector } from '../ImageSelector';
 import ChechBox from '../checkBox';
-const CustomBottomSheet = ({ source }) => {
+const CustomBottomSheet = ({
+   source,
+   excutionImages,
+   onSelectExcutionImages,
+}) => {
    const renderInner = () => (
       <View style={styles.panel}>
          <View style={styles.panelHandle} />
@@ -19,7 +23,10 @@ const CustomBottomSheet = ({ source }) => {
             <>
                <View
                   style={{ height: '20%', width: '90%', alignSelf: 'center' }}>
-                  <ImageSelector />
+                  <ImageSelector
+                     images={excutionImages}
+                     onSelectImagesPressed={onSelectExcutionImages}
+                  />
                </View>
                <View style={{ flex: 0.8, width: '90%', marginBottom: 10 }}>
                   <FlatList

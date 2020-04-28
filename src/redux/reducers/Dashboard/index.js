@@ -3,7 +3,7 @@ import {
    GET_DASHBOARD_DATA_SUCCESS,
    GET_DASHBOARD_DATA_FAILED,
 } from '../../actions/Dashboard/dashboardTypes';
-
+import moment from 'moment';
 const initialState = {
    dashboardSpinner: false,
    dashboardError: false,
@@ -22,7 +22,9 @@ export default (state = initialState, { type, payload }) => {
             dashboardError: false,
             dashboardSpinner: false,
             dashboardData: payload,
-            lastUpdate: new Date().toLocaleTimeString(),
+            lastUpdate: moment()
+               .locale('eg')
+               .format('LT'),
          };
          break;
       case GET_DASHBOARD_DATA_FAILED:
