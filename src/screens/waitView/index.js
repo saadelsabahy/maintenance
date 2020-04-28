@@ -19,6 +19,7 @@ import {
    closeBottomSheet,
    handleCheckItem,
    handlePerview,
+   onCommentChange,
 } from '../../redux/actions/waitView';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -26,11 +27,12 @@ const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
-   const { images, guaranteeSpares, outGuaranteeSpares } = useSelector(
+   const { images, guaranteeSpares, outGuaranteeSpares, comment } = useSelector(
       state => ({
          images: state.WaitView.images,
          guaranteeSpares: state.WaitView.inGuaranteeSpares,
          outGuaranteeSpares: state.WaitView.outGuaranteeSpares,
+         comment: state.WaitView.comment,
       })
    );
    useEffect(() => {
@@ -84,7 +86,11 @@ const ComplainsDetailes = ({ route, navigation }) => {
                onCheckItem={(index, Id, selectedButton) => {
                   dispatch(handleCheckItem(index, Id, selectedButton));
                }}
-               handlePerview={() => dispatch(handlePerview(data))}
+               handlePerview={guranteeStatus =>
+                  dispatch(handlePerview(data, guranteeStatus))
+               }
+               comment={comment}
+               onCommentChange={text => dispatch(onCommentChange(text))}
             />
          </View>
       </View>

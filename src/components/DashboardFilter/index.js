@@ -31,6 +31,9 @@ const DashboardFilter = ({
    onModalShow,
    backdropOpacity,
    searchDropdownLabels,
+   contructorId,
+   onContructorIdCgange,
+   onDashboardSearchFilterPressed,
 }) => {
    const menuRef = useRef(null);
    const [dropDownText, setdropDownText] = useState('');
@@ -75,6 +78,8 @@ const DashboardFilter = ({
                   <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم العقد'}
+                     value={contructorId}
+                     onChangeText={onContructorIdCgange}
                   />
                </View>
 
@@ -82,10 +87,12 @@ const DashboardFilter = ({
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'بحث'}
+                     onButtonPressed={onDashboardSearchFilterPressed}
                   />
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'إلغاء'}
+                     onButtonPressed={onBackdropPress}
                   />
                </View>
             </KeyboardAwareScrollView>

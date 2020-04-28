@@ -37,6 +37,11 @@ const Complains = ({ navigation, route, complain }) => {
       searchError,
       searchLoading,
       SearchPaginationLoading,
+      complainNumber,
+      complainStatus,
+      complainType,
+      searchContructorId,
+      searchPlateNumber,
    } = useSelector(state => ({
       complainsList: state.Complains.complainsList,
       getComplainsListLoading: state.Complains.getComplainsListLoading,
@@ -47,6 +52,13 @@ const Complains = ({ navigation, route, complain }) => {
       searchError: state.Complains.searchError,
       search: state.Complains.search,
       SearchPaginationLoading: state.Complains.SearchPaginationLoading,
+      complainNumber: state.Complains.complainNumber,
+      searchContructorId: state.Complains.searchContructorId,
+      complainStatus: state.Complains.complainStatus,
+      searchPlateNumber: state.Complains.searchPlateNumber,
+      complainType: state.Complains.complainType,
+      startDate: state.Complains.startDate,
+      endDate: state.Complains.endDate,
    }));
    useEffect(() => {
       if (isFocused) {
@@ -85,9 +97,9 @@ const Complains = ({ navigation, route, complain }) => {
       if (isFocused) {
          if (route.params && route.params.hasOwnProperty('distination')) {
             const { distination } = route.params;
-            dispatch(onSearchPressed(distination));
+            dispatch(onSearchPressed(distination, dateSearch));
          } else {
-            dispatch(onSearchPressed(null));
+            dispatch(onSearchPressed(null, dateSearch));
          }
       } else {
          return;
@@ -142,6 +154,10 @@ const Complains = ({ navigation, route, complain }) => {
                { id: '5', text: 'مرفوض' },
             ]}
             onSearchPressed={onSearch}
+            complainNumber={complainNumber}
+            complainStatus={complainStatus}
+            contructorId={searchContructorId}
+            plateNumber={searchPlateNumber}
          />
       </View>
    );

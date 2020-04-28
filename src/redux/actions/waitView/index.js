@@ -7,10 +7,12 @@ import {
    OUT_GUARANTEE_ITEM_CHECKED,
    PERVIEW_SPINNER,
    PERVIEW_FAILED,
+   COMMENT_CHANGE,
 } from './waitViewTypes';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import Reactotron from 'reactotron-react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 export const getSpareParts = () => async (dispatch, getState) => {
    try {
       const outGuaranteeSpares = await Api.get(
@@ -71,11 +73,37 @@ export const handleCheckItem = (index, Id, selectedButton) => (
    }
 };
 
-export const handlePerview = ({ complainNumber, complainStatus }) => async (
-   dispatch,
-   getState
-) => {
-   const { images } = getState().WaitView;
+export const handlePerview = (
+   { complainNumber, complainStatus },
+   guranteeStatus
+) => async (dispatch, getState) => {
+   const {
+      images,
+      inGuaranteeSpares,
+      outGuaranteeSpares,
+      comment,
+   } = getState().WaitView;
+   const inGuarnteeSelectedParts = inGuaranteeSpares
+      .filter(item => item.checked == true)
+      .map(({ Id, NameAr, NameOther, Guarantee }) => ({
+         Id,
+         NameAr,
+         NameOther,
+         NameOther,
+         Guarantee,
+      }));
+
+   const outGuarnteeSelectedParts = outGuaranteeSpares
+      .filter(item => item.checked == true)
+      .map(({ Id, NameAr, NameOther, Guarantee }) => ({
+         Id,
+         NameAr,
+         NameOther,
+         NameOther,
+         Guarantee,
+      }));
+
+   const userId = await AsyncStorage.getItem('userId');
 
    try {
       dispatch({ type: PERVIEW_SPINNER });
@@ -87,18 +115,35 @@ export const handlePerview = ({ complainNumber, complainStatus }) => async (
             name: `picture${index}`,
          });
       });
-      const uploadImageResponse = await Api.post(
-         `DamageComplain/UploadComplianImage?ComplianId=${+complainNumber}&StatusId=${`${+complainStatus}`}`,
+      /*  const uploadImageResponse = await Api.post(
+         `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
          form,
          { headers: { 'Content-Type': 'multipart/form-data' } }
       );
-      Reactotron.log(uploadImageResponse);
+      Reactotron.log(uploadImageResponse); */
+      const perviewResponse = await Api.post(
+         `Complians/UpdateStatus?StatusId=${+complainStatus +
+            1}&UserId=${+userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
+            0}&Comment=${comment}`,
+         {
+            SpareParts:
+               guranteeStatus == 0
+                  ? inGuarnteeSelectedParts
+                  : outGuarnteeSelectedParts,
+         }
+      );
+      console.log(perviewResponse);
    } catch (error) {
       console.log('preview error', error);
       dispatch({ type: PERVIEW_FAILED });
    }
 };
-
+export const onCommentChange = text => dispatch => {
+   dispatch({
+      type: COMMENT_CHANGE,
+      payload: text,
+   });
+};
 export const closeBottomSheet = () => dispatch => {
    dispatch({ type: CLOSE_BOTTOM_SHEET });
 };

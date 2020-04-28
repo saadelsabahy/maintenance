@@ -35,6 +35,10 @@ const SearchModal = ({
    backdropOpacity,
    searchDropdownLabels,
    onSearchPressed,
+   complainNumber,
+   complainStatus,
+   contructorId,
+   plateNumber,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
@@ -117,6 +121,7 @@ const SearchModal = ({
                      onChangeText={text =>
                         dispatch(onSearchInputsChange('complainNumber', text))
                      }
+                     value={complainNumber}
                   />
                   <CustomInput
                      inputContainerStyle={styles.input}
@@ -125,14 +130,16 @@ const SearchModal = ({
                      onChangeText={text =>
                         dispatch(onSearchInputsChange('contructorId', text))
                      }
+                     value={contructorId}
                   />
-                  <CustomInput
+                  {/*  <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'حاله البلاغ'}
                      onChangeText={text =>
                         dispatch(onSearchInputsChange('complainStatus', text))
                      }
-                  />
+                     value={complainStatus}
+                  /> */}
 
                   <CustomInput
                      inputContainerStyle={styles.input}
@@ -140,6 +147,7 @@ const SearchModal = ({
                      onChangeText={text =>
                         dispatch(onSearchInputsChange('plateNumber', text))
                      }
+                     value={plateNumber}
                   />
                   <CustomDropDown
                      onDropDownPressed={() => menuRef.current.show()}

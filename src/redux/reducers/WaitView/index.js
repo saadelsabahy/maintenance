@@ -4,6 +4,7 @@ import {
    CLOSE_BOTTOM_SHEET,
    IN_GUARANTEE_ITEM_CHECKED,
    OUT_GUARANTEE_ITEM_CHECKED,
+   COMMENT_CHANGE,
 } from '../../actions/waitView/waitViewTypes';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
    inGuaranteeSpares: [],
    outGuaranteeSpares: [],
    images: [],
+   comment: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -32,13 +34,16 @@ export default (state = initialState, { type, payload }) => {
          break;
 
       case CLOSE_BOTTOM_SHEET:
-         return { ...state, images: [] };
+         return { ...initialState };
          break;
       case IN_GUARANTEE_ITEM_CHECKED:
          return { ...state, inGuaranteeSpares: payload };
          break;
       case OUT_GUARANTEE_ITEM_CHECKED:
          return { ...state, outGuaranteeSpares: payload };
+         break;
+      case COMMENT_CHANGE:
+         return { ...state, comment: payload };
          break;
       default:
          return state;

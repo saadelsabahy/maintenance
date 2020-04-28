@@ -14,7 +14,10 @@ import {
 import DashboardHeader from './DashboardHeader';
 import { useIsFocused } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDashBoardData } from '../../redux/actions/Dashboard';
+import {
+   getDashBoardData,
+   onDashboardFilterChage,
+} from '../../redux/actions/Dashboard';
 import NetInfo from '@react-native-community/netinfo';
 
 const DashBoard = ({ navigation }) => {
@@ -26,11 +29,13 @@ const DashBoard = ({ navigation }) => {
       dashboardError,
       dashboardData,
       lastUpdate,
+      filterInput,
    } = useSelector(state => ({
       dashboardSpinner: state.Dashboard.dashboardSpinner,
       dashboardError: state.Dashboard.dashboardError,
       dashboardData: state.Dashboard.dashboardData,
       lastUpdate: state.Dashboard.lastUpdate,
+      filterInput: state.Dashboard.filterInput,
    }));
    const dispatch = useDispatch();
    const onDashboardItemPressed = (text, distination) => {
@@ -147,6 +152,14 @@ const DashBoard = ({ navigation }) => {
          <DashboardFilter
             isModalVisible={showFilterModal}
             onBackdropPress={() => setshowFilterModal(!showFilterModal)}
+            contructorId={filterInput}
+            onContructorIdCgange={text =>
+               dispatch(onDashboardFilterChage(text))
+            }
+            onDashboardSearchFilterPressed={() => {
+               dispatch(getDashBoardData());
+               setshowFilterModal(!showFilterModal);
+            }}
          />
       </View>
    );

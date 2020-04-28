@@ -21,6 +21,7 @@ import {
    SEARCH_PAGINATION_SPINNER,
    SEARCH_PAGINATION_FAILED,
    SEARCH_PAGINATION_SUCCESS,
+   PLATE_NUMBER_CHANGE,
 } from '../../actions/ComplainsList/complainsListTypes';
 
 const initialState = {
@@ -41,9 +42,9 @@ const initialState = {
    searchLoading: false,
    searchError: false,
    complainNumber: null,
-   contructorId: null,
+   searchContructorId: null,
    complainStatus: null,
-   plateNumber: null,
+   searchPlateNumber: null,
    complainType: null,
    startDate: null,
    endDate: null,
@@ -104,7 +105,7 @@ export default (state = initialState, { type, payload }) => {
          return { ...state, complainType: payload };
          break;
       case CONTRUCTOR_ID_CHANGE:
-         return { ...state, contructorId: payload };
+         return { ...state, searchContructorId: payload };
          break;
       case START_DATE_CHANGE:
          return { ...state, startDate: payload };
@@ -112,7 +113,8 @@ export default (state = initialState, { type, payload }) => {
       case END_DATE_CHANGE:
          return { ...state, endDate: payload };
          break;
-
+      case PLATE_NUMBER_CHANGE:
+         return { ...state, searchPlateNumber: payload };
       case SEARCH_SPINNER:
          return {
             ...state,

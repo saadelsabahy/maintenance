@@ -22,6 +22,8 @@ const Gurantee = ({
    oncloseBottomSheet,
    onCheckItem,
    handlePerview,
+   onCommentChange,
+   comment,
 }) => {
    const [selectedButton, setselectedButton] = useState(null);
    const bottomSheetRef = useRef(null);
@@ -148,6 +150,8 @@ const Gurantee = ({
                   }}>
                   <TextArea
                      placeholder={selectedButton == 0 ? 'الحل' : 'الوصف'}
+                     value={comment}
+                     onChangeText={onCommentChange}
                   />
                   <CustomButton
                      buttonContainerStyle={{
@@ -157,7 +161,7 @@ const Gurantee = ({
                      buttonTitle={
                         selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
                      }
-                     onButtonPressed={handlePerview}
+                     onButtonPressed={() => handlePerview(selectedButton)}
                   />
                </View>
 

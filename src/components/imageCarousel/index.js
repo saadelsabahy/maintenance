@@ -1,23 +1,29 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, I18nManager } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { SCREEN_WIDTH, WHITE_COLOR } from '../../constants/colors';
+import {
+   SCREEN_WIDTH,
+   WHITE_COLOR,
+   SECONDART_COLOR,
+} from '../../constants/colors';
 
 const ITEM_WIDTH = Math.round(SCREEN_WIDTH * 0.8);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 2);
-const ImageCarousel = () => {
+const ImageCarousel = ({ data }) => {
    const carouselRef = useRef(null);
    const [activeSlide, setactiveSlide] = useState(0);
-   const data = [
+   /* const data = [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdi1PBrHn9_dU3Cy_Zi3WXUiMUNun0_FhmClzxtxqp_-GrI3BX&usqp=CAU',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjVKXpRpMnnxBkaUsREPg0igQAjhzKS4hSnOxsWfmOiIZewzcK&usqp=CAU',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTirRdLSYIyV1nKMjewjN-WFAqTRIHjDWK5ECHHCAMekuqhMlm6&usqp=CAU',
-   ];
+   ]; */
 
-   const renderItem = ({ item }) => {
+   const renderItem = ({ item: { ImagePath } }) => {
+      console.log(ImagePath);
+
       return (
          <View style={styles.itemContainer}>
-            <Image source={{ uri: item }} style={styles.itemLabel} />
+            <Image source={{ uri: ImagePath }} style={styles.itemLabel} />
          </View>
       );
    };
@@ -73,6 +79,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       borderRadius: 10,
       overflow: 'hidden',
+      backgroundColor: SECONDART_COLOR,
    },
    itemLabel: {
       width: '100%',

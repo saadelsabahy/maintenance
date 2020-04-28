@@ -14,7 +14,7 @@ const ChechBox = ({ onItemPressed, text, checked }) => {
             onClick={onItemPressed}
             isChecked={checked}
          />
-         <CustomText text={text} />
+         <CustomText text={text} textStyle={{ marginStart: 10 }} />
       </TouchableOpacity>
    );
 };
@@ -22,9 +22,6 @@ const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginHorizontal: 5,
-      /*  marginVertical: 3,
-      marginHorizontal: 5, */
    },
 });
 

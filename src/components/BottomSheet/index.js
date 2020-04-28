@@ -15,6 +15,7 @@ const CustomBottomSheet = ({
    source,
    excutionImages,
    onSelectExcutionImages,
+   spareParts,
 }) => {
    const renderInner = () => (
       <View style={styles.panel}>
@@ -32,7 +33,7 @@ const CustomBottomSheet = ({
                   <FlatList
                      style={{ flex: 1 }}
                      contentContainerStyle={{ flexGrow: 1 }}
-                     data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+                     data={[spareParts]}
                      keyExtractor={(item, index) => `${index}`}
                      renderItem={({ item, index }) => {
                         return (
@@ -41,8 +42,14 @@ const CustomBottomSheet = ({
                                  ...styles.bottomSheetItem,
                                  justifyContent: 'flex-start',
                               }}>
-                              <ChechBox />
-                              <CustomText text={'تغيير أنتنه'} />
+                              <ChechBox
+                                 checked={true}
+                                 onItemPressed={() => {}}
+                              />
+                              <CustomText
+                                 text={item.NameAr}
+                                 textStyle={{ marginStart: 10 }}
+                              />
                            </View>
                         );
                      }}
@@ -51,16 +58,20 @@ const CustomBottomSheet = ({
             </>
          ) : (
             <>
-               <View style={{ flex: 0.8, width: '90%', marginBottom: 10 }}>
+               <View
+                  style={{
+                     flex: 0.7,
+                     width: '90%',
+                  }}>
                   <FlatList
                      style={{ flex: 1 }}
                      contentContainerStyle={{ flexGrow: 1 }}
-                     data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+                     data={spareParts}
                      keyExtractor={(item, index) => `${index}`}
                      renderItem={({ item, index }) => {
                         return (
                            <View style={styles.bottomSheetItem}>
-                              <CustomText text={'تغيير أنتنه'} />
+                              <CustomText text={item.NameAr} />
                               <CustomText text={'100 ريال'} />
                            </View>
                         );

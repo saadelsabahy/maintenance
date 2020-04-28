@@ -35,7 +35,15 @@ const ListAndLoading = ({
 
    const renderListFooter = () => {
       return paginationLoading ? (
-         <ActivityIndicator color={MAIN_COLOR} />
+         <View
+            style={{
+               width: '100%',
+               height: 30,
+               alignItems: 'center',
+               justifyContent: 'center',
+            }}>
+            <ActivityIndicator color={MAIN_COLOR} />
+         </View>
       ) : null;
    };
    const Ids = [...new Set(list.map(item => item.Id))];
@@ -59,7 +67,6 @@ const ListAndLoading = ({
                scrollEventThrottle={100}
                maxToRenderPerBatch={30}
                updateCellsBatchingPeriod={1000}
-               windowSize={101}
                initialNumToRender={10}
                renderItem={({
                   item,
@@ -76,6 +83,9 @@ const ListAndLoading = ({
                      StatusNameAr,
                      PlateNumber,
                      ContractorId,
+                     ComplianSpareParts,
+                     ComplianImages,
+                     VehicleType,
                   },
                   index,
                }) => {
@@ -85,15 +95,17 @@ const ListAndLoading = ({
                         complainDate={new Date(CretaedOn).toLocaleDateString()}
                         vehicleCode={VehicleId}
                         vehicleNumber={PlateNumber}
-                        vehicleType={'ضاغط'}
+                        vehicleType={VehicleType}
                         contractorNumber={ContractorId}
                         complainStatus={StatusId}
+                        images={ComplianImages}
+                        spareParts={ComplianSpareParts}
                         indicatorColor={
-                           StatusId > 4
+                           StatusId == 4
                               ? INDICATOR_GREEN
-                              : StatusId >= 2
-                              ? INDICATOR_YELLOW
-                              : INDICATOR_RED
+                              : StatusId == 5 || StatusId == 1
+                              ? INDICATOR_RED
+                              : INDICATOR_YELLOW
                         }
                         onComplainPressed={data =>
                            dispatch(onComplainPressed(data, navigation, route))

@@ -2,8 +2,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-crop-picker';
 import { SELECT_EXCUTION_IMAGES } from './types';
 
-export const onAcceptThePreview = () => async (dispatch, getState) => {
+export const onAcceptThePreview = ({
+   complainNumber,
+   complainStatus,
+}) => async (dispatch, getState) => {
    const userId = await AsyncStorage.getItem('userId');
+
    console.warn('accpt preview');
 };
 

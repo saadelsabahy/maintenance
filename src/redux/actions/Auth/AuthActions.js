@@ -38,12 +38,13 @@ export const onLoginPressed = () => async (dispatch, getState) => {
             `http://41.39.108.205:5565/UMMaintenanceAPI/api/user/Authenticate?userName=${userName}&password=${userPassword}&encrypteddata=${false}`
             // { timeout: 20000 }
          );
+         console.log(loginResponse);
 
          if (loginResponse.data) {
             Reactotron.log('loginResponse.FirstName', loginResponse);
 
             await AsyncStorage.multiSet([
-               ['userId', `${loginResponse.data.userId}`],
+               ['userId', `${loginResponse.data.Id}`],
                [
                   'userName',
                   `${loginResponse.data.FirstName} ${

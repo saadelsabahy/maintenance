@@ -36,7 +36,7 @@ const WaitApproval = ({ navigation, route }) => {
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}
                   buttonTitle={'تم الحل'}
-                  onButtonPressed={() => dispatch(onExcutionDone())}
+                  onButtonPressed={() => dispatch(onExcutionDone(data))}
                />
             );
             break;
@@ -48,7 +48,7 @@ const WaitApproval = ({ navigation, route }) => {
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}
                   buttonTitle={'تعميد'}
-                  onButtonPressed={() => dispatch(onAcceptThePreview())}
+                  onButtonPressed={() => dispatch(onAcceptThePreview(data))}
                />
             );
             break;
@@ -63,12 +63,12 @@ const WaitApproval = ({ navigation, route }) => {
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'تعميد'}
-                     onButtonPressed={() => dispatch(onAcceptThePreview())}
+                     onButtonPressed={() => dispatch(onAcceptThePreview(data))}
                   />
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'رفض'}
-                     onButtonPressed={() => dispatch(onRejectThePreview())}
+                     onButtonPressed={() => dispatch(onRejectThePreview(data))}
                   />
                </View>
             );
@@ -103,7 +103,7 @@ const WaitApproval = ({ navigation, route }) => {
                height: '35%',
                backgroundColor: MAIN_COLOR,
             }}>
-            <ImageCarousel />
+            <ImageCarousel data={data.images ? data.images : []} />
          </View>
          <View style={styles.detailesContainer}>
             <ComplainsItem
@@ -117,6 +117,7 @@ const WaitApproval = ({ navigation, route }) => {
                source={distination}
                excutionImages={images}
                onSelectExcutionImages={() => dispatch(selectExcutionPhotos())}
+               spareParts={data.spareParts ? data.spareParts : []}
             />
          </View>
          <View style={styles.buttonsContainer}>{renderButtons()}</View>
