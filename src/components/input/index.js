@@ -54,6 +54,7 @@ const CustomInput = ({
                   size={iconStartSize}
                   color={startIconColor}
                   type={iconType}
+                  iconContainerStyle={{ flex: 0.2 }}
                />
             )}
             <TextInput
@@ -70,6 +71,7 @@ const CustomInput = ({
                   size={iconEndSize}
                   type={iconType}
                   color={EndIconColor}
+                  iconContainerStyle={{ flex: 0.2 }}
                />
             )}
          </View>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
       flex: 1,
       height: '100%',
       fontSize: responsiveFontSize(2),
-      textAlign: I18nManager.isRTL ? 'right' : 'left',
+      //textAlign: I18nManager.isRTL ? 'right' : 'left',
       borderRadius: 3,
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
