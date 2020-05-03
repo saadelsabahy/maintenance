@@ -16,7 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation; // this probably already exists!
-[[RCTI18nUtil sharedInstance] allowRTL:YES];
+
 [[RCTI18nUtil sharedInstance] forceRTL:YES];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
