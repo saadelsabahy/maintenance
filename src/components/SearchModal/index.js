@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
    },
    button: {
       width: '45%',
-      height: SCREEN_HEIGHT / 15,
+      height: SCREEN_HEIGHT / 16,
       borderRadius: 20,
    },
    input: {

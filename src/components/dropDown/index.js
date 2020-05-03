@@ -27,6 +27,7 @@ const CustomDropDown = ({
    return (
       <TouchableOpacity
          onPress={onDropDownPressed}
+         activeOpacity={1}
          style={[{ justifyContent: 'center' }, menuContainerStyle]}>
          {typeof dropDownText == 'string' ? (
             <View
