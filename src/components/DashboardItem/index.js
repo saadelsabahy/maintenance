@@ -28,6 +28,7 @@ const DashBoardItem = ({
                type={iconTtype}
                color={WHITE_COLOR}
                size={responsiveFontSize(4)}
+               iconContainerStyle={{ flex: 1 }}
             />
          </View>
          <View style={styles.cardDetailesContainer}>
@@ -46,9 +47,13 @@ const styles = StyleSheet.create({
       borderBottomEndRadius: 30,
       borderBottomStartRadius: 5,
       borderTopEndRadius: 5,
-      justifyContent: 'flex-end',
+      justifyContent: 'center',
       marginBottom: '7%',
       elevation: 3,
+      shadowOffset: { width: 0, height: 3 },
+      shadowColor: '#000',
+      shadowOpacity: 0.7,
+      shadowRadius: 5,
    },
    iconContainer: {
       backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
@@ -65,16 +70,16 @@ const styles = StyleSheet.create({
       top: '-7%',
    },
    cardDetailesContainer: {
+      flex: 0.9,
       alignItems: 'flex-start',
       width: '90%',
-      height: '50%',
       alignSelf: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-end',
    },
    textStyle: {
       textAlign: 'right',
       fontSize: responsiveFontSize(2.7),
-      lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
+      // lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
    },
 });
 
