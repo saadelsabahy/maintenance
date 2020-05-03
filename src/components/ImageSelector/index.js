@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
    },
    IconContainer: {
       width: SCREEN_WIDTH / 6,
-      height: SCREEN_HEIGHT / 10,
+      height: SCREEN_HEIGHT / 11,
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center',
