@@ -195,7 +195,7 @@ const SearchModal = ({
             <FlashMessage
                ref={modalFlashMessage}
                position={'bottom'}
-               style={{ height: 45 }}
+               style={{ height: 45, alignItems: 'flex-start' }}
                duration={3000}
             />
          </View>

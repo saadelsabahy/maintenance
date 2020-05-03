@@ -49,13 +49,14 @@ const styles = StyleSheet.create({
    flashMessage: {
       width: '100%',
       height: '5%',
-      alignSelf: 'center',
+      alignSelf: 'flex-start',
       justifyContent: 'center',
    },
    flashText: {
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.8),
+      alignSelf: 'flex-start',
    },
 });
 
