@@ -196,7 +196,7 @@ const SearchModal = ({
                ref={modalFlashMessage}
                position={'bottom'}
                style={{
-                  height: 50,
+                  height: '10%',
                   alignItems: 'flex-start',
                   justifyContent: 'center',
                   padding: 0,
