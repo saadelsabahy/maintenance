@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       justifyContent: 'center',
       paddingVertical: 5,
-      writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
+      writingDirection: 'rtl',
    },
    StartIcon: {
       marginHorizontal: 10,
