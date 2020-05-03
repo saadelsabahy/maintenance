@@ -26,7 +26,6 @@ import { onLogoutPressed } from '../../redux/actions';
 const CustomDrawer = props => {
    const dispatch = useDispatch();
    const [userName, setuserName] = useState('');
-
    useEffect(() => {
       getName();
       return () => {};
@@ -72,7 +71,10 @@ const CustomDrawer = props => {
                      flex: 1,
                      alignItems: 'flex-end',
                   }}
-                  onPress={() => dispatch(onLogoutPressed())}
+                  onPress={() => {
+                     dispatch(onLogoutPressed());
+                     props.navigation.closeDrawer();
+                  }}
                />
             </View>
          </View>

@@ -8,11 +8,13 @@ import {
    PERVIEW_SPINNER,
    PERVIEW_FAILED,
    COMMENT_CHANGE,
+   PERVIEW_SUCCESS,
 } from './waitViewTypes';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { showFlashMessage } from '../../../utils/flashMessage';
 export const getSpareParts = () => async (dispatch, getState) => {
    try {
       const outGuaranteeSpares = await Api.get(
@@ -85,57 +87,81 @@ export const handlePerview = (
    } = getState().WaitView;
    const inGuarnteeSelectedParts = inGuaranteeSpares
       .filter(item => item.checked == true)
-      .map(({ Id, NameAr, NameOther, Guarantee }) => ({
+      .map(({ Id, NameAr, NameOther, Guarantee, Price }) => ({
          Id,
          NameAr,
          NameOther,
          NameOther,
          Guarantee,
+         Price,
       }));
 
    const outGuarnteeSelectedParts = outGuaranteeSpares
       .filter(item => item.checked == true)
-      .map(({ Id, NameAr, NameOther, Guarantee }) => ({
+      .map(({ Id, NameAr, NameOther, Guarantee, Price }) => ({
          Id,
          NameAr,
          NameOther,
          NameOther,
          Guarantee,
+         Price,
       }));
 
    const userId = await AsyncStorage.getItem('userId');
 
-   try {
-      dispatch({ type: PERVIEW_SPINNER });
-      const form = new FormData();
-      images.map(({ mime, path }, index) => {
-         form.append('image', {
-            uri: Platform.OS == 'android' ? path : path.replace('file://', ''),
-            type: mime,
-            name: `picture${index}`,
+   if (images.length < 1) {
+      showFlashMessage('danger', 'يجب اضافه صوره العطل');
+   } else if (guranteeStatus == 0 && inGuarnteeSelectedParts.length < 1) {
+      showFlashMessage('danger', 'يجب تحديد قطع الغيار داخل الضمان المستخدمه');
+   } else if (guranteeStatus == 1 && outGuarnteeSelectedParts.length < 1) {
+      showFlashMessage('danger', 'يجب تحديد قطع الغيار خارج الضمان المستخدمه');
+   } else {
+      Reactotron.log(images);
+
+      try {
+         dispatch({ type: PERVIEW_SPINNER });
+         const form = new FormData();
+         images.map(({ mime, path }, index) => {
+            let pathParts = path.split('/');
+            form.append('image', {
+               uri:
+                  Platform.OS == 'android' ? path : path.replace('file://', ''),
+               type: mime,
+               name: pathParts[pathParts.length - 1],
+            });
          });
-      });
-      /*  const uploadImageResponse = await Api.post(
-         `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
-         form,
-         { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
-      Reactotron.log(uploadImageResponse); */
-      const perviewResponse = await Api.post(
-         `Complians/UpdateStatus?StatusId=${+complainStatus +
-            1}&UserId=${+userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
-            0}&Comment=${comment}`,
-         {
-            SpareParts:
-               guranteeStatus == 0
-                  ? inGuarnteeSelectedParts
-                  : outGuarnteeSelectedParts,
+         await Api.post(
+            `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
+            form,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+         );
+
+         const perviewResponse = await Api.post(
+            `Complians/UpdateStatus?StatusId=${+complainStatus +
+               1}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
+               0}&Comment=${comment}`,
+
+            guranteeStatus == 0
+               ? inGuarnteeSelectedParts
+               : outGuarnteeSelectedParts
+         );
+         Reactotron.log(perviewResponse);
+         if (perviewResponse.data.statusCode == 200) {
+            dispatch({
+               type: PERVIEW_SUCCESS,
+               payload: {
+                  outSpares: outGuarnteeSelectedParts,
+                  inSpares: inGuarnteeSelectedParts,
+               },
+            });
          }
-      );
-      console.log(perviewResponse);
-   } catch (error) {
-      console.log('preview error', error);
-      dispatch({ type: PERVIEW_FAILED });
+      } catch (error) {
+         console.log('preview error', error);
+         dispatch({
+            type: PERVIEW_FAILED,
+         });
+         showFlashMessage('danger', 'جدث خطا برجاء اعاده المحاوله');
+      }
    }
 };
 export const onCommentChange = text => dispatch => {

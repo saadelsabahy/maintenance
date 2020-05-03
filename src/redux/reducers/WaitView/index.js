@@ -5,6 +5,9 @@ import {
    IN_GUARANTEE_ITEM_CHECKED,
    OUT_GUARANTEE_ITEM_CHECKED,
    COMMENT_CHANGE,
+   PERVIEW_SUCCESS,
+   PERVIEW_SPINNER,
+   PERVIEW_FAILED,
 } from '../../actions/waitView/waitViewTypes';
 
 const initialState = {
@@ -14,6 +17,7 @@ const initialState = {
    outGuaranteeSpares: [],
    images: [],
    comment: '',
+   perviewSpinner: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -34,7 +38,7 @@ export default (state = initialState, { type, payload }) => {
          break;
 
       case CLOSE_BOTTOM_SHEET:
-         return { ...initialState };
+         return { ...state, images: [], comment: '', perviewSpinner: false };
          break;
       case IN_GUARANTEE_ITEM_CHECKED:
          return { ...state, inGuaranteeSpares: payload };
@@ -44,6 +48,20 @@ export default (state = initialState, { type, payload }) => {
          break;
       case COMMENT_CHANGE:
          return { ...state, comment: payload };
+         break;
+      case PERVIEW_SUCCESS:
+         return {
+            ...initialState,
+            inGuaranteeSpares: payload.inSpares,
+            outGuaranteeSpares: payload.outSpares,
+            perviewSpinner: false,
+         };
+         break;
+      case PERVIEW_SPINNER:
+         return { ...state, perviewSpinner: true };
+         break;
+      case PERVIEW_FAILED:
+         return { ...state, perviewSpinner: false };
          break;
       default:
          return state;

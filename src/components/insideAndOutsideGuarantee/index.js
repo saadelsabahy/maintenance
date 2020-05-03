@@ -7,12 +7,14 @@ import {
    TEXT_COLOR,
    SCREEN_HEIGHT,
    SECONDART_COLOR,
+   SCREEN_WIDTH,
 } from '../../constants/colors';
 import TextArea from '../TextArea';
 import ChechBox from '../checkBox';
 import { ImageSelector } from '../ImageSelector';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { CustomText } from '../customText';
 
 const Gurantee = ({
    onSelectImagesPressed,
@@ -24,6 +26,7 @@ const Gurantee = ({
    handlePerview,
    onCommentChange,
    comment,
+   loading,
 }) => {
    const [selectedButton, setselectedButton] = useState(null);
    const bottomSheetRef = useRef(null);
@@ -56,11 +59,14 @@ const Gurantee = ({
                <CustomButton
                   buttonContainerStyle={{
                      width: '47%',
-                     height: 45,
+                     height: SCREEN_HEIGHT / 17,
                      borderWidth: selectedButton !== 0 ? 1 : 0,
                      borderColor: MAIN_COLOR,
                      backgroundColor:
                         selectedButton == 0 ? MAIN_COLOR : WHITE_COLOR,
+                     borderRadius: Math.round(
+                        SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
+                     ),
                   }}
                   buttonTitleStyle={{
                      color: selectedButton == 0 ? WHITE_COLOR : TEXT_COLOR,
@@ -71,11 +77,14 @@ const Gurantee = ({
                <CustomButton
                   buttonContainerStyle={{
                      width: '47%',
-                     height: 45,
+                     height: SCREEN_HEIGHT / 17,
                      borderWidth: selectedButton !== 1 ? 1 : 0,
                      borderColor: MAIN_COLOR,
                      backgroundColor:
                         selectedButton == 1 ? MAIN_COLOR : WHITE_COLOR,
+                     borderRadius: Math.round(
+                        SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
+                     ),
                   }}
                   buttonTitleStyle={{
                      color: selectedButton == 1 ? WHITE_COLOR : TEXT_COLOR,
@@ -125,19 +134,24 @@ const Gurantee = ({
                      keyExtractor={(item, index) => `${index}`}
                      renderItem={({
                         item,
-                        item: { Id, NameAr, checked },
+                        item: { Id, NameAr, checked, Price },
                         index,
                      }) => {
                         return (
-                           <ChechBox
-                              index={index}
-                              text={NameAr}
-                              Id={Id}
-                              checked={checked}
-                              onItemPressed={() =>
-                                 onCheckItem(index, Id, selectedButton)
-                              }
-                           />
+                           <View style={styles.spareContainer}>
+                              <ChechBox
+                                 index={index}
+                                 text={NameAr}
+                                 Id={Id}
+                                 checked={checked}
+                                 onItemPressed={() =>
+                                    onCheckItem(index, Id, selectedButton)
+                                 }
+                              />
+                              {selectedButton == 1 && (
+                                 <CustomText text={`${Price} ريال`} />
+                              )}
+                           </View>
                         );
                      }}
                      /* numColumns={2} */
@@ -162,6 +176,8 @@ const Gurantee = ({
                         selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
                      }
                      onButtonPressed={() => handlePerview(selectedButton)}
+                     loading={loading}
+                     spinnerColor={WHITE_COLOR}
                   />
                </View>
 
@@ -217,6 +233,12 @@ const styles = StyleSheet.create({
       height: '15%',
       alignItems: 'center',
       justifyContent: 'space-between',
+   },
+   spareContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
    },
 });
 

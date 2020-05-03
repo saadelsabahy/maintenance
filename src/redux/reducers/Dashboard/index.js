@@ -24,9 +24,7 @@ export default (state = initialState, { type, payload }) => {
             dashboardError: false,
             dashboardSpinner: false,
             dashboardData: payload,
-            lastUpdate: moment()
-               .locale('eg')
-               .format('LT'),
+            lastUpdate: moment().format('LT'),
             filterInput: '',
          };
          break;

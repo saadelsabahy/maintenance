@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComplainsItem } from '../complainsItem';
 import { LoaderAndRetry } from '../LoaderAndRetry';
 import {
@@ -7,6 +7,7 @@ import {
    StyleSheet,
    FlatList,
    ActivityIndicator,
+   RefreshControl,
 } from 'react-native';
 import {
    WHITE_COLOR,
@@ -30,9 +31,11 @@ const ListAndLoading = ({
    paginationLoading,
    onEndReached,
    dateSearch,
+   hanleRetry,
 }) => {
    const dispatch = useDispatch();
-
+   const [loadMore, setloadMore] = useState(false);
+   const [refreshing, setRefreshing] = useState(false);
    const renderListFooter = () => {
       return paginationLoading ? (
          <View
@@ -46,21 +49,25 @@ const ListAndLoading = ({
          </View>
       ) : null;
    };
+   const handleRefresh = async () => {
+      setRefreshing(true);
+      hanleRetry();
+      setRefreshing(false);
+   };
    const Ids = [...new Set(list.map(item => item.Id))];
    const notRedundency = Ids.map(id => list.find(order => order.Id == id));
 
    return (
       <View style={{ flex: 1 }}>
          {loading || error ? (
-            <LoaderAndRetry loading={loading} error={error} />
+            <LoaderAndRetry
+               loading={loading}
+               error={error}
+               onRetryPressed={hanleRetry}
+            />
          ) : (
             <FlatList
-               data={
-                  notRedundency
-                  // dateSearch == 1
-                  //    ? list.sort((a, b) => new Date() - new Date(b.CretaedOn))
-                  //    : list.sort((a, b) => new Date(b.CretaedOn) - new Date())
-               }
+               data={notRedundency}
                extraData={dateSearch}
                keyExtractor={(item, index) => `${item.Id}`}
                showsVerticalScrollIndicator={false}
@@ -100,6 +107,7 @@ const ListAndLoading = ({
                         complainStatus={StatusId}
                         images={ComplianImages}
                         spareParts={ComplianSpareParts}
+                        covered={Covered}
                         indicatorColor={
                            StatusId == 4
                               ? INDICATOR_GREEN
@@ -113,8 +121,18 @@ const ListAndLoading = ({
                      />
                   );
                }}
-               onEndReached={onEndReached}
+               onEndReached={() => {
+                  loadMore ? onEndReached() : null;
+               }}
+               refreshControl={
+                  <RefreshControl
+                     refreshing={refreshing}
+                     onRefresh={handleRefresh}
+                     colors={[MAIN_COLOR]}
+                  />
+               }
                onEndReachedThreshold={0.5}
+               onScroll={() => setloadMore(true)}
                ListFooterComponent={renderListFooter}
                ListEmptyComponent={
                   <View

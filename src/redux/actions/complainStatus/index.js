@@ -1,24 +1,107 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import ImagePicker from 'react-native-image-crop-picker';
-import { SELECT_EXCUTION_IMAGES } from './types';
+import {
+   SELECT_EXCUTION_IMAGES,
+   APPROVE_FAILED,
+   APPROVE_SPINNER,
+   REJECT_SPINNER,
+   REJECT_FAILED,
+   APPROVE_SUCCESS,
+   REJECT_SUCCESS,
+   EXCUTION_SPINNER,
+   EXCUTION_SUCCESS,
+   EXCUTION_FAILED,
+   CLOSE_EXCUTION_BOTTOM_SHEET,
+} from './types';
+import { showFlashMessage } from '../../../utils/flashMessage';
+import Reactotron from 'reactotron-react-native';
+import Api from '../../../apis';
 
-export const onAcceptThePreview = ({
+export const onAcceptThePreview = ({ complainNumber, covered }) => async (
+   dispatch,
+   getState
+) => {
+   const userId = await AsyncStorage.getItem('userId');
+   try {
+      dispatch({ type: APPROVE_SPINNER });
+      const approvalResponse = await Api.post(
+         `Complians/UpdateStatus?StatusId=${3}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
+         []
+      );
+      Reactotron.log(approvalResponse);
+      if (approvalResponse.data.statusCode == 200) {
+         dispatch({ type: APPROVE_SUCCESS });
+      }
+   } catch (error) {
+      dispatch({ type: APPROVE_FAILED });
+      console.log('approval error', error);
+      showFlashMessage('danger', 'حدث خطأ برجاء المحاوله مره اخري');
+   }
+};
+
+export const onRejectThePreview = ({ complainNumber, covered }) => async (
+   dispatch,
+   getState
+) => {
+   const userId = await AsyncStorage.getItem('userId');
+   try {
+      dispatch({ type: REJECT_SPINNER });
+      const rejectResponse = await Api.post(
+         `Complians/UpdateStatus?StatusId=${5}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
+         []
+      );
+      if (rejectResponse.data.statusCode == 200) {
+         dispatch({ type: REJECT_SUCCESS });
+      }
+   } catch (error) {
+      dispatch({ type: REJECT_FAILED });
+      console.log('approval error', error);
+      showFlashMessage('danger', 'حدث خطأ برجاء المحاوله مره اخري');
+   }
+};
+
+export const onExcutionDone = ({
    complainNumber,
+   covered,
    complainStatus,
 }) => async (dispatch, getState) => {
    const userId = await AsyncStorage.getItem('userId');
+   const { images } = getState().UpdateComplainsStatus;
 
-   console.warn('accpt preview');
-};
+   if (images.length < 1) {
+      showFlashMessage('danger', 'يجب اضافه صوره لما تم اصلاحه');
+   } else {
+      try {
+         dispatch({ type: EXCUTION_SPINNER });
+         const form = new FormData();
+         images.map(({ mime, path }, index) => {
+            let pathParts = path.split('/');
+            form.append('image', {
+               uri:
+                  Platform.OS == 'android' ? path : path.replace('file://', ''),
+               type: mime,
+               name: pathParts[pathParts.length - 1],
+            });
+         });
+         await Api.post(
+            `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${4}`,
+            form,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+         );
 
-export const onRejectThePreview = () => async (dispatch, getState) => {
-   const userId = await AsyncStorage.getItem('userId');
-   console.warn('reject preview');
-};
-
-export const onExcutionDone = () => async (dispatch, getState) => {
-   const userId = await AsyncStorage.getItem('userId');
-   console.warn('excution done');
+         const rejectResponse = await Api.post(
+            `Complians/UpdateStatus?StatusId=${4}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
+            []
+         );
+         if (rejectResponse.data.statusCode == 200) {
+            dispatch({ type: EXCUTION_SUCCESS });
+         }
+      } catch (error) {
+         dispatch({ type: EXCUTION_FAILED });
+         console.log('excution error', error);
+         showFlashMessage('danger', 'حدث خطأ برجاء المحاوله مره اخري');
+      }
+   }
    // Complians/UpdateStatus
 };
 
@@ -37,4 +120,8 @@ export const selectExcutionPhotos = () => dispatch => {
       .catch(e => {
          console.log('image picker error', e);
       });
+};
+
+export const onCloseExcutionSheet = () => dispatch => {
+   dispatch({ type: CLOSE_EXCUTION_BOTTOM_SHEET });
 };

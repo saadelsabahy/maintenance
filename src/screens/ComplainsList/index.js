@@ -24,6 +24,7 @@ const Complains = ({ navigation, route, complain }) => {
    const menuRef = useRef(null);
    const [filterLabel, setfilterLabel] = useState(null);
    const [dateSearch, setDateSearch] = useState(0);
+   const [reload, setReload] = useState(false);
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
@@ -75,7 +76,7 @@ const Complains = ({ navigation, route, complain }) => {
       return () => {
          dispatch(emptyListOnUnmount());
       };
-   }, [isFocused, dateSearch]);
+   }, [isFocused, dateSearch, reload]);
    const onListEndReached = () => {
       if (search) {
          if (route.params && route.params.hasOwnProperty('distination')) {
@@ -140,6 +141,7 @@ const Complains = ({ navigation, route, complain }) => {
                   search ? SearchPaginationLoading : paginationLoading
                }
                dateSearch={dateSearch}
+               hanleRetry={() => setReload(!reload)}
             />
          </View>
 
@@ -147,6 +149,7 @@ const Complains = ({ navigation, route, complain }) => {
             isModalVisible={isModalVisible}
             onBackdropPress={toggleSearchModal}
             searchDropdownLabels={[
+               { id: 'null', text: 'جميع البلاغات' },
                { id: '1', text: 'قيد المعاينه' },
                { id: '2', text: 'قيد التعميد' },
                { id: '3', text: 'قيد التنفيذ' },

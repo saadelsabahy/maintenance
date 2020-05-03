@@ -45,6 +45,7 @@ export const onLoginPressed = () => async (dispatch, getState) => {
 
             await AsyncStorage.multiSet([
                ['userId', `${loginResponse.data.Id}`],
+               ['userType', `${loginResponse.data.LocationId}`],
                [
                   'userName',
                   `${loginResponse.data.FirstName} ${

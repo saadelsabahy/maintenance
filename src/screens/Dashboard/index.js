@@ -52,7 +52,7 @@ const DashBoard = ({ navigation }) => {
       return () => {
          unsubscribe();
       };
-   }, [netConnected]);
+   }, [netConnected, isFocused]);
    const getDashboardData = () => {
       if (netConnected) {
          dispatch(getDashBoardData());

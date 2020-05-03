@@ -26,6 +26,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Icon } from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { onSearchInputsChange } from '../../redux/actions';
+import FlashMessage from 'react-native-flash-message';
+
 const SearchModal = ({
    isModalVisible,
    coverScreen,
@@ -42,6 +44,8 @@ const SearchModal = ({
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
+   const modalFlashMessage = useRef(null);
+
    const [dropDownText, setdropDownText] = useState('');
    const [keyboardShow, setKeyboardShow] = useState(false);
    useEffect(() => {
@@ -171,7 +175,7 @@ const SearchModal = ({
                         width: '100%',
                         alignItems: 'center',
                      }}>
-                     <SearchDuration />
+                     <SearchDuration modalMessage={modalFlashMessage} />
                   </View>
                </View>
 
@@ -188,6 +192,12 @@ const SearchModal = ({
                   />
                </View>
             </KeyboardAwareScrollView>
+            <FlashMessage
+               ref={modalFlashMessage}
+               position={'bottom'}
+               style={{ height: 45 }}
+               duration={3000}
+            />
          </View>
       </Modal>
    );
@@ -238,7 +248,6 @@ const styles = StyleSheet.create({
    },
    menuContainerStyle: {
       width: '100%',
-      paddingHorizontal: 5,
       backgroundColor: '#fff',
       borderRadius: 50,
       borderColor: TEXT_COLOR,

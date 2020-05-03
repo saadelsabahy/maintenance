@@ -14,7 +14,7 @@ const ChechBox = ({ onItemPressed, text, checked }) => {
             onClick={onItemPressed}
             isChecked={checked}
          />
-         <CustomText text={text} textStyle={{ marginStart: 10 }} />
+         <CustomText text={text} textStyle={{ marginStart: 5 }} />
       </TouchableOpacity>
    );
 };

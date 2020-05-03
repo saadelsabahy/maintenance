@@ -19,9 +19,12 @@ export const getDashBoardData = () => async (dispatch, getState) => {
          const {
             data: { data },
          } = getDashboardResponse;
-         const totals = data.map(item => item.Total);
+         let dashData = [];
+         data.map(item => {
+            dashData[item.StatusId - 1] = item.Total;
+         });
 
-         dispatch({ type: GET_DASHBOARD_DATA_SUCCESS, payload: totals });
+         dispatch({ type: GET_DASHBOARD_DATA_SUCCESS, payload: dashData });
       }
    } catch (error) {
       console.log('get dashboard data error', error);

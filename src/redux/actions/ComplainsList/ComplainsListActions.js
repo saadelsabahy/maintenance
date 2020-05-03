@@ -44,7 +44,7 @@ export const getAllComplainsList = (statusId, sort) => async (
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${pageNumber}&PageSize=${rowsNumber}&Sort=${sort}`
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
       if (getComplainsListResponse.status == 200) {
          const {
@@ -115,15 +115,15 @@ export const onComplainPressed = (data, navigation, route) => () => {
             break;
       }
    } else {
-      switch (data.statusId) {
+      switch (data.complainStatus) {
          case 1:
-            navigation.navigate('waitView', { data });
+            navigation.navigate('complainPerview', { data });
             break;
 
          default:
-            navigation.navigate('waitView', {
+            navigation.navigate('complainAprroval', {
                data,
-               distination: data.statusId,
+               distination: data.complainStatus,
             });
             break;
       }

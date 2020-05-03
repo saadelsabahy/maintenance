@@ -19,8 +19,6 @@ const ImageCarousel = ({ data }) => {
    ]; */
 
    const renderItem = ({ item: { ImagePath } }) => {
-      console.log(ImagePath);
-
       return (
          <View style={styles.itemContainer}>
             <Image source={{ uri: ImagePath }} style={styles.itemLabel} />
@@ -80,6 +78,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       overflow: 'hidden',
       backgroundColor: SECONDART_COLOR,
+      height: '95%',
    },
    itemLabel: {
       width: '100%',

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import DateTimeButton from './DateTimePickerButton';
 import CustomDateTimePicker from './DateTimePicker';
 import { WHITE_COLOR } from '../../constants/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { onSearchInputsChange } from '../../redux/actions';
-
+import moment from 'moment';
+import { date } from '@nozbe/watermelondb/decorators';
 const now = new Date();
 
-const SearchDuration = () => {
+const SearchDuration = ({ modalMessage }) => {
    const dispatch = useDispatch();
    const colorScheme = useColorScheme();
    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -32,13 +33,31 @@ const SearchDuration = () => {
       hideDatePicker();
       switch (currentActive) {
          case 'startDate':
+            /*  const isStartDateValid = moment(date).isSameOrAfter(
+               moment()
+            );
+            if (isStartDateValid) {
+              
+            } else {
+               showFlashMessage('danger','')
+            } */
             setStartDate(date.toLocaleDateString());
             dispatch(onSearchInputsChange('startDate', date));
             break;
 
          case 'endDate':
-            setEndDate(date.toLocaleDateString());
-            dispatch(onSearchInputsChange('endDate', date));
+            const isEndDateValid = moment(date).isSameOrAfter(
+               moment(startDate, 'MM/DD/YY')
+            );
+            if (isEndDateValid) {
+               setEndDate(date.toLocaleDateString());
+               dispatch(onSearchInputsChange('endDate', date));
+            } else {
+               modalMessage.current.showMessage({
+                  type: 'danger',
+                  message: 'تاريخ الانتهاء يجب ان يكون بعد تاريخ البدايه',
+               });
+            }
             break;
       }
    };

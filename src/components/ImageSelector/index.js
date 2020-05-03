@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   TouchableOpacity,
-   FlatList,
-   Image,
-} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { Icon } from '../Icon';
 import {
    SCREEN_WIDTH,
@@ -15,7 +8,7 @@ import {
    SCREEN_HEIGHT,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
    const EmptyLiImageList = () => {
       return ['1', '2', '3'].map((item, index) => {

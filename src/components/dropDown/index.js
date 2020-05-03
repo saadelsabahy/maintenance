@@ -8,6 +8,7 @@ import {
    TEXT_COLOR,
    SCREEN_WIDTH,
    SCREEN_HEIGHT,
+   MAIN_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText } from '../customText';
@@ -28,10 +29,34 @@ const CustomDropDown = ({
          onPress={onDropDownPressed}
          style={[{ justifyContent: 'center' }, menuContainerStyle]}>
          {typeof dropDownText == 'string' ? (
-            <CustomText
-               text={dropDownText != '' ? dropDownText : 'نوع البلاغ'}
-               textStyle={{ paddingHorizontal: 20, alignSelf: 'flex-start' }}
-            />
+            <View
+               style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+               }}>
+               <CustomText
+                  text={dropDownText != '' ? dropDownText : 'نوع البلاغ'}
+                  textStyle={{ paddingHorizontal: 20, alignSelf: 'center' }}
+               />
+               <View
+                  style={{
+                     justifyContent: 'center',
+                     alignItems: 'center',
+                     backgroundColor: MAIN_COLOR,
+                     borderRadius: Math.round(
+                        SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
+                     ),
+                     height: SCREEN_HEIGHT / 15,
+                     width: SCREEN_WIDTH / 9,
+                  }}>
+                  <Icon
+                     name={'keyboard-arrow-down'}
+                     type="materialIcon"
+                     color={WHITE_COLOR}
+                  />
+               </View>
+            </View>
          ) : null}
          <Menu button={button} ref={refrence} style={menuStyle}>
             {labels.map((label, index) => {

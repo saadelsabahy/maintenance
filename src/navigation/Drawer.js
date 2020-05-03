@@ -54,6 +54,8 @@ const ComplainsStack = () => {
             name={'ComplainDetailes'}
             component={ComplainsDetailes}
          />
+         <Stack.Screen name={'complainPerview'} component={WaitingView} />
+         <Stack.Screen name={'complainAprroval'} component={WaitApproval} />
       </Stack.Navigator>
    );
 };

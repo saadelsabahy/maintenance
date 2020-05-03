@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import {
    ImageCarousel,
@@ -22,38 +22,63 @@ import {
    onAcceptThePreview,
    onRejectThePreview,
    selectExcutionPhotos,
+   onCloseExcutionSheet,
 } from '../../redux/actions';
+import AsyncStorage from '@react-native-community/async-storage';
+import Reactotron from 'reactotron-react-native';
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
+   const [userType, setuserType] = useState(null);
    const dispatch = useDispatch();
-   const { images } = useSelector(state => ({
+   const {
+      images,
+      acceptSpinner,
+      rejectSpinner,
+      excutionSpinner,
+   } = useSelector(state => ({
       images: state.UpdateComplainsStatus.images,
+      acceptSpinner: state.UpdateComplainsStatus.acceptSpinner,
+      rejectSpinner: state.UpdateComplainsStatus.rejectSpinner,
+      excutionSpinner: state.UpdateComplainsStatus.excutionSpinner,
    }));
+   useEffect(() => {
+      getUserType();
+      return () => {};
+   }, []);
+   const getUserType = async () => {
+      const userType = await AsyncStorage.getItem('userType');
+      setuserType(userType);
+   };
    const renderButtons = () => {
       switch (distination) {
          case 3:
             return (
-               <CustomButton
-                  buttonContainerStyle={{ ...styles.button, width: '90%' }}
-                  buttonTitle={'تم الحل'}
-                  onButtonPressed={() => dispatch(onExcutionDone(data))}
-               />
+               userType != -1 && (
+                  <CustomButton
+                     buttonContainerStyle={{ ...styles.button, width: '90%' }}
+                     buttonTitle={'تم الحل'}
+                     onButtonPressed={() => dispatch(onExcutionDone(data))}
+                     loading={excutionSpinner}
+                     spinnerColor={WHITE_COLOR}
+                  />
+               )
             );
             break;
          case 4:
             return null;
             break;
          case 5:
-            return (
+            userType != -1 && userType != 0 && (
                <CustomButton
                   buttonContainerStyle={{ ...styles.button, width: '90%' }}
                   buttonTitle={'تعميد'}
                   onButtonPressed={() => dispatch(onAcceptThePreview(data))}
+                  loading={acceptSpinner}
                />
             );
             break;
          default:
-            return (
+            userType != -1 && userType != 0 && (
                <View
                   style={{
                      ...styles.buttonsContainer,
@@ -64,11 +89,15 @@ const WaitApproval = ({ navigation, route }) => {
                      buttonContainerStyle={styles.button}
                      buttonTitle={'تعميد'}
                      onButtonPressed={() => dispatch(onAcceptThePreview(data))}
+                     loading={acceptSpinner}
+                     spinnerColor={WHITE_COLOR}
                   />
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'رفض'}
                      onButtonPressed={() => dispatch(onRejectThePreview(data))}
+                     loading={rejectSpinner}
+                     spinnerColor={WHITE_COLOR}
                   />
                </View>
             );
@@ -118,6 +147,7 @@ const WaitApproval = ({ navigation, route }) => {
                excutionImages={images}
                onSelectExcutionImages={() => dispatch(selectExcutionPhotos())}
                spareParts={data.spareParts ? data.spareParts : []}
+               oncloseBottomSheet={() => dispatch(onCloseExcutionSheet())}
             />
          </View>
          <View style={styles.buttonsContainer}>{renderButtons()}</View>

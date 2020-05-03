@@ -16,6 +16,7 @@ const ComplainsItem = ({
    complainStatus,
    images,
    spareParts,
+   covered,
 }) => {
    return (
       <TouchableOpacity
@@ -33,6 +34,7 @@ const ComplainsItem = ({
                complainStatus,
                images,
                spareParts,
+               covered,
             })
          }>
          <View

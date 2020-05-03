@@ -27,17 +27,24 @@ const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
-   const { images, guaranteeSpares, outGuaranteeSpares, comment } = useSelector(
-      state => ({
-         images: state.WaitView.images,
-         guaranteeSpares: state.WaitView.inGuaranteeSpares,
-         outGuaranteeSpares: state.WaitView.outGuaranteeSpares,
-         comment: state.WaitView.comment,
-      })
-   );
+   const {
+      images,
+      guaranteeSpares,
+      outGuaranteeSpares,
+      comment,
+      perviewSpinner,
+   } = useSelector(state => ({
+      images: state.WaitView.images,
+      guaranteeSpares: state.WaitView.inGuaranteeSpares,
+      outGuaranteeSpares: state.WaitView.outGuaranteeSpares,
+      comment: state.WaitView.comment,
+      perviewSpinner: state.WaitView.perviewSpinner,
+   }));
    useEffect(() => {
       dispatch(getSpareParts());
-      return () => {};
+      return () => {
+         dispatch(closeBottomSheet());
+      };
    }, [isFocused]);
 
    return (
@@ -91,6 +98,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
                }
                comment={comment}
                onCommentChange={text => dispatch(onCommentChange(text))}
+               loading={perviewSpinner}
             />
          </View>
       </View>
