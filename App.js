@@ -9,7 +9,7 @@ import { YellowBox } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import AppNavigation from './src/navigation/MainNavigator';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 YellowBox.ignoreWarnings(['Remote debugger']);
 // import database from './src/models';
 const App = () => {
@@ -21,20 +21,22 @@ const App = () => {
    return (
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
-            <SafeAreaView
-               style={styles.container}
-               forceInset={{ bottom: 'never' }}>
-               <StatusBar backgroundColor={MAIN_COLOR} />
+            <SafeAreaProvider>
+               <SafeAreaView
+                  style={styles.container}
+                  forceInset={{ bottom: 'never' }}>
+                  <StatusBar backgroundColor={MAIN_COLOR} />
 
-               <AppNavigation /* screenProps={{ database }} */ />
-               <FlashMessage
-                  position="bottom"
-                  style={styles.flashMessage}
-                  duration={2500}
-                  textStyle={styles.flashText}
-                  titleStyle={styles.flashText}
-               />
-            </SafeAreaView>
+                  <AppNavigation /* screenProps={{ database }} */ />
+                  <FlashMessage
+                     position="bottom"
+                     style={styles.flashMessage}
+                     duration={2500}
+                     textStyle={styles.flashText}
+                     titleStyle={styles.flashText}
+                  />
+               </SafeAreaView>
+            </SafeAreaProvider>
          </PersistGate>
       </Provider>
    );
