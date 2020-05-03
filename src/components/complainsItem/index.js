@@ -41,7 +41,10 @@ const ComplainsItem = ({
             style={[styles.indicator, { backgroundColor: indicatorColor }]}
          />
          <View style={styles.detailsContainer}>
-            <CustomText text={`رقم البلاغ : ${complainNumber}`} />
+            <CustomText
+               text={`رقم البلاغ : ${complainNumber}`}
+               textStyle={{ alignSelf: 'flex-start' }}
+            />
             <CustomText text={`تاريخ البلاغ : ${complainDate}`} />
             <CustomText text={`نوع المعده : ${vehicleType}`} />
             <CustomText text={`كود المعده : ${vehicleCode}`} />

@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(2),
       color: TEXT_COLOR,
-      textAlign: 'right',
    },
 });
 
