@@ -1,13 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   I18nManager,
-   StatusBar,
-   SafeAreaView,
-} from 'react-native';
+import { View, Text, StyleSheet, I18nManager, StatusBar } from 'react-native';
 import { MAIN_COLOR, WHITE_COLOR } from './src/constants/colors';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
@@ -16,6 +9,7 @@ import { YellowBox } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import AppNavigation from './src/navigation/MainNavigator';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { SafeAreaView } from 'react-navigation';
 YellowBox.ignoreWarnings(['Remote debugger']);
 // import database from './src/models';
 const App = () => {
@@ -27,7 +21,9 @@ const App = () => {
    return (
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView
+               style={styles.container}
+               forceInset={{ bottom: 'never' }}>
                <StatusBar backgroundColor={MAIN_COLOR} />
 
                <AppNavigation /* screenProps={{ database }} */ />
