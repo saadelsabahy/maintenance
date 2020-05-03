@@ -48,9 +48,11 @@ const styles = StyleSheet.create({
    },
    flashMessage: {
       width: '100%',
-      height: '8%',
+      height: '10%',
       alignSelf: 'flex-start',
       justifyContent: 'center',
+      padding: 0,
+      paddingVertical: 0,
    },
    flashText: {
       fontFamily: 'DroidArabicKufi',
