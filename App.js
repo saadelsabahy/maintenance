@@ -14,6 +14,7 @@ YellowBox.ignoreWarnings(['Remote debugger']);
 // import database from './src/models';
 const App = () => {
    I18nManager.forceRTL(true);
+   I18nManager.allowRTL(true);
    useEffect(() => {
       return () => {};
    }, []);

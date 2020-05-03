@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       flex: 1,
       height: '100%',
       fontSize: responsiveFontSize(2),
-      //textAlign: I18nManager.isRTL ? 'right' : 'left',
+      textAlign: I18nManager.isRTL ? 'right' : 'left',
       borderRadius: 3,
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
