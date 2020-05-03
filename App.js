@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
    },
    flashMessage: {
       width: '100%',
-      height: '5%',
+      height: '8%',
       alignSelf: 'flex-start',
       justifyContent: 'center',
    },
