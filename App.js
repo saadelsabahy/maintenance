@@ -22,9 +22,7 @@ const App = () => {
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
             <SafeAreaProvider>
-               <SafeAreaView
-                  style={styles.container}
-                  forceInset={{ bottom: 'never' }}>
+               <SafeAreaView style={styles.container}>
                   <StatusBar backgroundColor={MAIN_COLOR} />
 
                   <AppNavigation /* screenProps={{ database }} */ />

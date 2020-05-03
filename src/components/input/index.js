@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       padding: 5,
+      writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
    },
    StartIcon: {
       marginHorizontal: 10,

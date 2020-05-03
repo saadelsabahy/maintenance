@@ -56,6 +56,7 @@ const CustomButton = ({
                      color={iconColor}
                      type={iconType}
                      size={iconSize || responsiveFontSize(2.5)}
+                     iconContainerStyle={{ flex: 0.2 }}
                   />
                )}
                <CustomText
