@@ -79,7 +79,11 @@ const styles = StyleSheet.create({
    textStyle: {
       textAlign: 'right',
       fontSize: responsiveFontSize(2.7),
+<<<<<<< HEAD
       // lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
+=======
+      //lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
+>>>>>>> cb01e45695680e9e430c8ee3d5dbceb9d42dd8da
    },
 });
 
