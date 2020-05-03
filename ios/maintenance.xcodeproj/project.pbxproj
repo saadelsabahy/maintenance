@@ -76,6 +76,8 @@
 		355C2F6AD3574702868380A9 /* libWatermelonDB.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libWatermelonDB.a; sourceTree = "<group>"; };
 		50AB376A245EFC4600FA2E78 /* maintenance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "maintenance-Bridging-Header.h"; sourceTree = "<group>"; };
 		50AB376B245EFC4600FA2E78 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		50AB3776245F240F00FA2E78 /* libRSKImageCropper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRSKImageCropper.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		50AB3778245F242B00FA2E78 /* QBImagePicker.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = QBImagePicker.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F016D8CA1FF4EDD99D5356D /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		74DBEA24195FAADD7F0B00F5 /* Pods-maintenance-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maintenance-tvOS.release.xcconfig"; path = "Target Support Files/Pods-maintenance-tvOS/Pods-maintenance-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		85319297D3AF0C2AD53AA50C /* Pods-maintenance-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maintenance-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-maintenance-tvOS/Pods-maintenance-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50AB3778245F242B00FA2E78 /* QBImagePicker.bundle */,
+				50AB3776245F240F00FA2E78 /* libRSKImageCropper.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				266A73110CAFBB32E9D8AC2C /* libPods-maintenance.a */,
@@ -803,6 +807,7 @@
 					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/ios/WatermelonDB/SupportingFiles/**",
 				);
 				INFOPLIST_FILE = maintenance/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -830,6 +835,7 @@
 					"$(SRCROOT)/../node_modules/@nozbe/watermelondb/native/ios/WatermelonDB/SupportingFiles/**",
 				);
 				INFOPLIST_FILE = maintenance/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

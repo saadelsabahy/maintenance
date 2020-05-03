@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
    container: {
       flex: 1,
       backgroundColor: MAIN_COLOR,
+      paddingBottom: 0,
    },
    flashMessage: {
       width: '100%',

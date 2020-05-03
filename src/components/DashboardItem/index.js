@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
       borderTopEndRadius: 5,
       justifyContent: 'center',
       marginBottom: '7%',
-      elevation: 3,
+      /*elevation: 3,
       shadowOffset: { width: 0, height: 3 },
       shadowColor: '#000',
       shadowOpacity: 0.5,
-      shadowRadius: 20,
+      shadowRadius: 20,*/
    },
    iconContainer: {
       backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
