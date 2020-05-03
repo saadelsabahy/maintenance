@@ -35,6 +35,8 @@ const CustomInput = ({
    referance,
    ...res
 }) => {
+   console.log(I18nManager.isRTL);
+
    return (
       <View
          style={[
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
       borderRadius: 3,
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       padding: 5,
       writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
