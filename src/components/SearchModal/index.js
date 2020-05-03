@@ -196,11 +196,14 @@ const SearchModal = ({
                ref={modalFlashMessage}
                position={'bottom'}
                style={{
-                  height: 60,
+                  height: 50,
                   alignItems: 'flex-start',
+                  justifyContent: 'center',
                   padding: 0,
                   paddingVertical: 0,
                }}
+               textStyle={styles.flashText}
+               titleStyle={styles.flashText}
                duration={3000}
             />
          </View>
@@ -263,6 +266,12 @@ const styles = StyleSheet.create({
       width: SCREEN_WIDTH - 50,
       alignSelf: 'center',
       overflow: 'scroll',
+   },
+   flashText: {
+      fontFamily: 'DroidArabicKufi',
+      textTransform: 'capitalize',
+      fontSize: responsiveFontSize(1.8),
+      alignSelf: 'flex-start',
    },
 });
 
