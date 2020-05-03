@@ -28,6 +28,7 @@ const DashBoardItem = ({
                type={iconTtype}
                color={WHITE_COLOR}
                size={responsiveFontSize(4)}
+               iconContainerStyle={{flex:1}}
             />
          </View>
          <View style={styles.cardDetailesContainer}>
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
    textStyle: {
       textAlign: 'right',
       fontSize: responsiveFontSize(2.7),
-      lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
+      //lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
    },
 });
 
