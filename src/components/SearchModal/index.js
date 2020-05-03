@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.8),
       alignSelf: 'flex-start',
+      marginVertical: 10,
    },
 });
 
