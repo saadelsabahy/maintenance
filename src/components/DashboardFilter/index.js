@@ -64,7 +64,7 @@ const DashboardFilter = ({
                keyboardShow
                   ? {
                        ...styles.modalContentContainer,
-                       height: 0.6 * SCREEN_HEIGHT,
+                       height: 0.5 * SCREEN_HEIGHT,
                     }
                   : styles.modalContentContainer
             }>
