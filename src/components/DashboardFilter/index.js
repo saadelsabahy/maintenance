@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
    flashText: {
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
-      fontSize: responsiveFontSize(1.5),
+      fontSize: responsiveFontSize(1.7),
       paddingTop: 20,
    },
 });
