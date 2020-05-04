@@ -45,11 +45,9 @@ const CustomDropDown = ({
                      justifyContent: 'center',
                      alignItems: 'center',
                      backgroundColor: MAIN_COLOR,
-                     borderRadius: Math.round(
-                        SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
-                     ),
-                     height: SCREEN_HEIGHT / 15,
-                     width: SCREEN_WIDTH / 9,
+                     borderRadius: 25,
+                     height: 50,
+                     width: 50,
                   }}>
                   <Icon
                      name={'keyboard-arrow-down'}
