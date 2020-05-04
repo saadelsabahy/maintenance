@@ -38,7 +38,13 @@ const DashboardFilter = ({
    onDashboardSearchFilterPressed,
 }) => {
    const menuRef = useRef(null);
-   const [dropDownText, setdropDownText] = useState('');
+   const [keyboardShow, setKeyboardShow] = useState(false);
+   const onKeyboardWillShow = () => {
+      setKeyboardShow(true);
+   };
+   const onKeyboardWillHide = () => {
+      setKeyboardShow(false);
+   };
    const HideModal = () => {
       Keyboard.dismiss();
       onBackdropPress();
@@ -53,7 +59,15 @@ const DashboardFilter = ({
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}>
-         <View style={styles.modalContentContainer}>
+         <View
+            style={
+               keyboardShow
+                  ? {
+                       ...styles.modalContentContainer,
+                       height: 0.6 * SCREEN_HEIGHT,
+                    }
+                  : styles.modalContentContainer
+            }>
             <KeyboardAwareScrollView
                style={{
                   flex: 1,
@@ -63,7 +77,13 @@ const DashboardFilter = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                }}
-               enableOnAndroid={true}>
+               enableOnAndroid={true}
+               onKeyboardDidShow={() =>
+                  Platform.OS === 'ios' ? onKeyboardWillShow() : null
+               }
+               onKeyboardDidHide={() =>
+                  Platform.OS === 'ios' ? onKeyboardWillHide() : null
+               }>
                <View
                   style={{
                      flex: 1,
@@ -96,7 +116,6 @@ const DashboardFilter = ({
                   </View>
                   <View style={{ flex: 1 }} />
                </View>
-
                <View style={styles.inputsContainer}>
                   <CustomInput
                      inputContainerStyle={styles.input}
@@ -105,7 +124,6 @@ const DashboardFilter = ({
                      onChangeText={onContructorIdCgange}
                   />
                </View>
-
                <View style={styles.buttonsContainer}>
                   <CustomButton
                      buttonContainerStyle={styles.button}
