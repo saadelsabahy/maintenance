@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
    },
    iconContainer: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
+      width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
+      height: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
+      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: MAIN_COLOR,
