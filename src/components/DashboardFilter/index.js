@@ -188,7 +188,6 @@ const styles = StyleSheet.create({
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.7),
-      paddingTop: 20,
    },
 });
 
