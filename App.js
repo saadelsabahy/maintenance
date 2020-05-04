@@ -1,6 +1,13 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, I18nManager, StatusBar } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   I18nManager,
+   StatusBar,
+   Platform,
+} from 'react-native';
 import { MAIN_COLOR, WHITE_COLOR } from './src/constants/colors';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
@@ -53,6 +60,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       padding: 0,
       paddingVertical: 0,
+      marginBottom: Platform.OS == 'ios' ? 20 : 0,
    },
    flashText: {
       fontFamily: 'DroidArabicKufi',
