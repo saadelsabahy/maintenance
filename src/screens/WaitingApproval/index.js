@@ -167,9 +167,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       elevation: 2,
-      shadowOffset: { width: 0, height: 5 },
+      shadowOffset: { width: 0, height: 2 },
       shadowColor: '#000',
-      shadowOpacity: 0.2,
+      shadowOpacity: 0.1,
       elevation: 10,
    },
    detailesContainer: {
