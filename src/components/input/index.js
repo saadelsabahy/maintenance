@@ -6,7 +6,6 @@ import {
    TEXT_COLOR,
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
-   MAIN_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -36,11 +35,13 @@ const CustomInput = ({
    referance,
    ...res
 }) => {
+   console.log(I18nManager.isRTL);
+
    return (
       <View
          style={[
             {
-               height: SCREEN_HEIGHT / 16,
+               height: SCREEN_HEIGHT / 14,
                alignItems: 'center',
                justifyContent: 'center',
                width: '100%',
@@ -63,8 +64,6 @@ const CustomInput = ({
                style={[styles.input, inputStyle]}
                underlineColorAndroid="transparent"
                ref={referance}
-               selectionColor={MAIN_COLOR}
-               // selection={Platform.OS == 'ios' ? { start: 0 } : null}
                {...res}
             />
             {iconEndName && (
@@ -100,18 +99,16 @@ const styles = StyleSheet.create({
       borderColor: TEXT_COLOR,
    },
    input: {
-      width: '100%',
+      flex: 1,
+      height: '100%',
       fontSize: responsiveFontSize(2),
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       color: TEXT_COLOR,
-      fontFamily: 'DroidArabicKufi',
-      /* alignItems: 'flex-start',
+      fontFamily: Platform.OS === 'android' ? 'DroidArabicKufi' : null,
+      alignItems: 'flex-start',
       justifyContent: 'center',
       paddingVertical: 5,
-      alignSelf: 'flex-start',
       writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
-      zIndex: 1000,
-      margin: 0, */
    },
    StartIcon: {
       marginHorizontal: 10,
