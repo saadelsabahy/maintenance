@@ -7,6 +7,7 @@ import {
    KeyboardAvoidingView,
    Platform,
    ScrollView,
+   Keyboard,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -62,6 +63,7 @@ const SearchModal = ({
    const HideModal = () => {
       onKeyboardWillHide();
       onBackdropPress();
+      Keyboard.dismiss();
    };
    return (
       <Modal
@@ -81,17 +83,6 @@ const SearchModal = ({
                     }
                   : styles.modalContentContainer
             }>
-            {/* <View
-               style={{
-                  alignSelf: 'center',
-                  position: 'absolute',
-                  start: 0,
-                  top: 15,
-                  zIndex: 100000,
-                  justifyContent: 'center',
-               }}>
-               
-            </View> */}
             <KeyboardAwareScrollView
                style={{ flex: 1 }}
                enableOnAndroid={true}

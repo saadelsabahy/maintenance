@@ -97,12 +97,14 @@ const styles = StyleSheet.create({
    container: {
       flex: 1,
       backgroundColor: SECONDART_COLOR,
+      paddingBottom: 20,
    },
    DrawerHeader: {
       backgroundColor: MAIN_COLOR,
       width: '100%',
       height: '35%',
       borderBottomStartRadius: 50,
+      marginBottom: 0,
    },
    editIconContainer: {
       width: '90%',

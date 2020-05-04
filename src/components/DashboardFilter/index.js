@@ -7,6 +7,7 @@ import {
    KeyboardAvoidingView,
    Platform,
    ScrollView,
+   Keyboard,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -23,6 +24,7 @@ import { SearchDuration } from '../duration';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomDropDown } from '../dropDown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Icon } from '../Icon';
 const DashboardFilter = ({
    isModalVisible,
    coverScreen,
@@ -37,6 +39,10 @@ const DashboardFilter = ({
 }) => {
    const menuRef = useRef(null);
    const [dropDownText, setdropDownText] = useState('');
+   const HideModal = () => {
+      Keyboard.dismiss();
+      onBackdropPress();
+   };
    return (
       <Modal
          testID={'modal'}
@@ -60,18 +66,35 @@ const DashboardFilter = ({
                enableOnAndroid={true}>
                <View
                   style={{
-                     width: '100%',
-                     height: SCREEN_HEIGHT / 15,
-                     justifyContent: 'center',
+                     flex: 1,
+                     flexDirection: 'row',
+                     justifyContent: 'space-between',
                      alignItems: 'center',
+                     padding: 10,
                   }}>
-                  <CustomText
-                     text={'بحث'}
-                     textStyle={{
-                        margin: 20,
-                        fontSize: responsiveFontSize(2.5),
+                  <Icon
+                     name={'close'}
+                     type={'material-community'}
+                     onPress={HideModal}
+                     iconContainerStyle={{
+                        flex: 1,
+                        alignItems: 'flex-start',
                      }}
+                     color={TEXT_COLOR}
                   />
+                  <View
+                     style={{
+                        flex: 1,
+                        alignItems: 'center',
+                     }}>
+                     <CustomText
+                        text={'بحث'}
+                        textStyle={{
+                           fontSize: responsiveFontSize(2.7),
+                        }}
+                     />
+                  </View>
+                  <View style={{ flex: 1 }} />
                </View>
 
                <View style={styles.inputsContainer}>

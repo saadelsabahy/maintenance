@@ -85,20 +85,20 @@ const SearchDuration = ({ modalMessage }) => {
             onConfirm={handleConfirm}
             isDarkModeEnabled={colorScheme === 'dark'}
             date={now}
-            customCancelButtonIOS={
+            customCancelButtonIOS={() => (
                <CustomButton
                   buttonContainerStyle={styles.buttonIos}
                   buttonTitle={'الغاء'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
                />
-            }
-            customConfirmButtonIOS={
+            )}
+            customConfirmButtonIOS={() => (
                <CustomButton
                   buttonContainerStyle={styles.buttonIos}
                   buttonTitle={'تأكيد'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
                />
-            }
+            )}
          />
       </View>
    );
