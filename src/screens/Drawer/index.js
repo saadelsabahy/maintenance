@@ -6,6 +6,7 @@ import {
    Image,
    ScrollView,
    TouchableOpacity,
+   SafeAreaView,
 } from 'react-native';
 import {
    MAIN_COLOR,
@@ -36,7 +37,7 @@ const CustomDrawer = props => {
       setuserName(name);
    };
    return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
          <View style={styles.DrawerHeader}>
             <View style={styles.editIconContainer}>
                <Icon
@@ -90,14 +91,13 @@ const CustomDrawer = props => {
                <DrawerItemList {...props} />
             </DrawerContentScrollView>
          </View>
-      </View>
+      </SafeAreaView>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
       backgroundColor: SECONDART_COLOR,
-      paddingBottom: 20,
    },
    DrawerHeader: {
       backgroundColor: MAIN_COLOR,
