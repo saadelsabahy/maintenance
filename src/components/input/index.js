@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
-      alignItems: 'flex-start',
+      /* alignItems: 'flex-start',
       justifyContent: 'center',
       paddingVertical: 5,
       alignSelf: 'flex-start',
       writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
       zIndex: 1000,
-      margin: 0,
+      margin: 0, */
    },
    StartIcon: {
       marginHorizontal: 10,
