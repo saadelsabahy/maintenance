@@ -139,7 +139,6 @@ const DashboardFilter = ({
                position={'bottom'}
                textStyle={styles.flashText}
                titleStyle={styles.flashText}
-               floating
                duration={4000}
                style={{ alignItems: 'flex-start' }}
             />

@@ -40,7 +40,6 @@ const App = () => {
                      duration={4000}
                      textStyle={styles.flashText}
                      titleStyle={styles.flashText}
-                     floating
                   />
                </SafeAreaView>
             </SafeAreaProvider>
