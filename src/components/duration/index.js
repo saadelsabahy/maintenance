@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
    },
    buttonIos: {
       width: '100%',
-      backgroundColor: 'transparent',
+      backgroundColor: WHITE_COLOR,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 0,

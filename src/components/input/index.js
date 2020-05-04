@@ -40,7 +40,7 @@ const CustomInput = ({
       <View
          style={[
             {
-               height: SCREEN_HEIGHT / 14,
+               height: SCREEN_HEIGHT / 16,
                alignItems: 'center',
                justifyContent: 'center',
                width: '100%',

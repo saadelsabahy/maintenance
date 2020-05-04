@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
       borderRadius: 50,
       borderColor: TEXT_COLOR,
       borderWidth: 1,
-      height: SCREEN_HEIGHT / 14,
+      height: SCREEN_HEIGHT / 16,
    },
    menuStyle: {
       width: SCREEN_WIDTH - 50,
