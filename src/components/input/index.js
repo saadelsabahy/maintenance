@@ -64,7 +64,7 @@ const CustomInput = ({
                underlineColorAndroid="transparent"
                ref={referance}
                selectionColor={MAIN_COLOR}
-               // selection={{ start: 0, end: 5 }}
+               selection={{ start: 0, end: 0 }}
                {...res}
             />
             {iconEndName && (
