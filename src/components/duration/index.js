@@ -8,6 +8,7 @@ import { onSearchInputsChange } from '../../redux/actions';
 import moment from 'moment';
 import { date } from '@nozbe/watermelondb/decorators';
 import { CustomButton } from '../Button';
+import { CustomText } from '../customText';
 const now = new Date();
 
 const SearchDuration = ({ modalMessage }) => {
@@ -101,6 +102,12 @@ const SearchDuration = ({ modalMessage }) => {
                   buttonContainerStyle={styles.buttonIos}
                   buttonTitle={'تأكيد'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
+               />
+            )}
+            customHeaderIOS={() => (
+               <CustomText
+                  text="اختر تاريخ"
+                  textStyle={{ color: MAIN_COLOR }}
                />
             )}
          />
