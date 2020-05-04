@@ -40,6 +40,10 @@ const DashboardFilter = ({
    const menuRef = useRef(null);
    const [keyboardShow, setKeyboardShow] = useState(false);
 
+   const HideModal = () => {
+      Keyboard.dismiss();
+      onBackdropPress();
+   };
    return (
       <Modal
          testID={'modal'}
@@ -61,8 +65,8 @@ const DashboardFilter = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                }}
-               enableAutomaticScroll={false}
-               enableOnAndroid={true}>
+               enableOnAndroid={true}
+               enableAutomaticScroll={false}>
                <View
                   style={{
                      flex: 1,
