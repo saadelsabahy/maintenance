@@ -78,9 +78,18 @@ const CustomDrawer = props => {
                />
             </View>
          </View>
-         <DrawerContentScrollView {...props}>
-            <DrawerItemList {...props} />
-         </DrawerContentScrollView>
+         <View style={{ flex: 1 }}>
+            <DrawerContentScrollView
+               {...props}
+               style={{
+                  marginTop: 0,
+                  marginVertical: 0,
+                  paddingVertical: 0,
+                  paddingTop: 0,
+               }}>
+               <DrawerItemList {...props} />
+            </DrawerContentScrollView>
+         </View>
       </View>
    );
 };
@@ -99,6 +108,7 @@ const styles = StyleSheet.create({
       width: '90%',
       height: '20%',
       justifyContent: 'center',
+      marginBottom: 0,
    },
    profileContainer: {
       flex: 1,

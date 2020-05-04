@@ -6,6 +6,7 @@ import {
    TEXT_COLOR,
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
+   MAIN_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -35,8 +36,6 @@ const CustomInput = ({
    referance,
    ...res
 }) => {
-   console.log(I18nManager.isRTL);
-
    return (
       <View
          style={[
@@ -64,6 +63,8 @@ const CustomInput = ({
                style={[styles.input, inputStyle]}
                underlineColorAndroid="transparent"
                ref={referance}
+               selectionColor={MAIN_COLOR}
+               // selection={{ start: 0, end: 5 }}
                {...res}
             />
             {iconEndName && (
@@ -102,13 +103,16 @@ const styles = StyleSheet.create({
       flex: 1,
       height: '100%',
       fontSize: responsiveFontSize(2),
-      textAlign: 'right',
+      textAlign: I18nManager.isRTL ? 'right' : 'left',
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
       alignItems: 'flex-start',
       justifyContent: 'center',
       paddingVertical: 5,
-      writingDirection: 'rtl',
+      alignSelf: 'flex-start',
+      writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
+      zIndex: 1000,
+      margin: 0,
    },
    StartIcon: {
       marginHorizontal: 10,

@@ -81,40 +81,57 @@ const SearchModal = ({
                     }
                   : styles.modalContentContainer
             }>
-            <View
+            {/* <View
                style={{
+                  alignSelf: 'center',
                   position: 'absolute',
-                  start: 10,
-                  top: 10,
+                  start: 0,
+                  top: 15,
                   zIndex: 100000,
+                  justifyContent: 'center',
                }}>
-               <Icon
-                  name={'close'}
-                  type={'material-community'}
-                  onPress={HideModal}
-                  iconContainerStyle={{ flex: 1 }}
-                  color={TEXT_COLOR}
-               />
-            </View>
+               
+            </View> */}
             <KeyboardAwareScrollView
                style={{ flex: 1 }}
                enableOnAndroid={true}
-               onKeyboardDidShow={() => onKeyboardWillShow()}
-               onKeyboardDidHide={() => onKeyboardWillHide()}>
+               onKeyboardDidShow={() =>
+                  Platform.OS === 'ios' ? null : onKeyboardWillShow()
+               }
+               onKeyboardDidHide={() =>
+                  Platform.OS === 'ios' ? null : onKeyboardWillHide()
+               }>
                <View
                   style={{
-                     width: '100%',
-                     height: 40,
-                     justifyContent: 'center',
+                     flex: 1,
+                     flexDirection: 'row',
+                     justifyContent: 'space-between',
                      alignItems: 'center',
+                     padding: 10,
                   }}>
-                  <CustomText
-                     text={'بحث'}
-                     textStyle={{
-                        margin: 20,
-                        fontSize: responsiveFontSize(2.5),
+                  <Icon
+                     name={'close'}
+                     type={'material-community'}
+                     onPress={HideModal}
+                     iconContainerStyle={{
+                        flex: 1,
+                        alignItems: 'flex-start',
                      }}
+                     color={TEXT_COLOR}
                   />
+                  <View
+                     style={{
+                        flex: 1,
+                        alignItems: 'center',
+                     }}>
+                     <CustomText
+                        text={'بحث'}
+                        textStyle={{
+                           fontSize: responsiveFontSize(2.7),
+                        }}
+                     />
+                  </View>
+                  <View style={{ flex: 1 }} />
                </View>
 
                <View style={styles.inputsContainer}>

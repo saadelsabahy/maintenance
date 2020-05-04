@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import DateTimeButton from './DateTimePickerButton';
 import CustomDateTimePicker from './DateTimePicker';
-import { WHITE_COLOR } from '../../constants/colors';
+import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { onSearchInputsChange } from '../../redux/actions';
 import moment from 'moment';
 import { date } from '@nozbe/watermelondb/decorators';
+import { CustomButton } from '../Button';
 const now = new Date();
 
 const SearchDuration = ({ modalMessage }) => {
@@ -84,7 +85,20 @@ const SearchDuration = ({ modalMessage }) => {
             onConfirm={handleConfirm}
             isDarkModeEnabled={colorScheme === 'dark'}
             date={now}
-            isDarkModeEnabled={colorScheme == 'dark'}
+            customCancelButtonIOS={
+               <CustomButton
+                  buttonContainerStyle={styles.buttonIos}
+                  buttonTitle={'الغاء'}
+                  buttonTitleStyle={{ color: MAIN_COLOR }}
+               />
+            }
+            customConfirmButtonIOS={
+               <CustomButton
+                  buttonContainerStyle={styles.buttonIos}
+                  buttonTitle={'تأكيد'}
+                  buttonTitleStyle={{ color: MAIN_COLOR }}
+               />
+            }
          />
       </View>
    );
@@ -96,6 +110,13 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       width: '100%',
       height: '35%',
+   },
+   buttonIos: {
+      width: '100%',
+      backgroundColor: 'transparent',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 0,
    },
 });
 
