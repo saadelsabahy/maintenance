@@ -48,7 +48,7 @@ const CustomDropDown = ({
                      borderRadius: Math.round(
                         SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
                      ),
-                     height: SCREEN_HEIGHT / 15,
+                     height: SCREEN_HEIGHT / 14,
                      width: SCREEN_WIDTH / 9,
                   }}>
                   <Icon
