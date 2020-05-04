@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.8),
-      alignSelf: 'flex-start',
+      alignSelf: 'center',
    },
 });
 
