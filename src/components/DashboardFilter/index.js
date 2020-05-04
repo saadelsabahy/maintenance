@@ -25,6 +25,8 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomDropDown } from '../dropDown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Icon } from '../Icon';
+import FlashMessage from 'react-native-flash-message';
+
 const DashboardFilter = ({
    isModalVisible,
    coverScreen,
@@ -39,10 +41,20 @@ const DashboardFilter = ({
 }) => {
    const menuRef = useRef(null);
    const [keyboardShow, setKeyboardShow] = useState(false);
-
+   const filterModalFlashMessage = useRef(null);
    const HideModal = () => {
       Keyboard.dismiss();
       onBackdropPress();
+   };
+   const handleDashBoardFilter = () => {
+      if (!contructorId) {
+         filterModalFlashMessage.current.showMessage({
+            type: 'danger',
+            message: 'يجب اخال رقم العقد',
+         });
+      } else {
+         onDashboardSearchFilterPressed();
+      }
    };
    return (
       <Modal
@@ -113,7 +125,7 @@ const DashboardFilter = ({
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'بحث'}
-                     onButtonPressed={onDashboardSearchFilterPressed}
+                     onButtonPressed={handleDashBoardFilter}
                   />
                   <CustomButton
                      buttonContainerStyle={styles.button}
@@ -122,6 +134,14 @@ const DashboardFilter = ({
                   />
                </View>
             </KeyboardAwareScrollView>
+            <FlashMessage
+               ref={filterModalFlashMessage}
+               position={'bottom'}
+               textStyle={styles.flashText}
+               titleStyle={styles.flashText}
+               floating
+               duration={4000}
+            />
          </View>
       </Modal>
    );
@@ -163,6 +183,12 @@ const styles = StyleSheet.create({
    input: {
       backgroundColor: WHITE_COLOR,
       paddingHorizontal: 10,
+   },
+   flashText: {
+      fontFamily: 'DroidArabicKufi',
+      textTransform: 'capitalize',
+      fontSize: responsiveFontSize(1.5),
+      paddingTop: 20,
    },
 });
 
