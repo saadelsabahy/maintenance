@@ -86,6 +86,7 @@ const SearchModal = ({
             <KeyboardAwareScrollView
                style={{ flex: 1 }}
                enableOnAndroid={true}
+               keyboardShouldPersistTaps="always"
                onKeyboardDidShow={() =>
                   Platform.OS === 'ios' ? null : onKeyboardWillShow()
                }

@@ -66,6 +66,7 @@ const DashboardFilter = ({
                   alignItems: 'center',
                }}
                enableOnAndroid={true}
+               keyboardShouldPersistTaps="always"
                enableAutomaticScroll={false}>
                <View
                   style={{
