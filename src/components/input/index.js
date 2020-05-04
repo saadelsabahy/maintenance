@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
    input: {
       flex: 1,
       height: '100%',
-      fontSize: responsiveFontSize(2),
+      // fontSize: responsiveFontSize(2),
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       color: TEXT_COLOR,
       fontFamily: 'DroidArabicKufi',
