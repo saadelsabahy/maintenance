@@ -63,6 +63,7 @@ const CustomInput = ({
                placeholder={placeholder}
                style={[styles.input, inputStyle]}
                underlineColorAndroid="transparent"
+               placeholderStyle={{ fontFamily: 'DroidArabicKufi' }}
                ref={referance}
                {...res}
             />
