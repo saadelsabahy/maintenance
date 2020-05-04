@@ -78,6 +78,7 @@ const DashboardFilter = ({
                   alignItems: 'center',
                }}
                enableOnAndroid={true}
+               enableAutomaticScroll={false}
                onKeyboardDidShow={() =>
                   Platform.OS === 'ios' ? onKeyboardWillShow() : null
                }
