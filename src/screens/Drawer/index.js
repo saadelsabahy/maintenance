@@ -79,7 +79,7 @@ const CustomDrawer = props => {
                />
             </View>
          </View>
-         <View style={{ flex: 1 }}>
+         <SafeAreaView style={{ flex: 1 }}>
             <DrawerContentScrollView
                {...props}
                style={{
@@ -90,7 +90,7 @@ const CustomDrawer = props => {
                }}>
                <DrawerItemList {...props} />
             </DrawerContentScrollView>
-         </View>
+         </SafeAreaView>
       </SafeAreaView>
    );
 };
