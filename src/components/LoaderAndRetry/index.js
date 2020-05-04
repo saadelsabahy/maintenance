@@ -29,6 +29,7 @@ const LoaderAndRetry = ({
                   type={'material-community'}
                   color={MAIN_COLOR}
                   size={responsiveFontSize(4)}
+                  iconContainerStyle={{ flex: 0.2 }}
                />
                <CustomText
                   text={errorText || 'حدث خطأ ما برجاء اعاده المحاوله'}
