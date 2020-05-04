@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, I18nManager } from 'react-native';
+import { View, Text, StyleSheet, I18nManager, Platform } from 'react-native';
 import {
    INPUT_COLOR,
    ERROR_RED_COLOR,
@@ -64,7 +64,7 @@ const CustomInput = ({
                underlineColorAndroid="transparent"
                ref={referance}
                selectionColor={MAIN_COLOR}
-               selection={{ start: 0 }}
+               selection={Platform.OS == 'ios' ? { start: 0 } : null}
                {...res}
             />
             {iconEndName && (
