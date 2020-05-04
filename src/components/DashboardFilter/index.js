@@ -39,16 +39,7 @@ const DashboardFilter = ({
 }) => {
    const menuRef = useRef(null);
    const [keyboardShow, setKeyboardShow] = useState(false);
-   const onKeyboardWillShow = () => {
-      setKeyboardShow(true);
-   };
-   const onKeyboardWillHide = () => {
-      setKeyboardShow(false);
-   };
-   const HideModal = () => {
-      Keyboard.dismiss();
-      onBackdropPress();
-   };
+
    return (
       <Modal
          testID={'modal'}
@@ -70,13 +61,8 @@ const DashboardFilter = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                }}
-               enableOnAndroid={true}
-               onKeyboardDidShow={() =>
-                  Platform.OS === 'ios' ? onKeyboardWillShow() : null
-               }
-               onKeyboardDidHide={() =>
-                  Platform.OS === 'ios' ? onKeyboardWillHide() : null
-               }>
+               enableAutomaticScroll={false}
+               enableOnAndroid={true}>
                <View
                   style={{
                      flex: 1,
