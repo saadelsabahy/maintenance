@@ -95,6 +95,7 @@ const SearchDuration = ({ modalMessage }) => {
                   }}
                   buttonTitle={'الغاء'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
+                  onButtonPressed={hideDatePicker}
                />
             )}
             customConfirmButtonIOS={() => (
@@ -102,6 +103,7 @@ const SearchDuration = ({ modalMessage }) => {
                   buttonContainerStyle={styles.buttonIos}
                   buttonTitle={'تأكيد'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
+                  onButtonPressed={handleConfirm}
                />
             )}
             customHeaderIOS={() => (
