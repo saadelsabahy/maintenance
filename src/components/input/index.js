@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       borderColor: TEXT_COLOR,
    },
    input: {
-      height: '100%',
+      width: '100%',
       fontSize: responsiveFontSize(2),
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       color: TEXT_COLOR,
