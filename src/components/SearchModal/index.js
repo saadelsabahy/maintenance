@@ -273,6 +273,7 @@ const styles = StyleSheet.create({
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.5),
+      alignSelf: 'center',
    },
 });
 
