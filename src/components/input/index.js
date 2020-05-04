@@ -64,7 +64,7 @@ const CustomInput = ({
                underlineColorAndroid="transparent"
                ref={referance}
                selectionColor={MAIN_COLOR}
-               selection={Platform.OS == 'ios' ? { start: 0 } : null}
+               // selection={Platform.OS == 'ios' ? { start: 0 } : null}
                {...res}
             />
             {iconEndName && (
