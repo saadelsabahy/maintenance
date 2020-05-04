@@ -141,6 +141,7 @@ const DashboardFilter = ({
                titleStyle={styles.flashText}
                floating
                duration={4000}
+               style={{ alignItems: 'flex-start' }}
             />
          </View>
       </Modal>
