@@ -105,6 +105,7 @@ const DashboardFilter = ({
                      placeholder={'رقم العقد'}
                      value={contructorId}
                      onChangeText={onContructorIdCgange}
+                     keyboardType={'numeric'}
                   />
                </View>
                <View style={styles.buttonsContainer}>
