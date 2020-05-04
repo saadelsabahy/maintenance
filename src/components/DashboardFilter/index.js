@@ -60,15 +60,7 @@ const DashboardFilter = ({
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}
          avoidKeyboard>
-         <View
-            style={
-               keyboardShow
-                  ? {
-                       ...styles.modalContentContainer,
-                       height: 0.5 * SCREEN_HEIGHT,
-                    }
-                  : styles.modalContentContainer
-            }>
+         <View style={styles.modalContentContainer}>
             <KeyboardAwareScrollView
                style={{
                   flex: 1,
