@@ -37,7 +37,7 @@ const App = () => {
                   <FlashMessage
                      position="bottom"
                      style={styles.flashMessage}
-                     duration={2500}
+                     duration={4000}
                      textStyle={styles.flashText}
                      titleStyle={styles.flashText}
                      floating
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
    flashText: {
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
-      fontSize: responsiveFontSize(1.8),
+      fontSize: responsiveFontSize(1.5),
+      alignSelf: 'center',
    },
 });
 

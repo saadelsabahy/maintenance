@@ -206,7 +206,7 @@ const SearchModal = ({
                textStyle={styles.flashText}
                titleStyle={styles.flashText}
                floating
-               duration={3000}
+               duration={4000}
             />
          </View>
       </Modal>
