@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import DateTimeButton from './DateTimePickerButton';
 import CustomDateTimePicker from './DateTimePicker';
-import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
+import { WHITE_COLOR, MAIN_COLOR, SCREEN_HEIGHT } from '../../constants/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { onSearchInputsChange } from '../../redux/actions';
 import moment from 'moment';
@@ -91,7 +91,7 @@ const SearchDuration = ({ modalMessage }) => {
                   buttonContainerStyle={{
                      ...styles.buttonIos,
                      borderRadius: 10,
-                     marginBottom: 5,
+                     height: SCREEN_HEIGHT / 15,
                   }}
                   buttonTitle={'الغاء'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
