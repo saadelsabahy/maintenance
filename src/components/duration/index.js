@@ -91,7 +91,7 @@ const SearchDuration = ({ modalMessage }) => {
                   buttonContainerStyle={{
                      ...styles.buttonIos,
                      borderRadius: 10,
-                     height: SCREEN_HEIGHT / 15,
+                     height: SCREEN_HEIGHT / 10,
                   }}
                   buttonTitle={'الغاء'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
