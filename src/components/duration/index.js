@@ -107,7 +107,7 @@ const SearchDuration = ({ modalMessage }) => {
             customHeaderIOS={() => (
                <CustomText
                   text="اختر تاريخ"
-                  textStyle={{ color: MAIN_COLOR }}
+                  textStyle={{ color: MAIN_COLOR, alignSelf: 'center' }}
                />
             )}
          />
