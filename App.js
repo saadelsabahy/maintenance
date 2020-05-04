@@ -53,20 +53,11 @@ const styles = StyleSheet.create({
       backgroundColor: MAIN_COLOR,
       paddingBottom: 0,
    },
-   flashMessage: {
-      width: '100%',
-      height: '10%',
-      alignSelf: 'flex-start',
-      justifyContent: 'center',
-      padding: 0,
-      paddingVertical: 0,
-      marginBottom: Platform.OS == 'ios' ? 20 : 0,
-   },
+   flashMessage: {},
    flashText: {
       fontFamily: 'DroidArabicKufi',
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.8),
-      alignSelf: 'center',
    },
 });
 
