@@ -170,7 +170,6 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 0, height: 5 },
       shadowColor: '#000',
       shadowOpacity: 0.2,
-      shadowRadius: 20,
       elevation: 10,
    },
    detailesContainer: {
