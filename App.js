@@ -31,7 +31,7 @@ const App = () => {
          <PersistGate persistor={persistor} loading={null}>
             <SafeAreaProvider>
                <SafeAreaView style={styles.container}>
-                  <StatusBar backgroundColor={MAIN_COLOR} />
+                  <StatusBar backgroundColor={MAIN_COLOR} animated />
 
                   <AppNavigation /* screenProps={{ database }} */ />
                   <FlashMessage
@@ -40,6 +40,7 @@ const App = () => {
                      duration={2500}
                      textStyle={styles.flashText}
                      titleStyle={styles.flashText}
+                     floating
                   />
                </SafeAreaView>
             </SafeAreaProvider>

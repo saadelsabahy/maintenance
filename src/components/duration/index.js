@@ -87,7 +87,11 @@ const SearchDuration = ({ modalMessage }) => {
             date={now}
             customCancelButtonIOS={() => (
                <CustomButton
-                  buttonContainerStyle={styles.buttonIos}
+                  buttonContainerStyle={{
+                     ...styles.buttonIos,
+                     borderRadius: 10,
+                     marginBottom: 5,
+                  }}
                   buttonTitle={'الغاء'}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
                />

@@ -1,12 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   ScrollView,
-   FlatList,
-   KeyboardAvoidingView,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
 import { CustomButton } from '../Button';
 import {
    MAIN_COLOR,
@@ -20,6 +13,7 @@ import TextArea from '../TextArea';
 import ChechBox from '../checkBox';
 import { ImageSelector } from '../ImageSelector';
 import BottomSheet from 'reanimated-bottom-sheet';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { CustomText } from '../customText';
 
 const Gurantee = ({
@@ -117,6 +111,10 @@ const Gurantee = ({
                   elevation: 5,
                   alignItems: 'center',
                }}>
+               {/*  <KeyboardAwareScrollView
+                  enableOnAndroid
+                  style={{ flex: 1, width: '100%' }}
+                  contentContainerStyle={{ flex: 1 }}> */}
                <View
                   style={{
                      width: '100%',
@@ -182,6 +180,8 @@ const Gurantee = ({
                      spinnerColor={WHITE_COLOR}
                   />
                </View>
+
+               {/* </KeyboardAwareScrollView> */}
             </View>
          );
       } else {
@@ -202,7 +202,7 @@ const Gurantee = ({
       }
    };
    return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
          <BottomSheet
             renderHeader={bottomSheetHeader}
             snapPoints={['32%', '90%', '32%']}
@@ -217,7 +217,7 @@ const Gurantee = ({
             enabledInnerScrolling={true}
             enabledContentGestureInteraction={false}
          />
-      </KeyboardAvoidingView>
+      </View>
    );
 };
 const styles = StyleSheet.create({
