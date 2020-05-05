@@ -188,6 +188,7 @@ const WaitApproval = ({ navigation, route }) => {
                      }
                      spareParts={data.spareParts ? data.spareParts : []}
                      oncloseBottomSheet={() => dispatch(onCloseExcutionSheet())}
+                     userType={userType}
                   />
                </View>
                <View style={styles.buttonsContainer}>{renderButtons()}</View>

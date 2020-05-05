@@ -20,6 +20,7 @@ const CustomBottomSheet = ({
    onSelectExcutionImages,
    spareParts,
    oncloseBottomSheet,
+   userType,
 }) => {
    const TOTAL_PRICE = spareParts.reduce(
       (acc, val) => +acc + +val.Price,
@@ -32,17 +33,19 @@ const CustomBottomSheet = ({
          {source === 3 ? (
             <View
                style={{ width: '100%', height: '100%', alignItems: 'center' }}>
-               <View style={{ height: '15%', width: '90%' }}>
-                  <ImageSelector
-                     images={excutionImages}
-                     onSelectImagesPressed={async () => {
-                        await bottonSheetReferance.current.snapTo(
-                           SCREEN_HEIGHT - 50
-                        );
-                        onSelectExcutionImages();
-                     }}
-                  />
-               </View>
+               {userType == 0 && (
+                  <View style={{ height: '15%', width: '90%' }}>
+                     <ImageSelector
+                        images={excutionImages}
+                        onSelectImagesPressed={async () => {
+                           await bottonSheetReferance.current.snapTo(
+                              SCREEN_HEIGHT - 50
+                           );
+                           onSelectExcutionImages();
+                        }}
+                     />
+                  </View>
+               )}
                <View
                   style={{
                      flex: 0.8,
@@ -126,7 +129,7 @@ const CustomBottomSheet = ({
    return (
       <View style={{ flex: 1 }}>
          <BottomSheet
-            snapPoints={['35%', '95%', '35%']}
+            snapPoints={['30%', '95%', '30%']}
             renderContent={renderInner}
             renderHeader={renderHeader}
             enabledInnerScrolling={false}

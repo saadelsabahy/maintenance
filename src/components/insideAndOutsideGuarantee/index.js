@@ -209,7 +209,7 @@ const Gurantee = ({
       <View style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
          <BottomSheet
             renderHeader={bottomSheetHeader}
-            snapPoints={['35%', '88%', '35%']}
+            snapPoints={['33%', '95%', '33%']}
             renderContent={renderInner}
             enabledBottomInitialAnimation
             ref={bottomSheetRef}
