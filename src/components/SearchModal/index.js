@@ -73,7 +73,8 @@ const SearchModal = ({
          onBackdropPress={HideModal}
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
-         backdropColor={backdropColor || '#000'}>
+         backdropColor={backdropColor || '#000'}
+         avoidKeyboard>
          <View
             style={
                keyboardShow

@@ -6,6 +6,7 @@ import Login from '../screens/Login';
 import AsyncStorage from '@react-native-community/async-storage';
 import Splash from '../screens/Splash';
 import { useSelector } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen';
 const Stack = createStackNavigator();
 
 const LoginStack = () => {
@@ -27,7 +28,7 @@ const AppNavigation = ({ screenProps }) => {
    const [showSplash, setshowSplash] = useState(true);
    useEffect(() => {
       const SplashTimeOut = setTimeout(() => {
-         setshowSplash(false);
+         SplashScreen.hide();
       }, 1000);
       return () => {
          clearTimeout(SplashTimeOut);
@@ -35,13 +36,7 @@ const AppNavigation = ({ screenProps }) => {
    }, []);
    return (
       <NavigationContainer screenProps={screenProps}>
-         {showSplash ? (
-            <Splash />
-         ) : token ? (
-            <DrawerNavigator />
-         ) : (
-            <LoginStack />
-         )}
+         {token ? <DrawerNavigator /> : <LoginStack />}
       </NavigationContainer>
    );
 };

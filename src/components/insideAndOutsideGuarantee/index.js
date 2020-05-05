@@ -27,6 +27,7 @@ const Gurantee = ({
    onCommentChange,
    comment,
    loading,
+   userType,
 }) => {
    const [selectedButton, setselectedButton] = useState(null);
    const bottomSheetRef = useRef(null);
@@ -159,6 +160,7 @@ const Gurantee = ({
                </View>
                <View
                   style={{
+                     height: SCREEN_HEIGHT * 0.3,
                      width: '100%',
                      justifyContent: 'space-evenly',
                   }}>
@@ -167,18 +169,20 @@ const Gurantee = ({
                      value={comment}
                      onChangeText={onCommentChange}
                   />
-                  <CustomButton
-                     buttonContainerStyle={{
-                        alignSelf: 'center',
-                        height: 45,
-                     }}
-                     buttonTitle={
-                        selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
-                     }
-                     onButtonPressed={() => handlePerview(selectedButton)}
-                     loading={loading}
-                     spinnerColor={WHITE_COLOR}
-                  />
+                  {userType == 0 && (
+                     <CustomButton
+                        buttonContainerStyle={{
+                           alignSelf: 'center',
+                           height: SCREEN_HEIGHT / 14,
+                        }}
+                        buttonTitle={
+                           selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
+                        }
+                        onButtonPressed={() => handlePerview(selectedButton)}
+                        loading={loading}
+                        spinnerColor={WHITE_COLOR}
+                     />
+                  )}
                </View>
 
                {/* </KeyboardAwareScrollView> */}
@@ -205,7 +209,7 @@ const Gurantee = ({
       <View style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
          <BottomSheet
             renderHeader={bottomSheetHeader}
-            snapPoints={['32%', '90%', '32%']}
+            snapPoints={['35%', '88%', '35%']}
             renderContent={renderInner}
             enabledBottomInitialAnimation
             ref={bottomSheetRef}

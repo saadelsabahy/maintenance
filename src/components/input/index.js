@@ -35,8 +35,6 @@ const CustomInput = ({
    referance,
    ...res
 }) => {
-   console.log(I18nManager.isRTL);
-
    return (
       <View
          style={[
