@@ -103,7 +103,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
                   dispatch(handleCheckItem(index, Id, selectedButton));
                }}
                handlePerview={guranteeStatus =>
-                  dispatch(handlePerview(data, guranteeStatus))
+                  dispatch(handlePerview(data, guranteeStatus, navigation))
                }
                comment={comment}
                onCommentChange={text => dispatch(onCommentChange(text))}

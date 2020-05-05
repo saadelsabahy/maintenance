@@ -77,7 +77,8 @@ export const handleCheckItem = (index, Id, selectedButton) => (
 
 export const handlePerview = (
    { complainNumber, complainStatus },
-   guranteeStatus
+   guranteeStatus,
+   navigation
 ) => async (dispatch, getState) => {
    const {
       images,
@@ -147,13 +148,14 @@ export const handlePerview = (
          );
          Reactotron.log(perviewResponse);
          if (perviewResponse.data.statusCode == 200) {
-            dispatch({
+            await dispatch({
                type: PERVIEW_SUCCESS,
                payload: {
                   outSpares: outGuarnteeSelectedParts,
                   inSpares: inGuarnteeSelectedParts,
                },
             });
+            navigation.goBack();
          }
       } catch (error) {
          console.log('preview error', error);

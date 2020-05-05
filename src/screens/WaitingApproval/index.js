@@ -63,7 +63,9 @@ const WaitApproval = ({ navigation, route }) => {
                   <CustomButton
                      buttonContainerStyle={{ ...styles.button, width: '90%' }}
                      buttonTitle={'تم الحل'}
-                     onButtonPressed={() => dispatch(onExcutionDone(data))}
+                     onButtonPressed={() =>
+                        dispatch(onExcutionDone(data, navigation))
+                     }
                      loading={excutionSpinner}
                      spinnerColor={WHITE_COLOR}
                   />
@@ -79,7 +81,9 @@ const WaitApproval = ({ navigation, route }) => {
                   <CustomButton
                      buttonContainerStyle={{ ...styles.button, width: '90%' }}
                      buttonTitle={'تعميد'}
-                     onButtonPressed={() => dispatch(onAcceptThePreview(data))}
+                     onButtonPressed={() =>
+                        dispatch(onAcceptThePreview(data, navigation))
+                     }
                      loading={acceptSpinner}
                   />
                );
@@ -98,7 +102,7 @@ const WaitApproval = ({ navigation, route }) => {
                         buttonContainerStyle={styles.button}
                         buttonTitle={'تعميد'}
                         onButtonPressed={() =>
-                           dispatch(onAcceptThePreview(data))
+                           dispatch(onAcceptThePreview(data, navigation))
                         }
                         loading={acceptSpinner}
                         spinnerColor={WHITE_COLOR}
@@ -107,7 +111,7 @@ const WaitApproval = ({ navigation, route }) => {
                         buttonContainerStyle={styles.button}
                         buttonTitle={'رفض'}
                         onButtonPressed={() =>
-                           dispatch(onRejectThePreview(data))
+                           dispatch(onRejectThePreview(data, navigation))
                         }
                         loading={rejectSpinner}
                         spinnerColor={WHITE_COLOR}

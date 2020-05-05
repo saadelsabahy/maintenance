@@ -17,10 +17,10 @@ import { showFlashMessage } from '../../../utils/flashMessage';
 import Reactotron from 'reactotron-react-native';
 import Api from '../../../apis';
 
-export const onAcceptThePreview = ({ complainNumber, covered }) => async (
-   dispatch,
-   getState
-) => {
+export const onAcceptThePreview = (
+   { complainNumber, covered },
+   navigation
+) => async (dispatch, getState) => {
    const userId = await AsyncStorage.getItem('userId');
    try {
       dispatch({ type: APPROVE_SPINNER });
@@ -30,7 +30,8 @@ export const onAcceptThePreview = ({ complainNumber, covered }) => async (
       );
       Reactotron.log(approvalResponse);
       if (approvalResponse.data.statusCode == 200) {
-         dispatch({ type: APPROVE_SUCCESS });
+         await dispatch({ type: APPROVE_SUCCESS });
+         navigation.goBack();
       }
    } catch (error) {
       dispatch({ type: APPROVE_FAILED });
@@ -39,10 +40,10 @@ export const onAcceptThePreview = ({ complainNumber, covered }) => async (
    }
 };
 
-export const onRejectThePreview = ({ complainNumber, covered }) => async (
-   dispatch,
-   getState
-) => {
+export const onRejectThePreview = (
+   { complainNumber, covered },
+   navigation
+) => async (dispatch, getState) => {
    const userId = await AsyncStorage.getItem('userId');
    try {
       dispatch({ type: REJECT_SPINNER });
@@ -51,7 +52,8 @@ export const onRejectThePreview = ({ complainNumber, covered }) => async (
          []
       );
       if (rejectResponse.data.statusCode == 200) {
-         dispatch({ type: REJECT_SUCCESS });
+         await dispatch({ type: REJECT_SUCCESS });
+         navigation.goBack();
       }
    } catch (error) {
       dispatch({ type: REJECT_FAILED });
@@ -60,11 +62,10 @@ export const onRejectThePreview = ({ complainNumber, covered }) => async (
    }
 };
 
-export const onExcutionDone = ({
-   complainNumber,
-   covered,
-   complainStatus,
-}) => async (dispatch, getState) => {
+export const onExcutionDone = (
+   { complainNumber, covered, complainStatus },
+   navigation
+) => async (dispatch, getState) => {
    const userId = await AsyncStorage.getItem('userId');
    const { images } = getState().UpdateComplainsStatus;
 
@@ -94,7 +95,8 @@ export const onExcutionDone = ({
             []
          );
          if (rejectResponse.data.statusCode == 200) {
-            dispatch({ type: EXCUTION_SUCCESS });
+            await dispatch({ type: EXCUTION_SUCCESS });
+            navigation.goBack();
          }
       } catch (error) {
          dispatch({ type: EXCUTION_FAILED });
