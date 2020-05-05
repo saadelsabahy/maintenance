@@ -15,6 +15,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { showFlashMessage } from '../../../utils/flashMessage';
+import { Platform } from 'react-native';
 export const getSpareParts = () => async (dispatch, getState) => {
    try {
       const outGuaranteeSpares = await Api.get(
@@ -46,6 +47,8 @@ export const onSelectImagesPressed = () => dispatch => {
       multiple: true,
    })
       .then(seletedImages => {
+         console.log(seletedImages);
+
          const images = [];
          images.push(...seletedImages);
          dispatch({ type: SELECT_IMAGES_SUCCESS, payload: images });
@@ -122,13 +125,16 @@ export const handlePerview = (
       try {
          dispatch({ type: PERVIEW_SPINNER });
          const form = new FormData();
-         images.map(({ mime, path }, index) => {
+         images.map(({ mime, path, ...res }, index) => {
             let pathParts = path.split('/');
             form.append('image', {
                uri:
                   Platform.OS == 'android' ? path : path.replace('file://', ''),
                type: mime,
-               name: pathParts[pathParts.length - 1],
+               name:
+                  Platform.OS == 'android'
+                     ? pathParts[pathParts.length - 1]
+                     : res['filename'],
             });
          });
          await Api.post(
