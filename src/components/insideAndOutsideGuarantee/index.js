@@ -173,7 +173,7 @@ const Gurantee = ({
                      <CustomButton
                         buttonContainerStyle={{
                            alignSelf: 'center',
-                           height: SCREEN_HEIGHT / 14,
+                           height: SCREEN_HEIGHT / 17,
                         }}
                         buttonTitle={
                            selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
