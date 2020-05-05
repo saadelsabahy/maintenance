@@ -8,7 +8,11 @@ import {
    StatusBar,
    Platform,
 } from 'react-native';
-import { MAIN_COLOR, WHITE_COLOR } from './src/constants/colors';
+import {
+   MAIN_COLOR,
+   WHITE_COLOR,
+   SECONDART_COLOR,
+} from './src/constants/colors';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -30,6 +34,7 @@ const App = () => {
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
             <SafeAreaProvider>
+               <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
                <SafeAreaView style={styles.container}>
                   <StatusBar backgroundColor={MAIN_COLOR} animated />
 
@@ -50,8 +55,7 @@ const App = () => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: MAIN_COLOR,
-      paddingBottom: 0,
+      backgroundColor: SECONDART_COLOR,
    },
    flashMessage: {},
    flashText: {
