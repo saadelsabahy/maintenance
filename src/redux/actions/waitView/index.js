@@ -43,8 +43,11 @@ export const onSelectImagesPressed = () => dispatch => {
    ImagePicker.openPicker({
       width: 200,
       height: 200,
+      compressImageMaxWidth: 200,
+      compressImageMaxHeight: 200,
       cropping: false,
       multiple: true,
+      mediaType: 'photo',
    })
       .then(seletedImages => {
          console.log(seletedImages);
