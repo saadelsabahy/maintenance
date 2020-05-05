@@ -50,7 +50,7 @@ const DashboardFilter = ({
       if (!contructorId) {
          filterModalFlashMessage.current.showMessage({
             type: 'danger',
-            message: 'يجب اخال رقم العقد',
+            message: 'يجب ادخال رقم العقد',
          });
       } else {
          onDashboardSearchFilterPressed();
@@ -134,15 +134,15 @@ const DashboardFilter = ({
                   />
                </View>
             </KeyboardAwareScrollView>
-            <FlashMessage
-               ref={filterModalFlashMessage}
-               position={'bottom'}
-               textStyle={styles.flashText}
-               titleStyle={styles.flashText}
-               duration={4000}
-               style={{ alignItems: 'flex-start' }}
-            />
          </View>
+         <FlashMessage
+            ref={filterModalFlashMessage}
+            position={'top'}
+            textStyle={styles.flashText}
+            titleStyle={styles.flashText}
+            duration={4000}
+            style={{ alignItems: 'flex-start' }}
+         />
       </Modal>
    );
 };
