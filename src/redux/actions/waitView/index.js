@@ -48,6 +48,7 @@ export const onSelectImagesPressed = () => dispatch => {
       cropping: false,
       multiple: true,
       mediaType: 'photo',
+      includeBase64,
    })
       .then(seletedImages => {
          console.log(seletedImages);
