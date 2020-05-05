@@ -56,7 +56,7 @@ const App = () => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: SECONDART_COLOR,
+      backgroundColor: 'transparent',
    },
    flashMessage: {},
    flashText: {
