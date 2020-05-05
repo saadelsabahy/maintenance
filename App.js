@@ -7,6 +7,7 @@ import {
    I18nManager,
    StatusBar,
    Platform,
+   SafeAreaView,
 } from 'react-native';
 import {
    MAIN_COLOR,
@@ -20,7 +21,7 @@ import { YellowBox } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import AppNavigation from './src/navigation/MainNavigator';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+
 YellowBox.ignoreWarnings(['Remote debugger']);
 // import database from './src/models';
 const App = () => {
@@ -33,21 +34,19 @@ const App = () => {
    return (
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
-            <SafeAreaProvider>
-               <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
-               <SafeAreaView style={styles.container}>
-                  <StatusBar backgroundColor={MAIN_COLOR} animated />
+            <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
+            <SafeAreaView style={styles.container}>
+               <StatusBar backgroundColor={MAIN_COLOR} animated />
 
-                  <AppNavigation /* screenProps={{ database }} */ />
-                  <FlashMessage
-                     position="bottom"
-                     style={styles.flashMessage}
-                     duration={4000}
-                     textStyle={styles.flashText}
-                     titleStyle={styles.flashText}
-                  />
-               </SafeAreaView>
-            </SafeAreaProvider>
+               <AppNavigation /* screenProps={{ database }} */ />
+               <FlashMessage
+                  position="bottom"
+                  style={styles.flashMessage}
+                  duration={4000}
+                  textStyle={styles.flashText}
+                  titleStyle={styles.flashText}
+               />
+            </SafeAreaView>
          </PersistGate>
       </Provider>
    );
