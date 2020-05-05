@@ -125,7 +125,8 @@ export const handlePerview = (
          images.map(({ mime, path }, index) => {
             let pathParts = path.split('/');
             form.append('image', {
-               uri: path,
+               uri:
+                  Platform.OS == 'android' ? path : path.replace('file://', ''),
                type: mime,
                name: pathParts[pathParts.length - 1],
             });
