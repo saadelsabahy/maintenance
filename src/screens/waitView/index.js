@@ -22,11 +22,13 @@ import {
    onCommentChange,
 } from '../../redux/actions/waitView';
 import { useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
+   const [userType, setuserType] = useState(null);
    const {
       images,
       guaranteeSpares,
@@ -46,7 +48,14 @@ const ComplainsDetailes = ({ route, navigation }) => {
          dispatch(closeBottomSheet());
       };
    }, [isFocused]);
-
+   useEffect(() => {
+      getUserType();
+      return () => {};
+   }, []);
+   const getUserType = async () => {
+      const userType = await AsyncStorage.getItem('userType');
+      setuserType(userType);
+   };
    return (
       <View style={styles.container}>
          <Header>
@@ -99,6 +108,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
                comment={comment}
                onCommentChange={text => dispatch(onCommentChange(text))}
                loading={perviewSpinner}
+               userType={userType}
             />
          </View>
       </View>
