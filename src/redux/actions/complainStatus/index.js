@@ -16,6 +16,7 @@ import {
 import { showFlashMessage } from '../../../utils/flashMessage';
 import Reactotron from 'reactotron-react-native';
 import Api from '../../../apis';
+import { Platform } from 'react-native';
 
 export const onAcceptThePreview = (
    { complainNumber, covered },
@@ -75,13 +76,16 @@ export const onExcutionDone = (
       try {
          dispatch({ type: EXCUTION_SPINNER });
          const form = new FormData();
-         images.map(({ mime, path }, index) => {
+         images.map(({ mime, path, ...res }, index) => {
             let pathParts = path.split('/');
             form.append('image', {
                uri:
                   Platform.OS == 'android' ? path : path.replace('file://', ''),
                type: mime,
-               name: pathParts[pathParts.length - 1],
+               name:
+                  Platform.OS == 'android'
+                     ? pathParts[pathParts.length - 1]
+                     : res['filename'],
             });
          });
          await Api.post(
@@ -111,8 +115,11 @@ export const selectExcutionPhotos = () => dispatch => {
    ImagePicker.openPicker({
       width: 200,
       height: 200,
+      compressImageMaxWidth: 200,
+      compressImageMaxHeight: 200,
       cropping: false,
       multiple: true,
+      mediaType: 'photo',
    })
       .then(seletedImages => {
          const images = [];
