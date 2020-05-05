@@ -34,19 +34,21 @@ const App = () => {
    return (
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
-            <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
-            <SafeAreaView style={styles.container}>
-               <StatusBar backgroundColor={MAIN_COLOR} animated />
+            <>
+               <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
+               <SafeAreaView style={styles.container}>
+                  <StatusBar backgroundColor={MAIN_COLOR} animated />
 
-               <AppNavigation /* screenProps={{ database }} */ />
-               <FlashMessage
-                  position="bottom"
-                  style={styles.flashMessage}
-                  duration={4000}
-                  textStyle={styles.flashText}
-                  titleStyle={styles.flashText}
-               />
-            </SafeAreaView>
+                  <AppNavigation /* screenProps={{ database }} */ />
+                  <FlashMessage
+                     position="bottom"
+                     style={styles.flashMessage}
+                     duration={4000}
+                     textStyle={styles.flashText}
+                     titleStyle={styles.flashText}
+                  />
+               </SafeAreaView>
+            </>
          </PersistGate>
       </Provider>
    );
