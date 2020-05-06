@@ -60,9 +60,9 @@ const CustomInput = ({
             <TextInput
                placeholder={placeholder}
                style={[
-                  Platform.OS == 'android'
-                     ? styles.input
-                     : { ...styles.input, fontFamily: null },
+                  Platform.OS == 'ios' && res.value
+                     ? { ...styles.input, fontFamily: null }
+                     : styles.input,
                   inputStyle,
                ]}
                underlineColorAndroid="transparent"
