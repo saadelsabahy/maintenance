@@ -27,6 +27,7 @@ import Api from '../../../apis';
 import database from '../../../models';
 import Reactotron from 'reactotron-react-native';
 import { Q } from '@nozbe/watermelondb';
+import moment from 'moment';
 /////////////////////////////complains feed
 export const getAllComplainsList = (statusId, sort) => async (
    dispatch,
@@ -103,7 +104,7 @@ export const LoadPagination = (statusId, sort) => async (
 };
 
 export const onComplainPressed = (data, navigation, route) => () => {
-   if (route.params && route.params.hasOwnProperty('distination')) {
+   if (route.params && route.params.distination) {
       const { distination } = route.params;
 
       switch (route.params.distination) {
@@ -172,7 +173,11 @@ export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
    try {
       dispatch({ type: SEARCH_SPINNER });
       const getSearchListResponse = await Api.get(
-         `Complians?From=${startDate}&To=${endDate}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
+         `Complians?From=${moment(startDate).format('MM/DD/YYYY')}&To=${moment(
+            endDate
+         ).format(
+            'MM/DD/YYYY'
+         )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
       if (getSearchListResponse.status == 200) {
@@ -208,7 +213,11 @@ export const LoadSearchPagination = (source, sort) => async (
    try {
       dispatch({ type: SEARCH_PAGINATION_SPINNER });
       const searchPaginationtResponse = await Api.get(
-         `Complians?From=${startDate}&To=${endDate}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
+         `Complians?From=${moment(startDate).format('MM/DD/YYYY')}&To=${moment(
+            endDate
+         ).format(
+            'MM/DD/YYYY'
+         )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
             1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 

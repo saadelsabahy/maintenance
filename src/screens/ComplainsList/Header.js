@@ -39,7 +39,7 @@ const ListHeader = ({
             }}>
             <CustomText
                text={
-                  route.params && route.params.hasOwnProperty('headerText')
+                  route.params && route.params.headerText
                      ? route.params.headerText
                      : 'البلاغات'
                }
