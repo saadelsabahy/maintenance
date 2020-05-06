@@ -59,7 +59,12 @@ const CustomInput = ({
             )}
             <TextInput
                placeholder={placeholder}
-               style={[styles.input, inputStyle]}
+               style={[
+                  Platform.OS == 'android'
+                     ? styles.input
+                     : { ...styles.input, fontFamily: null },
+                  inputStyle,
+               ]}
                underlineColorAndroid="transparent"
                placeholderStyle={{ fontFamily: 'DroidArabicKufi' }}
                ref={referance}
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
       fontSize: responsiveFontSize(2),
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       color: TEXT_COLOR,
-      fontFamily: Platform.OS === 'android' ? 'DroidArabicKufi' : null,
+      fontFamily: 'DroidArabicKufi',
       alignItems: 'flex-start',
       justifyContent: 'center',
       paddingVertical: 5,
