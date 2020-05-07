@@ -20,36 +20,40 @@ const ListHeader = ({
    menuRef,
    filterLabel,
    onMenuItemPressed,
+   navigation,
 }) => {
    return (
-      <Header>
+      <Header containerStyle={{ width: '100%' }}>
          <Icon
-            name={'search'}
-            type={'feather'}
+            name={'ios-arrow-back'}
+            type={'ionicon'}
             color={WHITE_COLOR}
-            iconContainerStyle={{ flex: 0 }}
-            onPress={toggleSearchModal}
+            style={{ transform: [{ rotateY: '-180deg' }] }}
+            onPress={() => navigation.goBack()}
+            iconContainerStyle={{ flex: 0.2 }}
+            size={responsiveFontSize(4)}
+         />
+
+         <CustomText
+            text={
+               route.params && route.params.headerText
+                  ? route.params.headerText
+                  : 'البلاغات'
+            }
+            textStyle={{
+               color: WHITE_COLOR,
+               fontSize: responsiveFontSize(2.7),
+            }}
          />
 
          <View
             style={{
-               flex: 1,
+               flex: 0.3,
+               flexDirection: 'row',
                alignItems: 'center',
-               justifyContent: 'center',
+               justifyContent: 'space-evenly',
+               height: '100%',
             }}>
-            <CustomText
-               text={
-                  route.params && route.params.headerText
-                     ? route.params.headerText
-                     : 'البلاغات'
-               }
-               textStyle={{
-                  color: WHITE_COLOR,
-                  fontSize: responsiveFontSize(2.7),
-               }}
-            />
-         </View>
-         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <CustomDropDown
                labels={[{ id: 1, text: 'الاقدم' }, { id: 0, text: 'الأحدث' }]}
                onMenuItemPressed={onMenuItemPressed}
@@ -66,6 +70,13 @@ const ListHeader = ({
                   />
                }
                refrence={menuRef}
+            />
+            <Icon
+               name={'search'}
+               type={'feather'}
+               color={WHITE_COLOR}
+               iconContainerStyle={{ flex: 0 }}
+               onPress={toggleSearchModal}
             />
          </View>
       </Header>

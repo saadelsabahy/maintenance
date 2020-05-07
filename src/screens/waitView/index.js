@@ -59,30 +59,28 @@ const ComplainsDetailes = ({ route, navigation }) => {
    return (
       <View style={styles.container}>
          <Header>
-            <View>
-               <Icon
-                  name={'ios-arrow-back'}
-                  type={'ionicon'}
-                  color={WHITE_COLOR}
-                  iconContainerStyle={{ flex: 1 }}
-                  style={{ transform: [{ rotateY: '-180deg' }] }}
-                  onPress={() => navigation.goBack()}
-                  size={responsiveFontSize(4)}
-               />
-            </View>
+            <Icon
+               name={'ios-arrow-back'}
+               type={'ionicon'}
+               color={WHITE_COLOR}
+               iconContainerStyle={{ flex: 0.1 }}
+               style={{ transform: [{ rotateY: '-180deg' }] }}
+               onPress={() => navigation.goBack()}
+               size={responsiveFontSize(4)}
+            />
+
             <CustomText
                text={data.complainNumber}
                textStyle={{ color: WHITE_COLOR }}
             />
-            <View>
-               <Icon
-                  name={'list-unordered'}
-                  type={'octicon'}
-                  color={WHITE_COLOR}
-                  iconContainerStyle={{ flex: 1 }}
-                  size={responsiveFontSize(4)}
-               />
-            </View>
+
+            <Icon
+               name={'list-unordered'}
+               type={'octicon'}
+               color={WHITE_COLOR}
+               iconContainerStyle={{ flex: 0.1 }}
+               size={responsiveFontSize(4)}
+            />
          </Header>
          <View style={{ width: '100%', height: '30%' }}>
             <ComplainsItem

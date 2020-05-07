@@ -121,6 +121,7 @@ const Complains = ({ navigation, route, complain }) => {
             menuRef={menuRef}
             filterLabel={filterLabel}
             onMenuItemPressed={onFilterItemPressed}
+            navigation={navigation}
          />
          <View style={styles.listContainer} />
          <View style={styles.contentContainer}>
