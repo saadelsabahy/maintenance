@@ -47,6 +47,7 @@ const Gurantee = ({
                borderTopStartRadius: 50,
                borderTopEndRadius: 50,
             }}>
+            <View style={styles.handle} />
             <View style={{ flex: 1, alignItems: 'center' }}>
                <ImageSelector
                   onSelectImagesPressed={async () => {
@@ -243,6 +244,14 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+   },
+   handle: {
+      width: 50,
+      height: 8,
+      borderRadius: 4,
+      backgroundColor: '#00000040',
+      marginTop: 15,
+      alignSelf: 'center',
    },
 });
 
