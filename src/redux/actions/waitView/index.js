@@ -39,8 +39,9 @@ export const getSpareParts = () => async (dispatch, getState) => {
    }
 };
 
-export const onSelectImagesPressed = () => dispatch => {
-   ImagePicker.openPicker({
+export const onSelectImagesPressed = () => (dispatch, getState) => {
+   const { images } = getState().WaitView;
+   ImagePicker.openCamera({
       width: 200,
       height: 200,
       compressImageMaxWidth: 200,
@@ -48,14 +49,12 @@ export const onSelectImagesPressed = () => dispatch => {
       cropping: false,
       multiple: true,
       mediaType: 'photo',
-      includeBase64: true,
    })
       .then(seletedImages => {
-         console.log(seletedImages);
-
-         const images = [];
-         images.push(...seletedImages);
-         dispatch({ type: SELECT_IMAGES_SUCCESS, payload: images });
+         dispatch({
+            type: SELECT_IMAGES_SUCCESS,
+            payload: [...images, seletedImages],
+         });
       })
       .catch(e => {
          console.log('image picker error', e);

@@ -42,6 +42,7 @@ const SearchModal = ({
    complainStatus,
    contructorId,
    plateNumber,
+   source,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
@@ -163,21 +164,23 @@ const SearchModal = ({
                      }
                      value={plateNumber}
                   />
-                  <CustomDropDown
-                     onDropDownPressed={() => menuRef.current.show()}
-                     menuStyle={styles.menuStyle}
-                     onMenuItemPressed={label => {
-                        dispatch(
-                           onSearchInputsChange('complainType', label.id)
-                        );
-                        setdropDownText(label.text);
-                        menuRef.current.hide();
-                     }}
-                     menuContainerStyle={styles.menuContainerStyle}
-                     labels={searchDropdownLabels}
-                     refrence={menuRef}
-                     dropDownText={dropDownText}
-                  />
+                  {source == 0 && (
+                     <CustomDropDown
+                        onDropDownPressed={() => menuRef.current.show()}
+                        menuStyle={styles.menuStyle}
+                        onMenuItemPressed={label => {
+                           dispatch(
+                              onSearchInputsChange('complainType', label.id)
+                           );
+                           setdropDownText(label.text);
+                           menuRef.current.hide();
+                        }}
+                        menuContainerStyle={styles.menuContainerStyle}
+                        labels={searchDropdownLabels}
+                        refrence={menuRef}
+                        dropDownText={dropDownText}
+                     />
+                  )}
                   <View
                      style={{
                         height: '20%',

@@ -57,7 +57,7 @@ const WaitApprovalList = ({ navigation, route }) => {
                }}>
                <CustomText
                   text={
-                     route.params && route.params.hasOwnProperty('headerText')
+                     route.params && route.params.distination
                         ? route.params.headerText
                         : 'البلاغات'
                   }

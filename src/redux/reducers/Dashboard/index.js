@@ -25,7 +25,6 @@ export default (state = initialState, { type, payload }) => {
             dashboardSpinner: false,
             dashboardData: payload,
             lastUpdate: moment().format('LT'),
-            filterInput: '',
          };
          break;
       case GET_DASHBOARD_DATA_FAILED:

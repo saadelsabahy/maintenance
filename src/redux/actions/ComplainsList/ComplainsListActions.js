@@ -27,6 +27,7 @@ import Api from '../../../apis';
 import database from '../../../models';
 import Reactotron from 'reactotron-react-native';
 import { Q } from '@nozbe/watermelondb';
+import moment from 'moment';
 /////////////////////////////complains feed
 export const getAllComplainsList = (statusId, sort) => async (
    dispatch,
@@ -41,10 +42,13 @@ export const getAllComplainsList = (statusId, sort) => async (
       pageNumber,
       complainType,
    } = getState().Complains;
+   const { filterInput } = getState().Dashboard;
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
+            statusId && filterInput ? filterInput : contractorId
+         }&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
       if (getComplainsListResponse.status == 200) {
          const {
@@ -79,12 +83,13 @@ export const LoadPagination = (statusId, sort) => async (
       pageNumber,
       complainType,
    } = getState().Complains;
-
+   const { filterInput } = getState().Dashboard;
    try {
       dispatch({ type: GET_COMPLAINS_LIST_PAGINATION_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${pageNumber +
-            1}&PageSize=${rowsNumber}&Sort=${sort}`
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
+            statusId && filterInput ? filterInput : contractorId
+         }&PageIndex=${pageNumber + 1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
 
       if (getComplainsListResponse.status == 200) {
@@ -103,7 +108,7 @@ export const LoadPagination = (statusId, sort) => async (
 };
 
 export const onComplainPressed = (data, navigation, route) => () => {
-   if (route.params && route.params.hasOwnProperty('distination')) {
+   if (route.params && route.params.distination) {
       const { distination } = route.params;
 
       switch (route.params.distination) {
@@ -172,7 +177,11 @@ export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
    try {
       dispatch({ type: SEARCH_SPINNER });
       const getSearchListResponse = await Api.get(
-         `Complians?From=${startDate}&To=${endDate}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
+         `Complians?From=${moment(startDate).format('MM/DD/YYYY')}&To=${moment(
+            endDate
+         ).format(
+            'MM/DD/YYYY'
+         )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
       if (getSearchListResponse.status == 200) {
@@ -208,7 +217,11 @@ export const LoadSearchPagination = (source, sort) => async (
    try {
       dispatch({ type: SEARCH_PAGINATION_SPINNER });
       const searchPaginationtResponse = await Api.get(
-         `Complians?From=${startDate}&To=${endDate}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
+         `Complians?From=${moment(startDate).format('MM/DD/YYYY')}&To=${moment(
+            endDate
+         ).format(
+            'MM/DD/YYYY'
+         )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
             1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 

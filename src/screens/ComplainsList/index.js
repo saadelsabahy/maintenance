@@ -63,7 +63,7 @@ const Complains = ({ navigation, route, complain }) => {
    }));
    useEffect(() => {
       if (isFocused) {
-         if (route.params && route.params.hasOwnProperty('distination')) {
+         if (route.params && route.params.distination) {
             const { distination } = route.params;
             dispatch(getAllComplainsList(distination, dateSearch));
          } else {
@@ -79,14 +79,14 @@ const Complains = ({ navigation, route, complain }) => {
    }, [isFocused, dateSearch, reload]);
    const onListEndReached = () => {
       if (search) {
-         if (route.params && route.params.hasOwnProperty('distination')) {
+         if (route.params && route.params.distination) {
             const { distination } = route.params;
             dispatch(LoadSearchPagination(distination, dateSearch));
          } else {
             dispatch(LoadSearchPagination(null, dateSearch));
          }
       } else {
-         if (route.params && route.params.hasOwnProperty('distination')) {
+         if (route.params && route.params.distination) {
             const { distination } = route.params;
             dispatch(LoadPagination(distination, dateSearch));
          } else {
@@ -96,7 +96,7 @@ const Complains = ({ navigation, route, complain }) => {
    };
    const onSearch = () => {
       if (isFocused) {
-         if (route.params && route.params.hasOwnProperty('distination')) {
+         if (route.params && route.params.distination) {
             const { distination } = route.params;
             dispatch(onSearchPressed(distination, dateSearch));
          } else {
@@ -121,6 +121,7 @@ const Complains = ({ navigation, route, complain }) => {
             menuRef={menuRef}
             filterLabel={filterLabel}
             onMenuItemPressed={onFilterItemPressed}
+            navigation={navigation}
          />
          <View style={styles.listContainer} />
          <View style={styles.contentContainer}>
@@ -130,7 +131,7 @@ const Complains = ({ navigation, route, complain }) => {
                loading={search ? searchLoading : getComplainsListLoading}
                error={search ? searchError : getComplainsListErorr}
                list={
-                  route.params && route.params.hasOwnProperty('distination')
+                  route.params && route.params.distination
                      ? complainsList.filter(
                           item => item.StatusId === route.params.distination
                        )
@@ -161,6 +162,11 @@ const Complains = ({ navigation, route, complain }) => {
             complainStatus={complainStatus}
             contructorId={searchContructorId}
             plateNumber={searchPlateNumber}
+            source={
+               route.params && route.params.distination
+                  ? route.params.distination
+                  : 0
+            }
          />
       </View>
    );

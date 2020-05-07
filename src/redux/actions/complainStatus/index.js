@@ -111,8 +111,9 @@ export const onExcutionDone = (
    // Complians/UpdateStatus
 };
 
-export const selectExcutionPhotos = () => dispatch => {
-   ImagePicker.openPicker({
+export const selectExcutionPhotos = () => (dispatch, getState) => {
+   const { images } = getState().UpdateComplainsStatus;
+   ImagePicker.openCamera({
       width: 200,
       height: 200,
       compressImageMaxWidth: 200,
@@ -122,9 +123,10 @@ export const selectExcutionPhotos = () => dispatch => {
       mediaType: 'photo',
    })
       .then(seletedImages => {
-         const images = [];
-         images.push(...seletedImages);
-         dispatch({ type: SELECT_EXCUTION_IMAGES, payload: images });
+         dispatch({
+            type: SELECT_EXCUTION_IMAGES,
+            payload: [...images, seletedImages],
+         });
       })
       .catch(e => {
          console.log('image picker error', e);
