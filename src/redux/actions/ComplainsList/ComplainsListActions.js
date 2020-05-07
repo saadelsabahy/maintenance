@@ -42,10 +42,13 @@ export const getAllComplainsList = (statusId, sort) => async (
       pageNumber,
       complainType,
    } = getState().Complains;
+   const { filterInput } = getState().Dashboard;
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
+            statusId && filterInput ? filterInput : contractorId
+         }&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
       if (getComplainsListResponse.status == 200) {
          const {
@@ -80,12 +83,13 @@ export const LoadPagination = (statusId, sort) => async (
       pageNumber,
       complainType,
    } = getState().Complains;
-
+   const { filterInput } = getState().Dashboard;
    try {
       dispatch({ type: GET_COMPLAINS_LIST_PAGINATION_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${contractorId}&PageIndex=${pageNumber +
-            1}&PageSize=${rowsNumber}&Sort=${sort}`
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
+            statusId && filterInput ? filterInput : contractorId
+         }&PageIndex=${pageNumber + 1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
 
       if (getComplainsListResponse.status == 200) {
