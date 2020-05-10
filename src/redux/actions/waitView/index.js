@@ -16,6 +16,7 @@ import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import { Platform } from 'react-native';
+import { SOLVED } from '../../../utils/complainsStutus';
 export const getSpareParts = () => async (dispatch, getState) => {
    try {
       const outGuaranteeSpares = await Api.get(
@@ -148,8 +149,9 @@ export const handlePerview = (
 
          const perviewResponse = await Api.post(
             `Complians/UpdateStatus?StatusId=${+complainStatus +
-               1}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
-               0}&Comment=${comment}`,
+               1}&UserId=${userId}&ComplianId=${
+               guranteeStatus == 1 ? +complainNumber : SOLVED
+            }&IsInWarranty=${guranteeStatus == 0}&Comment=${comment}`,
 
             guranteeStatus == 0
                ? inGuarnteeSelectedParts

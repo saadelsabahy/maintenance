@@ -129,7 +129,7 @@ const CustomBottomSheet = ({
    return (
       <View style={{ flex: 1 }}>
          <BottomSheet
-            snapPoints={['32%', '95%', '32%']}
+            snapPoints={['28%', '90%', '28%']}
             renderContent={renderInner}
             renderHeader={renderHeader}
             enabledInnerScrolling={false}

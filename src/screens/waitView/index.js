@@ -73,14 +73,14 @@ const ComplainsDetailes = ({ route, navigation }) => {
                text={data.complainNumber}
                textStyle={{ color: WHITE_COLOR }}
             />
-
-            <Icon
+            <View style={{ flex: 0.2 }} />
+            {/* <Icon
                name={'list-unordered'}
                type={'octicon'}
                color={WHITE_COLOR}
                iconContainerStyle={{ flex: 0.1 }}
                size={responsiveFontSize(4)}
-            />
+            /> */}
          </Header>
          <View style={{ width: '100%', height: '30%' }}>
             <ComplainsItem

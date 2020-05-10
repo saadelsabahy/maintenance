@@ -6,6 +6,7 @@ import {
    TEXT_COLOR,
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
+   MAIN_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -59,6 +60,7 @@ const CustomInput = ({
             )}
             <TextInput
                placeholder={placeholder}
+               selectionColor={MAIN_COLOR}
                style={[
                   Platform.OS == 'ios' && res.value
                      ? { ...styles.input, fontFamily: null }

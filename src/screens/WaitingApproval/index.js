@@ -140,14 +140,14 @@ const WaitApproval = ({ navigation, route }) => {
                   onPress={() => navigation.goBack()}
                />
             </View>
-            <View style={styles.headerIconContainer}>
+            {/* <View style={styles.headerIconContainer}>
                <Icon
                   name={'list-unordered'}
                   type={'octicon'}
                   color={WHITE_COLOR}
                   iconContainerStyle={{ flex: 1 }}
                />
-            </View>
+            </View> */}
          </Header>
          {!userType ? (
             <View
