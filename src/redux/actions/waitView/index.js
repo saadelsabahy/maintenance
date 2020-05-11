@@ -148,10 +148,10 @@ export const handlePerview = (
          );
 
          const perviewResponse = await Api.post(
-            `Complians/UpdateStatus?StatusId=${+complainStatus +
-               1}&UserId=${userId}&ComplianId=${
-               guranteeStatus == 1 ? +complainNumber : SOLVED
-            }&IsInWarranty=${guranteeStatus == 0}&Comment=${comment}`,
+            `Complians/UpdateStatus?StatusId=${
+               guranteeStatus == 1 ? +complainStatus + 1 : SOLVED
+            }&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
+               0}&Comment=${comment}`,
 
             guranteeStatus == 0
                ? inGuarnteeSelectedParts
