@@ -43,7 +43,13 @@ const SearchDuration = ({ modalMessage }) => {
             } else {
                showFlashMessage('danger','')
             } */
-            setStartDate(date.toLocaleDateString());
+            console.log(date);
+
+            setStartDate(
+               moment(date)
+                  .format('MM/DD/YYYY')
+                  .toString()
+            );
             dispatch(onSearchInputsChange('startDate', date));
             break;
 
@@ -52,7 +58,11 @@ const SearchDuration = ({ modalMessage }) => {
                moment(startDate, 'MM/DD/YY')
             );
             if (isEndDateValid) {
-               setEndDate(date.toLocaleDateString());
+               setEndDate(
+                  moment(date)
+                     .format('MM/DD/YYYY')
+                     .toString()
+               );
                dispatch(onSearchInputsChange('endDate', date));
             } else {
                modalMessage.current.showMessage({
