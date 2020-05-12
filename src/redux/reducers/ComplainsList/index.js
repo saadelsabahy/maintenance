@@ -81,7 +81,12 @@ export default (state = initialState, { type, payload }) => {
          };
          break;
       case GET_COMPLAINS_LIST_PAGINATION_SPINNER:
-         return { ...state, paginationLoading: true, paginationError: false };
+         return {
+            ...state,
+            paginationLoading: true,
+            paginationError: false,
+            pageNumber: 1,
+         };
          break;
       case GET_COMPLAINS_LIST_PAGINATION_SUCCESS:
          return {
