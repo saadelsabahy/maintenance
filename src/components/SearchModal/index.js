@@ -43,12 +43,13 @@ const SearchModal = ({
    contructorId,
    plateNumber,
    source,
+   dropDownText,
+   onSearchDropdownPressed,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
    const modalFlashMessage = useRef(null);
 
-   const [dropDownText, setdropDownText] = useState('');
    const [keyboardShow, setKeyboardShow] = useState(false);
    useEffect(() => {
       return () => {
@@ -66,6 +67,7 @@ const SearchModal = ({
       onBackdropPress();
       Keyboard.dismiss();
    };
+
    return (
       <Modal
          testID={'modal'}
@@ -167,13 +169,9 @@ const SearchModal = ({
                      <CustomDropDown
                         onDropDownPressed={() => menuRef.current.show()}
                         menuStyle={styles.menuStyle}
-                        onMenuItemPressed={label => {
-                           dispatch(
-                              onSearchInputsChange('complainType', label.id)
-                           );
-                           setdropDownText(label.text);
-                           menuRef.current.hide();
-                        }}
+                        onMenuItemPressed={label =>
+                           onSearchDropdownPressed(label, menuRef.current)
+                        }
                         menuContainerStyle={styles.menuContainerStyle}
                         labels={searchDropdownLabels}
                         refrence={menuRef}

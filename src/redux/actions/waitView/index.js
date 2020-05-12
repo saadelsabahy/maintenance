@@ -25,7 +25,10 @@ export const getSpareParts = () => async (dispatch, getState) => {
       const inGuaranteeSpares = await Api.get(
          `SparePart/GetByGuarantee?guarantee=${true}`
       );
-      if (outGuaranteeSpares.status == 200 && inGuaranteeSpares.status == 200) {
+      if (
+         outGuaranteeSpares.data.statusCode == 200 &&
+         inGuaranteeSpares.data.statusCode == 200
+      ) {
          Reactotron.log('spares', inGuaranteeSpares, inGuaranteeSpares);
          dispatch({
             type: GET_SPAREPARTS,

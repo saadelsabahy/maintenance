@@ -50,7 +50,7 @@ export const getAllComplainsList = (statusId, sort) => async (
             statusId && filterInput ? filterInput : contractorId
          }&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
-      if (getComplainsListResponse.status == 200) {
+      if (getComplainsListResponse.data.statusCode == 200) {
          const {
             data: { data },
          } = getComplainsListResponse;
@@ -66,7 +66,7 @@ export const getAllComplainsList = (statusId, sort) => async (
          });
       }
    } catch (error) {
-      console.log('get complains list error', error);
+      console.log('get complains list error', { ...error });
       dispatch({ type: GET_COMPLAINS_LIST_FAILED });
    }
 };
@@ -92,7 +92,7 @@ export const LoadPagination = (statusId, sort) => async (
          }&PageIndex=${pageNumber + 1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
 
-      if (getComplainsListResponse.status == 200) {
+      if (getComplainsListResponse.data.statusCode == 200) {
          const {
             data: { data },
          } = getComplainsListResponse;
@@ -184,7 +184,7 @@ export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
          )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
-      if (getSearchListResponse.status == 200) {
+      if (getSearchListResponse.data.statusCode == 200) {
          const {
             data: { data },
          } = getSearchListResponse;
@@ -225,7 +225,7 @@ export const LoadSearchPagination = (source, sort) => async (
             1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
-      if (searchPaginationtResponse.status == 200) {
+      if (searchPaginationtResponse.data.statusCode == 200) {
          const {
             data: { data },
          } = searchPaginationtResponse;

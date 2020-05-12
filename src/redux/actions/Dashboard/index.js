@@ -15,7 +15,7 @@ export const getDashBoardData = () => async (dispatch, getState) => {
          }`
       );
 
-      if (getDashboardResponse.status == 200) {
+      if (getDashboardResponse.data.statusCode == 200) {
          const {
             data: { data },
          } = getDashboardResponse;
