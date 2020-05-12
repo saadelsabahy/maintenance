@@ -10,6 +10,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import Reactotron from 'reactotron-react-native';
+import { purgeStoredState } from 'redux-persist';
 export const inputsChange = (inputName, inputValue) => {
    switch (inputName) {
       case 'loginName':
@@ -74,5 +75,6 @@ export const onLoginPressed = () => async (dispatch, getState) => {
 
 export const onLogoutPressed = () => async dispatch => {
    await AsyncStorage.clear();
+   /*  await purgeStoredState(); */
    dispatch({ type: LOGOUT_SUCCESS });
 };

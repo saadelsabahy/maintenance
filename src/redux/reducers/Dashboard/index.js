@@ -5,6 +5,7 @@ import {
    DASHBOARD_FILTER_INPUT_CHANGE,
 } from '../../actions/Dashboard/dashboardTypes';
 import moment from 'moment';
+import { LOGOUT_SUCCESS } from '../../actions/Auth/AuthTypes';
 const initialState = {
    dashboardSpinner: false,
    dashboardError: false,
@@ -32,6 +33,9 @@ export default (state = initialState, { type, payload }) => {
          break;
       case DASHBOARD_FILTER_INPUT_CHANGE:
          return { ...state, filterInput: payload };
+         break;
+      case LOGOUT_SUCCESS:
+         return { ...state, filterInput: '' };
          break;
       default:
          return state;
