@@ -52,6 +52,11 @@ const DashboardFilter = ({
             type: 'danger',
             message: 'يجب ادخال رقم العقد',
          });
+      } else if (+contructorId < 80 || +contructorId > 84) {
+         filterModalFlashMessage.current.showMessage({
+            type: 'danger',
+            message: 'برجاء ادخال رقم عقد صحيح',
+         });
       } else {
          onDashboardSearchFilterPressed();
       }
@@ -119,6 +124,7 @@ const DashboardFilter = ({
                      value={contructorId}
                      onChangeText={onContructorIdCgange}
                      keyboardType={'numeric'}
+                     maxLength={2}
                   />
                </View>
                <View style={styles.buttonsContainer}>

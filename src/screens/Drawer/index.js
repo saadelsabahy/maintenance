@@ -39,7 +39,7 @@ const CustomDrawer = props => {
    return (
       <SafeAreaView style={styles.container}>
          <View style={styles.DrawerHeader}>
-            <View style={styles.editIconContainer}>
+            {/* <View style={styles.editIconContainer}>
                <Icon
                   name={'square-edit-outline'}
                   type={'material-community'}
@@ -49,7 +49,7 @@ const CustomDrawer = props => {
                      alignItems: 'flex-start',
                   }}
                />
-            </View>
+            </View> */}
             <View style={styles.profileContainer}>
                <Image
                   source={require('../../assets/images/boy.png')}
@@ -58,12 +58,20 @@ const CustomDrawer = props => {
                      height: 100,
                      borderRadius: 50,
                      resizeMode: 'cover',
+                     borderColor: WHITE_COLOR,
+                     borderWidth: 1,
                   }}
                />
                <CustomText text={'اهلا بك'} textStyle={styles.headerText} />
                <CustomText text={userName} textStyle={styles.headerText} />
             </View>
-            <View style={{ ...styles.editIconContainer, width: '95%' }}>
+            <View
+               style={{
+                  ...styles.editIconContainer,
+                  width: '95%',
+                  position: 'absolute',
+                  bottom: 5,
+               }}>
                <Icon
                   name={'logout'}
                   type={'material-community'}
@@ -122,6 +130,7 @@ const styles = StyleSheet.create({
    profileContainer: {
       flex: 1,
       alignItems: 'center',
+      justifyContent: 'center',
    },
    headerText: {
       color: WHITE_COLOR,

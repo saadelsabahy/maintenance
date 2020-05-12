@@ -130,6 +130,7 @@ export default (state = initialState, { type, payload }) => {
             searchLoading: false,
             searchError: false,
             complainsList: payload,
+            searchPageNumber: 1,
          };
          break;
       case SEARCH_FAILED:

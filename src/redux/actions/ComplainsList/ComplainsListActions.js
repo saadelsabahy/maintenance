@@ -88,7 +88,7 @@ export const LoadPagination = (statusId, sort) => async (
       dispatch({ type: GET_COMPLAINS_LIST_PAGINATION_SPINNER });
       const getComplainsListResponse = await Api.get(
          `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
-            statusId && filterInput ? filterInput : contractorId
+            filterInput ? filterInput : contractorId
          }&PageIndex=${pageNumber + 1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
 
