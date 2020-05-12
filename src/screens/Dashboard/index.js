@@ -48,7 +48,11 @@ const DashBoard = ({ navigation }) => {
       const unsubscribe = NetInfo.addEventListener(state => {
          setNetConnected(state.isConnected);
       });
-      getDashboardData();
+      if (isFocused) {
+         getDashboardData();
+      } else {
+         return;
+      }
       return () => {
          unsubscribe();
       };

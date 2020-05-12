@@ -14,6 +14,7 @@ import {
    emptyListOnUnmount,
    LoadPagination,
    LoadSearchPagination,
+   onSearchInputsChange,
 } from '../../redux/actions';
 import ListHeader from './Header';
 import withObservables from '@nozbe/with-observables';
@@ -23,6 +24,7 @@ const Complains = ({ navigation, route, complain }) => {
    const [isModalVisible, setisModalVisible] = useState(false);
    const menuRef = useRef(null);
    const [filterLabel, setfilterLabel] = useState(null);
+   const [dropDownText, setdropDownText] = useState('');
    const [dateSearch, setDateSearch] = useState(0);
    const [reload, setReload] = useState(false);
    const toggleSearchModal = () => {
@@ -61,22 +63,7 @@ const Complains = ({ navigation, route, complain }) => {
       startDate: state.Complains.startDate,
       endDate: state.Complains.endDate,
    }));
-   useEffect(() => {
-      if (isFocused) {
-         if (route.params && route.params.distination) {
-            const { distination } = route.params;
-            dispatch(getAllComplainsList(distination, dateSearch));
-         } else {
-            dispatch(getAllComplainsList(null, dateSearch));
-         }
-      } else {
-         return;
-      }
 
-      return () => {
-         dispatch(emptyListOnUnmount());
-      };
-   }, [isFocused, dateSearch, reload]);
    const onListEndReached = () => {
       if (search) {
          if (route.params && route.params.distination) {
@@ -112,7 +99,49 @@ const Complains = ({ navigation, route, complain }) => {
       menuRef.current.hide();
       setDateSearch(label.id);
    };
+   useEffect(() => {
+      if (isFocused) {
+         getData();
+      } else {
+         return;
+      }
 
+      return () => {};
+   }, [isFocused, reload, dateSearch]);
+   useEffect(() => {
+      return () => {
+         dispatch(emptyListOnUnmount());
+         setdropDownText('');
+         setDateSearch(0);
+         setfilterLabel(null);
+      };
+   }, [isFocused]);
+   const getData = () => {
+      if (search) {
+         dispatch(
+            onSearchPressed(
+               route.params && route.params.distination
+                  ? route.params.distination
+                  : null,
+               dateSearch
+            )
+         );
+      } else {
+         dispatch(
+            getAllComplainsList(
+               route.params && route.params.distination
+                  ? route.params.distination
+                  : null,
+               dateSearch
+            )
+         );
+      }
+   };
+   const onSearchDropdownPressed = (label, menu) => {
+      dispatch(onSearchInputsChange('complainType', label.id));
+      setdropDownText(label.text);
+      menu.hide();
+   };
    return (
       <View style={styles.container}>
          <ListHeader
@@ -167,6 +196,8 @@ const Complains = ({ navigation, route, complain }) => {
                   ? route.params.distination
                   : 0
             }
+            onSearchDropdownPressed={onSearchDropdownPressed}
+            dropDownText={dropDownText}
          />
       </View>
    );
