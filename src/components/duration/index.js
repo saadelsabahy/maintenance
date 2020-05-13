@@ -9,6 +9,7 @@ import moment from 'moment';
 import { date } from '@nozbe/watermelondb/decorators';
 import { CustomButton } from '../Button';
 import { CustomText } from '../customText';
+import Reactotron from 'reactotron-react-native';
 const now = new Date();
 
 const SearchDuration = ({ modalMessage }) => {
@@ -35,16 +36,7 @@ const SearchDuration = ({ modalMessage }) => {
       hideDatePicker();
       switch (currentActive) {
          case 'startDate':
-            /*  const isStartDateValid = moment(date).isSameOrAfter(
-               moment()
-            );
-            if (isStartDateValid) {
-              
-            } else {
-               showFlashMessage('danger','')
-            } */
-            console.log(date);
-
+            Reactotron.log(date);
             setStartDate(
                moment(date)
                   .format('MM/DD/YYYY')
