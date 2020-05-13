@@ -36,10 +36,10 @@ const SearchDuration = ({ modalMessage }) => {
       hideDatePicker();
       switch (currentActive) {
          case 'startDate':
-            Reactotron.log(date);
+            /* Reactotron.log(moment(date.timestamp).format('DD-MM-YYYY')); */
             setStartDate(
                moment(date)
-                  .format('MM/DD/YYYY')
+                  .format('DD-MM-YYYY')
                   .toString()
             );
             dispatch(onSearchInputsChange('startDate', date));
@@ -47,12 +47,12 @@ const SearchDuration = ({ modalMessage }) => {
 
          case 'endDate':
             const isEndDateValid = moment(date).isSameOrAfter(
-               moment(startDate, 'MM/DD/YY')
+               moment(startDate, 'DD-MM-YYYY')
             );
             if (isEndDateValid) {
                setEndDate(
                   moment(date)
-                     .format('MM/DD/YYYY')
+                     .format('DD-MM-YYYY')
                      .toString()
                );
                dispatch(onSearchInputsChange('endDate', date));
@@ -61,6 +61,7 @@ const SearchDuration = ({ modalMessage }) => {
                   type: 'danger',
                   message: 'تاريخ الانتهاء يجب ان يكون بعد تاريخ البدايه',
                });
+               setEndDate('')
             }
             break;
       }
@@ -88,26 +89,35 @@ const SearchDuration = ({ modalMessage }) => {
             onConfirm={handleConfirm}
             isDarkModeEnabled={colorScheme === 'dark'}
             date={now}
-            customCancelButtonIOS={() => (
+            cancelTextIOS={'الغاء'}
+            confirmTextIOS={'تأكيد'}
+            customCancelButtonIOS={({onPress,label}) => (
                <CustomButton
                   buttonContainerStyle={{
                      ...styles.buttonIos,
                      borderRadius: 10,
-                     height: SCREEN_HEIGHT / 18,
+                     height: SCREEN_HEIGHT / 20,
                   }}
-                  buttonTitle={'الغاء'}
+                  buttonTitle={label}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
-                  onButtonPressed={hideDatePicker}
+                  onButtonPressed={()=>{
+                     onPress()
+                     if (currentActive=='startDate') {
+                        setStartDate('')
+                     } else {
+                        setEndDate('')
+                     }
+                  }}
                />
             )}
-            customConfirmButtonIOS={() => (
+            customConfirmButtonIOS={({onPress,label,}) => (
                <CustomButton
                   buttonContainerStyle={styles.buttonIos}
-                  buttonTitle={'تأكيد'}
+                  buttonTitle={label}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
-                  onButtonPressed={handleConfirm}
+                  onButtonPressed={onPress}
                />
-            )}
+            )} 
             customHeaderIOS={() => (
                <CustomText
                   text="اختر تاريخ"
