@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import { MAIN_COLOR } from '../../constants/colors';
+import { MAIN_COLOR, TEXT_COLOR } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { Icon } from '../Icon';
 
@@ -16,7 +16,7 @@ const LoaderAndRetry = ({
       <View style={styles.container}>
          {loading && (
             <View style={styles.contentContainer}>
-               <ActivityIndicator size="large" color={MAIN_COLOR} />
+               <ActivityIndicator size="large" color={TEXT_COLOR} />
                <CustomText text={loadingText || 'جاري تحميل البيانات'} />
             </View>
          )}

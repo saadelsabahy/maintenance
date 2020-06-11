@@ -66,10 +66,10 @@ const Login = ({ navigation }) => {
             onKeyboardDidHide={onKeyboardHide}
             scrollEventThrottle={10}
             extraHeight={0}
-            resetScrollToCoords={{ x: 0, y: 20 }}
+            resetScrollToCoords={{ x: 0, y: 0 }}
             contentContainerStyle={{ flexGrow: 1 }}
             ref={ref => (ref = keyboardAvoidingRef)}
-            keyboardShouldPersistTaps="always">
+            keyboardShouldPersistTaps="never">
             <View
                style={{
                   flex: 1,
@@ -78,14 +78,27 @@ const Login = ({ navigation }) => {
                }}>
                <View
                   style={{
-                     height: SCREEN_HEIGHT * 0.3,
-                     borderBottomWidth: 1,
+                     height: SCREEN_HEIGHT / 3,
                   }}>
-                  <Text>head</Text>
+                  <Image
+                     source={require('../../assets/images/login_bg_top.png')}
+                     style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                     }}
+                     resizeMode="stretch"
+                  />
+                  <View style={{ position: 'absolute', end: 25, bottom: 25 }}>
+                     <CustomText
+                        text={'تطبيق الصيانات'}
+                        textStyle={styles.loginText}
+                     />
+                  </View>
                </View>
                <View
                   style={{
-                     height: SCREEN_HEIGHT * 0.4,
+                     height: SCREEN_HEIGHT / 3,
                      backgroundColor: SURFACE_COLOR,
                      justifyContent: 'space-evenly',
                   }}>
@@ -137,12 +150,22 @@ const Login = ({ navigation }) => {
                      />
                   </View>
                </View>
-               <View style={{ height: SCREEN_HEIGHT * 0.3, borderTopWidth: 1 }}>
+               <View style={{ height: SCREEN_HEIGHT / 3, paddingVertical: 10 }}>
+                  <Image
+                     source={require('../../assets/images/login_bg_btm.png')}
+                     style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                     }}
+                     resizeMode="stretch"
+                  />
                   <View style={styles.buttonContainer}>
                      <LoginButton
                         onLoginPressed={() => {
                            dispatch(onLoginPressed());
                         }}
+                        loading={loginSpinner}
                      />
                   </View>
                </View>
