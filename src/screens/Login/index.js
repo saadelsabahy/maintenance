@@ -7,9 +7,14 @@ import {
    KeyboardAvoidingView,
    Platform,
    ImageBackground,
+   Text,
 } from 'react-native';
-import { CustomInput, CustomButton, CustomText } from '../../components';
-import Svg, { Rect, G } from 'react-native-svg';
+import {
+   CustomInput,
+   CustomButton,
+   CustomText,
+   LoginButton,
+} from '../../components';
 import LoginHeaderImage from '../../assets/images/gear.png';
 import {
    MAIN_COLOR,
@@ -20,6 +25,7 @@ import {
    SCREEN_WIDTH,
    MAIN_RED_COLOR,
    PLACEHOLDER_COLOR,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -64,22 +70,24 @@ const Login = ({ navigation }) => {
             contentContainerStyle={{ flexGrow: 1 }}
             ref={ref => (ref = keyboardAvoidingRef)}
             keyboardShouldPersistTaps="always">
-            <ImageBackground
-               resizeMode="stretch"
-               resizeMethod="resize"
-               source={require('../../assets/images/login_bg.png')}
+            <View
                style={{
-                  width: SCREEN_WIDTH,
-                  height: SCREEN_HEIGHT,
-                  position: 'absolute',
-               }}
-            />
-            <View style={styles.formContainer}>
+                  flex: 1,
+                  backgroundColor: MAIN_COLOR,
+                  justifyContent: 'space-between',
+               }}>
                <View
                   style={{
-                     alignSelf: 'center',
-                     height: '50%',
-                     justifyContent: 'center',
+                     height: SCREEN_HEIGHT * 0.3,
+                     borderBottomWidth: 1,
+                  }}>
+                  <Text>head</Text>
+               </View>
+               <View
+                  style={{
+                     height: SCREEN_HEIGHT * 0.4,
+                     backgroundColor: SURFACE_COLOR,
+                     justifyContent: 'space-evenly',
                   }}>
                   <View style={styles.textContainer}>
                      <CustomText
@@ -87,17 +95,13 @@ const Login = ({ navigation }) => {
                         textStyle={styles.loginText}
                      />
                   </View>
-                  <View
-                     style={{
-                        justifyContent: 'space-evenly',
-                        alignSelf: 'center',
-                     }}>
+                  <View style={{ width: '80%', alignSelf: 'center' }}>
                      <CustomInput
                         iconStartName={'account-outline'}
                         iconType={'material-community'}
                         iconStartBackGround
                         placeholderTextColor={PLACEHOLDER_COLOR}
-                        iconStartSize={responsiveFontSize(2.5)}
+                        iconStartSize={responsiveFontSize(3.5)}
                         startIconColor={MAIN_RED_COLOR}
                         placeholder={'اسم المستخدم'}
                         onChangeText={loginName => {
@@ -117,7 +121,7 @@ const Login = ({ navigation }) => {
                         iconStartName="lock"
                         iconStartBackGround
                         placeholderTextColor={PLACEHOLDER_COLOR}
-                        iconStartSize={responsiveFontSize(2.5)}
+                        iconStartSize={responsiveFontSize(3.5)}
                         startIconColor={MAIN_RED_COLOR}
                         placeholder={'كلمه المرور'}
                         secureTextEntry={true}
@@ -132,24 +136,13 @@ const Login = ({ navigation }) => {
                         iconStartStyle={styles.icon}
                      />
                   </View>
-
+               </View>
+               <View style={{ height: SCREEN_HEIGHT * 0.3, borderTopWidth: 1 }}>
                   <View style={styles.buttonContainer}>
-                     <CustomButton
-                        buttonTitle="دخول"
-                        onButtonPressed={() => {
+                     <LoginButton
+                        onLoginPressed={() => {
                            dispatch(onLoginPressed());
-                           Keyboard.dismiss();
                         }}
-                        buttonContainerStyle={
-                           !loginSpinner
-                              ? styles.button
-                              : { ...styles.button, justifyContent: 'center' }
-                        }
-                        icon={'long-arrow-right'}
-                        iconColor={WHITE_COLOR}
-                        iconType={'font-awesome'}
-                        loading={loginSpinner}
-                        spinnerColor={WHITE_COLOR}
                      />
                   </View>
                </View>
