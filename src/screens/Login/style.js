@@ -5,16 +5,14 @@ import {
    TEXT_COLOR,
    SCREEN_WIDTH,
    SCREEN_HEIGHT,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#000',
-      paddingBottom: 0,
-      marginBottom: 0,
-      height: SCREEN_HEIGHT,
+      backgroundColor: SURFACE_COLOR,
    },
    imageContainer: {
       width: SCREEN_WIDTH - 30,
