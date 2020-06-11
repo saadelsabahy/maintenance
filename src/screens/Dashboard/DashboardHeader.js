@@ -5,6 +5,7 @@ import {
    WHITE_COLOR,
    SECONDART_COLOR,
    MAIN_COLOR,
+   HEADER_ICONS_COLOR,
 } from '../../constants/colors';
 import { Header, Icon, CustomText } from '../../components';
 
@@ -13,25 +14,45 @@ const DashboardHeader = ({
    onFilterPressed,
    onRefreshPressed,
    lastUpdate,
+   onNotificationPressed,
 }) => {
    return (
       <View style={{ width: '100%', height: '25%' }}>
          <Header headerWrapperStyle={styles.headerIconsContainer}>
-            <View>
+            <View style={styles.headerStartRow}>
                <Icon
                   name={'menu'}
                   type={'material-community'}
-                  color={WHITE_COLOR}
+                  color={HEADER_ICONS_COLOR}
                   onPress={() => navigation.toggleDrawer()}
                   iconContainerStyle={{ flex: 1 }}
                />
+               <Icon
+                  name={'bell-outline'}
+                  type={'material-community'}
+                  color={HEADER_ICONS_COLOR}
+                  onPress={onNotificationPressed}
+                  iconContainerStyle={{ flex: 1 }}
+               />
             </View>
-
+            <View
+               style={{
+                  flex: 1,
+                  alignItems: 'center',
+               }}>
+               <CustomText
+                  text={'تطبيق الصيانات'}
+                  textStyle={{
+                     color: WHITE_COLOR,
+                     fontSize: responsiveFontSize(2.8),
+                  }}
+               />
+            </View>
             <View style={styles.headerStartRow}>
                <Icon
                   name={'filter-outline'}
                   type={'material-community'}
-                  color={WHITE_COLOR}
+                  color={HEADER_ICONS_COLOR}
                   iconContainerStyle={{ flex: 1 }}
                   onPress={onFilterPressed}
                />
@@ -45,7 +66,7 @@ const DashboardHeader = ({
                   <Icon
                      name={'autorenew'}
                      type={'material-community'}
-                     color={WHITE_COLOR}
+                     color={HEADER_ICONS_COLOR}
                      iconContainerStyle={{ flex: 1 }}
                      onPress={onRefreshPressed}
                   />
@@ -65,20 +86,8 @@ const DashboardHeader = ({
                   width: '95%',
                   height: '100%',
                   alignSelf: 'center',
+                  justifyContent: 'flex-end',
                }}>
-               <View
-                  style={{
-                     flex: 1,
-                     alignItems: 'center',
-                  }}>
-                  <CustomText
-                     text={'تطبيق الصيانات'}
-                     textStyle={{
-                        color: WHITE_COLOR,
-                        fontSize: responsiveFontSize(2.8),
-                     }}
-                  />
-               </View>
                <View style={{ top: -15 }}>
                   <CustomText
                      text={'أخر تحديث'}
@@ -102,7 +111,7 @@ const DashboardHeader = ({
 };
 const styles = StyleSheet.create({
    headerStartRow: {
-      flex: 0.3,
+      flex: 0.35,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',

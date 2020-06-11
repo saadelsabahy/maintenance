@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { IconButton } from '../IconButton';
-import { MAIN_COLOR, WHITE_COLOR } from '../../constants/colors';
+import { MAIN_COLOR, WHITE_COLOR, SURFACE_COLOR } from '../../constants/colors';
 import { CustomText } from '../customText';
 const Header = ({ children, headerWrapperStyle, containerStyle }) => {
    return (
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
    container: {
       width: '100%',
       height: '8%',
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: SURFACE_COLOR,
       justifyContent: 'center',
       alignItems: 'center',
    },

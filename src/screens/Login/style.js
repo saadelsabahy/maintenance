@@ -61,14 +61,12 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
    },
    buttonContainer: {
-      width: SCREEN_WIDTH / 2,
+      width: '70%',
       height: SCREEN_HEIGHT / 15,
-      backgroundColor: '#fff',
       justifyContent: 'center',
-      alignItems: 'center',
       position: 'absolute',
-      bottom: 0,
-      start: '40%',
+      top: 0,
+      end: 0,
    },
    button: {
       width: '100%',

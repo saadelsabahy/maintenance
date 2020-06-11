@@ -13,6 +13,7 @@ import {
    MAIN_COLOR,
    WHITE_COLOR,
    SECONDART_COLOR,
+   SURFACE_COLOR,
 } from './src/constants/colors';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
@@ -37,7 +38,7 @@ const App = () => {
             <>
                <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
                <SafeAreaView style={styles.container}>
-                  <StatusBar backgroundColor={MAIN_COLOR} animated />
+                  <StatusBar backgroundColor={SURFACE_COLOR} animated />
 
                   <AppNavigation /* screenProps={{ database }} */ />
                   <FlashMessage
