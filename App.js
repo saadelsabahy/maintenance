@@ -36,7 +36,9 @@ const App = () => {
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
             <>
-               <SafeAreaView style={{ flex: 0, backgroundColor: MAIN_COLOR }} />
+               <SafeAreaView
+                  style={{ flex: 0, backgroundColor: SURFACE_COLOR }}
+               />
                <SafeAreaView style={styles.container}>
                   <StatusBar backgroundColor={SURFACE_COLOR} animated />
 
