@@ -7,6 +7,7 @@ import {
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
    MAIN_COLOR,
+   PLACEHOLDER_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -44,6 +45,7 @@ const CustomInput = ({
                alignItems: 'center',
                justifyContent: 'center',
                width: '100%',
+               marginVertical: 10,
             },
             inputWrapper,
          ]}>
@@ -99,10 +101,9 @@ const styles = StyleSheet.create({
       height: '100%',
       alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: INPUT_COLOR,
-      borderWidth: 0.9,
-      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
-      borderColor: TEXT_COLOR,
+      backgroundColor: 'transparent',
+      borderBottomWidth: 0.9,
+      borderColor: PLACEHOLDER_COLOR,
    },
    input: {
       flex: 1,

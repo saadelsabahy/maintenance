@@ -6,7 +6,12 @@ import {
    StyleSheet,
    ActivityIndicator,
 } from 'react-native';
-import { MAIN_COLOR, WHITE_COLOR, SCREEN_HEIGHT } from '../../constants/colors';
+import {
+   MAIN_COLOR,
+   WHITE_COLOR,
+   SCREEN_HEIGHT,
+   MAIN_RED_COLOR,
+} from '../../constants/colors';
 import { CustomText } from '../customText';
 import { Icon } from '../Icon';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
@@ -47,7 +52,7 @@ const CustomButton = ({
                   flex: 1,
                   width: '90%',
                   flexDirection: 'row',
-                  justifyContent: 'space-evenly',
+                  justifyContent: 'center',
                   alignItems: 'center',
                }}>
                {icon && (
@@ -56,7 +61,7 @@ const CustomButton = ({
                      color={iconColor}
                      type={iconType}
                      size={iconSize || responsiveFontSize(2.5)}
-                     iconContainerStyle={{ flex: 0.2 }}
+                     iconContainerStyle={{ flex: 0, marginHorizontal: 10 }}
                   />
                )}
                <CustomText
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
       height: SCREEN_HEIGHT / 12,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: MAIN_RED_COLOR,
       borderRadius: 25,
    },
    text: {

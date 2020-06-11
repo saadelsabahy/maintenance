@@ -11,7 +11,10 @@ import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: '#000',
+      paddingBottom: 0,
+      marginBottom: 0,
+      height: SCREEN_HEIGHT,
    },
    imageContainer: {
       width: SCREEN_WIDTH - 30,
@@ -26,9 +29,11 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
    },
    formContainer: {
-      width: SCREEN_WIDTH,
-      height: SCREEN_HEIGHT * 0.7,
+      width: '90%',
+      height: SCREEN_HEIGHT,
       justifyContent: 'center',
+      alignSelf: 'center',
+      alignItems: 'center',
    },
    svg: {
       position: 'absolute',
@@ -52,23 +57,23 @@ const styles = StyleSheet.create({
       color: WHITE_COLOR,
    },
    textContainer: {
-      width: '90%',
-      height: '10%',
       justifyContent: 'center',
       alignSelf: 'center',
    },
    buttonContainer: {
-      width: '90%',
-      height: '10%',
+      width: SCREEN_WIDTH / 2,
+      height: SCREEN_HEIGHT / 15,
+      backgroundColor: '#fff',
       justifyContent: 'center',
-      alignSelf: 'center',
+      alignItems: 'center',
+      position: 'absolute',
+      bottom: 0,
+      start: '40%',
    },
    button: {
-      width: '45%',
-      alignSelf: 'flex-start',
-      justifyContent: 'space-between',
-      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
-      height: SCREEN_HEIGHT / 15,
+      width: '100%',
+      height: '100%',
+      borderRadius: 0,
    },
 });
 

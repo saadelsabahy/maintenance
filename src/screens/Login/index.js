@@ -6,6 +6,7 @@ import {
    Keyboard,
    KeyboardAvoidingView,
    Platform,
+   ImageBackground,
 } from 'react-native';
 import { CustomInput, CustomButton, CustomText } from '../../components';
 import Svg, { Rect, G } from 'react-native-svg';
@@ -15,6 +16,10 @@ import {
    WHITE_COLOR,
    TEXT_COLOR,
    SECONDART_COLOR,
+   SCREEN_HEIGHT,
+   SCREEN_WIDTH,
+   MAIN_RED_COLOR,
+   PLACEHOLDER_COLOR,
 } from '../../constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -46,101 +51,111 @@ const Login = ({ navigation }) => {
       // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 0, animated: true })
    };
    return (
-      <KeyboardAwareScrollView
-         style={styles.container}
-         enableOnAndroid={true}
-         scrollEnabled={keyBoardShow}
-         onKeyboardDidShow={onKeyboardShow}
-         onKeyboardDidHide={onKeyboardHide}
-         ref={ref => (ref = keyboardAvoidingRef)}
-         keyboardShouldPersistTaps="always">
-         <View style={styles.imageContainer}>
-            <Image source={LoginHeaderImage} style={styles.headerImage} />
-            <CustomText text="تطبيق الصيانات" textStyle={styles.logoText} />
-         </View>
-
-         <View style={styles.formContainer}>
-            <Svg width="125%" height="110%" style={styles.svg}>
-               <Rect
-                  x="0"
-                  y="0"
-                  rx="70"
-                  ry="70"
-                  width="100%"
-                  height="100%"
-                  fill={SECONDART_COLOR}
-               />
-            </Svg>
-            <View style={styles.textContainer}>
-               <CustomText text={'تسجيل الدخول'} textStyle={styles.loginText} />
-            </View>
-            <View
+      <View style={{ flex: 1 }}>
+         <KeyboardAwareScrollView
+            style={styles.container}
+            enableOnAndroid={true}
+            scrollEnabled={keyBoardShow}
+            onKeyboardDidShow={onKeyboardShow}
+            onKeyboardDidHide={onKeyboardHide}
+            scrollEventThrottle={10}
+            extraHeight={0}
+            resetScrollToCoords={{ x: 0, y: 20 }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            ref={ref => (ref = keyboardAvoidingRef)}
+            keyboardShouldPersistTaps="always">
+            <ImageBackground
+               resizeMode="stretch"
+               resizeMethod="resize"
+               source={require('../../assets/images/login_bg.png')}
                style={{
-                  flex: 0.4,
-                  width: '85%',
-                  justifyContent: 'space-evenly',
-                  alignSelf: 'center',
-               }}>
-               <CustomInput
-                  iconStartName={'account-outline'}
-                  iconType={'material-community'}
-                  iconStartBackGround
-                  placeholderTextColor={TEXT_COLOR}
-                  iconStartSize={responsiveFontSize(2.5)}
-                  startIconColor={MAIN_COLOR}
-                  placeholder={'اسم المستخدم'}
-                  onChangeText={loginName => {
-                     dispatch(inputsChange('loginName', loginName));
-                  }}
-                  value={userName}
-                  returnKeyType="next"
-                  onSubmitEditing={() => passwordInput.current.focus()}
-                  blurOnSubmit={false}
+                  width: SCREEN_WIDTH,
+                  height: SCREEN_HEIGHT,
+                  position: 'absolute',
+               }}
+            />
+            <View style={styles.formContainer}>
+               <View
+                  style={{
+                     alignSelf: 'center',
+                     height: '50%',
+                     justifyContent: 'center',
+                  }}>
+                  <View style={styles.textContainer}>
+                     <CustomText
+                        text={'تسجيل الدخول'}
+                        textStyle={styles.loginText}
+                     />
+                  </View>
+                  <View
+                     style={{
+                        justifyContent: 'space-evenly',
+                        alignSelf: 'center',
+                     }}>
+                     <CustomInput
+                        iconStartName={'account-outline'}
+                        iconType={'material-community'}
+                        iconStartBackGround
+                        placeholderTextColor={PLACEHOLDER_COLOR}
+                        iconStartSize={responsiveFontSize(2.5)}
+                        startIconColor={MAIN_RED_COLOR}
+                        placeholder={'اسم المستخدم'}
+                        onChangeText={loginName => {
+                           dispatch(inputsChange('loginName', loginName));
+                        }}
+                        value={userName}
+                        returnKeyType="next"
+                        onSubmitEditing={() => passwordInput.current.focus()}
+                        blurOnSubmit={false}
 
-                  /*  error={true}
+                        /*  error={true}
             errorText={'حدث خطا مابيياريالاتا'} */
-               />
+                     />
 
-               <CustomInput
-                  iconType={'feather'}
-                  iconStartName="lock"
-                  iconStartBackGround
-                  placeholderTextColor={TEXT_COLOR}
-                  iconStartSize={responsiveFontSize(2.5)}
-                  startIconColor={MAIN_COLOR}
-                  placeholder={'كلمه المرور'}
-                  secureTextEntry={true}
-                  onChangeText={loginPassword => {
-                     dispatch(inputsChange('loginPassword', loginPassword));
-                  }}
-                  value={userPassword}
-                  referance={passwordInput}
-                  returnKeyType="go"
-                  iconStartStyle={styles.icon}
-               />
-            </View>
+                     <CustomInput
+                        iconType={'feather'}
+                        iconStartName="lock"
+                        iconStartBackGround
+                        placeholderTextColor={PLACEHOLDER_COLOR}
+                        iconStartSize={responsiveFontSize(2.5)}
+                        startIconColor={MAIN_RED_COLOR}
+                        placeholder={'كلمه المرور'}
+                        secureTextEntry={true}
+                        onChangeText={loginPassword => {
+                           dispatch(
+                              inputsChange('loginPassword', loginPassword)
+                           );
+                        }}
+                        value={userPassword}
+                        referance={passwordInput}
+                        returnKeyType="go"
+                        iconStartStyle={styles.icon}
+                     />
+                  </View>
 
-            <View style={styles.buttonContainer}>
-               <CustomButton
-                  buttonTitle="دخول"
-                  onButtonPressed={() => {
-                     dispatch(onLoginPressed());
-                     Keyboard.dismiss();
-                  }}
-                  buttonContainerStyle={
-                     !loginSpinner
-                        ? styles.button
-                        : { ...styles.button, justifyContent: 'center' }
-                  }
-                  icon={'long-arrow-right'}
-                  iconColor={WHITE_COLOR}
-                  iconType={'font-awesome'}
-                  loading={loginSpinner}
-                  spinnerColor={WHITE_COLOR}
-               />
+                  <View style={styles.buttonContainer}>
+                     <CustomButton
+                        buttonTitle="دخول"
+                        onButtonPressed={() => {
+                           dispatch(onLoginPressed());
+                           Keyboard.dismiss();
+                        }}
+                        buttonContainerStyle={
+                           !loginSpinner
+                              ? styles.button
+                              : { ...styles.button, justifyContent: 'center' }
+                        }
+                        icon={'long-arrow-right'}
+                        iconColor={WHITE_COLOR}
+                        iconType={'font-awesome'}
+                        loading={loginSpinner}
+                        spinnerColor={WHITE_COLOR}
+                     />
+                  </View>
+               </View>
             </View>
-         </View>
-      </KeyboardAwareScrollView>
+         </KeyboardAwareScrollView>
+      </View>
    );
 };
 
