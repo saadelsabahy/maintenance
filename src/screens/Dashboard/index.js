@@ -111,6 +111,7 @@ const DashBoard = ({ navigation }) => {
                   style={{
                      width: '100%',
                      height: '100%',
+                     top: '-5%',
                   }}>
                   <ScrollView
                      style={{ flex: 1 }}
