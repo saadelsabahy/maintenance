@@ -72,6 +72,7 @@ const CustomInput = ({
                underlineColorAndroid="transparent"
                placeholderStyle={{ fontFamily: 'DroidArabicKufi' }}
                ref={referance}
+               autoCapitalize="none"
                {...res}
             />
             {iconEndName && (
