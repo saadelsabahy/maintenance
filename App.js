@@ -13,6 +13,7 @@ import {
    MAIN_COLOR,
    WHITE_COLOR,
    SECONDART_COLOR,
+   SURFACE_COLOR,
 } from './src/constants/colors';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
@@ -43,7 +44,7 @@ const App = () => {
                   <FlashMessage
                      position="bottom"
                      style={styles.flashMessage}
-                     duration={4000}
+                     duration={3000}
                      textStyle={styles.flashText}
                      titleStyle={styles.flashText}
                   />
@@ -56,7 +57,7 @@ const App = () => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: SECONDART_COLOR,
+      backgroundColor: SURFACE_COLOR,
    },
    flashMessage: {},
    flashText: {
