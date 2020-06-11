@@ -71,16 +71,16 @@ const styles = StyleSheet.create({
       // top: 0,
    },
    cardDetailesContainer: {
-      flex: 0.9,
+      flex: 1,
       alignItems: 'flex-start',
       width: '90%',
       alignSelf: 'center',
       justifyContent: 'flex-end',
+      padding: 10,
    },
    textStyle: {
       textAlign: 'right',
       fontSize: responsiveFontSize(2.7),
-      // lineHeight: SCREEN_HEIGHT > 800 ? 70 : 30,
    },
 });
 
