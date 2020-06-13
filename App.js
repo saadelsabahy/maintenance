@@ -14,6 +14,7 @@ import {
    WHITE_COLOR,
    SECONDART_COLOR,
    SURFACE_COLOR,
+   SCREEN_HEIGHT,
 } from './src/constants/colors';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
@@ -47,7 +48,6 @@ const App = () => {
                      position="bottom"
                      style={styles.flashMessage}
                      duration={3000}
-                     textStyle={styles.flashText}
                      titleStyle={styles.flashText}
                   />
                </SafeAreaView>
@@ -61,11 +61,17 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: SURFACE_COLOR,
    },
-   flashMessage: {},
+   flashMessage: {
+      minHeight: 0,
+      justifyContent: 'center',
+      marginTop: 0,
+   },
    flashText: {
       fontFamily: 'DroidArabicKufi',
-      textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.5),
+      textTransform: 'capitalize',
+      marginBottom: 0,
+      lineHeight: responsiveFontSize(2),
       alignSelf: 'center',
    },
 });

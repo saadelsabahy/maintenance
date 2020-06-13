@@ -35,6 +35,7 @@ import {
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import styles from './style';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 const Login = ({ navigation }) => {
    const passwordInput = useRef();
    const keyboardAvoidingRef = useRef();
@@ -89,7 +90,8 @@ const Login = ({ navigation }) => {
                      }}
                      resizeMode="stretch"
                   />
-                  <View style={{ position: 'absolute', end: 25, bottom: 25 }}>
+                  <View
+                     style={{ position: 'absolute', start: '50%', bottom: 25 }}>
                      <CustomText
                         text={'تطبيق الصيانات'}
                         textStyle={styles.loginText}
@@ -150,7 +152,12 @@ const Login = ({ navigation }) => {
                      />
                   </View>
                </View>
-               <View style={{ height: SCREEN_HEIGHT / 3, paddingVertical: 10 }}>
+               <View
+                  style={{
+                     height: SCREEN_HEIGHT / 3,
+                     paddingVertical: 30,
+                     backgroundColor: SURFACE_COLOR,
+                  }}>
                   <Image
                      source={require('../../assets/images/login_bg_btm.png')}
                      style={{
