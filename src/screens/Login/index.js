@@ -91,7 +91,11 @@ const Login = ({ navigation }) => {
                      resizeMode="stretch"
                   />
                   <View
-                     style={{ position: 'absolute', start: '50%', bottom: 25 }}>
+                     style={{
+                        position: 'absolute',
+                        start: '50%',
+                        bottom: SCREEN_HEIGHT > 850 ? 30 : 25,
+                     }}>
                      <CustomText
                         text={'تطبيق الصيانات'}
                         textStyle={styles.loginText}
