@@ -9,6 +9,8 @@ import {
    SCREEN_WIDTH,
    SCREEN_HEIGHT,
    MAIN_COLOR,
+   SURFACE_COLOR,
+   MAIN_RED_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText } from '../customText';
@@ -61,7 +63,17 @@ const CustomDropDown = ({
                </View>
             </View>
          ) : null}
-         <Menu button={button} ref={refrence} style={menuStyle}>
+         <Menu
+            button={button}
+            ref={refrence}
+            style={[
+               {
+                  backgroundColor: SURFACE_COLOR,
+                  borderWidth: 1,
+                  borderColor: WHITE_COLOR,
+               },
+               menuStyle,
+            ]}>
             {labels.map((label, index) => {
                return (
                   <View style={{ flex: 1, width: '100%' }} key={index + label}>
@@ -86,7 +98,7 @@ const CustomDropDown = ({
 };
 const styles = StyleSheet.create({
    selectedItem: {
-      backgroundColor: SECONDART_COLOR,
+      backgroundColor: MAIN_RED_COLOR,
       width: '100%',
       maxHeight: SCREEN_HEIGHT,
       maxWidth: SCREEN_WIDTH,
