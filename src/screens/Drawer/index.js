@@ -7,12 +7,15 @@ import {
    ScrollView,
    TouchableOpacity,
    SafeAreaView,
+   ImageBackground,
 } from 'react-native';
 import {
    MAIN_COLOR,
    SECONDART_COLOR,
    WHITE_COLOR,
    DRAWER_DIVIDER,
+   SURFACE_COLOR,
+   MAIN_RED_COLOR,
 } from '../../constants/colors';
 import {
    createDrawerNavigator,
@@ -24,6 +27,7 @@ import { Icon, CustomText } from '../../components';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { onLogoutPressed } from '../../redux/actions';
+import Svg, { Path } from 'react-native-svg';
 const CustomDrawer = props => {
    const dispatch = useDispatch();
    const [userName, setuserName] = useState('');
@@ -38,7 +42,32 @@ const CustomDrawer = props => {
    };
    return (
       <SafeAreaView style={styles.container}>
+         {/*  <Svg
+            width={'120%'}
+            height={'200%'}
+            viewBox="0 0 762 2119"
+            style={{
+               transform: [{ rotateY: '-180deg' }],
+               position: 'absolute',
+            }}
+            fill={SURFACE_COLOR}
+            {...props}>
+            <Path d="M0 1059.5V2119h762V203.5L660.2 101.7 558.5 0H0v1059.5z" />
+         </Svg> */}
+
+         {/* <ImageBackground
+            source={require('../../assets/images/side-menu.png')}
+            style={styles.backgroundImage}
+            resizeMode="stretch"
+            resizeMethod="scale"
+         /> */}
          <View style={styles.DrawerHeader}>
+            <ImageBackground
+               source={require('../../assets/images/drawer_header.png')}
+               style={styles.backgroundImage}
+               resizeMode="stretch"
+               resizeMethod="scale"
+            />
             {/* <View style={styles.editIconContainer}>
                <Icon
                   name={'square-edit-outline'}
@@ -58,8 +87,6 @@ const CustomDrawer = props => {
                      height: 100,
                      borderRadius: 50,
                      resizeMode: 'cover',
-                     borderColor: WHITE_COLOR,
-                     borderWidth: 1,
                   }}
                />
                <CustomText text={'اهلا بك'} textStyle={styles.headerText} />
@@ -94,6 +121,7 @@ const CustomDrawer = props => {
                marginVertical: 0,
                paddingVertical: 0,
                paddingTop: 0,
+               backgroundColor: '#3D3D3D',
             }}>
             <DrawerContentScrollView
                {...props}
@@ -112,13 +140,14 @@ const CustomDrawer = props => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: SECONDART_COLOR,
+
+      // backgroundColor: SECONDART_COLOR,
    },
    DrawerHeader: {
-      backgroundColor: MAIN_COLOR,
+      // backgroundColor: MAIN_COLOR,
       width: '100%',
       height: '35%',
-      borderBottomStartRadius: 50,
+      // borderBottomStartRadius: 50,
       marginBottom: 0,
    },
    editIconContainer: {
@@ -145,6 +174,12 @@ const styles = StyleSheet.create({
    iconContainer: {
       backgroundColor: 'transparent',
       justifyContent: 'flex-end',
+   },
+   backgroundImage: {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      // transform: [{ rotateY: '-180deg' }],
    },
 });
 

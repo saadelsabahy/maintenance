@@ -45,7 +45,7 @@ const ListAndLoading = ({
                alignItems: 'center',
                justifyContent: 'center',
             }}>
-            <ActivityIndicator color={MAIN_COLOR} />
+            <ActivityIndicator color={WHITE_COLOR} />
          </View>
       ) : null;
    };
@@ -118,6 +118,7 @@ const ListAndLoading = ({
                         onComplainPressed={data =>
                            dispatch(onComplainPressed(data, navigation, route))
                         }
+                        detailsContainerStyle={styles.detaiesContainer}
                      />
                   );
                }}
@@ -165,6 +166,12 @@ const styles = StyleSheet.create({
       position: 'absolute',
       alignSelf: 'center',
       bottom: 0,
+   },
+   detaiesContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      alignItems: 'center',
    },
 });
 export { ListAndLoading };

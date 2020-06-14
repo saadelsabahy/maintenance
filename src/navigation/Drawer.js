@@ -11,6 +11,7 @@ import {
    WHITE_COLOR,
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
+   SURFACE_COLOR,
 } from '../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText, Icon } from '../components';
@@ -77,10 +78,8 @@ const DrawerNavigator = () => {
             color={WHITE_COLOR}
             iconContainerStyle={{
                flex: 0,
-               backgroundColor: MAIN_COLOR,
                width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 10,
                height: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 10,
-               borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
             }}
          />
       ),
@@ -89,27 +88,20 @@ const DrawerNavigator = () => {
       <Drawer.Navigator
          initialRouteName="DashBoardStack"
          drawerStyle={{
-            borderTopEndRadius: 75,
             overflow: 'hidden',
             width: '75%',
+            backgroundColor: 'transparent',
          }}
          drawerContent={props => <CustomDrawer {...props} />}
          drawerContentOptions={{
-            activeTintColor: MAIN_COLOR,
-            inactiveTintColor: TEXT_COLOR,
-            labelStyle: {
-               backgroundColor: 'red',
-            },
+            activeBackgroundColor: SURFACE_COLOR,
             itemStyle: {
                borderBottomColor: DRAWER_DIVIDER,
-               borderBottomWidth: 1,
-               height: '50%',
+               borderBottomWidth: 0.2,
+               height: '35%',
                width: '100%',
                justifyContent: 'center',
-               margin: 0,
-               marginStart: 0,
-               marginBottom: 0,
-               marginTop: 0,
+               marginHorizontal: 15,
             },
          }}>
          <Drawer.Screen

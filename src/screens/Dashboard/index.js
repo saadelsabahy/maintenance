@@ -10,6 +10,7 @@ import {
    WHITE_COLOR,
    SECONDART_COLOR,
    MAIN_COLOR,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import {
    DashBoardItem,
@@ -25,7 +26,7 @@ import {
    onDashboardFilterChage,
 } from '../../redux/actions/Dashboard';
 import NetInfo from '@react-native-community/netinfo';
-
+import DashboardBackground from '../../assets/images/bg.png';
 const DashBoard = ({ navigation }) => {
    const isFocused = useIsFocused();
    const [netConnected, setNetConnected] = useState(null);
@@ -86,12 +87,10 @@ const DashBoard = ({ navigation }) => {
    const [showFilterModal, setshowFilterModal] = useState(false);
 
    return (
-      <View style={styles.container}>
-         <ImageBackground
-            source={require('../../assets/images/bg.png')}
-            style={{ width: '100%', height: '100%', position: 'absolute' }}
-            resizeMode="stretch"
-         />
+      <ImageBackground
+         source={DashboardBackground}
+         style={styles.container}
+         resizeMode="stretch">
          {!netConnected && renderNetSignOffline()}
          <DashboardHeader
             navigation={navigation}
@@ -166,28 +165,28 @@ const DashBoard = ({ navigation }) => {
                         }
                      />
                      <DashBoardItem
-                        text={'مرفوض'}
+                        text={'متأخر المعاينه'}
                         number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'closecircleo'}
-                        iconTtype={'antdesign'}
+                        icon={'eye-slash'}
+                        iconTtype={'font-awesome'}
                         onDashboardItemPressed={headerName =>
                            onDashboardItemPressed(headerName, 5)
                         }
                      />
                      <DashBoardItem
-                        text={'مرفوض'}
+                        text={'متأخر الاعتماد'}
                         number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'closecircleo'}
-                        iconTtype={'antdesign'}
+                        icon={'thumbs-up'}
+                        iconTtype={'feather'}
                         onDashboardItemPressed={headerName =>
                            onDashboardItemPressed(headerName, 5)
                         }
                      />
                      <DashBoardItem
-                        text={'مرفوض'}
+                        text={'متأخر التنفيذ'}
                         number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'closecircleo'}
-                        iconTtype={'antdesign'}
+                        icon={'progress-wrench'}
+                        iconTtype={'material-community'}
                         onDashboardItemPressed={headerName =>
                            onDashboardItemPressed(headerName, 5)
                         }
@@ -208,13 +207,13 @@ const DashBoard = ({ navigation }) => {
                setshowFilterModal(!showFilterModal);
             }}
          />
-      </View>
+      </ImageBackground>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: SURFACE_COLOR,
    },
    itemsWrapper: {
       flex: 1,

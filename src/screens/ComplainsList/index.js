@@ -1,9 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   FlatList,
+   Image,
+   ImageBackground,
+} from 'react-native';
 import {
    WHITE_COLOR,
    MAIN_COLOR,
    SECONDART_COLOR,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import { SearchModal, ListAndLoading } from '../../components';
 import { useIsFocused } from '@react-navigation/native';
@@ -18,6 +26,7 @@ import {
 } from '../../redux/actions';
 import ListHeader from './Header';
 import withObservables from '@nozbe/with-observables';
+import BackgroundImage from '../../assets/images/app_bg.png';
 const Complains = ({ navigation, route, complain }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
@@ -143,7 +152,10 @@ const Complains = ({ navigation, route, complain }) => {
       menu.hide();
    };
    return (
-      <View style={styles.container}>
+      <ImageBackground
+         source={BackgroundImage}
+         style={styles.container}
+         resizeMode="stretch">
          <ListHeader
             route={route}
             toggleSearchModal={toggleSearchModal}
@@ -153,6 +165,7 @@ const Complains = ({ navigation, route, complain }) => {
             navigation={navigation}
          />
          <View style={styles.listContainer} />
+
          <View style={styles.contentContainer}>
             <ListAndLoading
                navigation={navigation}
@@ -199,26 +212,28 @@ const Complains = ({ navigation, route, complain }) => {
             onSearchDropdownPressed={onSearchDropdownPressed}
             dropDownText={dropDownText}
          />
-      </View>
+      </ImageBackground>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: SURFACE_COLOR,
       justifyContent: 'space-between',
    },
    listContainer: {
-      flex: 0.92,
-      backgroundColor: SECONDART_COLOR,
-      borderTopStartRadius: 50,
+      flex: 0.9,
    },
    contentContainer: {
       width: '90%',
-      height: '90%',
-      position: 'absolute',
+      height: '85%',
+      // position: 'absolute',
       alignSelf: 'center',
       bottom: 0,
+   },
+   backgroundImage: {
+      width: '100%',
+      height: '100%',
    },
 });
 

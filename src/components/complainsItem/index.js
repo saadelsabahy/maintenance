@@ -6,6 +6,7 @@ import {
    SURFACE_COLOR,
 } from '../../constants/colors';
 import { CustomText } from '../customText';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const ComplainsItem = ({
    complainNumber,
@@ -21,6 +22,7 @@ const ComplainsItem = ({
    images,
    spareParts,
    covered,
+   detailsContainerStyle,
 }) => {
    return (
       <TouchableOpacity
@@ -44,13 +46,13 @@ const ComplainsItem = ({
          <View
             style={[styles.indicator, { backgroundColor: indicatorColor }]}
          />
-         <View style={styles.detailsContainer}>
+         <View style={[styles.detailsContainer, detailsContainerStyle]}>
             <CustomText text={`رقم البلاغ : ${complainNumber}`} />
             <CustomText text={`تاريخ البلاغ : ${complainDate}`} />
             <CustomText text={`نوع المعده : ${vehicleType}`} />
             <CustomText text={`كود المعده : ${vehicleCode}`} />
-            <CustomText text={`رقم اللوحه : ${vehicleNumber}`} />
             <CustomText text={`العقد : ${contractorNumber}`} />
+            <CustomText text={`رقم اللوحه : ${vehicleNumber}`} />
          </View>
       </TouchableOpacity>
    );
@@ -58,12 +60,12 @@ const ComplainsItem = ({
 const styles = StyleSheet.create({
    container: {
       width: '100%',
-      height: SCREEN_HEIGHT / 4.5,
+      // height: SCREEN_HEIGHT / 5,
       backgroundColor: SURFACE_COLOR,
       borderRadius: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      padding: 10,
+      padding: 15,
       alignItems: 'center',
       marginBottom: 10,
    },
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
    detailsContainer: {
       flex: 0.97,
       alignSelf: 'center',
-      lineHeight: 20,
+      // lineHeight: responsiveFontSize(2.5),
       justifyContent: 'space-evenly',
       alignItems: 'flex-start',
    },

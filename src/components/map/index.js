@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   TouchableOpacity,
+   Platform,
+} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Linking } from 'react-native';
-
 
 const CustomMap = ({ mapStyle, mapContainerStyle, location }) => {
    const region = {
@@ -24,7 +29,7 @@ const CustomMap = ({ mapStyle, mapContainerStyle, location }) => {
       ios: `${scheme}${label}@${region.longitude}`,
       android: `${scheme}${latLng}(${label})`,
    });
-   
+
    return (
       <TouchableOpacity
          style={[styles.container, mapContainerStyle]}
@@ -41,10 +46,7 @@ const CustomMap = ({ mapStyle, mapContainerStyle, location }) => {
          }
          activeOpacity={0.9}>
          <MapView initialRegion={region} style={[styles.map, mapStyle]}>
-            <Marker
-               coordinate={region}
-               image={require('../../assets/images/marker.png')}
-            />
+            <Marker coordinate={region} />
          </MapView>
       </TouchableOpacity>
    );

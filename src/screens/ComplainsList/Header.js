@@ -13,6 +13,7 @@ import {
    WHITE_COLOR,
    MAIN_COLOR,
    SECONDART_COLOR,
+   HEADER_ICONS_COLOR,
 } from '../../constants/colors';
 const ListHeader = ({
    route,
@@ -27,7 +28,7 @@ const ListHeader = ({
          <Icon
             name={'ios-arrow-back'}
             type={'ionicon'}
-            color={WHITE_COLOR}
+            color={HEADER_ICONS_COLOR}
             style={{ transform: [{ rotateY: '-180deg' }] }}
             onPress={() => navigation.goBack()}
             iconContainerStyle={{ flex: 0.2 }}
@@ -64,7 +65,7 @@ const ListHeader = ({
                   <Icon
                      name={'filter-outline'}
                      type={'material-community'}
-                     color={WHITE_COLOR}
+                     color={HEADER_ICONS_COLOR}
                      iconContainerStyle={{ flex: 0 }}
                      onPress={() => menuRef.current.show()}
                   />
@@ -74,7 +75,7 @@ const ListHeader = ({
             <Icon
                name={'search'}
                type={'feather'}
-               color={WHITE_COLOR}
+               color={HEADER_ICONS_COLOR}
                iconContainerStyle={{ flex: 0 }}
                onPress={toggleSearchModal}
             />
