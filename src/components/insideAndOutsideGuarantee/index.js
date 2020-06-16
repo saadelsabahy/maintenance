@@ -167,9 +167,10 @@ const Gurantee = ({
                </View>
                <View
                   style={{
-                     height: SCREEN_HEIGHT * 0.3,
+                     height: SCREEN_HEIGHT * 0.25,
                      width: '100%',
                      justifyContent: 'space-evenly',
+                     paddingVertical: 10,
                   }}>
                   <TextArea
                      placeholder={selectedButton == 0 ? 'الحل' : 'الوصف'}

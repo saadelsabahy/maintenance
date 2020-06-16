@@ -21,6 +21,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ComplainsDetailes from '../screens/cmplainsDetails';
 import WaitingView from '../screens/waitView';
 import WaitApproval from '../screens/WaitingApproval';
+import AddComplain from '../screens/addComplain';
 
 const Stack = createStackNavigator();
 
@@ -98,7 +99,7 @@ const DrawerNavigator = () => {
             itemStyle: {
                borderBottomColor: DRAWER_DIVIDER,
                borderBottomWidth: 0.2,
-               height: '35%',
+               height: SCREEN_HEIGHT / 13,
                width: '100%',
                justifyContent: 'center',
                marginHorizontal: 15,
@@ -124,6 +125,13 @@ const DrawerNavigator = () => {
                   'file-multiple',
                   'material-community'
                ),
+            }}
+         />
+         <Drawer.Screen
+            name="AddComplain"
+            component={AddComplain}
+            options={{
+               ...dawerDefaultOptions('اضافه بلاغ', 'addfile', 'antdesign'),
             }}
          />
       </Drawer.Navigator>
