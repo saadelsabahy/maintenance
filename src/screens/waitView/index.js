@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import {
    Header,
    Icon,
@@ -9,7 +9,12 @@ import {
    ImageSelector,
    CustomText,
 } from '../../components';
-import { WHITE_COLOR, MAIN_COLOR } from '../../constants/colors';
+import {
+   WHITE_COLOR,
+   MAIN_COLOR,
+   SURFACE_COLOR,
+   HEADER_ICONS_COLOR,
+} from '../../constants/colors';
 import Gurantee from '../../components/insideAndOutsideGuarantee';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,7 +28,7 @@ import {
 } from '../../redux/actions/waitView';
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import BackgroundImage from '../../assets/images/app_bg.png';
 const ComplainsDetailes = ({ route, navigation }) => {
    const { data } = route.params;
    const isFocused = useIsFocused();
@@ -57,23 +62,33 @@ const ComplainsDetailes = ({ route, navigation }) => {
       setuserType(userType);
    };
    return (
-      <View style={styles.container}>
+      <ImageBackground
+         source={BackgroundImage}
+         style={styles.container}
+         resizeMode="stretch">
          <Header>
             <Icon
                name={'ios-arrow-back'}
                type={'ionicon'}
-               color={WHITE_COLOR}
+               color={HEADER_ICONS_COLOR}
                iconContainerStyle={{ flex: 0.1 }}
                style={{ transform: [{ rotateY: '-180deg' }] }}
                onPress={() => navigation.goBack()}
                size={responsiveFontSize(4)}
             />
 
-            <CustomText
-               text={data.complainNumber}
-               textStyle={{ color: WHITE_COLOR }}
-            />
-            <View style={{ flex: 0.2 }} />
+            <View
+               style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+               }}>
+               <CustomText
+                  text={data.complainNumber}
+                  textStyle={{ color: WHITE_COLOR }}
+               />
+            </View>
+
             {/* <Icon
                name={'list-unordered'}
                type={'octicon'}
@@ -82,7 +97,12 @@ const ComplainsDetailes = ({ route, navigation }) => {
                size={responsiveFontSize(4)}
             /> */}
          </Header>
-         <View style={{ width: '100%', height: '30%' }}>
+         <View
+            style={{
+               width: '100%',
+               justifyContent: 'center',
+               alignSelf: 'center',
+            }}>
             <ComplainsItem
                {...data}
                onComplainPressed={() => {}}
@@ -90,7 +110,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
             />
          </View>
 
-         <View style={{ flex: 1 }}>
+         <View style={{ flex: 0.6 }}>
             <Gurantee
                onSelectImagesPressed={() => dispatch(onSelectImagesPressed())}
                images={images}
@@ -109,19 +129,20 @@ const ComplainsDetailes = ({ route, navigation }) => {
                userType={userType}
             />
          </View>
-      </View>
+      </ImageBackground>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
       width: '100%',
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: SURFACE_COLOR,
+      justifyContent: 'space-between',
    },
    complainsItem: {
       width: '100%',
-      height: '100%',
       borderRadius: 0,
+      backgroundColor: 'transparent',
    },
 });
 

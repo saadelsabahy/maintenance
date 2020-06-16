@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: SURFACE_COLOR,
    },
+   inputContainer: {
+      borderWidth: 0,
+      borderBottomWidth: 0.7,
+   },
    imageContainer: {
       width: SCREEN_WIDTH - 30,
       height: SCREEN_HEIGHT * 0.3,

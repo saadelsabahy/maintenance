@@ -1,5 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   ScrollView,
+   FlatList,
+   ImageBackground,
+} from 'react-native';
 import { CustomButton } from '../Button';
 import {
    MAIN_COLOR,
@@ -8,6 +15,8 @@ import {
    SCREEN_HEIGHT,
    SECONDART_COLOR,
    SCREEN_WIDTH,
+   SURFACE_COLOR,
+   MAIN_RED_COLOR,
 } from '../../constants/colors';
 import TextArea from '../TextArea';
 import ChechBox from '../checkBox';
@@ -15,7 +24,7 @@ import { ImageSelector } from '../ImageSelector';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { CustomText } from '../customText';
-
+import BackgroundImage from '../../assets/images/bottom_sheet.png';
 const Gurantee = ({
    onSelectImagesPressed,
    images,
@@ -37,18 +46,21 @@ const Gurantee = ({
    };
    const bottomSheetHeader = () => {
       return (
-         <View
+         <ImageBackground
+            source={BackgroundImage}
             style={{
                width: '100%',
                height: 200,
                alignItems: 'center',
-               justifyContent: 'center',
-               backgroundColor: SECONDART_COLOR,
-               borderTopStartRadius: 50,
-               borderTopEndRadius: 50,
-            }}>
-            <View style={styles.handle} />
-            <View style={{ flex: 1, alignItems: 'center' }}>
+               justifyContent: 'flex-end',
+            }}
+            resizeMode="stretch">
+            <View
+               style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+               }}>
                <ImageSelector
                   onSelectImagesPressed={async () => {
                      await bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
@@ -62,16 +74,13 @@ const Gurantee = ({
                   buttonContainerStyle={{
                      width: '47%',
                      height: SCREEN_HEIGHT / 17,
-                     borderWidth: selectedButton !== 0 ? 1 : 0,
-                     borderColor: MAIN_COLOR,
-                     backgroundColor:
-                        selectedButton == 0 ? MAIN_COLOR : WHITE_COLOR,
-                     borderRadius: Math.round(
-                        SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
-                     ),
+                     borderBottomWidth: selectedButton == 0 ? 1 : 0,
+                     borderColor:
+                        selectedButton == 0 ? MAIN_RED_COLOR : 'transparent',
+                     backgroundColor: 'transparent',
                   }}
                   buttonTitleStyle={{
-                     color: selectedButton == 0 ? WHITE_COLOR : TEXT_COLOR,
+                     color: TEXT_COLOR,
                   }}
                   buttonTitle={'داخل الضمان'}
                   onButtonPressed={() => onButtonsPressed(0)}
@@ -80,22 +89,19 @@ const Gurantee = ({
                   buttonContainerStyle={{
                      width: '47%',
                      height: SCREEN_HEIGHT / 17,
-                     borderWidth: selectedButton !== 1 ? 1 : 0,
-                     borderColor: MAIN_COLOR,
-                     backgroundColor:
-                        selectedButton == 1 ? MAIN_COLOR : WHITE_COLOR,
-                     borderRadius: Math.round(
-                        SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2
-                     ),
+                     borderBottomWidth: selectedButton == 1 ? 1 : 0,
+                     borderColor:
+                        selectedButton == 1 ? MAIN_RED_COLOR : 'transparent',
+                     backgroundColor: 'transparent',
                   }}
                   buttonTitleStyle={{
-                     color: selectedButton == 1 ? WHITE_COLOR : TEXT_COLOR,
+                     color: TEXT_COLOR,
                   }}
                   buttonTitle={'خارج الضمان'}
                   onButtonPressed={() => onButtonsPressed(1)}
                />
             </View>
-         </View>
+         </ImageBackground>
       );
    };
 
@@ -105,7 +111,7 @@ const Gurantee = ({
             <View
                style={{
                   height: SCREEN_HEIGHT * 0.7,
-                  backgroundColor: SECONDART_COLOR,
+                  backgroundColor: '#3A3A3A',
                   paddingTop: 20,
                   shadowOffset: { width: 0, height: 5 },
                   shadowRadius: 5,
@@ -194,13 +200,13 @@ const Gurantee = ({
             <View
                style={{
                   height: SCREEN_HEIGHT - 150,
-                  backgroundColor: SECONDART_COLOR,
-                  paddingTop: 20,
+                  backgroundColor: '#3A3A3A',
+                  /*  paddingTop: 20,
                   shadowOffset: { width: 0, height: 5 },
                   shadowRadius: 5,
                   shadowOpacity: 0.7,
                   elevation: 5,
-                  alignItems: 'center',
+                  alignItems: 'center', */
                }}
             />
          );
@@ -244,14 +250,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-   },
-   handle: {
-      width: 50,
-      height: 8,
-      borderRadius: 4,
-      backgroundColor: '#00000040',
-      marginTop: 15,
-      alignSelf: 'center',
    },
 });
 

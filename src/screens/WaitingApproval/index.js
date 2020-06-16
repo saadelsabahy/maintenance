@@ -5,6 +5,7 @@ import {
    ScrollView,
    StyleSheet,
    ActivityIndicator,
+   ImageBackground,
 } from 'react-native';
 import {
    ImageCarousel,
@@ -21,6 +22,8 @@ import {
    DASHBOARD_ITEM_ICON_CONTAINER,
    SCREEN_HEIGHT,
    SCREEN_WIDTH,
+   HEADER_ICONS_COLOR,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -32,6 +35,8 @@ import {
 } from '../../redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import Reactotron from 'reactotron-react-native';
+import BackgroundImage from '../../assets/images/app_bg.png';
+
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
    const [userType, setuserType] = useState(null);
@@ -123,23 +128,20 @@ const WaitApproval = ({ navigation, route }) => {
       }
    };
    return (
-      <View
-         style={
-            !userType
-               ? { ...styles.container, backgroundColor: SECONDART_COLOR }
-               : styles.container
-         }>
-         <Header>
-            <View style={styles.headerIconContainer}>
-               <Icon
-                  name={'ios-arrow-back'}
-                  type={'ionicon'}
-                  color={WHITE_COLOR}
-                  iconContainerStyle={{ flex: 1 }}
-                  style={{ transform: [{ rotateY: '-180deg' }] }}
-                  onPress={() => navigation.goBack()}
-               />
-            </View>
+      <ImageBackground
+         source={BackgroundImage}
+         style={styles.container}
+         resizeMode="stretch">
+         <Header containerStyle={{ width: '90%' }}>
+            <Icon
+               name={'ios-arrow-back'}
+               type={'ionicon'}
+               color={HEADER_ICONS_COLOR}
+               iconContainerStyle={{ flex: 1, alignItems: 'flex-start' }}
+               style={{ transform: [{ rotateY: '-180deg' }] }}
+               onPress={() => navigation.goBack()}
+            />
+
             {/* <View style={styles.headerIconContainer}>
                <Icon
                   name={'list-unordered'}
@@ -157,7 +159,7 @@ const WaitApproval = ({ navigation, route }) => {
                   alignItems: 'center',
                }}>
                <ActivityIndicator
-                  color={MAIN_COLOR}
+                  color={WHITE_COLOR}
                   size={'large'}
                   style={{ alignSelf: 'center' }}
                />
@@ -168,7 +170,6 @@ const WaitApproval = ({ navigation, route }) => {
                   style={{
                      width: '100%',
                      height: '35%',
-                     backgroundColor: MAIN_COLOR,
                   }}>
                   <ImageCarousel data={data.images ? data.images : []} />
                </View>
@@ -194,19 +195,15 @@ const WaitApproval = ({ navigation, route }) => {
                <View style={styles.buttonsContainer}>{renderButtons()}</View>
             </>
          )}
-      </View>
+      </ImageBackground>
    );
 };
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: SURFACE_COLOR,
    },
    headerIconContainer: {
-      width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
-      height: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
-      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
-      backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
       alignItems: 'center',
       justifyContent: 'center',
       elevation: 2,
@@ -217,9 +214,6 @@ const styles = StyleSheet.create({
    },
    detailesContainer: {
       flex: 1,
-      paddingHorizontal: 10,
-      backgroundColor: WHITE_COLOR,
-      borderTopStartRadius: 50,
    },
    complainsItemContainer: {
       flex: 1,
@@ -227,10 +221,10 @@ const styles = StyleSheet.create({
       borderRadius: 0,
       borderTopStartRadius: 50,
       marginBottom: 0,
+      backgroundColor: 'transparent',
    },
    bottomSheetContainer: {
       flex: 1,
-      backgroundColor: WHITE_COLOR,
    },
    buttonsContainer: {
       flexDirection: 'row',
@@ -239,6 +233,7 @@ const styles = StyleSheet.create({
       marginBottom: 5,
       width: '90%',
       alignSelf: 'center',
+      zIndex: 1000,
    },
    button: {
       width: '45%',

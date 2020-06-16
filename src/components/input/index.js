@@ -8,6 +8,7 @@ import {
    SCREEN_WIDTH,
    MAIN_COLOR,
    PLACEHOLDER_COLOR,
+   WHITE_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -63,6 +64,7 @@ const CustomInput = ({
             <TextInput
                placeholder={placeholder}
                selectionColor={MAIN_COLOR}
+               placeholderTextColor={PLACEHOLDER_COLOR}
                style={[
                   Platform.OS == 'ios' && res.value
                      ? { ...styles.input, fontFamily: null }
@@ -105,6 +107,9 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent',
       borderBottomWidth: 0.9,
       borderColor: PLACEHOLDER_COLOR,
+      borderRadius: SCREEN_HEIGHT / 40,
+      borderWidth: 0.7,
+      borderColor: WHITE_COLOR,
    },
    input: {
       flex: 1,

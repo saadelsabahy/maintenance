@@ -1,18 +1,20 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {
    SECONDART_COLOR,
    TEXT_COLOR,
    WHITE_COLOR,
    SCREEN_HEIGHT,
+   SURFACE_COLOR,
+   MAIN_COLOR,
 } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { FlatList } from 'react-native-gesture-handler';
 import { ImageSelector } from '../ImageSelector';
 import ChechBox from '../checkBox';
 import Reactotron from 'reactotron-react-native';
-
+import BackgroundImage from '../../assets/images/popup.png';
 const VISITING_PRICE = 50;
 const CustomBottomSheet = ({
    source,
@@ -28,13 +30,21 @@ const CustomBottomSheet = ({
    );
    const bottonSheetReferance = useRef(null);
    const renderInner = () => (
-      <View style={styles.panel}>
-         <View style={styles.panelHandle} />
+      <ImageBackground
+         source={BackgroundImage}
+         style={styles.panel}
+         resizeMode="stretch">
          {source === 3 ? (
             <View
-               style={{ width: '100%', height: '100%', alignItems: 'center' }}>
+               style={{
+                  width: '90%',
+                  position: 'absolute',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  top: 90,
+               }}>
                {userType == 0 && (
-                  <View style={{ height: '15%', width: '90%' }}>
+                  <View style={{ height: '15%', width: '100%' }}>
                      <ImageSelector
                         images={excutionImages}
                         onSelectImagesPressed={async () => {
@@ -48,14 +58,10 @@ const CustomBottomSheet = ({
                )}
                <View
                   style={{
-                     flex: 0.8,
-                     width: '90%',
+                     width: '100%',
                   }}>
                   <FlatList
                      style={{ flex: 1 }}
-                     contentContainerStyle={{
-                        flexGrow: 1,
-                     }}
                      data={[...spareParts]}
                      keyExtractor={(item, index) => `${index}`}
                      renderItem={({ item, index }) => {
@@ -77,61 +83,65 @@ const CustomBottomSheet = ({
                </View>
             </View>
          ) : (
-            <>
+            <View
+               style={{
+                  width: '90%',
+                  position: 'absolute',
+                  top: 90,
+               }}>
+               <FlatList
+                  data={[...spareParts]}
+                  keyExtractor={(item, index) => `${index}`}
+                  style={{ maxHeight: SCREEN_HEIGHT * 0.6 }}
+                  renderItem={({ item, index }) => {
+                     return (
+                        <View style={styles.bottomSheetItem}>
+                           <CustomText text={item.NameAr} />
+                           <CustomText text={`${+item.Price} ريال`} />
+                        </View>
+                     );
+                  }}
+               />
                <View
                   style={{
-                     width: '90%',
-                     height: SCREEN_HEIGHT * 0.6,
+                     marginVertical: 10,
+                     borderTopWidth: 0.7,
+                     borderTopColor: WHITE_COLOR,
                   }}>
-                  <FlatList
-                     style={{ flex: 1 }}
-                     contentContainerStyle={{ flexGrow: 1 }}
-                     data={[...spareParts]}
-                     keyExtractor={(item, index) => `${index}`}
-                     renderItem={({ item, index }) => {
-                        return (
-                           <View style={styles.bottomSheetItem}>
-                              <CustomText text={item.NameAr} />
-                              <CustomText text={`${+item.Price} ريال`} />
-                           </View>
-                        );
-                     }}
-                  />
+                  <View style={styles.bottomSheetItem}>
+                     <CustomText text={'ثمن الزياره'} />
+                     <CustomText text={`${VISITING_PRICE}ريال`} />
+                  </View>
+                  <View
+                     style={[
+                        styles.bottomSheetItem,
+                        {
+                           backgroundColor: MAIN_COLOR,
+                           paddingHorizontal: 10,
+                        },
+                     ]}>
+                     <CustomText
+                        text={'المجموع الكلي'}
+                        textStyle={{ color: WHITE_COLOR }}
+                     />
+                     <CustomText
+                        text={`${TOTAL_PRICE}ريال`}
+                        textStyle={{ color: WHITE_COLOR }}
+                     />
+                  </View>
                </View>
-               <View style={styles.bottomSheetItem}>
-                  <CustomText text={'ثمن الزياره'} />
-                  <CustomText text={`${VISITING_PRICE}ريال`} />
-               </View>
-               <View
-                  style={[
-                     styles.bottomSheetItem,
-                     {
-                        backgroundColor: TEXT_COLOR,
-                        paddingHorizontal: 10,
-                        backgroundColor: TEXT_COLOR,
-                     },
-                  ]}>
-                  <CustomText
-                     text={'المجموع الكلي'}
-                     textStyle={{ color: WHITE_COLOR }}
-                  />
-                  <CustomText
-                     text={`${TOTAL_PRICE}ريال`}
-                     textStyle={{ color: WHITE_COLOR }}
-                  />
-               </View>
-            </>
+            </View>
          )}
-      </View>
+      </ImageBackground>
    );
 
    const renderHeader = () => <View style={styles.header} />;
    return (
       <View style={{ flex: 1 }}>
          <BottomSheet
-            snapPoints={['28%', '90%', '28%']}
+            snapPoints={['26%', '90%', '26%']}
             renderContent={renderInner}
-            renderHeader={renderHeader}
+            /*     renderHeader={renderHeader} */
             enabledInnerScrolling={false}
             enabledBottomInitialAnimation
             initialSnap={2}
@@ -160,16 +170,8 @@ const styles = StyleSheet.create({
    },
    panel: {
       height: SCREEN_HEIGHT,
-      backgroundColor: SECONDART_COLOR,
-      paddingTop: 20,
-      borderTopLeftRadius: 40,
-      borderTopRightRadius: 40,
-      shadowColor: '#000000',
-      shadowOffset: { width: 0, height: 5 },
-      shadowRadius: 5,
-      shadowOpacity: 0.7,
-      elevation: 5,
       alignItems: 'center',
+      justifyContent: 'center',
    },
    header: {
       width: '100%',
@@ -189,11 +191,11 @@ const styles = StyleSheet.create({
    bottomSheetItem: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      height: SCREEN_HEIGHT / 14,
       width: '100%',
-      height: 45,
-      width: '90%',
       alignSelf: 'center',
       alignItems: 'center',
+      paddingHorizontal: 10,
    },
 });
 

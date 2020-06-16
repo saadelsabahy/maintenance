@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, I18nManager, TextInput } from 'react-native';
 import Textarea from 'react-native-textarea';
-import { INPUT_COLOR, TEXT_COLOR } from '../../constants/colors';
+import { INPUT_COLOR, TEXT_COLOR, SURFACE_COLOR } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const TextArea = ({ placeholder, ...res }) => {
    return (
@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
    textareaContainer: {
       width: '90%',
       height: '40%',
-      backgroundColor: INPUT_COLOR,
+      backgroundColor: SURFACE_COLOR,
       alignSelf: 'center',
       alignItems: 'flex-start',
-      borderWidth: 0.4,
+      borderWidth: 0.3,
       borderRadius: 10,
       borderColor: TEXT_COLOR,
    },

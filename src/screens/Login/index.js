@@ -130,9 +130,7 @@ const Login = ({ navigation }) => {
                         returnKeyType="next"
                         onSubmitEditing={() => passwordInput.current.focus()}
                         blurOnSubmit={false}
-
-                        /*  error={true}
-            errorText={'حدث خطا مابيياريالاتا'} */
+                        inputContainerStyle={styles.inputContainer}
                      />
 
                      <CustomInput
@@ -153,6 +151,7 @@ const Login = ({ navigation }) => {
                         referance={passwordInput}
                         returnKeyType="go"
                         iconStartStyle={styles.icon}
+                        inputContainerStyle={styles.inputContainer}
                      />
                   </View>
                </View>

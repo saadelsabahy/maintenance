@@ -6,6 +6,7 @@ import {
    MAIN_COLOR,
    WHITE_COLOR,
    SCREEN_HEIGHT,
+   MAIN_RED_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -66,10 +67,11 @@ const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
 };
 const styles = StyleSheet.create({
    container: {
-      flex: 1,
+      height: SCREEN_HEIGHT / 10,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-evenly',
+      alignSelf: 'center',
    },
    IconContainer: {
       width: SCREEN_WIDTH / 6,
@@ -77,13 +79,13 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: MAIN_RED_COLOR,
       marginEnd: 5,
    },
    imageContainer: {
       width: 70,
-      height: 70,
-      backgroundColor: WHITE_COLOR,
+      height: SCREEN_HEIGHT / 11,
+      backgroundColor: MAIN_COLOR,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 15,

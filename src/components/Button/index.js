@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: MAIN_RED_COLOR,
-      borderRadius: 25,
+      borderRadius: 15,
    },
    text: {
       color: WHITE_COLOR,

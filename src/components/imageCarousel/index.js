@@ -5,6 +5,7 @@ import {
    SCREEN_WIDTH,
    WHITE_COLOR,
    SECONDART_COLOR,
+   MAIN_RED_COLOR,
 } from '../../constants/colors';
 
 const ITEM_WIDTH = Math.round(SCREEN_WIDTH * 0.8);
@@ -59,7 +60,7 @@ const ImageCarousel = ({ data }) => {
                dotsLength={data.length}
                activeDotIndex={activeSlide}
                dotStyle={styles.activeDot}
-               inactiveDotStyle={{}}
+               inactiveDotStyle={styles.inactiveDot}
                inactiveDotOpacity={0.4}
             />
          }
@@ -94,14 +95,14 @@ const styles = StyleSheet.create({
       width: 15,
       height: 15,
       borderRadius: 7.5,
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: MAIN_RED_COLOR,
       zIndex: 1000,
    },
    inactiveDot: {
       width: 20,
       height: 20,
       borderRadius: 10,
-      backgroundColor: '#000',
+      backgroundColor: '#ddd',
       zIndex: 1000,
    },
 });

@@ -4,6 +4,7 @@ import {
    WHITE_COLOR,
    SCREEN_HEIGHT,
    SURFACE_COLOR,
+   SCREEN_WIDTH,
 } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';

@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
    contentContainer: {
       width: '90%',
       height: '85%',
+      alignItems: 'center',
       // position: 'absolute',
       alignSelf: 'center',
       bottom: 0,

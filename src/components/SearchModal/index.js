@@ -7,6 +7,7 @@ import {
    KeyboardAvoidingView,
    Platform,
    ScrollView,
+   ImageBackground,
    Keyboard,
 } from 'react-native';
 import Modal from 'react-native-modal';
@@ -16,6 +17,7 @@ import {
    TEXT_COLOR,
    SCREEN_WIDTH,
    SCREEN_HEIGHT,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import { CustomInput } from '../input';
 import { CustomText } from '../customText';
@@ -28,7 +30,7 @@ import { Icon } from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { onSearchInputsChange } from '../../redux/actions';
 import FlashMessage from 'react-native-flash-message';
-
+import BackgroundImage from '../../assets/images/popup.png';
 const SearchModal = ({
    isModalVisible,
    coverScreen,
@@ -73,11 +75,13 @@ const SearchModal = ({
          testID={'modal'}
          style={styles.container}
          isVisible={isModalVisible}
-         onBackdropPress={HideModal}
+         onBackButtonPress={HideModal}
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}>
-         <View
+         <ImageBackground
+            source={BackgroundImage}
+            resizeMode="cover"
             style={
                keyboardShow
                   ? {
@@ -102,22 +106,12 @@ const SearchModal = ({
                      flexDirection: 'row',
                      justifyContent: 'space-between',
                      alignItems: 'center',
-                     padding: 10,
+                     padding: 15,
                   }}>
-                  <Icon
-                     name={'close'}
-                     type={'material-community'}
-                     onPress={HideModal}
-                     iconContainerStyle={{
-                        flex: 1,
-                        alignItems: 'flex-start',
-                     }}
-                     color={TEXT_COLOR}
-                  />
                   <View
                      style={{
                         flex: 1,
-                        alignItems: 'center',
+                        alignItems: 'flex-start',
                      }}>
                      <CustomText
                         text={'بحث'}
@@ -126,7 +120,16 @@ const SearchModal = ({
                         }}
                      />
                   </View>
-                  <View style={{ flex: 1 }} />
+                  <Icon
+                     name={'close'}
+                     type={'material-community'}
+                     onPress={HideModal}
+                     iconContainerStyle={{
+                        flex: 1,
+                        alignItems: 'flex-end',
+                     }}
+                     color={TEXT_COLOR}
+                  />
                </View>
 
                <View style={styles.inputsContainer}>
@@ -209,7 +212,7 @@ const SearchModal = ({
                titleStyle={styles.flashText}
                duration={4000}
             />
-         </View>
+         </ImageBackground>
       </Modal>
    );
 };
@@ -223,9 +226,9 @@ const styles = StyleSheet.create({
    },
    modalContentContainer: {
       height: SCREEN_HEIGHT * 0.9,
-      backgroundColor: SECONDART_COLOR,
+      /*    backgroundColor: SECONDART_COLOR,
       borderTopStartRadius: 20,
-      borderTopEndRadius: 20,
+      borderTopEndRadius: 20, */
       alignItems: 'center',
    },
    inputsContainer: {
@@ -246,10 +249,9 @@ const styles = StyleSheet.create({
    button: {
       width: '45%',
       height: SCREEN_HEIGHT / 16,
-      borderRadius: 20,
    },
    input: {
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: SURFACE_COLOR,
       paddingHorizontal: 10,
    },
    dropDwonButton: {
@@ -259,10 +261,10 @@ const styles = StyleSheet.create({
    },
    menuContainerStyle: {
       width: '100%',
-      backgroundColor: '#fff',
-      borderRadius: 50,
-      borderColor: TEXT_COLOR,
-      borderWidth: 1,
+      backgroundColor: SURFACE_COLOR,
+      borderRadius: 15,
+      borderColor: WHITE_COLOR,
+      borderWidth: 0.7,
       height: SCREEN_HEIGHT / 16,
    },
    menuStyle: {

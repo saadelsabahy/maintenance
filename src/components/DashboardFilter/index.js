@@ -8,6 +8,8 @@ import {
    Platform,
    ScrollView,
    Keyboard,
+   ImageBackground,
+   ImageBackgroundBase,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -16,6 +18,7 @@ import {
    TEXT_COLOR,
    SCREEN_WIDTH,
    SCREEN_HEIGHT,
+   SURFACE_COLOR,
 } from '../../constants/colors';
 import { CustomInput } from '../input';
 import { CustomText } from '../customText';
@@ -26,7 +29,7 @@ import { CustomDropDown } from '../dropDown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Icon } from '../Icon';
 import FlashMessage from 'react-native-flash-message';
-
+import BackgroundImage from '../../assets/images/popup.png';
 const DashboardFilter = ({
    isModalVisible,
    coverScreen,
@@ -66,47 +69,53 @@ const DashboardFilter = ({
          testID={'modal'}
          style={styles.container}
          isVisible={isModalVisible}
-         onBackdropPress={onBackdropPress}
          onBackButtonPress={onBackdropPress}
          coverScreen
          backdropOpacity={backdropOpacity || 0.6}
          backdropColor={backdropColor || '#000'}
          avoidKeyboard>
-         <View style={styles.modalContentContainer}>
+         <ImageBackground
+            source={BackgroundImage}
+            resizeMode="stretch"
+            style={styles.modalContentContainer}>
             <KeyboardAwareScrollView
                style={{
                   flex: 1,
                }}
                contentContainerStyle={{
                   flexGrow: 1,
-                  justifyContent: 'center',
+                  justifyContent: 'space-evenly',
                   alignItems: 'center',
                }}
                enableOnAndroid={true}
                keyboardShouldPersistTaps="always"
                enableAutomaticScroll={false}>
+               <Icon
+                  name={'close'}
+                  type={'material-community'}
+                  onPress={HideModal}
+                  iconContainerStyle={{
+                     position: 'absolute',
+                     end: 10,
+                     top: -10,
+                     flex: 1,
+                  }}
+                  color={TEXT_COLOR}
+                  size={responsiveFontSize(4)}
+               />
                <View
                   style={{
-                     flex: 1,
                      flexDirection: 'row',
                      justifyContent: 'space-between',
                      alignItems: 'center',
-                     padding: 10,
+                     paddingHorizontal: 10,
+                     /*   position: 'absolute',
+                     top: 0, */
                   }}>
-                  <Icon
-                     name={'close'}
-                     type={'material-community'}
-                     onPress={HideModal}
-                     iconContainerStyle={{
-                        flex: 1,
-                        alignItems: 'flex-start',
-                     }}
-                     color={TEXT_COLOR}
-                  />
                   <View
                      style={{
                         flex: 1,
-                        alignItems: 'center',
+                        // top: 10,
                      }}>
                      <CustomText
                         text={'بحث'}
@@ -115,7 +124,6 @@ const DashboardFilter = ({
                         }}
                      />
                   </View>
-                  <View style={{ flex: 1 }} />
                </View>
                <View style={styles.inputsContainer}>
                   <CustomInput
@@ -140,7 +148,7 @@ const DashboardFilter = ({
                   />
                </View>
             </KeyboardAwareScrollView>
-         </View>
+         </ImageBackground>
          <FlashMessage
             ref={filterModalFlashMessage}
             position={'top'}
@@ -162,9 +170,9 @@ const styles = StyleSheet.create({
    },
    modalContentContainer: {
       height: SCREEN_HEIGHT * 0.35,
-      backgroundColor: SECONDART_COLOR,
+      /* backgroundColor: SECONDART_COLOR,
       borderTopStartRadius: 20,
-      borderTopEndRadius: 20,
+      borderTopEndRadius: 20, */
       alignItems: 'center',
       justifyContent: 'center',
    },
@@ -183,11 +191,10 @@ const styles = StyleSheet.create({
    },
    button: {
       width: '45%',
-      height: SCREEN_HEIGHT / 15,
-      borderRadius: 20,
+      height: SCREEN_HEIGHT / 16,
    },
    input: {
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: SURFACE_COLOR,
       paddingHorizontal: 10,
    },
    flashText: {

@@ -8,6 +8,7 @@ import {
    TEXT_COLOR,
    SCREEN_WIDTH,
    SCREEN_HEIGHT,
+   SURFACE_COLOR,
 } from '../../../constants/colors';
 
 const DateTimeButton = ({
@@ -47,23 +48,24 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center',
       borderColor: TEXT_COLOR,
-      borderWidth: 1,
-      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
+      borderWidth: 0.7,
       paddingHorizontal: 10,
       paddingEnd: 0,
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: SURFACE_COLOR,
+      borderRadius: 10,
    },
    textContainer: {
-      flex: 0.8,
+      flex: 0.7,
       alignItems: 'center',
    },
    iconContainer: {
-      width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
+      flex: 0.3,
+      /*    width: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
       height: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2) / 12,
-      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2),
+      borderRadius: Math.round(SCREEN_HEIGHT / 2 + SCREEN_WIDTH / 2), */
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: MAIN_COLOR,
+      /*  backgroundColor: MAIN_COLOR, */
    },
 });
 export default DateTimeButton;
