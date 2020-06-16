@@ -63,7 +63,7 @@ const CustomInput = ({
             )}
             <TextInput
                placeholder={placeholder}
-               selectionColor={MAIN_COLOR}
+               selectionColor={MAIN_RED_COLOR}
                placeholderTextColor={PLACEHOLDER_COLOR}
                style={[
                   Platform.OS == 'ios' && res.value

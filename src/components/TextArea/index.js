@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, I18nManager, TextInput } from 'react-native';
 import Textarea from 'react-native-textarea';
-import { INPUT_COLOR, TEXT_COLOR, SURFACE_COLOR } from '../../constants/colors';
+import {
+   INPUT_COLOR,
+   TEXT_COLOR,
+   SURFACE_COLOR,
+   MAIN_RED_COLOR,
+} from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const TextArea = ({ placeholder, ...res }) => {
    return (
@@ -11,6 +16,7 @@ const TextArea = ({ placeholder, ...res }) => {
             maxLength={120}
             placeholder={placeholder}
             placeholderTextColor={TEXT_COLOR}
+            selectionColor={MAIN_RED_COLOR}
             underlineColorAndroid={'transparent'}
             {...res}
          />
