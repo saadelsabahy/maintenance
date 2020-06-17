@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, StyleSheet, I18nManager, Image } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
@@ -40,7 +40,6 @@ const MaterialDropDown = ({ containerStyle, data, label, ...res }) => {
             inputContainerStyle={{
                borderBottomWidth: 0,
                borderBottomColor: 'transparent',
-               backgroundColor: SURFACE_COLOR,
             }}
             pickerStyle={{ backgroundColor: SURFACE_COLOR }}
             rippleOpacity={0} //Hide The Effect Of Opacity
@@ -72,7 +71,7 @@ const MaterialDropDown = ({ containerStyle, data, label, ...res }) => {
 };
 const styles = StyleSheet.create({
    container: {
-      // backgroundColor: SURFACE_COLOR,
+      backgroundColor: SURFACE_COLOR,
       width: '100%',
       height: SCREEN_HEIGHT / 15,
       paddingHorizontal: 5,

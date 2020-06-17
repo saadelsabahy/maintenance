@@ -17,6 +17,7 @@ import Reactotron from 'reactotron-react-native';
 import BackgroundImage from '../../assets/images/popup.png';
 import moment from 'moment';
 import { SignatureModal } from '../signatureModal';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const VISITING_PRICE = 50;
 const CustomBottomSheet = ({
    source,
@@ -105,12 +106,21 @@ const CustomBottomSheet = ({
                      <CustomText text={'أمر توريد'} />
                      <CustomText
                         text={` تحريرا في ${moment().format('DD-MM-YYYY')}`}
-                        textStyle={{ marginVertical: 10 }}
+                        textStyle={{ marginVertical: 20 }}
                      />
-                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                     <View
+                        style={{
+                           flexDirection: 'row',
+                           flexWrap: 'wrap',
+                           flex: 1,
+                           flexShrink: 1,
+                        }}>
                         <CustomText
                            text={`الامر لأجل اصلاح المعده رقم :- ${vehicleNumber} في العقد :- ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه : - `}
-                           textStyle={{ alignSelf: 'flex-start' }}
+                           textStyle={{
+                              alignSelf: 'flex-start',
+                           }}
+                           numberOfLines={3}
                         />
                      </View>
                   </View>

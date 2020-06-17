@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, I18nManager } from 'react-native';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { TEXT_COLOR } from '../../constants/colors';
 
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(2),
       color: TEXT_COLOR,
+      writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
    },
 });
 
