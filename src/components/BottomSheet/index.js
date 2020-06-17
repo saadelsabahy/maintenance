@@ -106,7 +106,9 @@ const CustomBottomSheet = ({
                      <CustomText text={'أمر توريد'} />
                      <CustomText
                         text={` تحريرا في ${moment().format('DD-MM-YYYY')}`}
-                        textStyle={{ marginVertical: 20 }}
+                        textStyle={{
+                           marginVertical: SCREEN_HEIGHT > 850 ? 20 : 5,
+                        }}
                      />
                      <View
                         style={{
