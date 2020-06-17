@@ -116,6 +116,8 @@ const DashboardFilter = ({
                      style={{
                         flex: 1,
                         // top: 10,
+
+                        alignItems: 'flex-start',
                      }}>
                      <CustomText
                         text={'بحث'}

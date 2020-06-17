@@ -93,17 +93,26 @@ const CustomBottomSheet = ({
                style={{
                   width: '90%',
                   position: 'absolute',
-                  top: source == 5 ? 35 : 90,
+                  top: source == 5 ? 30 : 90,
                }}>
                {source == 5 && (
-                  <View style={{ padding: 10 }}>
+                  <View
+                     style={{
+                        padding: 10,
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                     }}>
                      <CustomText text={'أمر توريد'} />
                      <CustomText
                         text={` تحريرا في ${moment().format('DD-MM-YYYY')}`}
+                        textStyle={{ marginVertical: 10 }}
                      />
-                     <CustomText
-                        text={`الامر لأجل اصلاح المعده رقم :- ${vehicleNumber} في العقد :- ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه : - `}
-                     />
+                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                        <CustomText
+                           text={`الامر لأجل اصلاح المعده رقم :- ${vehicleNumber} في العقد :- ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه : - `}
+                           textStyle={{ alignSelf: 'flex-start' }}
+                        />
+                     </View>
                   </View>
                )}
                <FlatList
@@ -152,7 +161,11 @@ const CustomBottomSheet = ({
                   {source == 5 && (
                      <CustomText
                         text={'يعتمد بواسطه :--------'}
-                        textStyle={{ color: WHITE_COLOR, marginVertical: 10 }}
+                        textStyle={{
+                           color: WHITE_COLOR,
+                           marginVertical: 10,
+                           alignSelf: 'flex-start',
+                        }}
                         onPress={handleSignatureModal}
                      />
                   )}

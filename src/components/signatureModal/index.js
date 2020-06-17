@@ -21,7 +21,7 @@ const SignatureModal = ({
          backdropColor={backdropColor || '#000'}>
          <View style={{ flex: 1 }}>
             <SignatureCapture
-               style={{ flex: 1, width: '100%' }}
+               style={{ flex: 0.8, width: '100%', marginTop: 50 }}
                viewMode={'portrait'}
                saveImageFileInExtStorage={false}
                showNativeButtons={false}

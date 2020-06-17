@@ -40,6 +40,13 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "maintenance-tvOS";
 		};
+		4F10103A249ACEE5001A0D77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F101036249ACEE4001A0D77 /* RSSignatureCapture.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0C53A99E1B56113D004F2642;
+			remoteInfo = RSSignatureCapture;
+		};
 		50AB3771245EFCBD00FA2E78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F4C85D7498944A6686AD612B /* WatermelonDB.xcodeproj */;
@@ -74,6 +81,7 @@
 		2D02E4901E0B4A5D006451C7 /* maintenance-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "maintenance-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3541CD159478829C1C39C4A0 /* libPods-maintenanceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-maintenanceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		355C2F6AD3574702868380A9 /* libWatermelonDB.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libWatermelonDB.a; sourceTree = "<group>"; };
+		4F101036249ACEE4001A0D77 /* RSSignatureCapture.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSSignatureCapture.xcodeproj; path = "../node_modules/react-native-signature-capture/ios/RSSignatureCapture.xcodeproj"; sourceTree = "<group>"; };
 		50AB376A245EFC4600FA2E78 /* maintenance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "maintenance-Bridging-Header.h"; sourceTree = "<group>"; };
 		50AB376B245EFC4600FA2E78 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		50AB3776245F240F00FA2E78 /* libRSKImageCropper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRSKImageCropper.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +210,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4F101037249ACEE4001A0D77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F10103B249ACEE5001A0D77 /* libRSSignatureCapture.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		50AB376D245EFCBD00FA2E78 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +261,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4F101036249ACEE4001A0D77 /* RSSignatureCapture.xcodeproj */,
 				F4C85D7498944A6686AD612B /* WatermelonDB.xcodeproj */,
 			);
 			name = Libraries;
@@ -403,6 +420,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 4F101037249ACEE4001A0D77 /* Products */;
+					ProjectRef = 4F101036249ACEE4001A0D77 /* RSSignatureCapture.xcodeproj */;
+				},
+				{
 					ProductGroup = 50AB376E245EFCBD00FA2E78 /* Products */;
 					ProjectRef = F4C85D7498944A6686AD612B /* WatermelonDB.xcodeproj */;
 				},
@@ -418,6 +439,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4F10103B249ACEE5001A0D77 /* libRSSignatureCapture.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRSSignatureCapture.a;
+			remoteRef = 4F10103A249ACEE5001A0D77 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		50AB3772245EFCBD00FA2E78 /* libWatermelonDB.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
