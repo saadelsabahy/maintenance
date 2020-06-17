@@ -40,6 +40,7 @@ import BackgroundImage from '../../assets/images/app_bg.png';
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
    const [userType, setuserType] = useState(null);
+   const [isSignatureModalVisible, setisSignatureModalVisible] = useState(null);
    const dispatch = useDispatch();
    const {
       images,
@@ -59,6 +60,9 @@ const WaitApproval = ({ navigation, route }) => {
    const getUserType = async () => {
       const userType = await AsyncStorage.getItem('userType');
       setuserType(userType);
+   };
+   const handleSignatureModal = () => {
+      setisSignatureModalVisible(!isSignatureModalVisible);
    };
    const renderButtons = () => {
       switch (distination) {
@@ -190,6 +194,10 @@ const WaitApproval = ({ navigation, route }) => {
                      spareParts={data.spareParts ? data.spareParts : []}
                      oncloseBottomSheet={() => dispatch(onCloseExcutionSheet())}
                      userType={userType}
+                     vehicleNumber={data.vehicleNumber}
+                     contractorNumber={data.contractorNumber}
+                     handleSignatureModal={handleSignatureModal}
+                     isSignatureModalVisible={isSignatureModalVisible}
                   />
                </View>
                <View style={styles.buttonsContainer}>{renderButtons()}</View>

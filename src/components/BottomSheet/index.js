@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {
@@ -15,6 +15,8 @@ import { ImageSelector } from '../ImageSelector';
 import ChechBox from '../checkBox';
 import Reactotron from 'reactotron-react-native';
 import BackgroundImage from '../../assets/images/popup.png';
+import moment from 'moment';
+import { SignatureModal } from '../signatureModal';
 const VISITING_PRICE = 50;
 const CustomBottomSheet = ({
    source,
@@ -23,6 +25,10 @@ const CustomBottomSheet = ({
    spareParts,
    oncloseBottomSheet,
    userType,
+   vehicleNumber,
+   contractorNumber,
+   handleSignatureModal,
+   isSignatureModalVisible,
 }) => {
    const TOTAL_PRICE = spareParts.reduce(
       (acc, val) => +acc + +val.Price,
@@ -87,12 +93,26 @@ const CustomBottomSheet = ({
                style={{
                   width: '90%',
                   position: 'absolute',
-                  top: 90,
+                  top: source == 5 ? 35 : 90,
                }}>
+               {source == 5 && (
+                  <View style={{ padding: 10 }}>
+                     <CustomText text={'أمر توريد'} />
+                     <CustomText
+                        text={` تحريرا في ${moment().format('DD-MM-YYYY')}`}
+                     />
+                     <CustomText
+                        text={`الامر لأجل اصلاح المعده رقم :- ${vehicleNumber} في العقد :- ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه : - `}
+                     />
+                  </View>
+               )}
                <FlatList
                   data={[...spareParts]}
                   keyExtractor={(item, index) => `${index}`}
-                  style={{ maxHeight: SCREEN_HEIGHT * 0.6 }}
+                  style={{
+                     maxHeight:
+                        source == 5 ? SCREEN_HEIGHT * 0.3 : SCREEN_HEIGHT * 0.6,
+                  }}
                   renderItem={({ item, index }) => {
                      return (
                         <View style={styles.bottomSheetItem}>
@@ -129,6 +149,13 @@ const CustomBottomSheet = ({
                         textStyle={{ color: WHITE_COLOR }}
                      />
                   </View>
+                  {source == 5 && (
+                     <CustomText
+                        text={'يعتمد بواسطه :--------'}
+                        textStyle={{ color: WHITE_COLOR, marginVertical: 10 }}
+                        onPress={handleSignatureModal}
+                     />
+                  )}
                </View>
             </View>
          )}
@@ -139,7 +166,13 @@ const CustomBottomSheet = ({
    return (
       <View style={{ flex: 1 }}>
          <BottomSheet
-            snapPoints={['26%', SCREEN_HEIGHT - SCREEN_HEIGHT / 5, '26%']}
+            snapPoints={[
+               '26%',
+               source == 5
+                  ? SCREEN_HEIGHT - SCREEN_HEIGHT / 7
+                  : SCREEN_HEIGHT - SCREEN_HEIGHT / 5,
+               '26%',
+            ]}
             renderContent={renderInner}
             /*     renderHeader={renderHeader} */
             enabledInnerScrolling={false}
@@ -147,6 +180,10 @@ const CustomBottomSheet = ({
             initialSnap={2}
             ref={bottonSheetReferance}
             onCloseEnd={source === 3 ? oncloseBottomSheet : () => {}}
+         />
+         <SignatureModal
+            isModalVisible={isSignatureModalVisible}
+            hideModal={handleSignatureModal}
          />
       </View>
    );

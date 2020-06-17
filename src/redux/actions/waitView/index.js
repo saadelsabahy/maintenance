@@ -52,6 +52,8 @@ export const onSelectImagesPressed = () => (dispatch, getState) => {
       mediaType: 'photo',
    })
       .then(seletedImages => {
+         console.log(seletedImages);
+
          dispatch({
             type: SELECT_IMAGES_SUCCESS,
             payload: [...images, seletedImages],

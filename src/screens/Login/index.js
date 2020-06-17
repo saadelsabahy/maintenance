@@ -70,7 +70,7 @@ const Login = ({ navigation }) => {
             resetScrollToCoords={{ x: 0, y: 0 }}
             contentContainerStyle={{ flexGrow: 1 }}
             ref={ref => (ref = keyboardAvoidingRef)}
-            keyboardShouldPersistTaps="never">
+            keyboardShouldPersistTaps="always">
             <View
                style={{
                   flex: 1,

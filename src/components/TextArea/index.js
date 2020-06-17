@@ -6,16 +6,17 @@ import {
    TEXT_COLOR,
    SURFACE_COLOR,
    MAIN_RED_COLOR,
+   PLACEHOLDER_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-const TextArea = ({ placeholder, ...res }) => {
+const TextArea = ({ placeholder, containerStyle, ...res }) => {
    return (
-      <View style={styles.textareaContainer}>
+      <View style={[styles.textareaContainer, containerStyle]}>
          <TextInput
             style={styles.textarea}
             maxLength={120}
             placeholder={placeholder}
-            placeholderTextColor={TEXT_COLOR}
+            placeholderTextColor={PLACEHOLDER_COLOR}
             selectionColor={MAIN_RED_COLOR}
             underlineColorAndroid={'transparent'}
             {...res}

@@ -9,6 +9,7 @@ import {
    MAIN_COLOR,
    PLACEHOLDER_COLOR,
    WHITE_COLOR,
+   MAIN_RED_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -42,7 +43,7 @@ const CustomInput = ({
       <View
          style={[
             {
-               height: SCREEN_HEIGHT / 14,
+               height: SCREEN_HEIGHT / 15,
                alignItems: 'center',
                justifyContent: 'center',
                width: '100%',
