@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import SignatureCapture from 'react-native-signature-capture';
 import { SCREEN_HEIGHT, WHITE_COLOR } from '../../constants/colors';
@@ -11,6 +11,8 @@ const SignatureModal = ({
    backdropOpacity,
 }) => {
    const signatureRef = useRef(null);
+   const [selectedImage, setselectedImage] = useState('');
+   console.log('signature', `file://${selectedImage}`);
    return (
       <Modal
          style={styles.container}
@@ -23,14 +25,20 @@ const SignatureModal = ({
             <SignatureCapture
                style={{ flex: 0.8, width: '100%', marginTop: 50 }}
                viewMode={'portrait'}
-               saveImageFileInExtStorage={false}
+               saveImageFileInExtStorage={true}
                showNativeButtons={false}
                showTitleLabel={false}
                ref={signatureRef}
                onSaveEvent={res => {
-                  console.log('signature', res);
+                  setselectedImage(res.pathName);
                }}
             />
+            {selectedImage ? (
+               <Image
+                  style={{ width: 150, height: 150, backgroundColor: 'red' }}
+                  source={selectedImage && { uri: `file://${selectedImage}` }}
+               />
+            ) : null}
             <View
                style={{
                   height: SCREEN_HEIGHT / 8,

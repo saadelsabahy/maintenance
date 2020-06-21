@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { CustomText } from '../customText';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import { MAIN_COLOR } from '../../constants/colors';
+import { MAIN_COLOR, TEXT_COLOR } from '../../constants/colors';
 
 const EmptyList = ({ iconSize, emptyText }) => {
    return (
@@ -11,7 +11,7 @@ const EmptyList = ({ iconSize, emptyText }) => {
          <Icon
             name={'exclamation'}
             size={iconSize || responsiveFontSize(4)}
-            color={MAIN_COLOR}
+            color={TEXT_COLOR}
          />
          <CustomText text={emptyText || 'لا يوجد اي بلاغات'} />
       </View>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { Icon } from '../Icon';
 import {
@@ -11,11 +11,12 @@ import {
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
-   const EmptyLiImageList = () => {
-      return ['1', '2', '3'].map((item, index) => {
+   const EmptyLiImageList = length => {
+      return [...Array(length).keys()].map(String).map((item, index) => {
          return <View style={styles.imageContainer} key={item} />;
       });
    };
+   const placeHolder = [...Array(3 - images.length).keys()].map(String);
    return (
       <View style={[styles.container, containerStyle]}>
          <TouchableOpacity
@@ -43,21 +44,31 @@ const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
                   alignItems: 'center',
                   justifyContent: 'space-evenly',
                }}
-               ListEmptyComponent={() => EmptyLiImageList()}
-               data={images}
+               ListEmptyComponent={() => EmptyLiImageList(3)}
+               data={
+                  images.length < 3 && images.length
+                     ? [...images, ...placeHolder]
+                     : images
+               }
                keyExtractor={(item, index) => `${index}`}
                renderItem={({ item, item: { path }, index }) => {
                   return (
-                     <View style={styles.imageContainer}>
-                        <Image
-                           source={{ uri: path }}
-                           style={{
-                              width: '100%',
-                              height: '100%',
-                              resizeMode: 'cover',
-                           }}
-                        />
-                     </View>
+                     <>
+                        <View style={styles.imageContainer}>
+                           {path && (
+                              <Image
+                                 source={{ uri: path }}
+                                 style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    resizeMode: 'cover',
+                                 }}
+                              />
+                           )}
+                        </View>
+                        {/* {images.length < 3 &&
+                           EmptyLiImageList(3 - images.length)} */}
+                     </>
                   );
                }}
             />

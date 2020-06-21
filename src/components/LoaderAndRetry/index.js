@@ -27,7 +27,7 @@ const LoaderAndRetry = ({
                   onPress={onRetryPressed}
                   size={responsiveFontSize(4)}
                   type={'material-community'}
-                  color={MAIN_COLOR}
+                  color={TEXT_COLOR}
                   size={responsiveFontSize(4)}
                   iconContainerStyle={{ flex: 0.2 }}
                />
