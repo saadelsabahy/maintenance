@@ -14,6 +14,7 @@ import {
    ComplainsItem,
    CustomBottomSheet,
    CustomButton,
+   CustomText,
 } from '../../components';
 import {
    WHITE_COLOR,
@@ -141,11 +142,18 @@ const WaitApproval = ({ navigation, route }) => {
                name={'ios-arrow-back'}
                type={'ionicon'}
                color={HEADER_ICONS_COLOR}
-               iconContainerStyle={{ flex: 1, alignItems: 'flex-start' }}
+               iconContainerStyle={{ flex: 0.1, alignItems: 'flex-start' }}
                style={{ transform: [{ rotateY: '-180deg' }] }}
                onPress={() => navigation.goBack()}
             />
-
+            <View
+               style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+               }}>
+               <CustomText text={data.complainNumber} />
+            </View>
             {/* <View style={styles.headerIconContainer}>
                <Icon
                   name={'list-unordered'}

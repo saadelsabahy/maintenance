@@ -26,7 +26,8 @@ import {
    onDashboardFilterChage,
 } from '../../redux/actions/Dashboard';
 import NetInfo from '@react-native-community/netinfo';
-import DashboardBackground from '../../assets/images/bg.png';
+import DashboardBackground from '../../assets/images/app_bg.png';
+
 const DashBoard = ({ navigation }) => {
    const isFocused = useIsFocused();
    const [netConnected, setNetConnected] = useState(null);

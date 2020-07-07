@@ -31,3 +31,4 @@ export * from './noData';
 export * from './LoginButton';
 export * from './customDropDown';
 export * from './signatureModal';
+export * from './ImagePickerModal';

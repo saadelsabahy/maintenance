@@ -22,6 +22,7 @@
       "axios": "^0.19.2",
       "moment": "^2.24.0",
       "react": "16.11.0",
+      "react-hook-form": "^6.0.1",
       "react-native": "0.62.1",
       "react-native-check-box": "^2.1.7",
       "react-native-flash-message": "^0.1.15",

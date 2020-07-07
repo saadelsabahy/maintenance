@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet } from 'react-native';
 import {
    CustomText,
@@ -9,6 +9,7 @@ import {
    CustomButton,
    CustomDropDown,
    MaterialDropDown,
+   ImagePickerModal,
 } from '../../components';
 import BackgroundImage from '../../assets/images/bgetention.png';
 import {
@@ -20,6 +21,13 @@ import {
 } from '../../constants/colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import TextArea from '../../components/TextArea';
+import { useForm, Controller } from 'react-hook-form';
+import validation from '../../utils/validation';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+   handleOpenCamerapressed,
+   handleOpenGallerypressed,
+} from '../../redux/actions';
 let data = [
    {
       value: 'Banana',
@@ -33,6 +41,47 @@ let data = [
 ];
 const AddComplain = ({ navigation }) => {
    const menuRef = useRef(null);
+   const [isModalVisible, setIsModalVisible] = useState(false);
+   const dispatch = useDispatch();
+   const defaultValues = {
+      plateNumber: '',
+      vehicleNumber: '',
+      vehicleType: '',
+      complainDescription: '',
+      contractor: '',
+   };
+   const {
+      register,
+      setValue,
+      handleSubmit,
+      errors,
+      reset,
+      setError,
+      control,
+   } = useForm({
+      mode: 'all',
+      reValidateMode: 'all',
+      defaultValues,
+      resolver: undefined,
+      context: undefined,
+      criteriaMode: 'firstErrorDetected',
+      shouldFocusError: true,
+      shouldUnregister: true,
+   });
+
+   const onSubmit = data => {
+      const res = alert(JSON.stringify(data));
+      // reset(res);   //to reset after finish request
+   };
+   const toggleModal = () => setIsModalVisible(!isModalVisible);
+   const onOpenCamerapressed = () => {
+      toggleModal();
+      dispatch(handleOpenCamerapressed());
+   };
+   const onOpenGallerypressed = () => {
+      toggleModal();
+      dispatch(handleOpenGallerypressed());
+   };
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -52,33 +101,110 @@ const AddComplain = ({ navigation }) => {
                <CustomText text="اضافه بلاغ" />
             </View>
          </Header>
+
          <KeyboardAwareScrollView
             style={styles.formContainer}
             enableOnAndroid={true}
             contentContainerStyle={styles.keyboardAwareContent}
             extraScrollHeight={30}>
+            <ImagePickerModal
+               toggleModal={toggleModal}
+               isModalVisible={isModalVisible}
+               onOpenCamerapressed={onOpenCamerapressed}
+               onOpenGallerypressed={onOpenGallerypressed}
+            />
             <View style={styles.inputsWrapper}>
-               <CustomInput
-                  inputContainerStyle={styles.input}
-                  placeholder={'رقم اللوحه'}
+               <Controller
+                  control={control}
+                  render={({ onChange, onBlur, value }) => (
+                     <CustomInput
+                        inputContainerStyle={styles.input}
+                        placeholder={'رقم اللوحه'}
+                        error={errors.plateNumber}
+                        onChangeText={value => onChange(value)}
+                        onBlur={onBlur}
+                        value={value}
+                        //  onChangeText={text => setValue('plateNumber', text, true)}
+                     />
+                  )}
+                  name="plateNumber"
+                  rules={validation['plateNumber']}
                />
-               <CustomInput
-                  inputContainerStyle={styles.input}
-                  placeholder={'رقم المعده'}
+               <Controller
+                  control={control}
+                  render={({ onChange, onBlur, value }) => (
+                     <CustomInput
+                        inputContainerStyle={styles.input}
+                        placeholder={'رقم المعده'}
+                        onBlur={onBlur}
+                        value={value}
+                        error={errors.vehicleNumber}
+                        onChangeText={value => onChange(value)}
+                     />
+                  )}
+                  name="vehicleNumber"
+                  rules={validation['vehicleNumber']}
                />
-               <MaterialDropDown data={data} label={'نوع المعده '} />
-               <MaterialDropDown data={data} label={'العقد'} />
 
-               <TextArea
-                  containerStyle={styles.textAreaContainer}
-                  placeholder="وصف البلاغ"
+               <Controller
+                  control={control}
+                  render={({ onChange, onBlur, value }) => (
+                     <MaterialDropDown
+                        data={data}
+                        label={'نوع المعده '}
+                        onBlur={onBlur}
+                        value={value}
+                        error={errors.vehicleType}
+                        onChangeText={(value, index, data) => onChange(value)}
+                     />
+                  )}
+                  rules={validation['vehicleType']}
+                  name="vehicleType"
                />
 
-               <ImageSelector containerStyle={styles.imageSelectorContainer} />
+               <Controller
+                  control={control}
+                  render={({ onChange, onBlur, value }) => (
+                     <MaterialDropDown
+                        data={data}
+                        label={'العقد'}
+                        onBlur={onBlur}
+                        value={value}
+                        error={errors.contractor}
+                        onChangeText={(value, index, data) => onChange(value)}
+                     />
+                  )}
+                  name="contractor"
+                  rules={validation['contractor']}
+               />
+
+               <Controller
+                  control={control}
+                  render={({ onChange, onBlur, value, onFocus }) => (
+                     <TextArea
+                        containerStyle={styles.textAreaContainer}
+                        placeholder="وصف البلاغ"
+                        error={errors.complainDescription}
+                        onBlur={onBlur}
+                        value={value}
+                        onChangeText={value => onChange(value)}
+                        onFocus={onFocus}
+                     />
+                  )}
+                  name="complainDescription"
+                  rules={validation['complainDescription']}
+               />
+
+               <ImageSelector
+                  containerStyle={styles.imageSelectorContainer}
+                  images={[]}
+                  onSelectImagesPressed={toggleModal}
+               />
 
                <CustomButton
                   buttonContainerStyle={styles.buttonContainer}
                   buttonTitle="إضافه"
+                  onButtonPressed={handleSubmit(onSubmit)}
                />
             </View>
          </KeyboardAwareScrollView>
@@ -107,6 +233,7 @@ const styles = StyleSheet.create({
       width: '90%',
       alignSelf: 'center',
       justifyContent: 'space-evenly',
+      paddingVertical: 10,
    },
    textAreaContainer: {
       height: SCREEN_HEIGHT / 5,

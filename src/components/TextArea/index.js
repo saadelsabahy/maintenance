@@ -7,27 +7,45 @@ import {
    SURFACE_COLOR,
    MAIN_RED_COLOR,
    PLACEHOLDER_COLOR,
+   ERROR_RED_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-const TextArea = ({ placeholder, containerStyle, ...res }) => {
+import { CustomText } from '../customText';
+const TextArea = ({
+   placeholder,
+   containerStyle,
+   error,
+   errorTextStyle,
+   name,
+   ...res
+}) => {
    return (
-      <View style={[styles.textareaContainer, containerStyle]}>
-         <TextInput
-            style={styles.textarea}
-            maxLength={120}
-            placeholder={placeholder}
-            placeholderTextColor={PLACEHOLDER_COLOR}
-            selectionColor={MAIN_RED_COLOR}
-            underlineColorAndroid={'transparent'}
-            {...res}
-         />
-      </View>
+      <>
+         <View style={[styles.textareaContainer, containerStyle]}>
+            <TextInput
+               name={name}
+               style={styles.textarea}
+               maxLength={120}
+               placeholder={placeholder}
+               placeholderTextColor={PLACEHOLDER_COLOR}
+               selectionColor={MAIN_RED_COLOR}
+               underlineColorAndroid={'transparent'}
+               {...res}
+            />
+         </View>
+         {error && error.message && (
+            <CustomText
+               text={error.message}
+               textStyle={[styles.errorText, errorTextStyle]}
+            />
+         )}
+      </>
    );
 };
 const styles = StyleSheet.create({
    textareaContainer: {
       width: '90%',
-      height: '50%',
+      height: '100%',
       backgroundColor: SURFACE_COLOR,
       alignSelf: 'center',
       alignItems: 'flex-start',
@@ -48,6 +66,9 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       padding: 5,
       paddingHorizontal: 10,
+   },
+   errorText: {
+      color: ERROR_RED_COLOR,
    },
 });
 

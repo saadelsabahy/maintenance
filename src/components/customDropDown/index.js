@@ -12,61 +12,80 @@ import {
    TEXT_COLOR,
    MAIN_RED_COLOR,
    PLACEHOLDER_COLOR,
+   ERROR_RED_COLOR,
 } from '../../constants/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-const MaterialDropDown = ({ containerStyle, data, label, ...res }) => {
+import { CustomText } from '../customText';
+const MaterialDropDown = ({
+   containerStyle,
+   data,
+   label,
+   errorTextStyle,
+   error,
+   name,
+   ...res
+}) => {
    return (
-      <View style={[styles.container, containerStyle]}>
-         <Dropdown
-            data={data}
-            label={label}
-            baseColor={PLACEHOLDER_COLOR}
-            itemColor={TEXT_COLOR}
-            textColor={TEXT_COLOR} //For Labels in DropDown
-            labelFontSize={0} //Size For Animation Label
-            containerStyle={styles.inContainer}
-            inputContainerStyle={{
-               borderBottomWidth: 0,
-               borderBottomColor: 'transparent',
-            }} //Make UnderLine Transparent
-            fontSize={responsiveFontSize(2)}
-            titleTextStyle={{ color: TEXT_COLOR }} //Color For Fixed Label Title
-            itemTextStyle={styles.fontFamily}
-            style={styles.inputStyle}
-            dropdownOffset={{ top: 12, left: 0 }}
-            rippleInsets={{ top: 0 }}
-            labelTextStyle={styles.innerLabel}
-            inputContainerStyle={{
-               borderBottomWidth: 0,
-               borderBottomColor: 'transparent',
-            }}
-            pickerStyle={{ backgroundColor: SURFACE_COLOR }}
-            rippleOpacity={0} //Hide The Effect Of Opacity
-            renderAccessory={() => (
-               <View
-                  style={{
-                     width: SCREEN_WIDTH / 9,
-                     height: SCREEN_HEIGHT / 15,
-                     backgroundColor: SECOND_ICON_BACKGROUND,
-                     justifyContent: 'center',
-                     alignItems: 'center',
-                     marginTop: -4,
-                     borderTopEndRadius: 5,
-                     borderBottomEndRadius: 5,
-                  }}>
-                  <Icon
-                     name={'ios-arrow-down'}
-                     size={responsiveFontSize(3.5)}
-                     color={WHITE_COLOR}
-                  />
-               </View>
-            )}
-            selectedItemColor={MAIN_RED_COLOR}
-            placeholderTextColor={WHITE_COLOR}
-            {...res}
-         />
-      </View>
+      <>
+         <View style={[styles.container, containerStyle]}>
+            <Dropdown
+               name={name}
+               data={data}
+               label={label}
+               baseColor={PLACEHOLDER_COLOR}
+               itemColor={TEXT_COLOR}
+               textColor={TEXT_COLOR} //For Labels in DropDown
+               labelFontSize={0} //Size For Animation Label
+               containerStyle={styles.inContainer}
+               inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  borderBottomColor: 'transparent',
+               }} //Make UnderLine Transparent
+               fontSize={responsiveFontSize(2)}
+               titleTextStyle={{ color: TEXT_COLOR }} //Color For Fixed Label Title
+               itemTextStyle={styles.fontFamily}
+               style={styles.inputStyle}
+               dropdownOffset={{ top: 12, left: 0 }}
+               rippleInsets={{ top: 0 }}
+               labelTextStyle={styles.innerLabel}
+               inputContainerStyle={{
+                  borderBottomWidth: 0,
+                  borderBottomColor: 'transparent',
+               }}
+               pickerStyle={{ backgroundColor: SURFACE_COLOR }}
+               rippleOpacity={0} //Hide The Effect Of Opacity
+               renderAccessory={() => (
+                  <View
+                     style={{
+                        width: SCREEN_WIDTH / 9,
+                        height: SCREEN_HEIGHT / 15,
+                        backgroundColor: SECOND_ICON_BACKGROUND,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: -4,
+                        borderTopEndRadius: 5,
+                        borderBottomEndRadius: 5,
+                     }}>
+                     <Icon
+                        name={'ios-arrow-down'}
+                        size={responsiveFontSize(3.5)}
+                        color={WHITE_COLOR}
+                     />
+                  </View>
+               )}
+               selectedItemColor={MAIN_RED_COLOR}
+               placeholderTextColor={WHITE_COLOR}
+               {...res}
+            />
+         </View>
+         {error && error.message && (
+            <CustomText
+               text={error.message}
+               textStyle={[styles.errorText, errorTextStyle]}
+            />
+         )}
+      </>
    );
 };
 const styles = StyleSheet.create({
@@ -76,11 +95,11 @@ const styles = StyleSheet.create({
       height: SCREEN_HEIGHT / 15,
       paddingHorizontal: 5,
       marginTop: 0,
-      marginVertical: 10,
       paddingVertical: 0,
       borderRadius: 10,
       borderWidth: 0.7,
       borderColor: WHITE_COLOR,
+      marginVertical: 10,
    },
    inContainer: {
       flex: 1,
@@ -104,6 +123,9 @@ const styles = StyleSheet.create({
       marginTop: -7,
       marginStart: 5,
       color: PLACEHOLDER_COLOR,
+   },
+   errorText: {
+      color: ERROR_RED_COLOR,
    },
 });
 

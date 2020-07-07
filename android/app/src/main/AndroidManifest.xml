@@ -48,7 +48,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

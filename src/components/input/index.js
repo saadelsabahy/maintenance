@@ -37,15 +37,16 @@ const CustomInput = ({
    iconEndBackGround,
    inputWrapper,
    referance,
+   name,
    ...res
 }) => {
    return (
       <View
          style={[
             {
-               height: SCREEN_HEIGHT / 15,
+               height: SCREEN_HEIGHT / 14,
                alignItems: 'center',
-               justifyContent: 'center',
+               justifyContent: 'space-evenly',
                width: '100%',
                marginVertical: 10,
             },
@@ -63,6 +64,7 @@ const CustomInput = ({
                />
             )}
             <TextInput
+               name={name}
                placeholder={placeholder}
                selectionColor={MAIN_RED_COLOR}
                placeholderTextColor={PLACEHOLDER_COLOR}
@@ -89,9 +91,9 @@ const CustomInput = ({
                />
             )}
          </View>
-         {error && (
+         {error && error.message && (
             <CustomText
-               text={errorText}
+               text={error.message}
                textStyle={[styles.errorText, errorTextStyle]}
             />
          )}
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
       width: '100%',
-      height: '100%',
+      height: '85%',
       alignItems: 'center',
       justifyContent: 'space-between',
       backgroundColor: 'transparent',
@@ -132,7 +134,8 @@ const styles = StyleSheet.create({
    },
    errorText: {
       color: ERROR_RED_COLOR,
-      fontSize: 17,
+      alignSelf: 'flex-start',
+      marginTop: 5,
    },
 });
 
