@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, I18nManager, TextInput } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   I18nManager,
+   TextInput,
+   Platform,
+} from 'react-native';
 import Textarea from 'react-native-textarea';
 import {
    INPUT_COLOR,
@@ -17,6 +24,7 @@ const TextArea = ({
    error,
    errorTextStyle,
    name,
+   textareaStyle,
    ...res
 }) => {
    return (
@@ -24,7 +32,12 @@ const TextArea = ({
          <View style={[styles.textareaContainer, containerStyle]}>
             <TextInput
                name={name}
-               style={styles.textarea}
+               style={[
+                  Platform.OS == 'ios' && res.value
+                     ? { ...styles.textarea, fontFamily: null }
+                     : styles.textarea,
+                  textareaStyle,
+               ]}
                maxLength={120}
                placeholder={placeholder}
                placeholderTextColor={PLACEHOLDER_COLOR}
