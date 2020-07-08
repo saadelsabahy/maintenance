@@ -6,7 +6,7 @@ export const SURFACE_COLOR = '#2E2E2E';
 export const PLACEHOLDER_COLOR = '#8A8A8A';
 export const HEADER_ICONS_COLOR = '#8A8A8A';
 export const TEXT_COLOR = '#fff';
-
+export const BOTTOMSHEET_COLOR = '#3D3D3D';
 export const SECONDART_COLOR = '#D4D4D4';
 export const INDICATOR_GREEN = '#36E419';
 export const INDICATOR_YELLOW = '#E8C91A';

@@ -65,9 +65,9 @@ const Login = ({ navigation }) => {
             scrollEnabled={keyBoardShow}
             onKeyboardDidShow={onKeyboardShow}
             onKeyboardDidHide={onKeyboardHide}
-            scrollEventThrottle={10}
             extraHeight={0}
             resetScrollToCoords={{ x: 0, y: 0 }}
+            extraScrollHeight={0}
             contentContainerStyle={{ flexGrow: 1 }}
             ref={ref => (ref = keyboardAvoidingRef)}
             keyboardShouldPersistTaps="always">

@@ -24,6 +24,7 @@ const MaterialDropDown = ({
    errorTextStyle,
    error,
    name,
+   value,
    ...res
 }) => {
    return (
@@ -33,7 +34,7 @@ const MaterialDropDown = ({
                name={name}
                data={data}
                label={label}
-               baseColor={PLACEHOLDER_COLOR}
+               baseColor={!value ? PLACEHOLDER_COLOR : SURFACE_COLOR}
                itemColor={TEXT_COLOR}
                textColor={TEXT_COLOR} //For Labels in DropDown
                labelFontSize={0} //Size For Animation Label

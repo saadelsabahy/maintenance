@@ -25,6 +25,7 @@ import {
    SCREEN_WIDTH,
    HEADER_ICONS_COLOR,
    SURFACE_COLOR,
+   BOTTOMSHEET_COLOR,
 } from '../../constants/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -246,13 +247,14 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom: 5,
-      width: '90%',
+      padding: 5,
+      width: '100%',
       alignSelf: 'center',
       zIndex: 1000,
+      backgroundColor: BOTTOMSHEET_COLOR,
    },
    button: {
-      width: '45%',
+      width: '40%',
       height: SCREEN_HEIGHT / 18,
    },
 });
