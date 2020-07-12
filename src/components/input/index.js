@@ -78,6 +78,7 @@ const CustomInput = ({
                placeholderStyle={{ fontFamily: 'DroidArabicKufi' }}
                ref={referance}
                autoCapitalize="none"
+               keyboardAppearance="dark"
                {...res}
             />
             {iconEndName && (

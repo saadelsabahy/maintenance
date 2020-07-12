@@ -12,14 +12,15 @@ import { CustomText } from '../customText';
 import Reactotron from 'reactotron-react-native';
 const now = new Date();
 
-const SearchDuration = ({ modalMessage }) => {
+const SearchDuration = ({ modalMessage, startDate, endDate }) => {
    const dispatch = useDispatch();
+
    const colorScheme = useColorScheme();
    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
    const [currentActive, setCurrentActive] = useState('');
    const [mode, setMode] = useState('date');
-   const [startDate, setStartDate] = useState('');
-   const [endDate, setEndDate] = useState('');
+   /*  const [startDate, setStartDate] = useState('');
+   const [endDate, setEndDate] = useState(''); */
 
    const showDatePicker = duration => {
       setDatePickerVisibility(true);
@@ -37,12 +38,15 @@ const SearchDuration = ({ modalMessage }) => {
       switch (currentActive) {
          case 'startDate':
             /* Reactotron.log(moment(date.timestamp).format('DD-MM-YYYY')); */
-            setStartDate(
-               moment(date)
-                  .format('DD-MM-YYYY')
-                  .toString()
+
+            dispatch(
+               onSearchInputsChange(
+                  'startDate',
+                  moment(date)
+                     .format('DD-MM-YYYY')
+                     .toString()
+               )
             );
-            dispatch(onSearchInputsChange('startDate', date));
             break;
 
          case 'endDate':
@@ -50,18 +54,25 @@ const SearchDuration = ({ modalMessage }) => {
                moment(startDate, 'DD-MM-YYYY')
             );
             if (isEndDateValid) {
-               setEndDate(
+               /*  setEndDate(
                   moment(date)
                      .format('DD-MM-YYYY')
                      .toString()
+               ); */
+               dispatch(
+                  onSearchInputsChange(
+                     'endDate',
+                     moment(date)
+                        .format('DD-MM-YYYY')
+                        .toString()
+                  )
                );
-               dispatch(onSearchInputsChange('endDate', date));
             } else {
                modalMessage.current.showMessage({
                   type: 'danger',
                   message: 'تاريخ الانتهاء يجب ان يكون بعد تاريخ البدايه',
                });
-               setEndDate('')
+               setEndDate('');
             }
             break;
       }
@@ -69,14 +80,14 @@ const SearchDuration = ({ modalMessage }) => {
    return (
       <View style={[styles.container]}>
          <DateTimeButton
-            text={startDate == '' ? 'من تاريخ' : startDate}
+            text={!startDate ? 'من تاريخ' : startDate}
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
             onPress={() => showDatePicker('startDate')}
          />
          <DateTimeButton
-            text={endDate == '' ? 'إلي تاريخ' : endDate}
+            text={!endDate ? 'إلي تاريخ' : endDate}
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
@@ -91,7 +102,7 @@ const SearchDuration = ({ modalMessage }) => {
             date={now}
             cancelTextIOS={'الغاء'}
             confirmTextIOS={'تأكيد'}
-            customCancelButtonIOS={({onPress,label}) => (
+            customCancelButtonIOS={({ onPress, label }) => (
                <CustomButton
                   buttonContainerStyle={{
                      ...styles.buttonIos,
@@ -100,24 +111,24 @@ const SearchDuration = ({ modalMessage }) => {
                   }}
                   buttonTitle={label}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
-                  onButtonPressed={()=>{
-                     onPress()
-                     if (currentActive=='startDate') {
-                        setStartDate('')
+                  onButtonPressed={() => {
+                     onPress();
+                     if (currentActive == 'startDate') {
+                        setStartDate('');
                      } else {
-                        setEndDate('')
+                        setEndDate('');
                      }
                   }}
                />
             )}
-            customConfirmButtonIOS={({onPress,label,}) => (
+            customConfirmButtonIOS={({ onPress, label }) => (
                <CustomButton
                   buttonContainerStyle={styles.buttonIos}
                   buttonTitle={label}
                   buttonTitleStyle={{ color: MAIN_COLOR }}
                   onButtonPressed={onPress}
                />
-            )} 
+            )}
             customHeaderIOS={() => (
                <CustomText
                   text="اختر تاريخ"

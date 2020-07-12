@@ -22,6 +22,7 @@ import {
    SEARCH_PAGINATION_SPINNER,
    SEARCH_PAGINATION_FAILED,
    SEARCH_PAGINATION_SUCCESS,
+   RESET_ALL_SEARCH_INPUTS,
 } from './complainsListTypes';
 import Api from '../../../apis';
 import database from '../../../models';
@@ -160,7 +161,10 @@ export const onSearchInputsChange = (inputName, inputValue) => dispatch => {
          break;
    }
 };
-
+export const resetAllSearchInputs = callback => async dispatch => {
+   await dispatch({ type: RESET_ALL_SEARCH_INPUTS });
+   callback();
+};
 export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
    const {
       complainNumber,

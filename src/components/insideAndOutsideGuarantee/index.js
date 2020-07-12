@@ -83,7 +83,10 @@ const Gurantee = ({
                      color: TEXT_COLOR,
                   }}
                   buttonTitle={'داخل الضمان'}
-                  onButtonPressed={() => onButtonsPressed(0)}
+                  onButtonPressed={() => {
+                     oncloseBottomSheet();
+                     onButtonsPressed(0);
+                  }}
                />
                <CustomButton
                   buttonContainerStyle={{
@@ -98,7 +101,10 @@ const Gurantee = ({
                      color: TEXT_COLOR,
                   }}
                   buttonTitle={'خارج الضمان'}
-                  onButtonPressed={() => onButtonsPressed(1)}
+                  onButtonPressed={() => {
+                     oncloseBottomSheet();
+                     onButtonsPressed(1);
+                  }}
                />
             </View>
          </ImageBackground>
@@ -119,14 +125,19 @@ const Gurantee = ({
                   elevation: 5,
                   alignItems: 'center',
                }}>
-               {/*  <KeyboardAwareScrollView
-                  enableOnAndroid
-                  style={{ flex: 1, width: '100%' }}
-                  contentContainerStyle={{ flex: 1 }}> */}
+               <ImageBackground
+                  source={require('../../assets/images/bgetention.png')}
+                  resizeMode="stretch"
+                  style={{
+                     position: 'absolute',
+                     width: '100%',
+                     height: '100%',
+                  }}
+               />
                <View
                   style={{
                      width: '100%',
-                     height: SCREEN_HEIGHT * 0.25,
+                     height: SCREEN_HEIGHT * 0.22,
                      justifyContent: 'space-evenly',
                   }}>
                   <FlatList
@@ -167,15 +178,16 @@ const Gurantee = ({
                </View>
                <View
                   style={{
-                     height: SCREEN_HEIGHT * 0.25,
+                     height: SCREEN_HEIGHT * 0.22,
                      width: '100%',
-                     justifyContent: 'space-evenly',
+                     justifyContent: 'space-between',
                      paddingVertical: 10,
                   }}>
                   <TextArea
                      placeholder={selectedButton == 0 ? 'الحل' : 'الوصف'}
                      value={comment}
                      onChangeText={onCommentChange}
+                     containerStyle={{ height: '60%' }}
                   />
                   {userType == 0 && (
                      <CustomButton

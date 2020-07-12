@@ -16,6 +16,7 @@ import {
    DRAWER_DIVIDER,
    SURFACE_COLOR,
    MAIN_RED_COLOR,
+   BOTTOMSHEET_COLOR,
 } from '../../constants/colors';
 import {
    createDrawerNavigator,
@@ -121,7 +122,7 @@ const CustomDrawer = props => {
                marginVertical: 0,
                paddingVertical: 0,
                paddingTop: 0,
-               backgroundColor: '#3D3D3D',
+               backgroundColor: BOTTOMSHEET_COLOR,
             }}>
             <DrawerContentScrollView
                {...props}

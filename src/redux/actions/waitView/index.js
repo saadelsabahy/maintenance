@@ -119,7 +119,7 @@ export const handlePerview = (
 
    const userId = await AsyncStorage.getItem('userId');
 
-   if (images.length < 1) {
+   if (images.length < 1 && guranteeStatus == 1) {
       showFlashMessage('danger', 'يجب اضافه صوره العطل');
    } else if (guranteeStatus == 0 && inGuarnteeSelectedParts.length < 1) {
       showFlashMessage('danger', 'يجب تحديد قطع الغيار داخل الضمان المستخدمه');

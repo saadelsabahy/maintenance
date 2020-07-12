@@ -47,6 +47,9 @@ const SearchModal = ({
    source,
    dropDownText,
    onSearchDropdownPressed,
+   startDate,
+   endDate,
+   onCancelSearch,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
@@ -188,7 +191,11 @@ const SearchModal = ({
                         width: '100%',
                         alignItems: 'center',
                      }}>
-                     <SearchDuration modalMessage={modalFlashMessage} />
+                     <SearchDuration
+                        modalMessage={modalFlashMessage}
+                        startDate={startDate}
+                        endDate={endDate}
+                     />
                   </View>
                </View>
 
@@ -201,7 +208,7 @@ const SearchModal = ({
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'إلغاء'}
-                     onButtonPressed={HideModal}
+                     onButtonPressed={onCancelSearch}
                   />
                </View>
             </KeyboardAwareScrollView>

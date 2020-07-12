@@ -132,6 +132,7 @@ const ListAndLoading = ({
                      colors={[MAIN_COLOR]}
                   />
                }
+               bounces={false}
                onEndReachedThreshold={0.5}
                onScroll={() => setloadMore(true)}
                ListFooterComponent={renderListFooter}

@@ -1,4 +1,8 @@
 import ImageCropPicker from 'react-native-image-crop-picker';
+import {
+   SELECT_CREATE_COMPLAIN_IMAGES,
+   RESET_ADD_COMPLAIN_PHOTOS,
+} from './types';
 const options = {
    width: 200,
    height: 200,
@@ -11,7 +15,14 @@ const options = {
 export const handleOpenCamerapressed = () => (dispatch, getState) => {
    try {
       ImageCropPicker.openCamera(options)
-         .then(selectedImages => console.log(selectedImages))
+         .then(selectedImages => {
+            let selectedPhotos = [];
+            selectedPhotos.push(selectedImages);
+            dispatch({
+               type: SELECT_CREATE_COMPLAIN_IMAGES,
+               payload: selectedPhotos,
+            });
+         })
          .catch(e => {
             console.log('open camera error', e);
          });
@@ -23,11 +34,22 @@ export const handleOpenCamerapressed = () => (dispatch, getState) => {
 export const handleOpenGallerypressed = () => (dispatch, getState) => {
    try {
       ImageCropPicker.openPicker(options)
-         .then(selectedImages => console.log(selectedImages))
+         .then(selectedImages => {
+            let selectedPhotos = [];
+            selectedPhotos.push(...selectedImages);
+            dispatch({
+               type: SELECT_CREATE_COMPLAIN_IMAGES,
+               payload: selectedPhotos,
+            });
+         })
          .catch(e => {
             console.log('open camera error', e);
          });
    } catch (error) {
       console.log('add complain camera error', error);
    }
+};
+
+export const resetAddcomplainPhotos = () => async dispatch => {
+   dispatch({ type: RESET_ADD_COMPLAIN_PHOTOS });
 };

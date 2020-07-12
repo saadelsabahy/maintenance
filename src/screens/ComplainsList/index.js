@@ -23,6 +23,7 @@ import {
    LoadPagination,
    LoadSearchPagination,
    onSearchInputsChange,
+   resetAllSearchInputs,
 } from '../../redux/actions';
 import ListHeader from './Header';
 import withObservables from '@nozbe/with-observables';
@@ -54,6 +55,8 @@ const Complains = ({ navigation, route, complain }) => {
       complainType,
       searchContructorId,
       searchPlateNumber,
+      startDate,
+      endDate,
    } = useSelector(state => ({
       complainsList: state.Complains.complainsList,
       getComplainsListLoading: state.Complains.getComplainsListLoading,
@@ -151,6 +154,10 @@ const Complains = ({ navigation, route, complain }) => {
       setdropDownText(label.text);
       menu.hide();
    };
+   const onCancelSearch = async () => {
+      dispatch(resetAllSearchInputs(toggleSearchModal));
+      getData();
+   };
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -211,6 +218,9 @@ const Complains = ({ navigation, route, complain }) => {
             }
             onSearchDropdownPressed={onSearchDropdownPressed}
             dropDownText={dropDownText}
+            startDate={startDate}
+            endDate={endDate}
+            onCancelSearch={onCancelSearch}
          />
       </ImageBackground>
    );

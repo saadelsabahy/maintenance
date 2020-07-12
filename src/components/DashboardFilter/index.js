@@ -90,33 +90,17 @@ const DashboardFilter = ({
                enableOnAndroid={true}
                keyboardShouldPersistTaps="always"
                enableAutomaticScroll={false}>
-               <Icon
-                  name={'close'}
-                  type={'material-community'}
-                  onPress={HideModal}
-                  iconContainerStyle={{
-                     position: 'absolute',
-                     end: 10,
-                     top: -10,
-                     flex: 1,
-                  }}
-                  color={TEXT_COLOR}
-                  size={responsiveFontSize(4)}
-               />
                <View
                   style={{
+                     flex: 1,
                      flexDirection: 'row',
                      justifyContent: 'space-between',
                      alignItems: 'center',
-                     paddingHorizontal: 10,
-                     /*   position: 'absolute',
-                     top: 0, */
+                     padding: 15,
                   }}>
                   <View
                      style={{
                         flex: 1,
-                        // top: 10,
-
                         alignItems: 'flex-start',
                      }}>
                      <CustomText
@@ -126,6 +110,20 @@ const DashboardFilter = ({
                         }}
                      />
                   </View>
+                  <Icon
+                     name={'close'}
+                     type={'material-community'}
+                     onPress={HideModal}
+                     iconContainerStyle={{
+                        position: 'absolute',
+                        end: 5,
+                        top: -10,
+                        padding: 5,
+
+                        justifyContent: 'center',
+                     }}
+                     color={TEXT_COLOR}
+                  />
                </View>
                <View style={styles.inputsContainer}>
                   <CustomInput
@@ -172,9 +170,6 @@ const styles = StyleSheet.create({
    },
    modalContentContainer: {
       height: SCREEN_HEIGHT * 0.35,
-      /* backgroundColor: SECONDART_COLOR,
-      borderTopStartRadius: 20,
-      borderTopEndRadius: 20, */
       alignItems: 'center',
       justifyContent: 'center',
    },

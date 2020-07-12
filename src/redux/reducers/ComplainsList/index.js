@@ -22,6 +22,7 @@ import {
    SEARCH_PAGINATION_FAILED,
    SEARCH_PAGINATION_SUCCESS,
    PLATE_NUMBER_CHANGE,
+   RESET_ALL_SEARCH_INPUTS,
 } from '../../actions/ComplainsList/complainsListTypes';
 
 const initialState = {
@@ -169,6 +170,9 @@ export default (state = initialState, { type, payload }) => {
             SearchPaginationLoading: false,
             SearchPaginationError: true,
          };
+         break;
+      case RESET_ALL_SEARCH_INPUTS:
+         return { ...initialState };
          break;
 
       case UNMOUNT_EMPTY:

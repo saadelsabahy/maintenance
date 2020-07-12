@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { Icon } from '../Icon';
 import {
    SCREEN_WIDTH,
@@ -9,14 +9,17 @@ import {
    MAIN_RED_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
+import { IMAGES_LENGTH } from '../../utils/complainsStutus';
 const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
    const EmptyLiImageList = length => {
       return [...Array(length).keys()].map(String).map((item, index) => {
          return <View style={styles.imageContainer} key={item} />;
       });
    };
-   const placeHolder = [...Array(3 - images.length).keys()].map(String);
+   const placeHolder = [
+      ...Array(Math.abs(IMAGES_LENGTH - images.length)).keys(),
+   ].map(String);
    return (
       <View style={[styles.container, containerStyle]}>
          <TouchableOpacity
@@ -44,9 +47,9 @@ const ImageSelector = ({ images, onSelectImagesPressed, containerStyle }) => {
                   alignItems: 'center',
                   justifyContent: 'space-evenly',
                }}
-               ListEmptyComponent={() => EmptyLiImageList(3)}
+               ListEmptyComponent={() => EmptyLiImageList(IMAGES_LENGTH)}
                data={
-                  images.length < 3 && images.length
+                  images.length < IMAGES_LENGTH && images.length
                      ? [...images, ...placeHolder]
                      : images
                }

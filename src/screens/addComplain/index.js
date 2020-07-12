@@ -27,22 +27,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
    handleOpenCamerapressed,
    handleOpenGallerypressed,
+   resetAddcomplainPhotos,
 } from '../../redux/actions';
-let data = [
+import { useIsFocused } from '@react-navigation/native';
+let vehiclesTypes = [
    {
-      value: 'Banana',
+      value: 'ضاغط',
    },
    {
-      value: 'Mango',
+      value: 'حاويه',
    },
    {
-      value: 'Pear',
+      value: 'مكنسه',
+   },
+   {
+      value: 'مكنه شطف اليه',
+   },
+];
+let contractorsNumbers = [
+   {
+      value: '80',
+   },
+   {
+      value: '81',
    },
 ];
 const AddComplain = ({ navigation }) => {
+   const isFocused = useIsFocused();
    const menuRef = useRef(null);
    const [isModalVisible, setIsModalVisible] = useState(false);
    const dispatch = useDispatch();
+   const { images } = useSelector(state => ({
+      images: state.AddComplain.images,
+   }));
    const defaultValues = {
       plateNumber: '',
       vehicleNumber: '',
@@ -68,20 +85,27 @@ const AddComplain = ({ navigation }) => {
       shouldFocusError: true,
       shouldUnregister: true,
    });
-
+   useEffect(() => {
+      return () => {
+         dispatch(resetAddcomplainPhotos());
+         reset();
+      };
+   }, [isFocused]);
    const onSubmit = data => {
       const res = alert(JSON.stringify(data));
       // reset(res);   //to reset after finish request
    };
    const toggleModal = () => setIsModalVisible(!isModalVisible);
-   const onOpenCamerapressed = () => {
-      toggleModal();
+   const onOpenCamerapressed = async () => {
+      await toggleModal();
       dispatch(handleOpenCamerapressed());
    };
-   const onOpenGallerypressed = () => {
-      toggleModal();
+   const onOpenGallerypressed = async () => {
+      await toggleModal();
       dispatch(handleOpenGallerypressed());
    };
+   console.log('images...', images);
+
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -150,7 +174,7 @@ const AddComplain = ({ navigation }) => {
                   control={control}
                   render={({ onChange, onBlur, value }) => (
                      <MaterialDropDown
-                        data={data}
+                        data={vehiclesTypes}
                         label={'نوع المعده '}
                         onBlur={onBlur}
                         value={value}
@@ -166,7 +190,7 @@ const AddComplain = ({ navigation }) => {
                   control={control}
                   render={({ onChange, onBlur, value }) => (
                      <MaterialDropDown
-                        data={data}
+                        data={contractorsNumbers}
                         label={'العقد'}
                         onBlur={onBlur}
                         value={value}
@@ -197,7 +221,7 @@ const AddComplain = ({ navigation }) => {
 
                <ImageSelector
                   containerStyle={styles.imageSelectorContainer}
-                  images={[]}
+                  images={images}
                   onSelectImagesPressed={toggleModal}
                />
 

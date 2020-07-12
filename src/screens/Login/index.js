@@ -51,35 +51,44 @@ const Login = ({ navigation }) => {
    );
    const onKeyboardShow = () => {
       setkeyBoardShow(true);
-      // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 500, animated: true })
+
+      // keyboardAvoidingRef.current.scrollToPosition(0, 200, true);
    };
    const onKeyboardHide = () => {
       setkeyBoardShow(false);
-      // keyboardAvoidingRef.current.scrollToPosition({ x: 0, y: 0, animated: true })
    };
    return (
-      <View style={{ flex: 1 }}>
+      <View
+         style={{
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+            backgroundColor: SURFACE_COLOR,
+         }}>
          <KeyboardAwareScrollView
             style={styles.container}
             enableOnAndroid={true}
             scrollEnabled={keyBoardShow}
             onKeyboardDidShow={onKeyboardShow}
             onKeyboardDidHide={onKeyboardHide}
-            extraHeight={0}
-            resetScrollToCoords={{ x: 0, y: 0 }}
-            extraScrollHeight={0}
-            contentContainerStyle={{ flexGrow: 1 }}
-            ref={ref => (ref = keyboardAvoidingRef)}
+            bounces={false}
+            contentContainerStyle={{
+               flexGrow: 1,
+               backgroundColor: SURFACE_COLOR,
+            }}
+            innerRef={ref => {
+               keyboardAvoidingRef.current = ref ? ref.props : null;
+            }}
             keyboardShouldPersistTaps="always">
             <View
                style={{
                   flex: 1,
-                  backgroundColor: MAIN_COLOR,
+                  backgroundColor: SURFACE_COLOR,
                   justifyContent: 'space-between',
                }}>
                <View
                   style={{
                      height: SCREEN_HEIGHT / 3,
+                     backgroundColor: SURFACE_COLOR,
                   }}>
                   <Image
                      source={require('../../assets/images/login_bg_top.png')}
@@ -128,7 +137,14 @@ const Login = ({ navigation }) => {
                         }}
                         value={userName}
                         returnKeyType="next"
-                        onSubmitEditing={() => passwordInput.current.focus()}
+                        onSubmitEditing={() => {
+                           keyboardAvoidingRef.current.scrollToPosition(
+                              0,
+                              100,
+                              true
+                           );
+                           passwordInput.current.focus();
+                        }}
                         blurOnSubmit={false}
                         inputContainerStyle={styles.inputContainer}
                      />
@@ -149,7 +165,7 @@ const Login = ({ navigation }) => {
                         }}
                         value={userPassword}
                         referance={passwordInput}
-                        returnKeyType="go"
+                        returnKeyType="done"
                         iconStartStyle={styles.icon}
                         inputContainerStyle={styles.inputContainer}
                      />

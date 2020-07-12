@@ -65,6 +65,7 @@ const CustomBottomSheet = ({
                )}
                <View
                   style={{
+                     height: SCREEN_HEIGHT * 0.57,
                      width: '100%',
                   }}>
                   <FlatList
@@ -191,7 +192,13 @@ const CustomBottomSheet = ({
    return (
       <View style={{ flex: 1 }}>
          <BottomSheet
-            snapPoints={['25%', SCREEN_HEIGHT - SCREEN_HEIGHT / 5, '25%']}
+            snapPoints={[
+               '25%',
+               source == 5
+                  ? SCREEN_HEIGHT - SCREEN_HEIGHT / 7
+                  : SCREEN_HEIGHT - SCREEN_HEIGHT / 5,
+               '25%',
+            ]}
             renderContent={renderInner}
             /*     renderHeader={renderHeader} */
             enabledInnerScrolling={false}
