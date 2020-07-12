@@ -71,6 +71,7 @@ const Login = ({ navigation }) => {
             onKeyboardDidShow={onKeyboardShow}
             onKeyboardDidHide={onKeyboardHide}
             bounces={false}
+            overScrollMode="never"
             contentContainerStyle={{
                flexGrow: 1,
                backgroundColor: SURFACE_COLOR,
@@ -81,7 +82,8 @@ const Login = ({ navigation }) => {
             keyboardShouldPersistTaps="always">
             <View
                style={{
-                  flex: 1,
+                  height: SCREEN_HEIGHT,
+                  width: SCREEN_WIDTH,
                   backgroundColor: SURFACE_COLOR,
                   justifyContent: 'space-between',
                }}>

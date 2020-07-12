@@ -133,6 +133,7 @@ const ListAndLoading = ({
                   />
                }
                bounces={false}
+               overScrollMode="never"
                onEndReachedThreshold={0.5}
                onScroll={() => setloadMore(true)}
                ListFooterComponent={renderListFooter}

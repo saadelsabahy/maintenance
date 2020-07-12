@@ -115,6 +115,7 @@ const DashBoard = ({ navigation }) => {
                   }}>
                   <ScrollView
                      style={{ flex: 1 }}
+                     overScrollMode="never"
                      contentContainerStyle={{
                         flexDirection: 'row',
                         flexWrap: 'wrap',
