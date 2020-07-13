@@ -54,7 +54,8 @@ let contractorsNumbers = [
 ];
 const AddComplain = ({ navigation }) => {
    const isFocused = useIsFocused();
-   const menuRef = useRef(null);
+   const vehiclesTypesRef = useRef(null);
+   const contractorsRef = useRef(null);
    const [isModalVisible, setIsModalVisible] = useState(false);
    const dispatch = useDispatch();
    const { images } = useSelector(state => ({
@@ -89,11 +90,13 @@ const AddComplain = ({ navigation }) => {
       return () => {
          dispatch(resetAddcomplainPhotos());
          reset();
+         vehiclesTypesRef.current.state.value = '';
+         contractorsRef.current.state.value = '';
       };
    }, [isFocused]);
    const onSubmit = data => {
       const res = alert(JSON.stringify(data));
-      // reset(res);   //to reset after finish request
+      reset(res); //to reset after finish request
    };
    const toggleModal = () => setIsModalVisible(!isModalVisible);
    const onOpenCamerapressed = async () => {
@@ -104,7 +107,6 @@ const AddComplain = ({ navigation }) => {
       await toggleModal();
       dispatch(handleOpenGallerypressed());
    };
-   console.log('images...', images);
 
    return (
       <ImageBackground
@@ -180,6 +182,7 @@ const AddComplain = ({ navigation }) => {
                         value={value}
                         error={errors.vehicleType}
                         onChangeText={(value, index, data) => onChange(value)}
+                        referance={c => (vehiclesTypesRef.current = c)}
                      />
                   )}
                   rules={validation['vehicleType']}
@@ -196,6 +199,7 @@ const AddComplain = ({ navigation }) => {
                         value={value}
                         error={errors.contractor}
                         onChangeText={(value, index, data) => onChange(value)}
+                        referance={c => (contractorsRef.current = c)}
                      />
                   )}
                   name="contractor"

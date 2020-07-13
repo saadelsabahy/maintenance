@@ -25,6 +25,7 @@ const MaterialDropDown = ({
    error,
    name,
    value,
+   referance,
    ...res
 }) => {
    return (
@@ -32,6 +33,7 @@ const MaterialDropDown = ({
          <View style={[styles.container, containerStyle]}>
             <Dropdown
                name={name}
+               ref={referance}
                data={data}
                label={label}
                baseColor={!value ? PLACEHOLDER_COLOR : SURFACE_COLOR}
