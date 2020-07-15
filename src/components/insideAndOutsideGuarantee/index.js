@@ -25,6 +25,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { CustomText } from '../customText';
 import BackgroundImage from '../../assets/images/bottom_sheet.png';
+import { showFlashMessage } from '../../utils/flashMessage';
 const Gurantee = ({
    onSelectImagesPressed,
    images,
@@ -64,7 +65,15 @@ const Gurantee = ({
                <ImageSelector
                   onSelectImagesPressed={async () => {
                      await bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
-                     onSelectImagesPressed();
+                     if (selectedButton === 0 || selectedButton === 1) {
+                        onSelectImagesPressed();
+                     } else {
+                        showFlashMessage(
+                           'danger',
+                           'يجب تحديد ما اذاكان العطل  داخل الضمان او خارجه أولا'
+                        );
+                        return;
+                     }
                   }}
                   images={images}
                />

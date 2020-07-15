@@ -15,6 +15,7 @@ import {
    CustomBottomSheet,
    CustomButton,
    CustomText,
+   ImagePickerModal,
 } from '../../components';
 import {
    WHITE_COLOR,
@@ -43,6 +44,7 @@ const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
    const [userType, setuserType] = useState(null);
    const [isSignatureModalVisible, setisSignatureModalVisible] = useState(null);
+   const [galleryModalVisible, setgalleryModalVisible] = useState(null);
    const dispatch = useDispatch();
    const {
       images,
@@ -133,6 +135,13 @@ const WaitApproval = ({ navigation, route }) => {
             break;
       }
    };
+   const toggleGalleryModal = () => {
+      setgalleryModalVisible(!galleryModalVisible);
+   };
+   const handleSelectImage = async type => {
+      await toggleGalleryModal();
+      dispatch(selectExcutionPhotos(type));
+   };
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -164,6 +173,7 @@ const WaitApproval = ({ navigation, route }) => {
                />
             </View> */}
          </Header>
+
          {!userType ? (
             <View
                style={{
@@ -197,9 +207,7 @@ const WaitApproval = ({ navigation, route }) => {
                   <CustomBottomSheet
                      source={distination}
                      excutionImages={images}
-                     onSelectExcutionImages={() =>
-                        dispatch(selectExcutionPhotos())
-                     }
+                     onSelectExcutionImages={toggleGalleryModal}
                      spareParts={data.spareParts ? data.spareParts : []}
                      oncloseBottomSheet={() => dispatch(onCloseExcutionSheet())}
                      userType={userType}
@@ -210,6 +218,12 @@ const WaitApproval = ({ navigation, route }) => {
                   />
                </View>
                <View style={styles.buttonsContainer}>{renderButtons()}</View>
+               <ImagePickerModal
+                  toggleModal={toggleGalleryModal}
+                  isModalVisible={galleryModalVisible}
+                  onOpenCamerapressed={() => handleSelectImage('camera')}
+                  onOpenGallerypressed={() => handleSelectImage('gallery')}
+               />
             </>
          )}
       </ImageBackground>

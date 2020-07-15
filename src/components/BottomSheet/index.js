@@ -18,6 +18,7 @@ import BackgroundImage from '../../assets/images/popup.png';
 import moment from 'moment';
 import { SignatureModal } from '../signatureModal';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { REJECTED, WAIT_APPROVAL } from '../../utils/complainsStutus';
 const VISITING_PRICE = 50;
 const CustomBottomSheet = ({
    source,
@@ -30,6 +31,7 @@ const CustomBottomSheet = ({
    contractorNumber,
    handleSignatureModal,
    isSignatureModalVisible,
+   signature,
 }) => {
    const TOTAL_PRICE = spareParts.reduce(
       (acc, val) => +acc + +val.Price,
@@ -95,9 +97,9 @@ const CustomBottomSheet = ({
                style={{
                   width: '90%',
                   position: 'absolute',
-                  top: source == 5 ? 30 : 90,
+                  top: source == REJECTED || source == WAIT_APPROVAL ? 30 : 90,
                }}>
-               {source == 5 && (
+               {(source == REJECTED || source == WAIT_APPROVAL) && (
                   <View
                      style={{
                         padding: 10,
@@ -171,9 +173,11 @@ const CustomBottomSheet = ({
                         textStyle={{ color: WHITE_COLOR }}
                      />
                   </View>
-                  {source == 5 && (
+                  {(source == REJECTED || source == WAIT_APPROVAL) && (
                      <CustomText
-                        text={'يعتمد بواسطه :--------'}
+                        text={`يعتمد بواسطه :${
+                           signature ? signature : '--------'
+                        }`}
                         textStyle={{
                            color: WHITE_COLOR,
                            marginVertical: 10,

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
    View,
    Image,
@@ -35,6 +35,7 @@ import {
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import styles from './style';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { getFcmToken } from '../../utils/firebase';
 
 const Login = ({ navigation }) => {
    const passwordInput = useRef();
@@ -57,6 +58,10 @@ const Login = ({ navigation }) => {
    const onKeyboardHide = () => {
       setkeyBoardShow(false);
    };
+   useEffect(() => {
+      getFcmToken();
+      return () => {};
+   }, []);
    return (
       <View
          style={{
@@ -71,6 +76,7 @@ const Login = ({ navigation }) => {
             onKeyboardDidShow={onKeyboardShow}
             onKeyboardDidHide={onKeyboardHide}
             bounces={false}
+            enableAutomaticScroll={true}
             overScrollMode="never"
             contentContainerStyle={{
                flexGrow: 1,

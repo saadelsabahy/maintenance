@@ -15,38 +15,37 @@ const ImagePickerModal = ({
    onOpenGallerypressed,
 }) => {
    return (
-      <View style={styles.container}>
-         <Modal
-            isVisible={isModalVisible}
-            style={{ margin: 0, justifyContent: 'flex-end' }}
-            onBackButtonPress={toggleModal}>
-            <View style={styles.contentContainer}>
-               <ImageBackground
-                  source={BackgroundImage}
-                  resizeMode="stretch"
-                  style={styles.contentWrapper}>
-                  <CustomText text="اختيار صور من " textStyle={styles.title} />
-                  <Icon
-                     name="close"
-                     color={WHITE_COLOR}
-                     size={responsiveFontSize(4)}
-                     style={styles.closeIcon}
-                     onPress={toggleModal}
+      <Modal
+         isVisible={isModalVisible}
+         style={{ margin: 0, justifyContent: 'flex-end' }}
+         onBackButtonPress={toggleModal}
+         coverScreen={true}>
+         <View style={styles.contentContainer}>
+            <ImageBackground
+               source={BackgroundImage}
+               resizeMode="stretch"
+               style={styles.contentWrapper}>
+               <CustomText text="اختيار صور من " textStyle={styles.title} />
+               <Icon
+                  name="close"
+                  color={WHITE_COLOR}
+                  size={responsiveFontSize(4)}
+                  style={styles.closeIcon}
+                  onPress={toggleModal}
+               />
+               <View style={styles.buttonsContainer}>
+                  <CustomButton
+                     buttonTitle="الكاميرا"
+                     onButtonPressed={onOpenCamerapressed}
                   />
-                  <View style={styles.buttonsContainer}>
-                     <CustomButton
-                        buttonTitle="الكاميرا"
-                        onButtonPressed={onOpenCamerapressed}
-                     />
-                     <CustomButton
-                        buttonTitle="معرض الصور"
-                        onButtonPressed={onOpenGallerypressed}
-                     />
-                  </View>
-               </ImageBackground>
-            </View>
-         </Modal>
-      </View>
+                  <CustomButton
+                     buttonTitle="معرض الصور"
+                     onButtonPressed={onOpenGallerypressed}
+                  />
+               </View>
+            </ImageBackground>
+         </View>
+      </Modal>
    );
 };
 const styles = StyleSheet.create({

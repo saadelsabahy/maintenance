@@ -40,9 +40,9 @@ export const getSpareParts = () => async (dispatch, getState) => {
    }
 };
 
-export const onSelectImagesPressed = () => (dispatch, getState) => {
+export const onSelectImagesPressed = type => (dispatch, getState) => {
    const { images } = getState().WaitView;
-   ImagePicker.openCamera({
+   const options = {
       width: 200,
       height: 200,
       compressImageMaxWidth: 200,
@@ -50,18 +50,30 @@ export const onSelectImagesPressed = () => (dispatch, getState) => {
       cropping: false,
       multiple: true,
       mediaType: 'photo',
-   })
-      .then(seletedImages => {
-         console.log(seletedImages);
-
-         dispatch({
-            type: SELECT_IMAGES_SUCCESS,
-            payload: [...images, seletedImages],
+   };
+   if (type == 'camera') {
+      ImagePicker.openCamera(options)
+         .then(seletedImages => {
+            dispatch({
+               type: SELECT_IMAGES_SUCCESS,
+               payload: [...images, seletedImages],
+            });
+         })
+         .catch(e => {
+            console.log('image picker camera error', e);
          });
-      })
-      .catch(e => {
-         console.log('image picker error', e);
-      });
+   } else {
+      ImagePicker.openPicker(options)
+         .then(seletedImages => {
+            dispatch({
+               type: SELECT_IMAGES_SUCCESS,
+               payload: [...images, ...seletedImages],
+            });
+         })
+         .catch(e => {
+            console.log('image picker error', e);
+         });
+   }
 };
 export const handleCheckItem = (index, Id, selectedButton) => (
    dispatch,
@@ -143,10 +155,11 @@ export const handlePerview = (
                      : res['filename'],
             });
          });
-         await Api.post(
-            `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
-            form,
-            { headers: { 'Content-Type': 'multipart/form-data' } }
+         await uploadPerviewImage(
+            guranteeStatus,
+            complainNumber,
+            complainStatus,
+            guranteeStatus == 0 && !images.length ? null : form
          );
 
          const perviewResponse = await Api.post(
@@ -187,4 +200,29 @@ export const onCommentChange = text => dispatch => {
 };
 export const closeBottomSheet = () => dispatch => {
    dispatch({ type: CLOSE_BOTTOM_SHEET });
+};
+
+const uploadPerviewImage = async (
+   guranteeStatus,
+   complainNumber,
+   complainStatus,
+   form
+) => {
+   if (guranteeStatus) {
+      Api.post(
+         `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
+         form,
+         { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
+   } else {
+      if (form) {
+         Api.post(
+            `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
+            form,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+         );
+      } else {
+         return;
+      }
+   }
 };

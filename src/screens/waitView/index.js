@@ -8,6 +8,7 @@ import {
    CustomButton,
    ImageSelector,
    CustomText,
+   ImagePickerModal,
 } from '../../components';
 import {
    WHITE_COLOR,
@@ -34,6 +35,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
    const [userType, setuserType] = useState(null);
+   const [galleryModalVisible, setgalleryModalVisible] = useState(null);
    const {
       images,
       guaranteeSpares,
@@ -61,6 +63,14 @@ const ComplainsDetailes = ({ route, navigation }) => {
       const userType = await AsyncStorage.getItem('userType');
       setuserType(userType);
    };
+   const toggleGalleryModal = () => {
+      setgalleryModalVisible(!galleryModalVisible);
+   };
+   const handleSelectImage = async type => {
+      await toggleGalleryModal();
+      dispatch(onSelectImagesPressed(type));
+   };
+   console.log(images);
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -97,11 +107,13 @@ const ComplainsDetailes = ({ route, navigation }) => {
                size={responsiveFontSize(4)}
             /> */}
          </Header>
+
          <View
             style={{
                width: '100%',
                justifyContent: 'center',
                alignSelf: 'center',
+               marginTop: 10,
             }}>
             <ComplainsItem
                {...data}
@@ -110,9 +122,9 @@ const ComplainsDetailes = ({ route, navigation }) => {
             />
          </View>
 
-         <View style={{ flex: 0.6 }}>
+         <View style={{ flex: 1 }}>
             <Gurantee
-               onSelectImagesPressed={() => dispatch(onSelectImagesPressed())}
+               onSelectImagesPressed={toggleGalleryModal}
                images={images}
                inGuaranteeSpares={guaranteeSpares}
                outGuaranteeSpares={outGuaranteeSpares}
@@ -129,6 +141,12 @@ const ComplainsDetailes = ({ route, navigation }) => {
                userType={userType}
             />
          </View>
+         <ImagePickerModal
+            toggleModal={toggleGalleryModal}
+            isModalVisible={galleryModalVisible}
+            onOpenCamerapressed={() => handleSelectImage('camera')}
+            onOpenGallerypressed={() => handleSelectImage('gallery')}
+         />
       </ImageBackground>
    );
 };

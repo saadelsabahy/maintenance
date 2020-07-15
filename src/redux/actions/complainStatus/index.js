@@ -111,9 +111,9 @@ export const onExcutionDone = (
    // Complians/UpdateStatus
 };
 
-export const selectExcutionPhotos = () => (dispatch, getState) => {
+export const selectExcutionPhotos = type => (dispatch, getState) => {
    const { images } = getState().UpdateComplainsStatus;
-   ImagePicker.openCamera({
+   const options = {
       width: 200,
       height: 200,
       compressImageMaxWidth: 200,
@@ -121,16 +121,31 @@ export const selectExcutionPhotos = () => (dispatch, getState) => {
       cropping: false,
       multiple: true,
       mediaType: 'photo',
-   })
-      .then(seletedImages => {
-         dispatch({
-            type: SELECT_EXCUTION_IMAGES,
-            payload: [...images, seletedImages],
+   };
+
+   if (type == 'camera') {
+      ImagePicker.openCamera(options)
+         .then(seletedImages => {
+            dispatch({
+               type: SELECT_EXCUTION_IMAGES,
+               payload: [...images, seletedImages],
+            });
+         })
+         .catch(e => {
+            console.log('image picker camera error', e);
          });
-      })
-      .catch(e => {
-         console.log('image picker error', e);
-      });
+   } else {
+      ImagePicker.openPicker(options)
+         .then(seletedImages => {
+            dispatch({
+               type: SELECT_EXCUTION_IMAGES,
+               payload: [...images, ...seletedImages],
+            });
+         })
+         .catch(e => {
+            console.log('image picker error', e);
+         });
+   }
 };
 
 export const onCloseExcutionSheet = () => dispatch => {
