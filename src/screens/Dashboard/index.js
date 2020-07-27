@@ -5,6 +5,7 @@ import {
    StyleSheet,
    ImageBackground,
    ScrollView,
+   FlatList,
 } from 'react-native';
 import {
    WHITE_COLOR,
@@ -17,6 +18,7 @@ import {
    DashboardFilter,
    LoaderAndRetry,
    CustomText,
+   EmptyList,
 } from '../../components';
 import DashboardHeader from './DashboardHeader';
 import { useIsFocused } from '@react-navigation/native';
@@ -27,6 +29,17 @@ import {
 } from '../../redux/actions/Dashboard';
 import NetInfo from '@react-native-community/netinfo';
 import DashboardBackground from '../../assets/images/app_bg.png';
+import {
+   WAIT_PERVIEW,
+   WAIT_APPROVAL,
+   WAIT_EXCUTION,
+   SOLVED,
+   REJECTED,
+   LATE_APPROVAL,
+   LATE_EXCUTION,
+   LATE_PERVIEW,
+} from '../../utils/complainsStutus';
+import { dashboardInformation } from '../../utils/dashboardData';
 
 const DashBoard = ({ navigation }) => {
    const isFocused = useIsFocused();
@@ -86,7 +99,7 @@ const DashBoard = ({ navigation }) => {
       </View>
    );
    const [showFilterModal, setshowFilterModal] = useState(false);
-
+   console.log(dashboardData);
    return (
       <ImageBackground
          source={DashboardBackground}
@@ -111,89 +124,35 @@ const DashBoard = ({ navigation }) => {
                   style={{
                      width: '100%',
                      height: '100%',
-                     top: '-5%',
+                     justifyContent: 'flex-end',
                   }}>
-                  <ScrollView
-                     style={{ flex: 1 }}
+                  <FlatList
                      overScrollMode="never"
+                     style={{ flex: 1 }}
+                     numColumns={2}
                      contentContainerStyle={{
-                        flexDirection: 'row',
-                        flexWrap: 'wrap',
-                        justifyContent: 'space-evenly',
-                     }}>
-                     <DashBoardItem
-                        text={'قيد المعاينه'}
-                        number={isNaN(dashboardData[0]) ? 0 : dashboardData[0]}
-                        icon={'download'}
-                        iconTtype={'antdesign'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 1)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'قيد التعميد'}
-                        number={isNaN(dashboardData[1]) ? 0 : dashboardData[1]}
-                        icon={'stopwatch'}
-                        iconTtype={'entypo'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 2)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'قيد التنفيذ'}
-                        number={isNaN(dashboardData[2]) ? 0 : dashboardData[2]}
-                        icon={'gears'}
-                        iconTtype={'font-awesome'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 3)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'تم الحل'}
-                        number={isNaN(dashboardData[3]) ? 0 : dashboardData[3]}
-                        icon={'checkcircleo'}
-                        iconTtype={'antdesign'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 4)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'مرفوض'}
-                        number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'closecircleo'}
-                        iconTtype={'antdesign'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 5)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'متأخر المعاينه'}
-                        number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'eye-slash'}
-                        iconTtype={'font-awesome'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 5)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'متأخر الاعتماد'}
-                        number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'thumbs-up'}
-                        iconTtype={'feather'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 5)
-                        }
-                     />
-                     <DashBoardItem
-                        text={'متأخر التنفيذ'}
-                        number={isNaN(dashboardData[4]) ? 0 : dashboardData[4]}
-                        icon={'progress-wrench'}
-                        iconTtype={'material-community'}
-                        onDashboardItemPressed={headerName =>
-                           onDashboardItemPressed(headerName, 5)
-                        }
-                     />
-                  </ScrollView>
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                     }}
+                     data={dashboardData}
+                     keyExtractor={(item, index) => `${item.StatusId}`}
+                     renderItem={({ item: { StatusId, Total }, index }) => {
+                        return (
+                           <DashBoardItem
+                              text={dashboardInformation[StatusId].name}
+                              number={Total}
+                              icon={dashboardInformation[StatusId].icon}
+                              iconTtype={
+                                 dashboardInformation[StatusId].iconType
+                              }
+                              onDashboardItemPressed={headerName =>
+                                 onDashboardItemPressed(headerName, StatusId)
+                              }
+                           />
+                        );
+                     }}
+                     ListEmptyComponent={<EmptyList />}
+                  />
                </View>
             )}
          </View>

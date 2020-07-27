@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       marginBottom: '7%',
       overflow: 'hidden',
+      marginHorizontal: 8,
       /*elevation: 3,
       shadowOffset: { width: 0, height: 3 },
       shadowColor: '#000',

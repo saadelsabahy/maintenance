@@ -17,7 +17,7 @@ const DashboardHeader = ({
    onNotificationPressed,
 }) => {
    return (
-      <View style={{ width: '100%', height: '25%' }}>
+      <View style={{ width: '100%', height: '22%' }}>
          <Header headerWrapperStyle={styles.headerIconsContainer}>
             <View style={styles.headerStartRow}>
                <Icon
@@ -88,7 +88,7 @@ const DashboardHeader = ({
                   alignSelf: 'center',
                   justifyContent: 'flex-end',
                }}>
-               <View style={{ top: -15 }}>
+               <View style={{ top: -15, start: 3 }}>
                   <CustomText
                      text={'أخر تحديث'}
                      textStyle={{
@@ -101,6 +101,7 @@ const DashboardHeader = ({
                      textStyle={{
                         color: WHITE_COLOR,
                         fontSize: responsiveFontSize(1.5),
+                        zIndex: 1000,
                      }}
                   />
                </View>

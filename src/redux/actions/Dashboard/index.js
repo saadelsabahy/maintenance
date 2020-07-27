@@ -20,10 +20,11 @@ export const getDashBoardData = () => async (dispatch, getState) => {
             data: { data },
          } = getDashboardResponse;
          let dashData = [];
-         data.map(item => {
-            dashData[item.StatusId - 1] = item.Total;
-         });
-
+         dashData = data.sort((a, b) => a.StatusId - b.StatusId);
+         /* .map(item => {
+               dashData[item.StatusId - 1] = item.Total;
+            }); */
+         console.log('dash dta', dashData);
          dispatch({ type: GET_DASHBOARD_DATA_SUCCESS, payload: dashData });
       }
    } catch (error) {

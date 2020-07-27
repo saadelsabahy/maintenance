@@ -11,6 +11,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import Reactotron from 'reactotron-react-native';
 import { purgeStoredState } from 'redux-persist';
+import { firebase } from '@react-native-firebase/messaging';
+import { Keyboard } from 'react-native';
 export const inputsChange = (inputName, inputValue) => {
    switch (inputName) {
       case 'loginName':
@@ -24,6 +26,7 @@ export const inputsChange = (inputName, inputValue) => {
 };
 
 export const onLoginPressed = () => async (dispatch, getState) => {
+   Keyboard.dismiss();
    const { userName, userPassword } = getState().Auth;
    if (userName.length < 2) {
       showFlashMessage('warning', 'اسم المستخدم لايجب ان يقل عن حرفين');
@@ -75,6 +78,7 @@ export const onLoginPressed = () => async (dispatch, getState) => {
 
 export const onLogoutPressed = () => async dispatch => {
    await AsyncStorage.clear();
+   await firebase.messaging().deleteToken();
    /*  await purgeStoredState(); */
    dispatch({ type: LOGOUT_SUCCESS });
 };

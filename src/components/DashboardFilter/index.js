@@ -144,7 +144,11 @@ const DashboardFilter = ({
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'إلغاء'}
-                     onButtonPressed={onBackdropPress}
+                     onButtonPressed={() => {
+                        onContructorIdCgange('');
+
+                        onDashboardSearchFilterPressed();
+                     }}
                   />
                </View>
             </KeyboardAwareScrollView>
