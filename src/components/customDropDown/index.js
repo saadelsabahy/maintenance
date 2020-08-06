@@ -14,7 +14,7 @@ import {
    PLACEHOLDER_COLOR,
    ERROR_RED_COLOR,
 } from '../../constants/colors';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText } from '../customText';
 const MaterialDropDown = ({
@@ -71,8 +71,8 @@ const MaterialDropDown = ({
                         borderBottomEndRadius: 5,
                      }}>
                      <Icon
-                        name={'ios-arrow-down'}
-                        size={responsiveFontSize(3.5)}
+                        name={'arrow-down'}
+                        size={responsiveFontSize(2.5)}
                         color={WHITE_COLOR}
                      />
                   </View>

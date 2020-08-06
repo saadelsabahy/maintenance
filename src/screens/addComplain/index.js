@@ -28,6 +28,7 @@ import {
    handleOpenCamerapressed,
    handleOpenGallerypressed,
    resetAddcomplainPhotos,
+   onAddComplainPressed,
 } from '../../redux/actions';
 import { useIsFocused } from '@react-navigation/native';
 let vehiclesTypes = [
@@ -58,8 +59,9 @@ const AddComplain = ({ navigation }) => {
    const contractorsRef = useRef(null);
    const [isModalVisible, setIsModalVisible] = useState(false);
    const dispatch = useDispatch();
-   const { images } = useSelector(state => ({
+   const { images, loading } = useSelector(state => ({
       images: state.AddComplain.images,
+      loading: state.AddComplain.loading,
    }));
    const defaultValues = {
       plateNumber: '',
@@ -95,8 +97,9 @@ const AddComplain = ({ navigation }) => {
       };
    }, [isFocused]);
    const onSubmit = data => {
-      const res = alert(JSON.stringify(data));
-      reset(res); //to reset after finish request
+      dispatch(onAddComplainPressed(data));
+      /*  const res = alert(JSON.stringify(data));
+      reset(res); //to reset after finish request */
    };
    const toggleModal = () => setIsModalVisible(!isModalVisible);
    const onOpenCamerapressed = async () => {
@@ -107,7 +110,7 @@ const AddComplain = ({ navigation }) => {
       await toggleModal();
       dispatch(handleOpenGallerypressed());
    };
-
+   console.log(loading);
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -233,6 +236,8 @@ const AddComplain = ({ navigation }) => {
                   buttonContainerStyle={styles.buttonContainer}
                   buttonTitle="إضافه"
                   onButtonPressed={handleSubmit(onSubmit)}
+                  loading={loading}
+                  spinnerColor={WHITE_COLOR}
                />
             </View>
          </KeyboardAwareScrollView>
