@@ -58,6 +58,7 @@ const AddComplain = ({ navigation }) => {
    const vehiclesTypesRef = useRef(null);
    const contractorsRef = useRef(null);
    const [isModalVisible, setIsModalVisible] = useState(false);
+   const [showImageError, setshowImageError] = useState(false);
    const dispatch = useDispatch();
    const { images, loading } = useSelector(state => ({
       images: state.AddComplain.images,
@@ -90,14 +91,18 @@ const AddComplain = ({ navigation }) => {
    });
    useEffect(() => {
       return () => {
-         dispatch(resetAddcomplainPhotos());
-         reset();
-         vehiclesTypesRef.current.state.value = '';
-         contractorsRef.current.state.value = '';
+         resetValues();
       };
    }, [isFocused]);
+   const resetValues = () => {
+      dispatch(resetAddcomplainPhotos());
+      reset();
+      vehiclesTypesRef.current.state.value = '';
+      contractorsRef.current.state.value = '';
+   };
    const onSubmit = data => {
-      dispatch(onAddComplainPressed(data));
+      setshowImageError(!images.length);
+      dispatch(onAddComplainPressed(data, resetValues));
       /*  const res = alert(JSON.stringify(data));
       reset(res); //to reset after finish request */
    };
@@ -110,7 +115,7 @@ const AddComplain = ({ navigation }) => {
       await toggleModal();
       dispatch(handleOpenGallerypressed());
    };
-   console.log(loading);
+   console.log(showImageError, !images.length);
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -231,7 +236,12 @@ const AddComplain = ({ navigation }) => {
                   images={images}
                   onSelectImagesPressed={toggleModal}
                />
-
+               {showImageError && (
+                  <CustomText
+                     textStyle={{ color: 'red', margin: 10 }}
+                     text={'يجب اختيار صور البلاغ'}
+                  />
+               )}
                <CustomButton
                   buttonContainerStyle={styles.buttonContainer}
                   buttonTitle="إضافه"

@@ -29,6 +29,7 @@ import database from '../../../models';
 import Reactotron from 'reactotron-react-native';
 import { Q } from '@nozbe/watermelondb';
 import moment from 'moment';
+import { WAIT_PERVIEW, LATE_PERVIEW } from '../../../utils/complainsStutus';
 /////////////////////////////complains feed
 export const getAllComplainsList = (statusId, sort) => async (
    dispatch,
@@ -113,7 +114,8 @@ export const onComplainPressed = (data, navigation, route) => () => {
       const { distination } = route.params;
 
       switch (route.params.distination) {
-         case 1:
+         case WAIT_PERVIEW:
+         case LATE_PERVIEW:
             navigation.navigate('waitView', { data });
             break;
          default:
@@ -122,7 +124,8 @@ export const onComplainPressed = (data, navigation, route) => () => {
       }
    } else {
       switch (data.complainStatus) {
-         case 1:
+         case WAIT_PERVIEW:
+         case LATE_PERVIEW:
             navigation.navigate('complainPerview', { data });
             break;
 

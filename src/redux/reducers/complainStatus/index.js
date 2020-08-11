@@ -10,6 +10,8 @@ import {
    EXCUTION_SUCCESS,
    EXCUTION_FAILED,
    CLOSE_EXCUTION_BOTTOM_SHEET,
+   SAVE_SIGNATURE,
+   DELETE_IMAGE_PATH,
 } from '../../actions/complainStatus/types';
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
    acceptSpinner: false,
    rejectSpinner: false,
    excutionSpinner: false,
+   signature: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -56,7 +59,12 @@ export default (state = initialState, { type, payload }) => {
       case EXCUTION_FAILED:
          return { ...state, excutionSpinner: false };
          break;
-
+      case SAVE_SIGNATURE:
+         return { ...state, signature: payload };
+         break;
+      case DELETE_IMAGE_PATH:
+         return { ...state, signature: '' };
+         break;
       case CLOSE_EXCUTION_BOTTOM_SHEET:
          return { ...state, images: [] };
          break;

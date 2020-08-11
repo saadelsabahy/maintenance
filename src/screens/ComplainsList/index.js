@@ -156,6 +156,7 @@ const Complains = ({ navigation, route, complain }) => {
    };
    const onCancelSearch = async () => {
       dispatch(resetAllSearchInputs(toggleSearchModal));
+      setdropDownText('');
       getData();
    };
    return (
@@ -205,6 +206,9 @@ const Complains = ({ navigation, route, complain }) => {
                { id: '3', text: 'قيد التنفيذ' },
                { id: '4', text: 'تم الحل' },
                { id: '5', text: 'مرفوض' },
+               { id: '14', text: 'متأخر المعاينه' },
+               { id: '15', text: 'متأخر التنفيذ' },
+               { id: '16', text: 'متأخر الاعتماد' },
             ]}
             onSearchPressed={onSearch}
             complainNumber={complainNumber}

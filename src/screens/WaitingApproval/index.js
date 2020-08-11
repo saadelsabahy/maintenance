@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
    View,
    Text,
@@ -35,14 +35,26 @@ import {
    onRejectThePreview,
    selectExcutionPhotos,
    onCloseExcutionSheet,
+   onSaveSignature,
+   deleteImagePath,
 } from '../../redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import Reactotron from 'reactotron-react-native';
 import BackgroundImage from '../../assets/images/app_bg.png';
+import {
+   WAIT_EXCUTION,
+   LATE_EXCUTION,
+   SOLVED,
+   REJECTED,
+   EVISION_USER,
+   AMANA_USER,
+} from '../../utils/complainsStutus';
+import { showFlashMessage } from '../../utils/flashMessage';
 
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
    const [userType, setuserType] = useState(null);
+   const [showSignatureError, setshowSignatureError] = useState(null);
    const [isSignatureModalVisible, setisSignatureModalVisible] = useState(null);
    const [galleryModalVisible, setgalleryModalVisible] = useState(null);
    const dispatch = useDispatch();
@@ -51,15 +63,19 @@ const WaitApproval = ({ navigation, route }) => {
       acceptSpinner,
       rejectSpinner,
       excutionSpinner,
+      signature,
    } = useSelector(state => ({
       images: state.UpdateComplainsStatus.images,
       acceptSpinner: state.UpdateComplainsStatus.acceptSpinner,
       rejectSpinner: state.UpdateComplainsStatus.rejectSpinner,
       excutionSpinner: state.UpdateComplainsStatus.excutionSpinner,
+      signature: state.UpdateComplainsStatus.signature,
    }));
    useEffect(() => {
       getUserType();
-      return () => {};
+      return () => {
+         dispatch(deleteImagePath());
+      };
    }, []);
    const getUserType = async () => {
       const userType = await AsyncStorage.getItem('userType');
@@ -70,9 +86,10 @@ const WaitApproval = ({ navigation, route }) => {
    };
    const renderButtons = () => {
       switch (distination) {
-         case 3:
+         case WAIT_EXCUTION:
+         case LATE_EXCUTION:
             return (
-               userType == 0 && (
+               userType == EVISION_USER && (
                   <CustomButton
                      buttonContainerStyle={{ ...styles.button, width: '90%' }}
                      buttonTitle={'تم الحل'}
@@ -85,11 +102,11 @@ const WaitApproval = ({ navigation, route }) => {
                )
             );
             break;
-         case 4:
+         case SOLVED:
             return null;
             break;
-         case 5:
-            if (userType != -1 && userType != 0)
+         case REJECTED:
+            if (userType != AMANA_USER && userType != EVISION_USER)
                return (
                   <CustomButton
                      buttonContainerStyle={{ ...styles.button, width: '90%' }}
@@ -103,7 +120,7 @@ const WaitApproval = ({ navigation, route }) => {
             return null;
             break;
          default:
-            if (userType != -1 && userType != 0)
+            if (userType != AMANA_USER && userType != EVISION_USER)
                return (
                   <View
                      style={{
@@ -114,9 +131,15 @@ const WaitApproval = ({ navigation, route }) => {
                      <CustomButton
                         buttonContainerStyle={styles.button}
                         buttonTitle={'تعميد'}
-                        onButtonPressed={() =>
-                           dispatch(onAcceptThePreview(data, navigation))
-                        }
+                        onButtonPressed={() => {
+                           if (!signature) {
+                              handleSignatureModal();
+                              setshowSignatureError(!showSignatureError);
+                           } else {
+                              setshowSignatureError(false);
+                              dispatch(onAcceptThePreview(data, navigation));
+                           }
+                        }}
                         loading={acceptSpinner}
                         spinnerColor={WHITE_COLOR}
                      />
@@ -215,6 +238,11 @@ const WaitApproval = ({ navigation, route }) => {
                      contractorNumber={data.contractorNumber}
                      handleSignatureModal={handleSignatureModal}
                      isSignatureModalVisible={isSignatureModalVisible}
+                     handleSaveSignature={signature =>
+                        dispatch(onSaveSignature(signature))
+                     }
+                     signature={signature}
+                     showSignatureError={showSignatureError}
                   />
                </View>
                <View style={styles.buttonsContainer}>{renderButtons()}</View>

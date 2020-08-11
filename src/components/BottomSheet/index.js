@@ -18,8 +18,18 @@ import BackgroundImage from '../../assets/images/popup.png';
 import moment from 'moment';
 import { SignatureModal } from '../signatureModal';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-import { REJECTED, WAIT_APPROVAL } from '../../utils/complainsStutus';
-const VISITING_PRICE = 50;
+import {
+   REJECTED,
+   WAIT_APPROVAL,
+   WAIT_EXCUTION,
+   LATE_EXCUTION,
+   VISITING_PRICE,
+   AMANA_USER,
+   EVISION_USER,
+   WAIT_PERVIEW,
+   LATE_APPROVAL,
+} from '../../utils/complainsStutus';
+
 const CustomBottomSheet = ({
    source,
    excutionImages,
@@ -32,18 +42,21 @@ const CustomBottomSheet = ({
    handleSignatureModal,
    isSignatureModalVisible,
    signature,
+   handleSaveSignature,
+   showSignatureError,
 }) => {
    const TOTAL_PRICE = spareParts.reduce(
       (acc, val) => +acc + +val.Price,
       VISITING_PRICE
    );
    const bottonSheetReferance = useRef(null);
+
    const renderInner = () => (
       <ImageBackground
          source={BackgroundImage}
          style={styles.panel}
          resizeMode="stretch">
-         {source === 3 ? (
+         {source === WAIT_EXCUTION || source === LATE_EXCUTION ? (
             <View
                style={{
                   width: '90%',
@@ -97,9 +110,16 @@ const CustomBottomSheet = ({
                style={{
                   width: '90%',
                   position: 'absolute',
-                  top: source == REJECTED || source == WAIT_APPROVAL ? 30 : 90,
+                  top:
+                     source == REJECTED ||
+                     source == WAIT_APPROVAL ||
+                     source == LATE_APPROVAL
+                        ? 30
+                        : 90,
                }}>
-               {(source == REJECTED || source == WAIT_APPROVAL) && (
+               {(source == REJECTED ||
+                  source == WAIT_APPROVAL ||
+                  source == LATE_APPROVAL) && (
                   <View
                      style={{
                         padding: 10,
@@ -173,19 +193,22 @@ const CustomBottomSheet = ({
                         textStyle={{ color: WHITE_COLOR }}
                      />
                   </View>
-                  {(source == REJECTED || source == WAIT_APPROVAL) && (
-                     <CustomText
-                        text={`يعتمد بواسطه :${
-                           signature ? signature : '--------'
-                        }`}
-                        textStyle={{
-                           color: WHITE_COLOR,
-                           marginVertical: 10,
-                           alignSelf: 'flex-start',
-                        }}
-                        onPress={handleSignatureModal}
-                     />
-                  )}
+                  {(source == REJECTED ||
+                     source == WAIT_APPROVAL ||
+                     source == LATE_APPROVAL) &&
+                     (userType != AMANA_USER && userType != EVISION_USER) && (
+                        <CustomText
+                           text={`يعتمد بواسطه :${
+                              signature ? signature : '--------'
+                           }`}
+                           textStyle={{
+                              color: WHITE_COLOR,
+                              marginVertical: 10,
+                              alignSelf: 'flex-start',
+                           }}
+                           onPress={handleSignatureModal}
+                        />
+                     )}
                </View>
             </View>
          )}
@@ -198,8 +221,10 @@ const CustomBottomSheet = ({
          <BottomSheet
             snapPoints={[
                '25%',
-               source == 5
-                  ? SCREEN_HEIGHT - SCREEN_HEIGHT / 7
+               source == REJECTED ||
+               source == WAIT_APPROVAL ||
+               source == LATE_APPROVAL
+                  ? SCREEN_HEIGHT - SCREEN_HEIGHT / 6
                   : SCREEN_HEIGHT - SCREEN_HEIGHT / 5,
                '25%',
             ]}
@@ -214,6 +239,8 @@ const CustomBottomSheet = ({
          <SignatureModal
             isModalVisible={isSignatureModalVisible}
             hideModal={handleSignatureModal}
+            handleSaveSignature={handleSaveSignature}
+            showSignatureError={showSignatureError}
          />
       </View>
    );

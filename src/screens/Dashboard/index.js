@@ -99,7 +99,6 @@ const DashBoard = ({ navigation }) => {
       </View>
    );
    const [showFilterModal, setshowFilterModal] = useState(false);
-   console.log(dashboardData);
    return (
       <ImageBackground
          source={DashboardBackground}

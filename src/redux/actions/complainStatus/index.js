@@ -12,21 +12,44 @@ import {
    EXCUTION_SUCCESS,
    EXCUTION_FAILED,
    CLOSE_EXCUTION_BOTTOM_SHEET,
+   SAVE_SIGNATURE,
+   DELETE_IMAGE_PATH,
 } from './types';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import Reactotron from 'reactotron-react-native';
 import Api from '../../../apis';
 import { Platform } from 'react-native';
-
+import { convertImagesToFormData } from '../addComplain';
+import {
+   WAIT_EXCUTION,
+   REJECTED,
+   SOLVED,
+} from '../../../utils/complainsStutus';
 export const onAcceptThePreview = (
    { complainNumber, covered },
    navigation
 ) => async (dispatch, getState) => {
-   const userId = await AsyncStorage.getItem('userId');
    try {
       dispatch({ type: APPROVE_SPINNER });
+      const userId = await AsyncStorage.getItem('userId');
+      console.log('upload sig data...', complainNumber, userId);
+      const { signature } = getState().UpdateComplainsStatus;
+      const signatureImage = new FormData();
+      [signature].map(img => {
+         signatureImage.append('image', {
+            uri: Platform.OS == 'android' ? img : img.replace('file://', ''),
+            type: 'image/png',
+            name: userId + 'signature.png',
+         });
+      });
+
+      await Api.post(
+         `Complians/Signature/UploadImage/${+complainNumber}/${userId}`,
+         signatureImage,
+         { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
       const approvalResponse = await Api.post(
-         `Complians/UpdateStatus?StatusId=${3}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
+         `Complians/UpdateStatus?StatusId=${+WAIT_EXCUTION}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
          []
       );
       Reactotron.log(approvalResponse);
@@ -49,7 +72,7 @@ export const onRejectThePreview = (
    try {
       dispatch({ type: REJECT_SPINNER });
       const rejectResponse = await Api.post(
-         `Complians/UpdateStatus?StatusId=${5}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
+         `Complians/UpdateStatus?StatusId=${REJECTED}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
          []
       );
       if (rejectResponse.data.statusCode == 200) {
@@ -89,13 +112,13 @@ export const onExcutionDone = (
             });
          });
          await Api.post(
-            `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${4}`,
+            `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${SOLVED}`,
             form,
             { headers: { 'Content-Type': 'multipart/form-data' } }
          );
 
          const rejectResponse = await Api.post(
-            `Complians/UpdateStatus?StatusId=${4}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
+            `Complians/UpdateStatus?StatusId=${SOLVED}&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${covered}&Comment=${null}`,
             []
          );
          if (rejectResponse.data.statusCode == 200) {
@@ -150,4 +173,12 @@ export const selectExcutionPhotos = type => (dispatch, getState) => {
 
 export const onCloseExcutionSheet = () => dispatch => {
    dispatch({ type: CLOSE_EXCUTION_BOTTOM_SHEET });
+};
+
+export const onSaveSignature = signature => dispatch => {
+   dispatch({ type: SAVE_SIGNATURE, payload: signature });
+};
+
+export const deleteImagePath = () => dispatch => {
+   dispatch({ type: DELETE_IMAGE_PATH });
 };

@@ -8,3 +8,7 @@ export const LATE_APPROVAL = 15;
 export const LATE_EXCUTION = 16;
 
 export const IMAGES_LENGTH = 5;
+
+export const EVISION_USER = 0;
+export const AMANA_USER = -1;
+export const VISITING_PRICE = 50;

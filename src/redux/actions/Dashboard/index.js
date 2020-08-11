@@ -24,7 +24,6 @@ export const getDashBoardData = () => async (dispatch, getState) => {
          /* .map(item => {
                dashData[item.StatusId - 1] = item.Total;
             }); */
-         console.log('dash dta', dashData);
          dispatch({ type: GET_DASHBOARD_DATA_SUCCESS, payload: dashData });
       }
    } catch (error) {
