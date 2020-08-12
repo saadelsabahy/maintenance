@@ -43,7 +43,7 @@ const Gurantee = ({
    const bottomSheetRef = useRef(null);
    const onButtonsPressed = index => {
       setselectedButton(index);
-      bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
+      bottomSheetRef.current.snapTo(1);
    };
    const bottomSheetHeader = () => {
       return (
@@ -64,7 +64,7 @@ const Gurantee = ({
                }}>
                <ImageSelector
                   onSelectImagesPressed={async () => {
-                     await bottomSheetRef.current.snapTo(SCREEN_HEIGHT - 50);
+                     await bottomSheetRef.current.snapTo(1);
                      if (selectedButton === 0 || selectedButton === 1) {
                         onSelectImagesPressed();
                      } else {
