@@ -58,6 +58,7 @@ export default (state = initialState, { type, payload }) => {
          return {
             ...state,
             contractors: payload.contractorsData,
+            viehecles: payload.vehiclesData,
             getContractorsAndVieheclesSpinner: false,
          };
          break;

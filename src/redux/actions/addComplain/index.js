@@ -29,17 +29,42 @@ export const getVieheclesTypesAndContractorNumbers = () => async (
    try {
       dispatch({ type: GET_CONTRACTORS_AND_VIELECLES_SPINNER });
       const getContractors = await Api.get('Contractors');
-      if (getContractors.data.statusCode == 200) {
+      const getVehicles = await Api.get('Vehicles');
+      if (
+         getContractors.data.statusCode == 200 &&
+         getVehicles.data.statusCode == 200
+      ) {
          const { data: contractors } = getContractors.data;
+         const { data: vehicles } = getVehicles.data;
+         const typeIds = [...new Set(vehicles.map(item => item.TypeId))];
+         const vehiclesData = typeIds
+            .map(id => vehicles.find(vehicle => vehicle.TypeId == id))
+            .map(
+               ({
+                  PlateNumber,
+                  TypeId,
+                  ModelId,
+                  RFIDTag,
+                  NameAr,
+                  NameOther,
+               }) => ({
+                  PlateNumber,
+                  TypeId,
+                  ModelId,
+                  RFIDTag,
+                  value: NameAr,
+                  NameOther,
+               })
+            )
+            .filter(item => item.value);
          const contractorsData = contractors.map(({ Id, NameAr, NameEn }) => ({
             value: Id,
             NameAr,
             NameEn,
          }));
-
          dispatch({
             type: GET_CONTRACTORS_AND_VIELECLES_SUCCESS,
-            payload: { contractorsData },
+            payload: { contractorsData, vehiclesData },
          });
       }
    } catch (error) {

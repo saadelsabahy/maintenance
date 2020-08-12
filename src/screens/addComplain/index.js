@@ -1,5 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import {
+   View,
+   Text,
+   ImageBackground,
+   StyleSheet,
+   ActivityIndicator,
+} from 'react-native';
 import {
    CustomText,
    Header,
@@ -32,7 +38,7 @@ import {
    getVieheclesTypesAndContractorNumbers,
 } from '../../redux/actions';
 import { useIsFocused } from '@react-navigation/native';
-let vehiclesTypes = [
+/* let vehiclesTypes = [
    {
       value: 'ضاغط',
    },
@@ -45,7 +51,7 @@ let vehiclesTypes = [
    {
       value: 'مكنه شطف اليه',
    },
-];
+]; */
 /* let contractorsNumbers = [
    {
       value: '80',
@@ -61,10 +67,19 @@ const AddComplain = ({ navigation }) => {
    const [isModalVisible, setIsModalVisible] = useState(false);
    const [showImageError, setshowImageError] = useState(false);
    const dispatch = useDispatch();
-   const { images, loading, contractors } = useSelector(state => ({
+   const {
+      images,
+      loading,
+      contractors,
+      viehecles,
+      getContractorsAndVieheclesSpinner,
+   } = useSelector(state => ({
       images: state.AddComplain.images,
       loading: state.AddComplain.loading,
       contractors: state.AddComplain.contractors,
+      viehecles: state.AddComplain.viehecles,
+      getContractorsAndVieheclesSpinner:
+         state.AddComplain.getContractorsAndVieheclesSpinner,
    }));
    const defaultValues = {
       plateNumber: '',
@@ -141,121 +156,133 @@ const AddComplain = ({ navigation }) => {
             </View>
          </Header>
 
-         <KeyboardAwareScrollView
-            style={styles.formContainer}
-            enableOnAndroid={true}
-            contentContainerStyle={styles.keyboardAwareContent}
-            extraScrollHeight={30}>
-            <ImagePickerModal
-               toggleModal={toggleModal}
-               isModalVisible={isModalVisible}
-               onOpenCamerapressed={onOpenCamerapressed}
-               onOpenGallerypressed={onOpenGallerypressed}
+         {getContractorsAndVieheclesSpinner ? (
+            <ActivityIndicator
+               style={{ flex: 1, alignSelf: 'center' }}
+               color={WHITE_COLOR}
+               size={'large'}
             />
-            <View style={styles.inputsWrapper}>
-               <Controller
-                  control={control}
-                  render={({ onChange, onBlur, value }) => (
-                     <CustomInput
-                        inputContainerStyle={styles.input}
-                        placeholder={'رقم اللوحه'}
-                        error={errors.plateNumber}
-                        onChangeText={value => onChange(value)}
-                        onBlur={onBlur}
-                        value={value}
-                        //  onChangeText={text => setValue('plateNumber', text, true)}
-                     />
-                  )}
-                  name="plateNumber"
-                  rules={validation['plateNumber']}
+         ) : (
+            <KeyboardAwareScrollView
+               style={styles.formContainer}
+               enableOnAndroid={true}
+               contentContainerStyle={styles.keyboardAwareContent}
+               extraScrollHeight={30}>
+               <ImagePickerModal
+                  toggleModal={toggleModal}
+                  isModalVisible={isModalVisible}
+                  onOpenCamerapressed={onOpenCamerapressed}
+                  onOpenGallerypressed={onOpenGallerypressed}
                />
-               <Controller
-                  control={control}
-                  render={({ onChange, onBlur, value }) => (
-                     <CustomInput
-                        inputContainerStyle={styles.input}
-                        placeholder={'رقم المعده'}
-                        onBlur={onBlur}
-                        value={value}
-                        error={errors.vehicleNumber}
-                        onChangeText={value => onChange(value)}
-                     />
-                  )}
-                  name="vehicleNumber"
-                  rules={validation['vehicleNumber']}
-               />
-
-               <Controller
-                  control={control}
-                  render={({ onChange, onBlur, value }) => (
-                     <MaterialDropDown
-                        data={vehiclesTypes}
-                        label={'نوع المعده '}
-                        onBlur={onBlur}
-                        value={value}
-                        error={errors.vehicleType}
-                        onChangeText={(value, index, data) => onChange(value)}
-                        referance={c => (vehiclesTypesRef.current = c)}
-                     />
-                  )}
-                  rules={validation['vehicleType']}
-                  name="vehicleType"
-               />
-
-               <Controller
-                  control={control}
-                  render={({ onChange, onBlur, value }) => (
-                     <MaterialDropDown
-                        data={contractors}
-                        label={'العقد'}
-                        onBlur={onBlur}
-                        value={value}
-                        error={errors.contractor}
-                        onChangeText={(value, index, data) => onChange(value)}
-                        referance={c => (contractorsRef.current = c)}
-                     />
-                  )}
-                  name="contractor"
-                  rules={validation['contractor']}
-               />
-
-               <Controller
-                  control={control}
-                  render={({ onChange, onBlur, value, onFocus }) => (
-                     <TextArea
-                        containerStyle={styles.textAreaContainer}
-                        placeholder="وصف البلاغ"
-                        error={errors.complainDescription}
-                        onBlur={onBlur}
-                        value={value}
-                        onChangeText={value => onChange(value)}
-                        onFocus={onFocus}
-                     />
-                  )}
-                  name="complainDescription"
-                  rules={validation['complainDescription']}
-               />
-
-               <ImageSelector
-                  containerStyle={styles.imageSelectorContainer}
-                  images={images}
-                  onSelectImagesPressed={toggleModal}
-               />
-               {showImageError && (
-                  <CustomText
-                     textStyle={{ color: 'red', margin: 10 }}
-                     text={'يجب اختيار صور البلاغ'}
+               <View style={styles.inputsWrapper}>
+                  <Controller
+                     control={control}
+                     render={({ onChange, onBlur, value }) => (
+                        <CustomInput
+                           inputContainerStyle={styles.input}
+                           placeholder={'رقم اللوحه'}
+                           error={errors.plateNumber}
+                           onChangeText={value => onChange(value)}
+                           onBlur={onBlur}
+                           value={value}
+                           //  onChangeText={text => setValue('plateNumber', text, true)}
+                        />
+                     )}
+                     name="plateNumber"
+                     rules={validation['plateNumber']}
                   />
-               )}
-               <CustomButton
-                  buttonContainerStyle={styles.buttonContainer}
-                  buttonTitle="إضافه"
-                  onButtonPressed={handleSubmit(onSubmit)}
-                  loading={loading}
-                  spinnerColor={WHITE_COLOR}
-               />
-            </View>
-         </KeyboardAwareScrollView>
+                  <Controller
+                     control={control}
+                     render={({ onChange, onBlur, value }) => (
+                        <CustomInput
+                           inputContainerStyle={styles.input}
+                           placeholder={'رقم المعده'}
+                           onBlur={onBlur}
+                           value={value}
+                           error={errors.vehicleNumber}
+                           onChangeText={value => onChange(value)}
+                        />
+                     )}
+                     name="vehicleNumber"
+                     rules={validation['vehicleNumber']}
+                  />
+
+                  <Controller
+                     control={control}
+                     render={({ onChange, onBlur, value }) => (
+                        <MaterialDropDown
+                           data={viehecles}
+                           label={'نوع المعده '}
+                           onBlur={onBlur}
+                           value={value}
+                           error={errors.vehicleType}
+                           onChangeText={(value, index, data) =>
+                              onChange(value)
+                           }
+                           referance={c => (vehiclesTypesRef.current = c)}
+                        />
+                     )}
+                     rules={validation['vehicleType']}
+                     name="vehicleType"
+                  />
+
+                  <Controller
+                     control={control}
+                     render={({ onChange, onBlur, value }) => (
+                        <MaterialDropDown
+                           data={contractors}
+                           label={'العقد'}
+                           onBlur={onBlur}
+                           value={value}
+                           error={errors.contractor}
+                           onChangeText={(value, index, data) =>
+                              onChange(value)
+                           }
+                           referance={c => (contractorsRef.current = c)}
+                        />
+                     )}
+                     name="contractor"
+                     rules={validation['contractor']}
+                  />
+
+                  <Controller
+                     control={control}
+                     render={({ onChange, onBlur, value, onFocus }) => (
+                        <TextArea
+                           containerStyle={styles.textAreaContainer}
+                           placeholder="وصف البلاغ"
+                           error={errors.complainDescription}
+                           onBlur={onBlur}
+                           value={value}
+                           onChangeText={value => onChange(value)}
+                           onFocus={onFocus}
+                        />
+                     )}
+                     name="complainDescription"
+                     rules={validation['complainDescription']}
+                  />
+
+                  <ImageSelector
+                     containerStyle={styles.imageSelectorContainer}
+                     images={images}
+                     onSelectImagesPressed={toggleModal}
+                  />
+                  {showImageError && (
+                     <CustomText
+                        textStyle={{ color: 'red', margin: 10 }}
+                        text={'يجب اختيار صور البلاغ'}
+                     />
+                  )}
+                  <CustomButton
+                     buttonContainerStyle={styles.buttonContainer}
+                     buttonTitle="إضافه"
+                     onButtonPressed={handleSubmit(onSubmit)}
+                     loading={loading}
+                     spinnerColor={WHITE_COLOR}
+                  />
+               </View>
+            </KeyboardAwareScrollView>
+         )}
       </ImageBackground>
    );
 };
