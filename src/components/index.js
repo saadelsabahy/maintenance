@@ -32,3 +32,4 @@ export * from './LoginButton';
 export * from './customDropDown';
 export * from './signatureModal';
 export * from './ImagePickerModal';
+export * from './notificationCard';

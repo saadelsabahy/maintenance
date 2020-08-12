@@ -138,14 +138,13 @@ const CustomBottomSheet = ({
                            flexDirection: 'row',
                            flexWrap: 'wrap',
                            flex: 1,
-                           flexShrink: 1,
                         }}>
                         <CustomText
                            text={`الامر لأجل اصلاح المعده رقم :- ${vehicleNumber} في العقد :- ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه : - `}
                            textStyle={{
                               alignSelf: 'flex-start',
                            }}
-                           numberOfLines={3}
+                           numberOfLines={4}
                         />
                      </View>
                   </View>

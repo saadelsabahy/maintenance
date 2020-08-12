@@ -110,6 +110,7 @@ const DashBoard = ({ navigation }) => {
             onFilterPressed={() => setshowFilterModal(!showFilterModal)}
             lastUpdate={lastUpdate}
             onRefreshPressed={() => getDashboardData()}
+            onNotificationPressed={() => navigation.navigate('Notificatons')}
          />
          <View style={styles.itemsWrapper}>
             {dashboardSpinner || dashboardError ? (

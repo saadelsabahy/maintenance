@@ -6,6 +6,9 @@ import {
    ADD_COMPLAIN_SPINNER,
    ADD_COMPLAIN_SUCCESS,
    ADD_COMPLAIN_FAILED,
+   GET_CONTRACTORS_AND_VIELECLES_FAILED,
+   GET_CONTRACTORS_AND_VIELECLES_SPINNER,
+   GET_CONTRACTORS_AND_VIELECLES_SUCCESS,
 } from './types';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import { WAIT_PERVIEW } from '../../../utils/complainsStutus';
@@ -17,6 +20,32 @@ const options = {
    cropping: false,
    multiple: true,
    mediaType: 'photo',
+};
+export const getVieheclesTypesAndContractorNumbers = () => async (
+   dispatch,
+   getState
+) => {
+   const { filterInput } = getState().Dashboard;
+   try {
+      dispatch({ type: GET_CONTRACTORS_AND_VIELECLES_SPINNER });
+      const getContractors = await Api.get('Contractors');
+      if (getContractors.data.statusCode == 200) {
+         const { data: contractors } = getContractors.data;
+         const contractorsData = contractors.map(({ Id, NameAr, NameEn }) => ({
+            value: Id,
+            NameAr,
+            NameEn,
+         }));
+
+         dispatch({
+            type: GET_CONTRACTORS_AND_VIELECLES_SUCCESS,
+            payload: { contractorsData },
+         });
+      }
+   } catch (error) {
+      console.log('getVieheclesTypesAndContractorNumbers errror', error);
+      dispatch({ type: GET_CONTRACTORS_AND_VIELECLES_FAILED });
+   }
 };
 export const handleOpenCamerapressed = () => (dispatch, getState) => {
    try {

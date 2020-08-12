@@ -22,6 +22,7 @@ import ComplainsDetailes from '../screens/cmplainsDetails';
 import WaitingView from '../screens/waitView';
 import WaitApproval from '../screens/WaitingApproval';
 import AddComplain from '../screens/addComplain';
+import Notifications from '../screens/notifications';
 
 const Stack = createStackNavigator();
 
@@ -33,10 +34,7 @@ const DashboardStack = () => {
          }}
          initialRouteName={'Dashboard'}>
          <Stack.Screen name={'Dashboard'} component={DashBoard} />
-         {/*  <Stack.Screen
-            name={'waitApprovalComplains'}
-            component={WaitApprovalList}
-         /> */}
+         <Stack.Screen name={'Notificatons'} component={Notifications} />
          <Stack.Screen name={'DashboardComplains'} component={Complains} />
          <Stack.Screen name={'waitView'} component={WaitingView} />
          <Stack.Screen name={'waitAprroval'} component={WaitApproval} />

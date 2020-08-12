@@ -29,6 +29,7 @@ import {
    handleOpenGallerypressed,
    resetAddcomplainPhotos,
    onAddComplainPressed,
+   getVieheclesTypesAndContractorNumbers,
 } from '../../redux/actions';
 import { useIsFocused } from '@react-navigation/native';
 let vehiclesTypes = [
@@ -45,14 +46,14 @@ let vehiclesTypes = [
       value: 'مكنه شطف اليه',
    },
 ];
-let contractorsNumbers = [
+/* let contractorsNumbers = [
    {
       value: '80',
    },
    {
       value: '81',
    },
-];
+]; */
 const AddComplain = ({ navigation }) => {
    const isFocused = useIsFocused();
    const vehiclesTypesRef = useRef(null);
@@ -60,9 +61,10 @@ const AddComplain = ({ navigation }) => {
    const [isModalVisible, setIsModalVisible] = useState(false);
    const [showImageError, setshowImageError] = useState(false);
    const dispatch = useDispatch();
-   const { images, loading } = useSelector(state => ({
+   const { images, loading, contractors } = useSelector(state => ({
       images: state.AddComplain.images,
       loading: state.AddComplain.loading,
+      contractors: state.AddComplain.contractors,
    }));
    const defaultValues = {
       plateNumber: '',
@@ -90,6 +92,9 @@ const AddComplain = ({ navigation }) => {
       shouldUnregister: true,
    });
    useEffect(() => {
+      if (isFocused) {
+         dispatch(getVieheclesTypesAndContractorNumbers());
+      }
       return () => {
          resetValues();
       };
@@ -201,7 +206,7 @@ const AddComplain = ({ navigation }) => {
                   control={control}
                   render={({ onChange, onBlur, value }) => (
                      <MaterialDropDown
-                        data={contractorsNumbers}
+                        data={contractors}
                         label={'العقد'}
                         onBlur={onBlur}
                         value={value}
