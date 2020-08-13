@@ -73,7 +73,7 @@ const NotificationCard = ({
 const styles = StyleSheet.create({
    container: {
       width: '97%',
-      backgroundColor: MAIN_COLOR,
+      backgroundColor: SURFACE_COLOR,
       borderRadius: 10,
       ...Platform.select({
          android: {

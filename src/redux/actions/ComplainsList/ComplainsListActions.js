@@ -110,6 +110,7 @@ export const LoadPagination = (statusId, sort) => async (
 };
 
 export const onComplainPressed = (data, navigation, route) => () => {
+   console.log('data..', data);
    if (route.params && route.params.distination) {
       const { distination } = route.params;
 

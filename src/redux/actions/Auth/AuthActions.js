@@ -82,6 +82,8 @@ const addFcmToFireStore = async (data, dispatch) => {
          .set({
             notificationBadge: firestore.FieldValue.increment(0),
             fcmToken: firestore.FieldValue.arrayUnion(fcmToken),
+            userId: data.Id,
+            locationId: data.LocationId,
          });
       await AsyncStorage.multiSet([
          ['userId', `${data.Id}`],

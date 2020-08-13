@@ -35,7 +35,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
    const [userType, setuserType] = useState(null);
-   const [galleryModalVisible, setgalleryModalVisible] = useState(null);
+   const [galleryModalVisible, setgalleryModalVisible] = useState(false);
    const {
       images,
       guaranteeSpares,

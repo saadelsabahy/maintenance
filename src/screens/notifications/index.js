@@ -59,7 +59,9 @@ const Notifications = ({ navigation }) => {
 
                   return (
                      <NotificationCard
-                        notificationTimeText={new Date().toLocaleDateString()}
+                        notificationTimeText={new Date().toLocaleDateString(
+                           'ar-EG'
+                        )}
                         notificationIconSize={responsiveFontSize(3)}
                         containerStyle={{ alignSelf: 'center' }}
                         notificationDetailes={`detailes.....`}

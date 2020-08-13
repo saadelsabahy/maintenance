@@ -54,9 +54,11 @@ import { showFlashMessage } from '../../utils/flashMessage';
 const WaitApproval = ({ navigation, route }) => {
    const { data, distination } = route.params;
    const [userType, setuserType] = useState(null);
-   const [showSignatureError, setshowSignatureError] = useState(null);
-   const [isSignatureModalVisible, setisSignatureModalVisible] = useState(null);
-   const [galleryModalVisible, setgalleryModalVisible] = useState(null);
+   const [showSignatureError, setshowSignatureError] = useState(false);
+   const [isSignatureModalVisible, setisSignatureModalVisible] = useState(
+      false
+   );
+   const [galleryModalVisible, setgalleryModalVisible] = useState(false);
    const dispatch = useDispatch();
    const {
       images,
