@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "410473490293",
-    "firebase_url": "https://maintanance-57bda.firebaseio.com",
-    "project_id": "maintanance-57bda",
-    "storage_bucket": "maintanance-57bda.appspot.com"
+    "project_number": "913086430843",
+    "firebase_url": "https://maintenanceapp-45399.firebaseio.com",
+    "project_id": "maintenanceapp-45399",
+    "storage_bucket": "maintenanceapp-45399.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:410473490293:android:adaad631583251bc97953c",
+        "mobilesdk_app_id": "1:913086430843:android:ec793acb34c1c870cb2cde",
         "android_client_info": {
           "package_name": "com.maintenance"
         }
       },
       "oauth_client": [
         {
-          "client_id": "410473490293-n75lbsthqerd0v5toqhmmoh3rf58fssp.apps.googleusercontent.com",
+          "client_id": "913086430843-3lauv1i0vk8tntgnlit530kaejakspfg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD_f029bpULsvzhRKd_OKmVssFaUJo3Yzs"
+          "current_key": "AIzaSyDSbsKqvYrF-k6H7dmP-bjkW2BHcrCxCZw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "410473490293-n75lbsthqerd0v5toqhmmoh3rf58fssp.apps.googleusercontent.com",
+              "client_id": "913086430843-3lauv1i0vk8tntgnlit530kaejakspfg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
