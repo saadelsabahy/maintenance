@@ -83,6 +83,7 @@
 		3541CD159478829C1C39C4A0 /* libPods-maintenanceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-maintenanceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		355C2F6AD3574702868380A9 /* libWatermelonDB.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libWatermelonDB.a; sourceTree = "<group>"; };
 		4F101036249ACEE4001A0D77 /* RSSignatureCapture.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RSSignatureCapture.xcodeproj; path = "../node_modules/react-native-signature-capture/ios/RSSignatureCapture.xcodeproj"; sourceTree = "<group>"; };
+		4F42AE2024E4A212007D2438 /* maintenance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = maintenance.entitlements; path = maintenance/maintenance.entitlements; sourceTree = "<group>"; };
 		4F540B4A24E44769006B1CFD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50AB376A245EFC4600FA2E78 /* maintenance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "maintenance-Bridging-Header.h"; sourceTree = "<group>"; };
 		50AB376B245EFC4600FA2E78 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		13B07FAE1A68108700A75B9A /* maintenance */ = {
 			isa = PBXGroup;
 			children = (
+				4F42AE2024E4A212007D2438 /* maintenance.entitlements */,
 				4F540B4A24E44769006B1CFD /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -849,6 +851,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = maintenance/maintenance.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6S322V4U35;
@@ -880,6 +883,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = maintenance/maintenance.entitlements;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 6S322V4U35;
 				HEADER_SEARCH_PATHS = (
