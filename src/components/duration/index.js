@@ -78,13 +78,18 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
       }
    };
    return (
-      <View style={[styles.container]}>
+      <View
+         style={[
+            styles.container,
+            { width: startDate && endDate ? '90%' : '100%' },
+         ]}>
          <DateTimeButton
             text={!startDate ? 'من تاريخ' : startDate}
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
             onPress={() => showDatePicker('startDate')}
+            containerStyle={{ width: startDate && endDate ? '45%' : '47%' }}
          />
          <DateTimeButton
             text={!endDate ? 'إلي تاريخ' : endDate}
@@ -92,6 +97,7 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
             onPress={() => showDatePicker('endDate')}
+            containerStyle={{ width: startDate && endDate ? '45%' : '47%' }}
          />
          <CustomDateTimePicker
             isDatePickerVisible={isDatePickerVisible}
@@ -145,7 +151,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-between',
       width: '100%',
-      height: '35%',
+      height: '100%',
    },
    buttonIos: {
       width: '100%',

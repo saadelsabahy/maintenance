@@ -159,6 +159,10 @@ const Complains = ({ navigation, route, complain }) => {
       setdropDownText('');
       getData();
    };
+   const hideSearchModal = async () => {
+      await toggleSearchModal();
+      getData();
+   };
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -198,7 +202,7 @@ const Complains = ({ navigation, route, complain }) => {
 
          <SearchModal
             isModalVisible={isModalVisible}
-            onBackdropPress={toggleSearchModal}
+            onBackdropPress={hideSearchModal}
             searchDropdownLabels={[
                { id: 'null', text: 'جميع البلاغات' },
                { id: '1', text: 'قيد المعاينه' },

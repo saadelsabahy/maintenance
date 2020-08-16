@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   ImageBackground,
+   KeyboardAvoidingView,
+   Platform,
+} from 'react-native';
 import {
    Header,
    Icon,
@@ -72,82 +79,79 @@ const ComplainsDetailes = ({ route, navigation }) => {
    };
    console.log(images);
    return (
-      <ImageBackground
-         source={BackgroundImage}
-         style={styles.container}
-         resizeMode="stretch">
-         <Header>
-            <Icon
-               name={'ios-arrow-back'}
-               type={'ionicon'}
-               color={HEADER_ICONS_COLOR}
-               iconContainerStyle={{ flex: 0.1 }}
-               style={{ transform: [{ rotateY: '-180deg' }] }}
-               onPress={() => navigation.goBack()}
-               size={responsiveFontSize(4)}
-            />
+      <KeyboardAvoidingView
+         enabled={Platform.OS == 'ios'}
+         behavior={'padding'}
+         style={{ flex: 1 }}>
+         <ImageBackground
+            source={BackgroundImage}
+            style={styles.container}
+            resizeMode="stretch">
+            <Header>
+               <Icon
+                  name={'ios-arrow-back'}
+                  type={'ionicon'}
+                  color={HEADER_ICONS_COLOR}
+                  iconContainerStyle={{ flex: 0.1 }}
+                  style={{ transform: [{ rotateY: '-180deg' }] }}
+                  onPress={() => navigation.goBack()}
+                  size={responsiveFontSize(4)}
+               />
+
+               <View
+                  style={{
+                     flex: 1,
+                     justifyContent: 'center',
+                     alignItems: 'center',
+                  }}>
+                  <CustomText
+                     text={data.complainNumber}
+                     textStyle={{ color: WHITE_COLOR }}
+                  />
+               </View>
+            </Header>
 
             <View
                style={{
-                  flex: 1,
+                  width: '100%',
                   justifyContent: 'center',
-                  alignItems: 'center',
+                  alignSelf: 'center',
+                  marginTop: 10,
                }}>
-               <CustomText
-                  text={data.complainNumber}
-                  textStyle={{ color: WHITE_COLOR }}
+               <ComplainsItem
+                  {...data}
+                  onComplainPressed={() => {}}
+                  containerStyle={styles.complainsItem}
                />
             </View>
 
-            {/* <Icon
-               name={'list-unordered'}
-               type={'octicon'}
-               color={WHITE_COLOR}
-               iconContainerStyle={{ flex: 0.1 }}
-               size={responsiveFontSize(4)}
-            /> */}
-         </Header>
-
-         <View
-            style={{
-               width: '100%',
-               justifyContent: 'center',
-               alignSelf: 'center',
-               marginTop: 10,
-            }}>
-            <ComplainsItem
-               {...data}
-               onComplainPressed={() => {}}
-               containerStyle={styles.complainsItem}
+            <View style={{ flex: 1 }}>
+               <Gurantee
+                  onSelectImagesPressed={toggleGalleryModal}
+                  images={images}
+                  inGuaranteeSpares={guaranteeSpares}
+                  outGuaranteeSpares={outGuaranteeSpares}
+                  oncloseBottomSheet={() => dispatch(closeBottomSheet())}
+                  onCheckItem={(index, Id, selectedButton) => {
+                     dispatch(handleCheckItem(index, Id, selectedButton));
+                  }}
+                  handlePerview={guranteeStatus =>
+                     dispatch(handlePerview(data, guranteeStatus, navigation))
+                  }
+                  comment={comment}
+                  onCommentChange={text => dispatch(onCommentChange(text))}
+                  loading={perviewSpinner}
+                  userType={userType}
+               />
+            </View>
+            <ImagePickerModal
+               toggleModal={toggleGalleryModal}
+               isModalVisible={galleryModalVisible}
+               onOpenCamerapressed={() => handleSelectImage('camera')}
+               onOpenGallerypressed={() => handleSelectImage('gallery')}
             />
-         </View>
-
-         <View style={{ flex: 1 }}>
-            <Gurantee
-               onSelectImagesPressed={toggleGalleryModal}
-               images={images}
-               inGuaranteeSpares={guaranteeSpares}
-               outGuaranteeSpares={outGuaranteeSpares}
-               oncloseBottomSheet={() => dispatch(closeBottomSheet())}
-               onCheckItem={(index, Id, selectedButton) => {
-                  dispatch(handleCheckItem(index, Id, selectedButton));
-               }}
-               handlePerview={guranteeStatus =>
-                  dispatch(handlePerview(data, guranteeStatus, navigation))
-               }
-               comment={comment}
-               onCommentChange={text => dispatch(onCommentChange(text))}
-               loading={perviewSpinner}
-               userType={userType}
-            />
-         </View>
-         <ImagePickerModal
-            toggleModal={toggleGalleryModal}
-            isModalVisible={galleryModalVisible}
-            onOpenCamerapressed={() => handleSelectImage('camera')}
-            onOpenGallerypressed={() => handleSelectImage('gallery')}
-         />
-      </ImageBackground>
+         </ImageBackground>
+      </KeyboardAvoidingView>
    );
 };
 const styles = StyleSheet.create({

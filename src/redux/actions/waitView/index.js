@@ -16,7 +16,12 @@ import Reactotron from 'reactotron-react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import { Platform } from 'react-native';
-import { SOLVED } from '../../../utils/complainsStutus';
+import {
+   SOLVED,
+   OUT_WARNTY,
+   IN_WARNTY,
+   WAIT_APPROVAL,
+} from '../../../utils/complainsStutus';
 export const getSpareParts = () => async (dispatch, getState) => {
    try {
       const outGuaranteeSpares = await Api.get(
@@ -131,11 +136,14 @@ export const handlePerview = (
 
    const userId = await AsyncStorage.getItem('userId');
 
-   if (images.length < 1 && guranteeStatus == 1) {
+   if (images.length < 1 && guranteeStatus == OUT_WARNTY) {
       showFlashMessage('danger', 'يجب اضافه صوره العطل');
    } else if (guranteeStatus == 0 && inGuarnteeSelectedParts.length < 1) {
       showFlashMessage('danger', 'يجب تحديد قطع الغيار داخل الضمان المستخدمه');
-   } else if (guranteeStatus == 1 && outGuarnteeSelectedParts.length < 1) {
+   } else if (
+      guranteeStatus == OUT_WARNTY &&
+      outGuarnteeSelectedParts.length < 1
+   ) {
       showFlashMessage('danger', 'يجب تحديد قطع الغيار خارج الضمان المستخدمه');
    } else {
       Reactotron.log(images);
@@ -155,40 +163,41 @@ export const handlePerview = (
                      : res['filename'],
             });
          });
-         await uploadPerviewImage(
+         const uploadImages = await uploadPerviewImage(
             guranteeStatus,
             complainNumber,
             complainStatus,
-            guranteeStatus == 0 && !images.length ? null : form
+            guranteeStatus == IN_WARNTY && !images.length ? null : form
          );
+         Reactotron.log('uploadImages', uploadImages);
 
-         const perviewResponse = await Api.post(
-            `Complians/UpdateStatus?StatusId=${
-               guranteeStatus == 1 ? +complainStatus + 1 : SOLVED
-            }&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
-               0}&Comment=${comment}`,
-
-            guranteeStatus == 0
-               ? inGuarnteeSelectedParts
-               : outGuarnteeSelectedParts
-         );
-         Reactotron.log(perviewResponse);
-         if (perviewResponse.data.statusCode == 200) {
-            await dispatch({
-               type: PERVIEW_SUCCESS,
-               payload: {
-                  outSpares: outGuarnteeSelectedParts,
-                  inSpares: inGuarnteeSelectedParts,
-               },
-            });
-            navigation.goBack();
+         if (uploadImages.data.statusCode == 200) {
+            const perviewResponse = await Api.post(
+               `Complians/UpdateStatus?StatusId=${
+                  guranteeStatus == OUT_WARNTY ? WAIT_APPROVAL : SOLVED
+               }&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
+                  IN_WARNTY}&Comment=${comment}`,
+               guranteeStatus == IN_WARNTY
+                  ? inGuarnteeSelectedParts
+                  : outGuarnteeSelectedParts
+            );
+            if (perviewResponse.data.statusCode == 200) {
+               await dispatch({
+                  type: PERVIEW_SUCCESS,
+                  payload: {
+                     outSpares: outGuarnteeSelectedParts,
+                     inSpares: inGuarnteeSelectedParts,
+                  },
+               });
+               navigation.goBack();
+            }
          }
       } catch (error) {
          console.log('preview error', error);
          dispatch({
             type: PERVIEW_FAILED,
          });
-         showFlashMessage('danger', 'جدث خطا برجاء اعاده المحاوله');
+         showFlashMessage('danger', 'حدث خطا برجاء اعاده المحاوله');
       }
    }
 };
@@ -198,8 +207,20 @@ export const onCommentChange = text => dispatch => {
       payload: text,
    });
 };
-export const closeBottomSheet = () => dispatch => {
-   dispatch({ type: CLOSE_BOTTOM_SHEET });
+export const closeBottomSheet = () => (dispatch, getState) => {
+   const { outGuaranteeSpares, inGuaranteeSpares } = getState().WaitView;
+   const unCheckedInSpares = inGuaranteeSpares.map(item => ({
+      ...item,
+      checked: false,
+   }));
+   const unCheckedOutSpares = outGuaranteeSpares.map(item => ({
+      ...item,
+      checked: false,
+   }));
+   dispatch({
+      type: CLOSE_BOTTOM_SHEET,
+      payload: { unCheckedInSpares, unCheckedOutSpares },
+   });
 };
 
 const uploadPerviewImage = async (
@@ -208,21 +229,30 @@ const uploadPerviewImage = async (
    complainStatus,
    form
 ) => {
-   if (guranteeStatus) {
-      Api.post(
-         `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
-         form,
-         { headers: { 'Content-Type': 'multipart/form-data' } }
-      );
-   } else {
-      if (form) {
-         Api.post(
+   let response;
+
+   try {
+      if (guranteeStatus) {
+         const uploadoutGrantee = await Api.post(
             `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
             form,
             { headers: { 'Content-Type': 'multipart/form-data' } }
          );
+         response = uploadoutGrantee;
       } else {
-         return;
+         if (form) {
+            const uploadInGrantee = await Api.post(
+               `Complians/UploadImages?ComplianId=${+complainNumber}&StatusId=${+complainStatus}`,
+               form,
+               { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+            response = uploadInGrantee;
+         } else {
+            return;
+         }
       }
+   } catch (error) {
+      console.log('upload perview image error', error);
    }
+   return response;
 };

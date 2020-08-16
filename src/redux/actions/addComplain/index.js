@@ -28,7 +28,7 @@ export const getVieheclesTypesAndContractorNumbers = () => async (
    const { filterInput } = getState().Dashboard;
    try {
       dispatch({ type: GET_CONTRACTORS_AND_VIELECLES_SPINNER });
-      const getContractors = await Api.get('Contractors');
+      const getContractors = await Api.get(`Contractors/${filterInput}`);
       const getVehicles = await Api.get('Vehicles');
       if (
          getContractors.data.statusCode == 200 &&

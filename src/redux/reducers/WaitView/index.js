@@ -38,7 +38,14 @@ export default (state = initialState, { type, payload }) => {
          break;
 
       case CLOSE_BOTTOM_SHEET:
-         return { ...state, images: [], comment: '', perviewSpinner: false };
+         return {
+            ...state,
+            images: [],
+            comment: '',
+            perviewSpinner: false,
+            inGuaranteeSpares: payload.unCheckedInSpares,
+            outGuaranteeSpares: payload.unCheckedOutSpares,
+         };
          break;
       case IN_GUARANTEE_ITEM_CHECKED:
          return { ...state, inGuaranteeSpares: payload };

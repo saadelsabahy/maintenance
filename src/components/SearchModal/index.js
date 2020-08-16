@@ -187,15 +187,27 @@ const SearchModal = ({
                   <View
                      style={{
                         height: '20%',
-                        justifyContent: 'center',
+                        justifyContent: 'space-between',
                         width: '100%',
                         alignItems: 'center',
+                        flexDirection: 'row',
                      }}>
                      <SearchDuration
                         modalMessage={modalFlashMessage}
                         startDate={startDate}
                         endDate={endDate}
                      />
+                     {startDate && endDate && (
+                        <Icon
+                           name={'close'}
+                           type={'material-community'}
+                           onPress={() => {
+                              dispatch(onSearchInputsChange('startDate', null));
+                              dispatch(onSearchInputsChange('endDate', null));
+                           }}
+                           color={TEXT_COLOR}
+                        />
+                     )}
                   </View>
                </View>
 
@@ -240,7 +252,7 @@ const styles = StyleSheet.create({
    },
    inputsContainer: {
       height: SCREEN_HEIGHT * 0.65,
-      width: '95%',
+      width: SCREEN_WIDTH * 0.95,
       alignSelf: 'center',
       justifyContent: 'space-evenly',
       alignItems: 'center',

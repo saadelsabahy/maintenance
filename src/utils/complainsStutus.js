@@ -12,3 +12,6 @@ export const IMAGES_LENGTH = 5;
 export const EVISION_USER = 0;
 export const AMANA_USER = -1;
 export const VISITING_PRICE = 50;
+
+export const OUT_WARNTY = 1;
+export const IN_WARNTY = 0;

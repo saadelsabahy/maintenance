@@ -40,7 +40,7 @@ export const onLoginPressed = () => async (dispatch, getState) => {
       try {
          dispatch({ type: LOGIN_SPINNER });
          const loginResponse = await axios.get(
-            `http://41.39.108.205:5565/UMMaintenanceAPI/api/user/Authenticate?userName=${userName}&password=${userPassword}&encrypteddata=${false}`,
+            `http://192.168.50.123:5565/UMMaintenanceAPI/api/user/Authenticate?userName=${userName}&password=${userPassword}&encrypteddata=${false}`,
             { timeout: 20000 }
          );
 

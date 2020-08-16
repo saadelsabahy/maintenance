@@ -20,10 +20,11 @@ const DateTimeButton = ({
    iconEndSize,
    iconEndStyle,
    iconContainerStyle,
+   containerStyle,
 }) => {
    return (
       <TouchableWithoutFeedback onPress={onPress}>
-         <View style={styles.container}>
+         <View style={[styles.container, containerStyle]}>
             <View style={[styles.textContainer]}>
                <CustomText text={text} />
             </View>

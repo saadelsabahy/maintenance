@@ -26,6 +26,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { CustomText } from '../customText';
 import BackgroundImage from '../../assets/images/bottom_sheet.png';
 import { showFlashMessage } from '../../utils/flashMessage';
+import { IN_WARNTY, OUT_WARNTY } from '../../utils/complainsStutus';
 const Gurantee = ({
    onSelectImagesPressed,
    images,
@@ -65,7 +66,10 @@ const Gurantee = ({
                <ImageSelector
                   onSelectImagesPressed={async () => {
                      await bottomSheetRef.current.snapTo(1);
-                     if (selectedButton === 0 || selectedButton === 1) {
+                     if (
+                        selectedButton === IN_WARNTY ||
+                        selectedButton === OUT_WARNTY
+                     ) {
                         onSelectImagesPressed();
                      } else {
                         showFlashMessage(
@@ -83,9 +87,11 @@ const Gurantee = ({
                   buttonContainerStyle={{
                      width: '47%',
                      height: SCREEN_HEIGHT / 17,
-                     borderBottomWidth: selectedButton == 0 ? 1 : 0,
+                     borderBottomWidth: selectedButton == IN_WARNTY ? 1 : 0,
                      borderColor:
-                        selectedButton == 0 ? MAIN_RED_COLOR : 'transparent',
+                        selectedButton == IN_WARNTY
+                           ? MAIN_RED_COLOR
+                           : 'transparent',
                      backgroundColor: 'transparent',
                   }}
                   buttonTitleStyle={{
@@ -94,16 +100,18 @@ const Gurantee = ({
                   buttonTitle={'داخل الضمان'}
                   onButtonPressed={() => {
                      oncloseBottomSheet();
-                     onButtonsPressed(0);
+                     onButtonsPressed(IN_WARNTY);
                   }}
                />
                <CustomButton
                   buttonContainerStyle={{
                      width: '47%',
                      height: SCREEN_HEIGHT / 17,
-                     borderBottomWidth: selectedButton == 1 ? 1 : 0,
+                     borderBottomWidth: selectedButton == OUT_WARNTY ? 1 : 0,
                      borderColor:
-                        selectedButton == 1 ? MAIN_RED_COLOR : 'transparent',
+                        selectedButton == OUT_WARNTY
+                           ? MAIN_RED_COLOR
+                           : 'transparent',
                      backgroundColor: 'transparent',
                   }}
                   buttonTitleStyle={{
@@ -112,7 +120,7 @@ const Gurantee = ({
                   buttonTitle={'خارج الضمان'}
                   onButtonPressed={() => {
                      oncloseBottomSheet();
-                     onButtonsPressed(1);
+                     onButtonsPressed(OUT_WARNTY);
                   }}
                />
             </View>
@@ -121,7 +129,7 @@ const Gurantee = ({
    };
 
    const renderInner = () => {
-      if (selectedButton == 1 || selectedButton == 0) {
+      if (selectedButton == OUT_WARNTY || selectedButton == IN_WARNTY) {
          return (
             <View
                style={{
@@ -176,7 +184,7 @@ const Gurantee = ({
                                     onCheckItem(index, Id, selectedButton)
                                  }
                               />
-                              {selectedButton == 1 && (
+                              {selectedButton == OUT_WARNTY && (
                                  <CustomText text={`${Price} ريال`} />
                               )}
                            </View>
@@ -193,7 +201,9 @@ const Gurantee = ({
                      paddingVertical: 10,
                   }}>
                   <TextArea
-                     placeholder={selectedButton == 0 ? 'الحل' : 'الوصف'}
+                     placeholder={
+                        selectedButton == IN_WARNTY ? 'الحل' : 'الوصف'
+                     }
                      value={comment}
                      onChangeText={onCommentChange}
                      containerStyle={{ height: '60%' }}
@@ -205,7 +215,9 @@ const Gurantee = ({
                            height: SCREEN_HEIGHT / 17,
                         }}
                         buttonTitle={
-                           selectedButton == 0 ? 'تم الحل' : 'تم المعاينه'
+                           selectedButton == IN_WARNTY
+                              ? 'تم الحل'
+                              : 'تم المعاينه'
                         }
                         onButtonPressed={() => handlePerview(selectedButton)}
                         loading={loading}
