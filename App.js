@@ -41,7 +41,11 @@ const App = () => {
                   style={{ flex: 0, backgroundColor: SURFACE_COLOR }}
                />
                <SafeAreaView style={styles.container}>
-                  <StatusBar backgroundColor={SURFACE_COLOR} animated />
+                  <StatusBar
+                     backgroundColor={SURFACE_COLOR}
+                     animated
+                     barStyle="light-content"
+                  />
 
                   <AppNavigation /* screenProps={{ database }} */ />
                   <FlashMessage
