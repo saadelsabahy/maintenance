@@ -121,6 +121,7 @@ const AddComplain = ({ navigation }) => {
       contractorsRef.current.state.value = '';
    };
    const onSubmit = data => {
+      console.log(data);
       setshowImageError(!images.length);
       dispatch(onAddComplainPressed(data, resetValues));
       /*  const res = alert(JSON.stringify(data));
@@ -135,7 +136,6 @@ const AddComplain = ({ navigation }) => {
       await toggleModal();
       dispatch(handleOpenGallerypressed());
    };
-   console.log(showImageError, !images.length);
    return (
       <ImageBackground
          source={BackgroundImage}

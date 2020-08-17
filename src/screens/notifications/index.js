@@ -23,6 +23,7 @@ const Notifications = ({ navigation }) => {
       // dispatch(getAllNotifications());
       setRefreshing(false);
    };
+
    return (
       <ImageBackground
          source={BackgroundImage}

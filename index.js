@@ -6,7 +6,11 @@ import { AppRegistry, NativeModules } from 'react-native';
 import App from './App';
 import { name as appName } from './app.json';
 import database from './src/models';
+import { PushNotificationConfigration } from './src/utils/PushNotificationConfig';
+import { handleRecieveNotification } from './src/redux/actions/notifications';
 
+PushNotificationConfigration();
+handleRecieveNotification();
 /* 
 import AppNavigation from './src/navigation/MainNavigator';
 const Navigation = AppNavigation({ database }); */

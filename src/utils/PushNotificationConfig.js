@@ -1,26 +1,39 @@
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-import { getAllNotifications } from '../redux/actions';
-export const PushNotificationConfigration = dispatch => {
+export const PushNotificationConfigration = navigation => {
    PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function(token) {
          console.log('TOKEN:', token);
       },
 
-      // (required) Called when a remote or local notification is opened or received
+      // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function(notification) {
          console.log('NOTIFICATION:', notification);
-         dispatch(getAllNotifications());
-         // process the notification here
+         if (navigation) {
+            navigation.navigate('Notificatons');
+         } else {
+            return;
+         }
+         // process the notification
 
-         // required on iOS only
+         // (required) Called when a remote is received or opened, or local notification is opened
          notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
 
-      // Android only
-      senderID: '913086430843',
-      // iOS only
+      // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
+      onAction: function(notification) {
+         console.log('ACTION:', notification.action);
+         console.log('NOTIFICATION:', notification);
+
+         // process the action
+      },
+
+      // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
+      onRegistrationError: function(err) {
+         console.error(err.message, err);
+      },
+
       permissions: {
          alert: true,
          badge: true,
@@ -28,6 +41,7 @@ export const PushNotificationConfigration = dispatch => {
       },
 
       popInitialNotification: true,
+
       requestPermissions: true,
    });
 };

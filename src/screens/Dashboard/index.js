@@ -40,6 +40,7 @@ import {
    LATE_PERVIEW,
 } from '../../utils/complainsStutus';
 import { dashboardInformation } from '../../utils/dashboardData';
+import { PushNotificationConfigration } from '../../utils/PushNotificationConfig';
 
 const DashBoard = ({ navigation }) => {
    const isFocused = useIsFocused();
@@ -65,6 +66,7 @@ const DashBoard = ({ navigation }) => {
          distination,
       });
    };
+
    useEffect(() => {
       const unsubscribe = NetInfo.addEventListener(state => {
          setNetConnected(state.isConnected);

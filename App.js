@@ -23,16 +23,55 @@ import { YellowBox } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import AppNavigation from './src/navigation/MainNavigator';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-community/async-storage';
 
 YellowBox.ignoreWarnings(['Remote debugger']);
 // import database from './src/models';
 const App = () => {
    I18nManager.forceRTL(true);
    I18nManager.allowRTL(true);
+   const [initialRoute, setinitialRoute] = useState('Dashboard');
    useEffect(() => {
+      /* handleclickNotification(); */
       return () => {};
    }, []);
+   const handleclickNotification = async navigation => {
+      messaging().onMessage(async remoteMessage => {
+         console.log('open', remoteMessage);
+      });
 
+      // app in background
+
+      messaging().onNotificationOpenedApp(async remoteMessage => {
+         console.log('backGround', remoteMessage);
+         setinitialRoute('Notificatons');
+      });
+
+      messaging()
+         .getInitialNotification()
+         .then(async Notification => {
+            if (Notification) {
+               const {
+                  messageId,
+                  notification: { body, title, data },
+               } = Notification;
+
+               const lastOpenFromClosedId = await AsyncStorage.getItem(
+                  'lastNotification'
+               );
+
+               if (messageId !== lastOpenFromClosedId) {
+                  setinitialRoute('Notificatons');
+                  console.log('closed');
+               } else {
+                  console.log('returned');
+
+                  return;
+               }
+            }
+         });
+   };
    return (
       <Provider store={store}>
          <PersistGate persistor={persistor} loading={null}>
@@ -47,7 +86,7 @@ const App = () => {
                      barStyle="light-content"
                   />
 
-                  <AppNavigation /* screenProps={{ database }} */ />
+                  <AppNavigation initialRouteName={initialRoute} />
                   <FlashMessage
                      position="bottom"
                      style={styles.flashMessage}
