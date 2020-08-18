@@ -38,6 +38,7 @@ import {
    getVieheclesTypesAndContractorNumbers,
 } from '../../redux/actions';
 import { useIsFocused } from '@react-navigation/native';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 /* let vehiclesTypes = [
    {
       value: 'ضاغط',
@@ -143,12 +144,12 @@ const AddComplain = ({ navigation }) => {
          resizeMode="stretch">
          <Header>
             <Icon
-               name={'ios-arrow-back'}
-               type={'ionicon'}
+               name={'arrow-right'}
+               type={'simple-line-icon'}
                color={HEADER_ICONS_COLOR}
                iconContainerStyle={{ flex: 0.1, alignItems: 'flex-start' }}
-               style={{ transform: [{ rotateY: '-180deg' }] }}
                onPress={() => navigation.goBack()}
+               size={responsiveFontSize(3)}
             />
 
             <View style={styles.headerTextContainer}>

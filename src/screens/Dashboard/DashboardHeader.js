@@ -8,6 +8,7 @@ import {
    HEADER_ICONS_COLOR,
 } from '../../constants/colors';
 import { Header, Icon, CustomText } from '../../components';
+import Badge from '../../components/badge';
 
 const DashboardHeader = ({
    navigation,
@@ -15,6 +16,7 @@ const DashboardHeader = ({
    onRefreshPressed,
    lastUpdate,
    onNotificationPressed,
+   notificationNumber,
 }) => {
    return (
       <View style={{ width: '100%', height: '22%' }}>
@@ -27,13 +29,22 @@ const DashboardHeader = ({
                   onPress={() => navigation.toggleDrawer()}
                   iconContainerStyle={{ flex: 1 }}
                />
-               <Icon
-                  name={'bell-outline'}
-                  type={'material-community'}
-                  color={HEADER_ICONS_COLOR}
-                  onPress={onNotificationPressed}
-                  iconContainerStyle={{ flex: 1 }}
-               />
+               <View style={{ flex: 1 }}>
+                  <Icon
+                     name={'bell-outline'}
+                     type={'material-community'}
+                     color={HEADER_ICONS_COLOR}
+                     onPress={onNotificationPressed}
+                     iconContainerStyle={{ flex: 1 }}
+                  />
+                  {notificationNumber ? (
+                     <Badge
+                        number={notificationNumber}
+                        containerStyle={styles.badge}
+                        onPress={onNotificationPressed}
+                     />
+                  ) : null}
+               </View>
             </View>
             <View
                style={{
@@ -112,13 +123,18 @@ const DashboardHeader = ({
 };
 const styles = StyleSheet.create({
    headerStartRow: {
-      flex: 0.35,
+      flex: 0.4,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
    },
    headerIconsContainer: {
       height: '30%',
+   },
+   badge: {
+      position: 'absolute',
+      top: 5,
+      end: 0,
    },
 });
 

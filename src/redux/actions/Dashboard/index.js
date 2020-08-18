@@ -5,8 +5,11 @@ import {
    DASHBOARD_FILTER_INPUT_CHANGE,
 } from './dashboardTypes';
 import Api from '../../../apis';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-community/async-storage';
 export const getDashBoardData = () => async (dispatch, getState) => {
    const { filterInput } = getState().Dashboard;
+   const userId = await AsyncStorage.getItem('userId');
    try {
       dispatch({ type: GET_DASHBOARD_DATA_SPINNER });
       const getDashboardResponse = await Api.get(
@@ -14,17 +17,26 @@ export const getDashBoardData = () => async (dispatch, getState) => {
             !filterInput ? null : filterInput
          }`
       );
-
+      let badge;
+      await firestore()
+         .collection('users')
+         .doc(userId)
+         .get()
+         .then(querySnapshot => {
+            badge = querySnapshot._data.notificationBadge;
+         })
+         .catch(e => console.log('get firedata error', e));
       if (getDashboardResponse.data.statusCode == 200) {
          const {
             data: { data },
          } = getDashboardResponse;
          let dashData = [];
          dashData = data.sort((a, b) => a.StatusId - b.StatusId);
-         /* .map(item => {
-               dashData[item.StatusId - 1] = item.Total;
-            }); */
-         dispatch({ type: GET_DASHBOARD_DATA_SUCCESS, payload: dashData });
+
+         dispatch({
+            type: GET_DASHBOARD_DATA_SUCCESS,
+            payload: { dashData, badge },
+         });
       }
    } catch (error) {
       console.log('get dashboard data error', error);

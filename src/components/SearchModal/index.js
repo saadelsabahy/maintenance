@@ -199,7 +199,7 @@ const SearchModal = ({
                      />
                      {startDate && endDate && (
                         <Icon
-                           name={'close'}
+                           name={'delete-outline'}
                            type={'material-community'}
                            onPress={() => {
                               dispatch(onSearchInputsChange('startDate', null));

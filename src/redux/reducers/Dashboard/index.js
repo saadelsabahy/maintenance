@@ -12,6 +12,7 @@ const initialState = {
    dashboardData: [],
    lastUpdate: '',
    filterInput: '',
+   badge: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -24,8 +25,9 @@ export default (state = initialState, { type, payload }) => {
             ...state,
             dashboardError: false,
             dashboardSpinner: false,
-            dashboardData: payload,
+            dashboardData: payload.dashData,
             lastUpdate: moment().format('LT'),
+            badge: payload.badge,
          };
          break;
       case GET_DASHBOARD_DATA_FAILED:

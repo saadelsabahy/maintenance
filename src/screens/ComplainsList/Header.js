@@ -26,13 +26,12 @@ const ListHeader = ({
    return (
       <Header containerStyle={{ width: '100%' }}>
          <Icon
-            name={'ios-arrow-back'}
-            type={'ionicon'}
+            name={'arrow-right'}
+            type={'simple-line-icon'}
             color={HEADER_ICONS_COLOR}
-            style={{ transform: [{ rotateY: '-180deg' }] }}
             onPress={() => navigation.goBack()}
             iconContainerStyle={{ flex: 0.2 }}
-            size={responsiveFontSize(4)}
+            size={responsiveFontSize(3)}
          />
 
          <CustomText

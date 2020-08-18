@@ -52,12 +52,14 @@ const DashBoard = ({ navigation }) => {
       dashboardData,
       lastUpdate,
       filterInput,
+      badge,
    } = useSelector(state => ({
       dashboardSpinner: state.Dashboard.dashboardSpinner,
       dashboardError: state.Dashboard.dashboardError,
       dashboardData: state.Dashboard.dashboardData,
       lastUpdate: state.Dashboard.lastUpdate,
       filterInput: state.Dashboard.filterInput,
+      badge: state.Dashboard.badge,
    }));
    const dispatch = useDispatch();
    const onDashboardItemPressed = (text, distination) => {
@@ -87,6 +89,7 @@ const DashBoard = ({ navigation }) => {
          return;
       }
    };
+   console.log('badge', typeof badge, badge);
    const renderNetSignOffline = () => (
       <View
          style={{
@@ -113,6 +116,7 @@ const DashBoard = ({ navigation }) => {
             lastUpdate={lastUpdate}
             onRefreshPressed={() => getDashboardData()}
             onNotificationPressed={() => navigation.navigate('Notificatons')}
+            notificationNumber={badge}
          />
          <View style={styles.itemsWrapper}>
             {dashboardSpinner || dashboardError ? (

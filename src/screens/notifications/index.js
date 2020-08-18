@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
    View,
    Text,
@@ -15,15 +15,28 @@ import {
 } from '../../constants/colors';
 import { Header, Icon, CustomText, NotificationCard } from '../../components';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Notifications = ({ navigation }) => {
    const [refreshing, setRefreshing] = useState(false);
+   useEffect(() => {
+      resetBadge();
+      return () => {};
+   }, []);
    const handleRefresh = async () => {
       setRefreshing(true);
       // dispatch(getAllNotifications());
       setRefreshing(false);
    };
-
+   const resetBadge = async () => {
+      const userId = await AsyncStorage.getItem('userId');
+      firestore()
+         .collection(`users`)
+         .doc(`${userId}`)
+         .update({ notificationBadge: 0 })
+         .catch(e => console.log('reset badge error', e));
+   };
    return (
       <ImageBackground
          source={BackgroundImage}
@@ -31,13 +44,12 @@ const Notifications = ({ navigation }) => {
          resizeMode="stretch">
          <Header>
             <Icon
-               name={'ios-arrow-back'}
-               type={'ionicon'}
+               name={'arrow-right'}
+               type={'simple-line-icon'}
                color={HEADER_ICONS_COLOR}
-               style={{ transform: [{ rotateY: '-180deg' }] }}
                onPress={() => navigation.goBack()}
                iconContainerStyle={{ flex: 0.1 }}
-               size={responsiveFontSize(4)}
+               size={responsiveFontSize(3)}
             />
 
             <View style={{ flex: 1 }}>
@@ -53,11 +65,6 @@ const Notifications = ({ navigation }) => {
                keyExtractor={(iteem, index) => `${index}`}
                ListEmptyComponent={() => <EmptyList />}
                renderItem={() => {
-                  /*  const parsedData = JSON.parse(
-                     typeof Data !== 'undefined' && Data
-                  );
-                  console.log(JSON.parse(Data)); */
-
                   return (
                      <NotificationCard
                         notificationTimeText={new Date().toLocaleDateString(
