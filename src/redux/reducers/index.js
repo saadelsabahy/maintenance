@@ -6,6 +6,7 @@ import WaitView from './WaitView';
 import Dashboard from './Dashboard';
 import UpdateComplainsStatus from './complainStatus';
 import AddComplain from './addComplain';
+import Notification from './notifications';
 
 export default combineReducers({
    Auth,
@@ -14,4 +15,5 @@ export default combineReducers({
    Dashboard,
    UpdateComplainsStatus,
    AddComplain,
+   Notification,
 });

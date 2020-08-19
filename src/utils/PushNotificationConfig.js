@@ -28,6 +28,7 @@ export const PushNotificationConfigration = navigation => {
 
          // process the action
       },
+      senderID: '57105734546',
 
       // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
       onRegistrationError: function(err) {

@@ -153,8 +153,7 @@ const CustomBottomSheet = ({
                   data={[...spareParts]}
                   keyExtractor={(item, index) => `${index}`}
                   style={{
-                     maxHeight:
-                        source == 5 ? SCREEN_HEIGHT * 0.3 : SCREEN_HEIGHT * 0.6,
+                     maxHeight: SCREEN_HEIGHT * 0.3,
                   }}
                   renderItem={({ item, index }) => {
                      return (

@@ -1,5 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Platform } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   Image,
+   Platform,
+   PermissionsAndroid,
+} from 'react-native';
 import Modal from 'react-native-modal';
 import SignatureCapture from 'react-native-signature-capture';
 import { SCREEN_HEIGHT, WHITE_COLOR } from '../../constants/colors';
@@ -22,6 +29,12 @@ const SignatureModal = ({
          type: 'danger',
          message: 'برجاء التوقيع اولا',
       });
+      PermissionsAndroid.requestMultiple([
+         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      ])
+         .then(res => console.log('done'))
+         .catch(e => console.log(e));
       return () => {};
    }, [showSignatureError]);
 

@@ -70,6 +70,7 @@ const ComplainsDetailes = ({ route, navigation }) => {
       const userType = await AsyncStorage.getItem('userType');
       setuserType(userType);
    };
+   console.log('wait vew data', data);
    const toggleGalleryModal = () => {
       setgalleryModalVisible(!galleryModalVisible);
    };

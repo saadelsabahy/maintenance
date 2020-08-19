@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -37,10 +40,10 @@
         <!-- push notification -->
         <meta-data
             android:name="com.dieam.reactnativepushnotification.notification_channel_name"
-            android:value="YOUR NOTIFICATION CHANNEL NAME" />
+            android:value="maintanance" />
         <meta-data
             android:name="com.dieam.reactnativepushnotification.notification_channel_description"
-            android:value="YOUR NOTIFICATION CHANNEL DESCRIPTION" />
+            android:value="maintanance" />
 
         <!-- Change the value to true to enable pop-up for in foreground (remote-only, for local use ignoreInForeground) -->
         <meta-data
