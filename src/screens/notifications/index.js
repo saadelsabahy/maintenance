@@ -13,6 +13,7 @@ import {
   SURFACE_COLOR,
   HEADER_ICONS_COLOR,
   WHITE_COLOR,
+  SCREEN_HEIGHT,
 } from '../../constants/colors';
 import {
   Header,
@@ -20,6 +21,7 @@ import {
   CustomText,
   NotificationCard,
   EmptyList,
+  LoaderAndRetry,
 } from '../../components';
 import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import {useDispatch, useSelector} from 'react-redux';
@@ -117,16 +119,16 @@ const Notifications = ({navigation}) => {
         />
 
         <View style={{flex: 1}}>
-          <CustomText text={'الاشعارات'} textStyle={{alignSelf: 'center'}} />
+          <CustomText text={'التنبيهات'} textStyle={{alignSelf: 'center'}} />
         </View>
       </Header>
       <View style={{flex: 0.95}}>
-        {getNotificationLoader ? (
-          <ActivityIndicator
-            size={'large'}
-            animating
-            color={WHITE_COLOR}
-            style={{flex: 1}}
+        {getNotificationLoader || getNotificationError ? (
+          <LoaderAndRetry
+            loading={getNotificationLoader}
+            error={getNotificationError}
+            loadingText={'جاري تحميل التنبيهات'}
+            errorText={'حدث خطأ برجاء المحاوله مره اخري'}
           />
         ) : (
           <FlatList
@@ -135,11 +137,11 @@ const Notifications = ({navigation}) => {
             ListEmptyComponent={() => (
               <View
                 style={{
-                  flex: 1,
+                  height: SCREEN_HEIGHT * 0.85,
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <EmptyList />
+                <EmptyList emptyText={'لايوجد أي تنبيهات'} />
               </View>
             )}
             renderItem={({

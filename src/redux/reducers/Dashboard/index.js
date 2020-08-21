@@ -6,6 +6,7 @@ import {
 } from '../../actions/Dashboard/dashboardTypes';
 import moment from 'moment';
 import {LOGOUT_SUCCESS} from '../../actions/Auth/AuthTypes';
+import {GET_NOTIFICATON_SUCCESS} from '../../actions/notifications/types';
 const initialState = {
   dashboardSpinner: false,
   dashboardError: false,
