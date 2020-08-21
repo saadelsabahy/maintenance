@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>913086430843-q3ins9n7umttasialo44b052efa5imnt.apps.googleusercontent.com</string>
+	<string>57105734546-1kdbh8d6r2rk8jlb4motmrlsnt52b1ii.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.913086430843-q3ins9n7umttasialo44b052efa5imnt</string>
+	<string>com.googleusercontent.apps.57105734546-1kdbh8d6r2rk8jlb4motmrlsnt52b1ii</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB6QaYT7QRaj6mX8pwnkB8OZXJZ9HGlMZw</string>
+	<string>AIzaSyBz12GAxgf5OPWvHHQDFKjY1HUbL3APYVM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>913086430843</string>
+	<string>57105734546</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>org.reactjs.native.example.maintenanceapp</string>
 	<key>PROJECT_ID</key>
-	<string>maintenanceapp-45399</string>
+	<string>finalmaintenanceapp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>maintenanceapp-45399.appspot.com</string>
+	<string>finalmaintenanceapp.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:913086430843:ios:719beae5deae73c7cb2cde</string>
+	<string>1:57105734546:ios:ca0e4da038f5db300d3f4b</string>
 	<key>DATABASE_URL</key>
-	<string>https://maintenanceapp-45399.firebaseio.com</string>
+	<string>https://finalmaintenanceapp.firebaseio.com</string>
 </dict>
 </plist>
