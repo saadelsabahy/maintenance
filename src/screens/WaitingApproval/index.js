@@ -77,6 +77,7 @@ const WaitApproval = ({ navigation, route }) => {
       excutionSpinner: state.UpdateComplainsStatus.excutionSpinner,
       signature: state.UpdateComplainsStatus.signature,
    }));
+   console.log(signature);
    const [reRenderSpareList, setreRenderSpareList] = useState(false);
    useEffect(() => {
       if (isFocused) {
@@ -121,7 +122,7 @@ const WaitApproval = ({ navigation, route }) => {
             return null;
             break;
          case REJECTED:
-            if (userType != AMANA_USER && userType != EVISION_USER)
+            if (userType != AMANA_USER)
                return (
                   <CustomButton
                      buttonContainerStyle={{ ...styles.button, width: '90%' }}

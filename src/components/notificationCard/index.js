@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
    },
    headText: {
       fontWeight: '900',
-      fontSize: responsiveFontSize(2.1),
+      fontSize: responsiveFontSize(1.5),
       color: WHITE_COLOR,
       marginStart: 5,
    },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
       marginEnd: 3,
    },
    timeText: {
-      fontSize: responsiveFontSize(2.1),
+      fontSize: responsiveFontSize(1.5),
       color: WHITE_COLOR,
    },
    detailsContainer: {

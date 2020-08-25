@@ -22,9 +22,7 @@ export default (state = initialState, { type, payload }) => {
       case SELECT_CREATE_COMPLAIN_IMAGES:
          return {
             ...state,
-            images: payload /*  !state.images.length
-               ? payload
-               : [...payload, ...state.images], */,
+            images: [...state.images, ...payload],
          };
          break;
       case ADD_COMPLAIN_SPINNER:

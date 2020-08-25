@@ -29,7 +29,9 @@ export const inputsChange = (inputName, inputValue) => {
 export const onLoginPressed = () => async (dispatch, getState) => {
    Keyboard.dismiss();
    const { userName, userPassword } = getState().Auth;
-   if (userName.length < 2) {
+   if (!userName || !userPassword) {
+      showFlashMessage('warning', 'برجاء إخال البيانات');
+   } else if (userName.length < 2) {
       showFlashMessage('warning', 'اسم المستخدم لايجب ان يقل عن حرفين');
    } else if (userPassword.length < 6) {
       showFlashMessage(

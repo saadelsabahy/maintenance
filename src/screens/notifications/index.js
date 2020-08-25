@@ -55,9 +55,9 @@ const Notifications = ({ navigation }) => {
    }));
    const notificationsList = notifications.sort(
       (a, b) =>
-         new Date(b.CreatedOn).getTime() - new Date(a.CreatedOn).getTime()
+         new Date(b.NotificatonTime).getTime() -
+         new Date(a.NotificatonTime).getTime()
    );
-   console.log(notifications);
    const handleRefresh = async () => {
       setRefreshing(true);
       dispatch(getAllNotifications());
@@ -78,7 +78,6 @@ const Notifications = ({ navigation }) => {
       NotificatonType,
       StatusId,
    }) => {
-      console.log(StatusNameEn);
       switch (StatusNameEn?.trim()) {
          case 'New':
             return `  لقد تم انشاء بلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId}`;
@@ -113,6 +112,9 @@ const Notifications = ({ navigation }) => {
             break;
          case 'Delayed for execution':
             return `  لقد أصبح البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} متأخر في التنفيذ`;
+            break;
+         case 'Approval pending':
+            return `  لقد أصبح البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} قيد التعميد`;
             break;
       }
    };
@@ -175,6 +177,7 @@ const Notifications = ({ navigation }) => {
                         userId,
                         NotificatonType,
                         StatusId,
+                        NotificatonTime,
                      },
                      index,
                   }) => {
@@ -182,7 +185,7 @@ const Notifications = ({ navigation }) => {
                      return (
                         <NotificationCard
                            notificationTimeText={moment(
-                              CreatedOn,
+                              NotificatonTime,
                               'YYYY-MM-DD hh:mm:ss'
                            ).calendar()}
                            notificationName={NotificatonType}

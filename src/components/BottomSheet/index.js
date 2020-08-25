@@ -49,7 +49,6 @@ const CustomBottomSheet = ({
    onCheckItem,
    reRenderSpareList,
 }) => {
-   console.log('signature..', signature, spareParts);
    const TOTAL_PRICE = spareParts.reduce(
       (acc, val) => +acc + +val.Price,
       VISITING_PRICE
@@ -150,7 +149,7 @@ const CustomBottomSheet = ({
                            flex: 1,
                         }}>
                         <CustomText
-                           text={`الامر لأجل اصلاح المعده رقم :- ${vehicleNumber} في العقد :- ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه : - `}
+                           text={`الامر لأجل اصلاح المعده رقم : ${vehicleNumber} في العقد : ${contractorNumber} برجاء توريد وتركيب وتنفيذ الاصناف التاليه :  `}
                            textStyle={{
                               alignSelf: 'flex-start',
                            }}
@@ -222,7 +221,11 @@ const CustomBottomSheet = ({
 
                            {signature ? (
                               <Image
-                                 source={{ uri: signature }}
+                                 source={{
+                                    uri: `${signature}?random=${Math.random()
+                                       .toString(36)
+                                       .substring(7)}`,
+                                 }}
                                  style={styles.signatureImage}
                                  resizeMode={'contain'}
                               />
@@ -318,10 +321,12 @@ const styles = StyleSheet.create({
    signatureImage: {
       width: SCREEN_WIDTH,
       height: '100%',
+      backgroundColor: WHITE_COLOR,
+      marginEnd: 40,
    },
    sparePartsListContainer: {
       width: '100%',
-      maxHeight: SCREEN_HEIGHT * 0.25,
+      maxHeight: SCREEN_HEIGHT * 0.15,
    },
 });
 
