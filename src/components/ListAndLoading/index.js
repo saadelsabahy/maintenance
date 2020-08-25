@@ -21,7 +21,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { onComplainPressed } from '../../redux/actions';
 import { EmptyList } from '../noData';
-
+import moment from 'moment';
 const ListAndLoading = ({
    navigation,
    route,
@@ -81,7 +81,7 @@ const ListAndLoading = ({
                      Id,
                      VehicleId,
                      DamageType,
-                     CretaedOn,
+                     CreatedOn,
                      UpdatedBy,
                      UpdatedOn,
                      StatusId,
@@ -93,17 +93,21 @@ const ListAndLoading = ({
                      ComplianSpareParts,
                      ComplianImages,
                      VehicleType,
+                     ContractorName,
                   },
                   index,
                }) => {
                   return (
                      <ComplainsItem
                         complainNumber={Id}
-                        complainDate={new Date(CretaedOn).toLocaleDateString()}
+                        complainDate={moment(
+                           CreatedOn,
+                           'YYYY-MM-DD hh:mm:ss'
+                        ).format('YYYY/MM/DD')}
                         vehicleCode={VehicleId}
                         vehicleNumber={PlateNumber}
                         vehicleType={VehicleType}
-                        contractorNumber={ContractorId}
+                        contractorNumber={ContractorName}
                         complainStatus={StatusId}
                         images={ComplianImages}
                         spareParts={ComplianSpareParts}

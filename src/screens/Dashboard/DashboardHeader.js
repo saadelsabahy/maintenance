@@ -9,6 +9,7 @@ import {
 } from '../../constants/colors';
 import { Header, Icon, CustomText } from '../../components';
 import Badge from '../../components/badge';
+import { EVISION_USER } from '../../utils/complainsStutus';
 
 const DashboardHeader = ({
    navigation,
@@ -17,6 +18,7 @@ const DashboardHeader = ({
    lastUpdate,
    onNotificationPressed,
    notificationNumber,
+   userType,
 }) => {
    return (
       <View style={{ width: '100%', height: '22%' }}>
@@ -60,13 +62,17 @@ const DashboardHeader = ({
                />
             </View>
             <View style={styles.headerStartRow}>
-               <Icon
-                  name={'filter-outline'}
-                  type={'material-community'}
-                  color={HEADER_ICONS_COLOR}
-                  iconContainerStyle={{ flex: 1 }}
-                  onPress={onFilterPressed}
-               />
+               {userType == EVISION_USER ? (
+                  <Icon
+                     name={'filter-outline'}
+                     type={'material-community'}
+                     color={HEADER_ICONS_COLOR}
+                     iconContainerStyle={{ flex: 1 }}
+                     onPress={onFilterPressed}
+                  />
+               ) : (
+                  <View style={{ flex: 1 }} />
+               )}
 
                <View
                   style={{
@@ -99,7 +105,7 @@ const DashboardHeader = ({
                   alignSelf: 'center',
                   justifyContent: 'flex-end',
                }}>
-               <View style={{ top: -15, start: 3 }}>
+               <View style={{ top: -10, flex: 1, alignItems: 'flex-end' }}>
                   <CustomText
                      text={'أخر تحديث'}
                      textStyle={{

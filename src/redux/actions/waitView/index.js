@@ -163,34 +163,31 @@ export const handlePerview = (
                      : res['filename'],
             });
          });
-         const uploadImages = await uploadPerviewImage(
+         await uploadPerviewImage(
             guranteeStatus,
             complainNumber,
             complainStatus,
             guranteeStatus == IN_WARNTY && !images.length ? null : form
          );
-         Reactotron.log('uploadImages', uploadImages);
 
-         if (uploadImages.data.statusCode == 200) {
-            const perviewResponse = await Api.post(
-               `Complians/UpdateStatus?StatusId=${
-                  guranteeStatus == OUT_WARNTY ? WAIT_APPROVAL : SOLVED
-               }&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
-                  IN_WARNTY}&Comment=${comment}`,
-               guranteeStatus == IN_WARNTY
-                  ? inGuarnteeSelectedParts
-                  : outGuarnteeSelectedParts
-            );
-            if (perviewResponse.data.statusCode == 200) {
-               await dispatch({
-                  type: PERVIEW_SUCCESS,
-                  payload: {
-                     outSpares: outGuarnteeSelectedParts,
-                     inSpares: inGuarnteeSelectedParts,
-                  },
-               });
-               navigation.goBack();
-            }
+         const perviewResponse = await Api.post(
+            `Complians/UpdateStatus?StatusId=${
+               guranteeStatus == OUT_WARNTY ? WAIT_APPROVAL : SOLVED
+            }&UserId=${userId}&ComplianId=${+complainNumber}&IsInWarranty=${guranteeStatus ==
+               IN_WARNTY}&Comment=${comment}`,
+            guranteeStatus == IN_WARNTY
+               ? inGuarnteeSelectedParts
+               : outGuarnteeSelectedParts
+         );
+         if (perviewResponse.data.statusCode == 200) {
+            await dispatch({
+               type: PERVIEW_SUCCESS,
+               payload: {
+                  outSpares: outGuarnteeSelectedParts,
+                  inSpares: inGuarnteeSelectedParts,
+               },
+            });
+            navigation.goBack();
          }
       } catch (error) {
          console.log('preview error', error);

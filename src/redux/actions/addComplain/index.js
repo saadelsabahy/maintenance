@@ -12,6 +12,7 @@ import {
 } from './types';
 import { showFlashMessage } from '../../../utils/flashMessage';
 import { WAIT_PERVIEW } from '../../../utils/complainsStutus';
+import AsyncStorage from '@react-native-community/async-storage';
 const options = {
    width: 200,
    height: 200,
@@ -58,8 +59,8 @@ export const getVieheclesTypesAndContractorNumbers = () => async (
             )
             .filter(item => item.value);
          const contractorsData = contractors.map(({ Id, NameAr, NameEn }) => ({
-            value: Id,
-            NameAr,
+            Id,
+            value: NameAr,
             NameEn,
          }));
          dispatch({
@@ -114,12 +115,11 @@ export const onAddComplainPressed = (
    resetValues
 ) => async (dispatch, getState) => {
    const { images } = getState().AddComplain;
+   const userId = await AsyncStorage.getItem('userId');
    let complainImages;
    if (images.length) {
       complainImages = convertImagesToFormData(images);
       console.log('complainImages', complainImages);
-   } else {
-      showFlashMessage('danger', 'يجب اختيار صور البلاغ');
    }
    try {
       dispatch({ type: ADD_COMPLAIN_SPINNER });
@@ -131,21 +131,26 @@ export const onAddComplainPressed = (
          ContractorId: contractor,
          StatusId: WAIT_PERVIEW,
          CreatedOn: new Date(),
+         CreatedBy: userId,
       };
       const addComplainRequest = await Api.post('Complians/Post', complainBody);
       console.log('addComplainRequest', addComplainRequest);
       if (addComplainRequest.data.statusCode == 200) {
          const { data } = addComplainRequest.data;
-         console.log('complainId...', data);
-         await Api.post(
-            `Complians/UploadImages?ComplianId=${+data}&StatusId=${+WAIT_PERVIEW}`,
-            complainImages,
-            { headers: { 'Content-Type': 'multipart/form-data' } }
-         );
+         if (images.length > 0) {
+            await Api.post(
+               `Complians/UploadImages?ComplianId=${+data}&StatusId=${+WAIT_PERVIEW}`,
+               complainImages,
+               { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+            addComplainSuccess(dispatch);
+            resetValues();
+         } else {
+            addComplainSuccess(dispatch);
+            resetValues();
+         }
+
          //upload image here
-         resetValues();
-         dispatch({ type: ADD_COMPLAIN_SUCCESS });
-         showFlashMessage('success', 'تم اضافه البلاغ بنجاح');
       }
    } catch (error) {
       console.log('add complain error', error);
@@ -174,4 +179,9 @@ export const convertImagesToFormData = images => {
       });
    });
    return form;
+};
+
+const addComplainSuccess = dispatch => {
+   dispatch({ type: ADD_COMPLAIN_SUCCESS });
+   showFlashMessage('success', 'تم اضافه البلاغ بنجاح');
 };

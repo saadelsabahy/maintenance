@@ -38,8 +38,11 @@ const SignatureModal = ({
       return () => {};
    }, [showSignatureError]);
 
-   const [selectedImage, setselectedImage] = useState('');
+   const [dragged, setdragged] = useState('');
    // console.log('signature', `file://${selectedImage}`);
+   const onDraged = () => {
+      setdragged(true);
+   };
    return (
       <Modal
          style={styles.container}
@@ -56,6 +59,7 @@ const SignatureModal = ({
                showNativeButtons={false}
                showTitleLabel={false}
                ref={signatureRef}
+               onDragEvent={onDraged}
                onSaveEvent={res => {
                   handleSaveSignature(
                      Platform.OS === 'android'
@@ -88,13 +92,23 @@ const SignatureModal = ({
                   buttonContainerStyle={styles.button}
                   buttonTitle={'حفظ'}
                   onButtonPressed={() => {
-                     signatureRef.current.saveImage();
+                     if (!dragged) {
+                        signatureFlashRef?.current?.showMessage({
+                           type: 'danger',
+                           message: 'برجاء التوقيع اولا',
+                        });
+                     } else {
+                        signatureRef.current.saveImage();
+                     }
                   }}
                />
                <CustomButton
                   buttonContainerStyle={styles.button}
                   buttonTitle={'مسح'}
-                  onButtonPressed={() => signatureRef.current.resetImage()}
+                  onButtonPressed={() => {
+                     setdragged(false);
+                     signatureRef.current.resetImage();
+                  }}
                />
                <CustomButton
                   buttonContainerStyle={styles.button}

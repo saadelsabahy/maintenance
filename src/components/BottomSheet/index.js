@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {
    SECONDART_COLOR,
@@ -8,6 +8,7 @@ import {
    SCREEN_HEIGHT,
    SURFACE_COLOR,
    MAIN_COLOR,
+   SCREEN_WIDTH,
 } from '../../constants/colors';
 import { CustomText } from '../customText';
 import { FlatList } from 'react-native-gesture-handler';
@@ -44,7 +45,11 @@ const CustomBottomSheet = ({
    signature,
    handleSaveSignature,
    showSignatureError,
+   userName,
+   onCheckItem,
+   reRenderSpareList,
 }) => {
+   console.log('signature..', signature, spareParts);
    const TOTAL_PRICE = spareParts.reduce(
       (acc, val) => +acc + +val.Price,
       VISITING_PRICE
@@ -86,8 +91,9 @@ const CustomBottomSheet = ({
                   <FlatList
                      style={{ flex: 1 }}
                      data={[...spareParts]}
+                     extraData={reRenderSpareList}
                      keyExtractor={(item, index) => `${index}`}
-                     renderItem={({ item, index }) => {
+                     renderItem={({ item: { checked, NameAr, Id }, index }) => {
                         return (
                            <View
                               style={{
@@ -95,9 +101,13 @@ const CustomBottomSheet = ({
                                  justifyContent: 'flex-start',
                               }}>
                               <ChechBox
-                                 checked={true}
+                                 checked={checked}
                                  onItemPressed={() => {}}
-                                 text={item.NameAr}
+                                 text={NameAr}
+                                 index={index}
+                                 text={NameAr}
+                                 Id={Id}
+                                 onItemPressed={() => onCheckItem(index, Id)}
                               />
                            </View>
                         );
@@ -149,21 +159,23 @@ const CustomBottomSheet = ({
                      </View>
                   </View>
                )}
-               <FlatList
-                  data={[...spareParts]}
-                  keyExtractor={(item, index) => `${index}`}
-                  style={{
-                     maxHeight: SCREEN_HEIGHT * 0.3,
-                  }}
-                  renderItem={({ item, index }) => {
-                     return (
-                        <View style={styles.bottomSheetItem}>
-                           <CustomText text={item.NameAr} />
-                           <CustomText text={`${+item.Price} ريال`} />
-                        </View>
-                     );
-                  }}
-               />
+               <View style={styles.sparePartsListContainer}>
+                  <FlatList
+                     data={[...spareParts]}
+                     keyExtractor={({ SparePartId }, index) => `${SparePartId}`}
+                     style={{
+                        maxHeight: SCREEN_HEIGHT * 0.25,
+                     }}
+                     renderItem={({ item, index }) => {
+                        return (
+                           <View style={styles.bottomSheetItem}>
+                              <CustomText text={item.NameAr} />
+                              <CustomText text={`${+item.Price} ريال`} />
+                           </View>
+                        );
+                     }}
+                  />
+               </View>
                <View
                   style={{
                      marginVertical: 10,
@@ -194,18 +206,28 @@ const CustomBottomSheet = ({
                   {(source == REJECTED ||
                      source == WAIT_APPROVAL ||
                      source == LATE_APPROVAL) &&
-                     (userType != AMANA_USER && userType != EVISION_USER) && (
-                        <CustomText
-                           text={`يعتمد بواسطه :${
-                              signature ? signature : '--------'
-                           }`}
-                           textStyle={{
-                              color: WHITE_COLOR,
-                              marginVertical: 10,
-                              alignSelf: 'flex-start',
-                           }}
-                           onPress={handleSignatureModal}
-                        />
+                     userType != AMANA_USER && (
+                        <View style={styles.signatureImageContainer}>
+                           <CustomText
+                              text={`يعتمد بواسطه :${
+                                 signature ? userName : '--------'
+                              }`}
+                              textStyle={{
+                                 color: WHITE_COLOR,
+                                 marginVertical: 10,
+                                 alignSelf: 'flex-start',
+                              }}
+                              onPress={handleSignatureModal}
+                           />
+
+                           {signature ? (
+                              <Image
+                                 source={{ uri: signature }}
+                                 style={styles.signatureImage}
+                                 resizeMode={'contain'}
+                              />
+                           ) : null}
+                        </View>
                      )}
                </View>
             </View>
@@ -288,6 +310,18 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       alignItems: 'center',
       paddingHorizontal: 10,
+   },
+   signatureImageContainer: {
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT / 6,
+   },
+   signatureImage: {
+      width: SCREEN_WIDTH,
+      height: '100%',
+   },
+   sparePartsListContainer: {
+      width: '100%',
+      maxHeight: SCREEN_HEIGHT * 0.25,
    },
 });
 

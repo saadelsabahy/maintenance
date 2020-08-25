@@ -30,7 +30,7 @@ export const dashboardInformation = {
       iconType: 'font-awesome',
    },
    15: {
-      name: 'متأخر الاعتماد',
+      name: 'متأخر التعميد',
       icon: 'thumbs-up',
       iconType: 'feather',
    },

@@ -46,6 +46,7 @@ const Gurantee = ({
       setselectedButton(index);
       bottomSheetRef.current.snapTo(1);
    };
+   console.log('waitView', images);
    const bottomSheetHeader = () => {
       return (
          <ImageBackground

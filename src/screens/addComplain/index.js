@@ -66,7 +66,7 @@ const AddComplain = ({ navigation }) => {
    const vehiclesTypesRef = useRef(null);
    const contractorsRef = useRef(null);
    const [isModalVisible, setIsModalVisible] = useState(false);
-   const [showImageError, setshowImageError] = useState(false);
+
    const dispatch = useDispatch();
    const {
       images,
@@ -117,13 +117,11 @@ const AddComplain = ({ navigation }) => {
    }, [isFocused]);
    const resetValues = () => {
       dispatch(resetAddcomplainPhotos());
-      reset();
       vehiclesTypesRef.current.state.value = '';
       contractorsRef.current.state.value = '';
+      reset();
    };
    const onSubmit = data => {
-      console.log(data);
-      setshowImageError(!images.length);
       dispatch(onAddComplainPressed(data, resetValues));
       /*  const res = alert(JSON.stringify(data));
       reset(res); //to reset after finish request */
@@ -202,6 +200,7 @@ const AddComplain = ({ navigation }) => {
                            value={value}
                            error={errors.vehicleNumber}
                            onChangeText={value => onChange(value)}
+                           keyboardType={'numeric'}
                         />
                      )}
                      name="vehicleNumber"
@@ -236,9 +235,10 @@ const AddComplain = ({ navigation }) => {
                            onBlur={onBlur}
                            value={value}
                            error={errors.contractor}
-                           onChangeText={(value, index, data) =>
-                              onChange(value)
-                           }
+                           onChangeText={(value, index, data) => {
+                              // console.log('dt..', data[index].Id);
+                              onChange(data[index].Id);
+                           }}
                            referance={c => (contractorsRef.current = c)}
                         />
                      )}
@@ -268,12 +268,7 @@ const AddComplain = ({ navigation }) => {
                      images={images}
                      onSelectImagesPressed={toggleModal}
                   />
-                  {showImageError && (
-                     <CustomText
-                        textStyle={{ color: 'red', margin: 10 }}
-                        text={'يجب اختيار صور البلاغ'}
-                     />
-                  )}
+
                   <CustomButton
                      buttonContainerStyle={styles.buttonContainer}
                      buttonTitle="إضافه"
