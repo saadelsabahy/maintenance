@@ -357,7 +357,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.10)
-  - Protobuf (3.12.0)
+  - Protobuf (3.13.0)
   - RCTRequired (0.62.1)
   - RCTTypeSafety (0.62.1):
     - FBLazyVector (= 0.62.1)
@@ -817,7 +817,7 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
-  Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   RCTRequired: e291538a455f5ad1afc2139a4288990be0cadd46
   RCTTypeSafety: 8b6237185765dd9a03a3647807e08864105b1f95
   React: 7b33e15fab929c47ac9c3c94c409258b13cfe452
@@ -860,4 +860,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 477b3de950918605c5add0566a87626ada017a34
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.9.1
