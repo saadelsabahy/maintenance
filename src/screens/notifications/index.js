@@ -53,10 +53,11 @@ const Notifications = ({ navigation }) => {
       notifications: state.Notification.notifications,
       getNotificationError: state.Notification.getNotificationError,
    }));
+   console.log(notifications);
    const notificationsList = notifications.sort(
       (a, b) =>
-         new Date(b.NotificatonTime).getTime() -
-         new Date(a.NotificatonTime).getTime()
+         new Date(moment(b.NotificatonTime,'YYYY-MM-DD hh:mm:ss')).getTime() -
+         new Date(moment(a.NotificatonTime,'YYYY-MM-DD hh:mm:ss')).getTime()
    );
    const handleRefresh = async () => {
       setRefreshing(true);
@@ -181,7 +182,7 @@ const Notifications = ({ navigation }) => {
                      },
                      index,
                   }) => {
-                     console.log(StatusId);
+                    
                      return (
                         <NotificationCard
                            notificationTimeText={moment(
