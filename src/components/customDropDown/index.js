@@ -36,6 +36,7 @@ const MaterialDropDown = ({
                ref={referance}
                data={data}
                label={label}
+               value={value}
                baseColor={!value ? PLACEHOLDER_COLOR : SURFACE_COLOR}
                itemColor={TEXT_COLOR}
                textColor={TEXT_COLOR} //For Labels in DropDown

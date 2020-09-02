@@ -32,10 +32,16 @@ export const getDashBoardData = () => async (dispatch, getState) => {
          } = getDashboardResponse;
          let dashData = [];
          dashData = data.sort((a, b) => a.StatusId - b.StatusId);
-
+         const getContractors = await Api.get(`Contractors`);
+         const { data: contractors } = getContractors.data;
+         const contractorsData = contractors.map(({ Id, NameAr, NameEn }) => ({
+            Id,
+            value: NameAr,
+            NameEn,
+         }));
          dispatch({
             type: GET_DASHBOARD_DATA_SUCCESS,
-            payload: { dashData, badge },
+            payload: { dashData, badge, contractorsData },
          });
       }
    } catch (error) {

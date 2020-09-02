@@ -56,6 +56,7 @@ const DashBoard = ({ navigation }) => {
       lastUpdate,
       filterInput,
       badge,
+      contractors,
    } = useSelector(state => ({
       dashboardSpinner: state.Dashboard.dashboardSpinner,
       dashboardError: state.Dashboard.dashboardError,
@@ -63,6 +64,7 @@ const DashBoard = ({ navigation }) => {
       lastUpdate: state.Dashboard.lastUpdate,
       filterInput: state.Dashboard.filterInput,
       badge: state.Dashboard.badge,
+      contractors: state.Dashboard.contractors,
    }));
    const dispatch = useDispatch();
    const onDashboardItemPressed = (text, distination) => {
@@ -86,10 +88,12 @@ const DashBoard = ({ navigation }) => {
       };
    }, [netConnected, isFocused]);
    const getDashboardData = async () => {
+      const LocationId = await AsyncStorage.getItem('userType');
+      setuserType(LocationId);
       if (netConnected) {
-         const LocationId = await AsyncStorage.getItem('userType');
-         setuserType(LocationId);
-         await dispatch(onDashboardFilterChage(LocationId));
+         if (!filterInput) {
+            await dispatch(onDashboardFilterChage(LocationId));
+         }
          dispatch(getDashBoardData());
       } else {
          return;
@@ -183,6 +187,8 @@ const DashBoard = ({ navigation }) => {
                dispatch(getDashBoardData());
                setshowFilterModal(!showFilterModal);
             }}
+            contractors={contractors}
+            selectedContractorId={filterInput}
          />
       </ImageBackground>
    );

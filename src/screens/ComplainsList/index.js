@@ -57,6 +57,8 @@ const Complains = ({ navigation, route, complain }) => {
       searchPlateNumber,
       startDate,
       endDate,
+      contractors,
+      filterInput,
    } = useSelector(state => ({
       complainsList: state.Complains.complainsList,
       getComplainsListLoading: state.Complains.getComplainsListLoading,
@@ -74,6 +76,8 @@ const Complains = ({ navigation, route, complain }) => {
       complainType: state.Complains.complainType,
       startDate: state.Complains.startDate,
       endDate: state.Complains.endDate,
+      contractors: state.Dashboard.contractors,
+      filterInput: state.Dashboard.filterInput,
    }));
 
    const onListEndReached = () => {
@@ -229,6 +233,8 @@ const Complains = ({ navigation, route, complain }) => {
             startDate={startDate}
             endDate={endDate}
             onCancelSearch={onCancelSearch}
+            contractors={contractors}
+            selectedContractorId={filterInput}
          />
       </ImageBackground>
    );

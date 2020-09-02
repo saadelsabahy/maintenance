@@ -30,6 +30,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Icon } from '../Icon';
 import FlashMessage from 'react-native-flash-message';
 import BackgroundImage from '../../assets/images/popup.png';
+import { MaterialDropDown } from '../customDropDown';
 const DashboardFilter = ({
    isModalVisible,
    coverScreen,
@@ -41,6 +42,8 @@ const DashboardFilter = ({
    contructorId,
    onContructorIdCgange,
    onDashboardSearchFilterPressed,
+   contractors,
+   selectedContractorId,
 }) => {
    const menuRef = useRef(null);
    const [keyboardShow, setKeyboardShow] = useState(false);
@@ -50,20 +53,9 @@ const DashboardFilter = ({
       onBackdropPress();
    };
    const handleDashBoardFilter = () => {
-      if (!contructorId) {
-         filterModalFlashMessage.current.showMessage({
-            type: 'danger',
-            message: 'يجب ادخال رقم العقد',
-         });
-      } else if (+contructorId < 80 || +contructorId > 84) {
-         filterModalFlashMessage.current.showMessage({
-            type: 'danger',
-            message: 'برجاء ادخال رقم عقد صحيح',
-         });
-      } else {
-         onDashboardSearchFilterPressed();
-      }
+      onDashboardSearchFilterPressed();
    };
+
    return (
       <Modal
          testID={'modal'}
@@ -126,13 +118,29 @@ const DashboardFilter = ({
                   />
                </View>
                <View style={styles.inputsContainer}>
-                  <CustomInput
+                  {/* <CustomInput
                      inputContainerStyle={styles.input}
                      placeholder={'رقم العقد'}
                      value={contructorId}
                      onChangeText={onContructorIdCgange}
                      keyboardType={'numeric'}
                      maxLength={2}
+                  /> */}
+                  <MaterialDropDown
+                     data={contractors}
+                     label={'رقم العقد'}
+                     value={
+                        Boolean(+selectedContractorId)
+                           ? contractors.find(
+                                contractor =>
+                                   contractor.Id == selectedContractorId
+                             ).value
+                           : ''
+                     }
+                     onChangeText={(value, index, data) => {
+                        onContructorIdCgange(data[index].Id);
+                     }}
+                     referance={c => (menuRef.current = c)}
                   />
                </View>
                <View style={styles.buttonsContainer}>
