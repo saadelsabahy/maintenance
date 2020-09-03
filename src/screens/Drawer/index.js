@@ -135,6 +135,18 @@ const CustomDrawer = props => {
                <DrawerItemList {...props} />
             </DrawerContentScrollView>
          </SafeAreaView>
+         <View
+            style={{
+               width: '100%',
+               // height: 70,
+               padding: 10,
+               backgroundColor: BOTTOMSHEET_COLOR,
+            }}>
+            <Image
+               source={require('../../assets/images/ev_side_logo.png')}
+               // style={{ width: 150, height: 150 }}
+            />
+         </View>
       </SafeAreaView>
    );
 };
