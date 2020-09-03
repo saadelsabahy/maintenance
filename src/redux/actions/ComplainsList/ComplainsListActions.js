@@ -45,6 +45,7 @@ export const getAllComplainsList = (statusId, sort) => async (
       complainType,
    } = getState().Complains;
    const { filterInput } = getState().Dashboard;
+   Reactotron.log('filterInput', filterInput);
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(

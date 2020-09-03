@@ -31,6 +31,7 @@ import { Icon } from '../Icon';
 import FlashMessage from 'react-native-flash-message';
 import BackgroundImage from '../../assets/images/popup.png';
 import { MaterialDropDown } from '../customDropDown';
+import { EVISION_USER } from '../../utils/complainsStutus';
 const DashboardFilter = ({
    isModalVisible,
    coverScreen,
@@ -44,6 +45,7 @@ const DashboardFilter = ({
    onDashboardSearchFilterPressed,
    contractors,
    selectedContractorId,
+   userType,
 }) => {
    const menuRef = useRef(null);
    const [keyboardShow, setKeyboardShow] = useState(false);
@@ -55,7 +57,12 @@ const DashboardFilter = ({
    const handleDashBoardFilter = () => {
       onDashboardSearchFilterPressed();
    };
-
+   console.log(
+      'selectedContractorId',
+      contractors,
+      contractors.find(contractor => contractor.Id == selectedContractorId),
+      selectedContractorId
+   );
    return (
       <Modal
          testID={'modal'}
@@ -130,7 +137,8 @@ const DashboardFilter = ({
                      data={contractors}
                      label={'رقم العقد'}
                      value={
-                        Boolean(+selectedContractorId)
+                        Boolean(+selectedContractorId) &&
+                        userType == EVISION_USER
                            ? contractors.find(
                                 contractor =>
                                    contractor.Id == selectedContractorId

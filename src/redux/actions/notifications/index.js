@@ -122,7 +122,7 @@ export const onNotificationPressed = (
             navigation.navigate('waitView', { data });
             break;
          default:
-            navigation.navigate('waitAprroval', { data, distination });
+            navigation.navigate('waitAprroval', { data, StatusId });
             break;
       }
    } catch (error) {

@@ -6,6 +6,7 @@ import {
    ImageBackground,
    ScrollView,
    FlatList,
+   RefreshControl,
 } from 'react-native';
 import {
    WHITE_COLOR,
@@ -48,6 +49,8 @@ const DashBoard = ({ navigation }) => {
    const isFocused = useIsFocused();
    const [netConnected, setNetConnected] = useState(null);
    const [userType, setuserType] = useState(null);
+   const [showFilterModal, setshowFilterModal] = useState(false);
+   const [refreshing, setrefreshing] = useState(false);
 
    const {
       dashboardSpinner,
@@ -86,14 +89,15 @@ const DashBoard = ({ navigation }) => {
       return () => {
          unsubscribe();
       };
-   }, [netConnected, isFocused]);
+   }, [netConnected, isFocused, refreshing]);
    const getDashboardData = async () => {
       const LocationId = await AsyncStorage.getItem('userType');
       setuserType(LocationId);
       if (netConnected) {
-         if (!filterInput) {
-            await dispatch(onDashboardFilterChage(LocationId));
-         }
+         await dispatch(
+            onDashboardFilterChage(!filterInput ? LocationId : filterInput)
+         );
+
          dispatch(getDashBoardData());
       } else {
          return;
@@ -112,7 +116,13 @@ const DashBoard = ({ navigation }) => {
          />
       </View>
    );
-   const [showFilterModal, setshowFilterModal] = useState(false);
+
+   const handleRefresh = async () => {
+      setrefreshing(true);
+
+      await getDashBoardData();
+      setrefreshing(false);
+   };
    return (
       <ImageBackground
          source={DashboardBackground}
@@ -172,6 +182,13 @@ const DashBoard = ({ navigation }) => {
                            <EmptyList />
                         </View>
                      }
+                     refreshControl={
+                        <RefreshControl
+                           refreshing={refreshing}
+                           onRefresh={handleRefresh}
+                           colors={[MAIN_COLOR]}
+                        />
+                     }
                   />
                </View>
             )}
@@ -189,6 +206,7 @@ const DashBoard = ({ navigation }) => {
             }}
             contractors={contractors}
             selectedContractorId={filterInput}
+            userType={userType}
          />
       </ImageBackground>
    );

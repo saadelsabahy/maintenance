@@ -28,6 +28,7 @@ import {
 import ListHeader from './Header';
 import withObservables from '@nozbe/with-observables';
 import BackgroundImage from '../../assets/images/app_bg.png';
+import AsyncStorage from '@react-native-community/async-storage';
 const Complains = ({ navigation, route, complain }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Complains = ({ navigation, route, complain }) => {
    const toggleSearchModal = () => {
       setisModalVisible(!isModalVisible);
    };
+   const [userType, setuserType] = useState(null);
    const {
       complainsList,
       getComplainsListErorr,
@@ -125,6 +127,7 @@ const Complains = ({ navigation, route, complain }) => {
       return () => {};
    }, [isFocused, reload, dateSearch]);
    useEffect(() => {
+      getUserType();
       return () => {
          dispatch(emptyListOnUnmount());
          setdropDownText('');
@@ -132,6 +135,11 @@ const Complains = ({ navigation, route, complain }) => {
          setfilterLabel(null);
       };
    }, [isFocused]);
+   const getUserType = async () => {
+      const LocationId = await AsyncStorage.getItem('locationId');
+      setuserType(LocationId);
+   };
+
    const getData = () => {
       if (search) {
          dispatch(
@@ -159,9 +167,10 @@ const Complains = ({ navigation, route, complain }) => {
       menu.hide();
    };
    const onCancelSearch = async () => {
-      dispatch(resetAllSearchInputs(toggleSearchModal));
-      setdropDownText('');
-      getData();
+      await dispatch(resetAllSearchInputs(toggleSearchModal));
+      await setdropDownText('');
+      setReload(!reload);
+      // getData();
    };
    const hideSearchModal = async () => {
       await toggleSearchModal();
@@ -235,6 +244,7 @@ const Complains = ({ navigation, route, complain }) => {
             onCancelSearch={onCancelSearch}
             contractors={contractors}
             selectedContractorId={filterInput}
+            userType={userType}
          />
       </ImageBackground>
    );

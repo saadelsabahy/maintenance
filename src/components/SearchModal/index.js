@@ -32,6 +32,7 @@ import { onSearchInputsChange } from '../../redux/actions';
 import FlashMessage from 'react-native-flash-message';
 import BackgroundImage from '../../assets/images/popup.png';
 import { MaterialDropDown } from '../customDropDown';
+import { EVISION_USER } from '../../utils/complainsStutus';
 const SearchModal = ({
    isModalVisible,
    coverScreen,
@@ -53,6 +54,7 @@ const SearchModal = ({
    onCancelSearch,
    contractors,
    selectedContractorId,
+   userType,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
@@ -155,9 +157,11 @@ const SearchModal = ({
                         ),
                      }}
                      data={
-                        Boolean(+contructorId)
+                        Boolean(+selectedContractorId) &&
+                        userType !== EVISION_USER
                            ? contractors.filter(
-                                contractor => contractor.Id == contructorId
+                                contractor =>
+                                   contractor.Id == selectedContractorId
                              )
                            : contractors
                      }
@@ -165,8 +169,7 @@ const SearchModal = ({
                      value={
                         Boolean(+contructorId)
                            ? contractors.find(
-                                contractor =>
-                                   contractor.Id == selectedContractorId
+                                contractor => contractor.Id == contructorId
                              ).value
                            : ''
                      }
@@ -177,23 +180,6 @@ const SearchModal = ({
                      }}
                      referance={c => (menuRef.current = c)}
                   />
-                  {/*  <CustomInput
-                     inputContainerStyle={styles.input}
-                     placeholder={'رقم العقد'}
-                     keyboardType={'numeric'}
-                     onChangeText={text =>
-                        dispatch(onSearchInputsChange('contructorId', text))
-                     }
-                     value={contructorId}
-                  /> */}
-                  {/*  <CustomInput
-                     inputContainerStyle={styles.input}
-                     placeholder={'حاله البلاغ'}
-                     onChangeText={text =>
-                        dispatch(onSearchInputsChange('complainStatus', text))
-                     }
-                     value={complainStatus}
-                  /> */}
 
                   <CustomInput
                      inputContainerStyle={styles.input}

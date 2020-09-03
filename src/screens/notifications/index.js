@@ -56,8 +56,8 @@ const Notifications = ({ navigation }) => {
    console.log(notifications);
    const notificationsList = notifications.sort(
       (a, b) =>
-         new Date(moment(b.NotificatonTime,'YYYY-MM-DD hh:mm:ss')).getTime() -
-         new Date(moment(a.NotificatonTime,'YYYY-MM-DD hh:mm:ss')).getTime()
+         new Date(moment(b.NotificatonTime, 'YYYY-MM-DD hh:mm:ss')).getTime() -
+         new Date(moment(a.NotificatonTime, 'YYYY-MM-DD hh:mm:ss')).getTime()
    );
    const handleRefresh = async () => {
       setRefreshing(true);
@@ -84,27 +84,14 @@ const Notifications = ({ navigation }) => {
             return `  لقد تم انشاء بلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId}`;
             break;
 
-         case 'InProgress':
+         case 'in progress':
             return `البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} جاري تنفيذه`;
             break;
 
-         case 'Resolved':
-            return `البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} تم حل مشكلته`;
-            break;
          case 'NotApprove':
             return `البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} تم رفضه`;
             break;
-         case 'Closed':
-            return `  لقد تم اغلاق البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId}`;
-            break;
 
-         case 'Delayed':
-            return `  البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} أصبح متأخر`;
-            break;
-
-         case 'Delayed And Closed':
-            return `  لقد تم انشاء بلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId}`;
-            break;
          case 'Delayed for inspection':
             return `  لقد أصبح البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} متأخر في المعاينه`;
             break;
@@ -116,6 +103,9 @@ const Notifications = ({ navigation }) => {
             break;
          case 'Approval pending':
             return `  لقد أصبح البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId} قيد التعميد`;
+            break;
+         case 'Done':
+            return `  لقد تم حل مشكله البلاغ رقم ${ComplainId} علي المعده رقم ${VehicleId}`;
             break;
       }
    };
@@ -182,7 +172,6 @@ const Notifications = ({ navigation }) => {
                      },
                      index,
                   }) => {
-                    
                      return (
                         <NotificationCard
                            notificationTimeText={moment(
