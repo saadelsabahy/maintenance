@@ -82,7 +82,7 @@ const addFcmToFireStore = async (data, dispatch) => {
       await firestore()
          .collection('users')
          .doc(`${data.Id}`)
-         .set({
+         .update({
             notificationBadge: firestore.FieldValue.increment(0),
             fcmToken: firestore.FieldValue.arrayUnion(fcmToken),
             userId: data.Id,

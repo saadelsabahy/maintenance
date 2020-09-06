@@ -182,7 +182,7 @@ const Login = ({ navigation }) => {
                <View
                   style={{
                      height: SCREEN_HEIGHT / 3,
-                     paddingVertical: SCREEN_HEIGHT > 800 ? 30 : 10,
+                     paddingVertical: SCREEN_HEIGHT > 800 ? 0 : 10,
                      backgroundColor: SURFACE_COLOR,
                   }}>
                   <Image
