@@ -30,6 +30,13 @@
             {
               "client_id": "57105734546-qpoue12oduipu6jpbdke9uqia1f39enk.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "57105734546-1kdbh8d6r2rk8jlb4motmrlsnt52b1ii.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.maintenanceapp"
+              }
             }
           ]
         }

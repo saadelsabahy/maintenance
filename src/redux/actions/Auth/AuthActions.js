@@ -79,15 +79,29 @@ const addFcmToFireStore = async (data, dispatch) => {
    const fcmToken = await AsyncStorage.getItem('fcmToken');
    console.log('dt..', data);
    try {
-      await firestore()
+      const getDocument = await firestore()
          .collection('users')
-         .doc(`${data.Id}`)
-         .update({
-            notificationBadge: firestore.FieldValue.increment(0),
-            fcmToken: firestore.FieldValue.arrayUnion(fcmToken),
-            userId: data.Id,
-            locationId: data.LocationId,
-         });
+         .doc(`${data.Id}`);
+
+      getDocument.get().then(doc => {
+         if (doc.exists) {
+            getDocument.update({
+               notificationBadge: firestore.FieldValue.increment(0),
+               fcmToken: firestore.FieldValue.arrayUnion(fcmToken),
+               userId: data.Id,
+               locationId: data.LocationId,
+            });
+         } else {
+            // doc.data() will be undefined in this case
+            getDocument.set({
+               notificationBadge: firestore.FieldValue.increment(0),
+               fcmToken: firestore.FieldValue.arrayUnion(fcmToken),
+               userId: data.Id,
+               locationId: data.LocationId,
+            });
+         }
+      });
+
       await AsyncStorage.multiSet([
          ['userId', `${data.Id}`],
          ['userType', `${data.LocationId}`],

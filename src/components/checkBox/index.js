@@ -11,7 +11,7 @@ const ChechBox = ({ onItemPressed, text, checked }) => {
          <CheckBox
             uncheckedCheckBoxColor={MAIN_COLOR}
             checkedCheckBoxColor={MAIN_COLOR}
-            style={{ alignItems: 'flex-start' }}
+            style={{ height: '100%' }}
             onClick={onItemPressed}
             isChecked={checked}
             checkedImage={
@@ -27,7 +27,9 @@ const ChechBox = ({ onItemPressed, text, checked }) => {
                />
             }
          />
-         <CustomText text={text} textStyle={{ marginStart: 10 }} />
+         <View style={{ flex: 1 }}>
+            <CustomText text={text} textStyle={{ marginStart: 10 }} />
+         </View>
       </TouchableOpacity>
    );
 };
@@ -35,6 +37,9 @@ const styles = StyleSheet.create({
    container: {
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'flex-start',
+      maxWidth: '80%',
+      flexWrap: 'wrap',
    },
 });
 
