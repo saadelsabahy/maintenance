@@ -192,7 +192,7 @@ const Login = ({ navigation }) => {
                      style={{
                         position: 'absolute',
                         width: SCREEN_WIDTH,
-                        height: SCREEN_HEIGHT / 3 -70,
+                        height:SCREEN_HEIGHT>800? SCREEN_HEIGHT / 3 -70:SCREEN_HEIGHT / 3 -20,
                         
                      }}
                      resizeMode="stretch"
