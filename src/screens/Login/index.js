@@ -185,7 +185,7 @@ const Login = ({ navigation }) => {
                      height: SCREEN_HEIGHT / 3,
                      paddingVertical: SCREEN_HEIGHT > 810 ?27: 10,
                      backgroundColor: SURFACE_COLOR,
-                     borderWidth:5
+                     
                   }}>
                   <Image
                      source={require('../../assets/images/login_bg_btm.png')}
