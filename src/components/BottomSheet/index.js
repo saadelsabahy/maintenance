@@ -1,5 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   ImageBackground,
+   Image,
+   Platform,
+} from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import {
    SECONDART_COLOR,
@@ -222,7 +229,11 @@ const CustomBottomSheet = ({
                            {signature ? (
                               <Image
                                  source={{
-                                    uri: `${signature}?random=${Math.random()
+                                    uri: `${
+                                       Platform.OS == 'ios'
+                                          ? `file:///${signature}`
+                                          : signature
+                                    }?random=${Math.random()
                                        .toString(36)
                                        .substring(7)}`,
                                  }}
