@@ -62,6 +62,7 @@ const Login = ({ navigation }) => {
       getFcmToken();
       return () => {};
    }, []);
+   console.log(SCREEN_HEIGHT);
    return (
       <View
          style={{
@@ -111,7 +112,7 @@ const Login = ({ navigation }) => {
                      style={{
                         position: 'absolute',
                         start: '50%',
-                        bottom: SCREEN_HEIGHT > 850 ? 30 : 25,
+                        bottom: SCREEN_HEIGHT > 810 ? 30 : 25,
                      }}>
                      <CustomText
                         text={'تطبيق الصيانات'}
@@ -182,15 +183,17 @@ const Login = ({ navigation }) => {
                <View
                   style={{
                      height: SCREEN_HEIGHT / 3,
-                     paddingVertical: SCREEN_HEIGHT > 800 ? 0 : 10,
+                     paddingVertical: SCREEN_HEIGHT > 810 ?27: 10,
                      backgroundColor: SURFACE_COLOR,
+                     borderWidth:5
                   }}>
                   <Image
                      source={require('../../assets/images/login_bg_btm.png')}
                      style={{
                         position: 'absolute',
-                        width: '100%',
-                        height: '100%',
+                        width: SCREEN_WIDTH,
+                        height: SCREEN_HEIGHT / 3 -70,
+                        
                      }}
                      resizeMode="stretch"
                   />
