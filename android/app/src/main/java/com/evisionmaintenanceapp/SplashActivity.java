@@ -1,4 +1,4 @@
-package com.maintenance; 
+package com.maintenanceapp;
 
 import android.content.Intent;
 import android.os.Bundle;
