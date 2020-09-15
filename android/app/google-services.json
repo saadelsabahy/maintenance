@@ -8,9 +8,45 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:57105734546:android:787aea387845b9f20d3f4b",
+        "mobilesdk_app_id": "1:57105734546:android:1d94be39c923a0d20d3f4b",
         "android_client_info": {
-          "package_name": "com.maintenance"
+          "package_name": "com.evisionmaintenanceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57105734546-qpoue12oduipu6jpbdke9uqia1f39enk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcyKdlf2U6rhd6SRgm3MXQDiUP8xXpMkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57105734546-qpoue12oduipu6jpbdke9uqia1f39enk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "57105734546-1kdbh8d6r2rk8jlb4motmrlsnt52b1ii.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.maintenanceapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57105734546:android:3412acda2d94b2400d3f4b",
+        "android_client_info": {
+          "package_name": "com.maintenanceapp"
         }
       },
       "oauth_client": [

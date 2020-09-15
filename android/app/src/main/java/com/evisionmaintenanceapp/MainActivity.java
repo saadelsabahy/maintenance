@@ -1,4 +1,4 @@
-package com.maintenanceapp;
+package com.evisionmaintenanceapp;
 
 import com.facebook.react.ReactActivity;
  import org.devio.rn.splashscreen.SplashScreen;

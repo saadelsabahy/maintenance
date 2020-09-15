@@ -1,4 +1,4 @@
-package com.maintenanceapp;
+package com.evisionmaintenanceapp;
 
 import android.app.Application;
 import android.content.Context;
