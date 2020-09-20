@@ -122,14 +122,6 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('D:\\projects\\maintenance\\keystore.jks')
-            keyAlias = 'key0'
-            storePassword '159753'
-            keyPassword '159753'
-        }
-    }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -141,7 +133,7 @@ android {
         applicationId "com.evisionmaintenanceapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 13
+        versionCode 14
         versionName "3.0"
         multiDexEnabled true
     }
