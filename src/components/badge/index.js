@@ -21,9 +21,9 @@ const Badge = ({ containerStyle, number, onPress }) => {
 };
 const styles = StyleSheet.create({
    container: {
-      width: 20,
-      height: 20,
-      borderRadius: 20 / 2,
+      width: 25,
+      height: 25,
+      borderRadius: 25 / 2,
       backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
       justifyContent: 'center',
       alignItems: 'center',

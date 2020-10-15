@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
    },
    textStyle: {
       textAlign: 'right',
-      fontSize: responsiveFontSize(2.5),
+      fontSize: responsiveFontSize(2),
    },
 });
 
