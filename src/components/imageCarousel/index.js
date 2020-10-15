@@ -46,7 +46,6 @@ const ImageCarousel = ({ data }) => {
             containerCustomStyle={styles.carouselContainer}
             layout={'default'}
             autoplay
-            loop
             autoplayDelay={0}
             autoplayInterval={2000}
             onSnapToItem={index => setactiveSlide(index)}

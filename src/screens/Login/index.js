@@ -62,7 +62,7 @@ const Login = ({ navigation }) => {
       getFcmToken();
       return () => {};
    }, []);
-   console.log(SCREEN_HEIGHT);
+   // console.log(SCREEN_HEIGHT);
    return (
       <View
          style={{
@@ -185,15 +185,16 @@ const Login = ({ navigation }) => {
                      height: SCREEN_HEIGHT / 3,
                      // paddingVertical: SCREEN_HEIGHT > 810 ?27: 10,
                      backgroundColor: SURFACE_COLOR,
-                     
                   }}>
                   <Image
                      source={require('../../assets/images/login_bg_btm.png')}
                      style={{
                         position: 'absolute',
                         width: SCREEN_WIDTH,
-                        height:SCREEN_HEIGHT>800? SCREEN_HEIGHT / 3 -70:SCREEN_HEIGHT / 3 -20,
-                        
+                        height:
+                           SCREEN_HEIGHT >= 812
+                              ? SCREEN_HEIGHT / 3 - 70
+                              : SCREEN_HEIGHT / 3 - 20,
                      }}
                      resizeMode="stretch"
                   />

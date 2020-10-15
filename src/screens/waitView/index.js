@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
       width: '100%',
       borderRadius: 0,
       backgroundColor: 'transparent',
+      marginTop: 10,
    },
 });
 

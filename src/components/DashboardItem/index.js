@@ -7,6 +7,7 @@ import {
    SCREEN_HEIGHT,
    SURFACE_COLOR,
    SCREEN_WIDTH,
+   PAGINATION_INACTIVE_DOT_COLOR,
 } from '../../constants/colors';
 import { Icon } from '../Icon';
 import { CustomText } from '../customText';
@@ -34,7 +35,13 @@ const DashBoardItem = ({
          </View>
          <View style={styles.cardDetailesContainer}>
             <CustomText text={`${number}`} textStyle={styles.textStyle} />
-            <CustomText text={text} textStyle={styles.textStyle} />
+            <CustomText
+               text={text}
+               textStyle={{
+                  ...styles.textStyle,
+                  color: PAGINATION_INACTIVE_DOT_COLOR,
+               }}
+            />
          </View>
       </TouchableOpacity>
    );
@@ -59,17 +66,13 @@ const styles = StyleSheet.create({
       backgroundColor: DASHBOARD_ITEM_ICON_CONTAINER,
       alignItems: 'center',
       justifyContent: 'center',
-      /*    borderTopStartRadius: 10,
+      borderTopStartRadius: 10,
       borderBottomEndRadius: 10,
       borderBottomStartRadius: 3,
-      borderTopEndRadius: 3, */
+      borderTopEndRadius: 3,
       width: '30%',
       height: '30%',
       alignSelf: 'flex-end',
-
-      // position: 'absolute',
-      // end: 5,
-      // top: 0,
    },
    cardDetailesContainer: {
       flex: 1,
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
    },
    textStyle: {
       textAlign: 'right',
-      fontSize: responsiveFontSize(2.7),
+      fontSize: responsiveFontSize(2.5),
    },
 });
 

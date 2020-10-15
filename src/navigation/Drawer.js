@@ -108,7 +108,7 @@ const DrawerNavigator = () => {
             component={DashboardStack}
             options={{
                ...dawerDefaultOptions(
-                  'الرئيسيه',
+                  'الرئيسية',
                   'home-outline',
                   'material-community'
                ),

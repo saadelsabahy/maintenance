@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
    },
    DrawerHeader: {
       // backgroundColor: MAIN_COLOR,
-      width: '100%',
+      width: '101.2%',
       height: '35%',
       // borderBottomStartRadius: 50,
       marginBottom: 0,

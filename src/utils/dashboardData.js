@@ -1,6 +1,6 @@
 export const dashboardInformation = {
    1: {
-      name: 'قيد المعاينه',
+      name: 'قيد المعاينة',
       icon: 'download',
       iconType: 'antdesign',
    },
@@ -25,7 +25,7 @@ export const dashboardInformation = {
       iconType: 'antdesign',
    },
    14: {
-      name: 'متأخر المعاينه',
+      name: 'متأخر المعاينة',
       icon: 'eye-slash',
       iconType: 'font-awesome',
    },

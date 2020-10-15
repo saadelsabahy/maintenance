@@ -27,6 +27,7 @@ import { CustomText } from '../customText';
 import BackgroundImage from '../../assets/images/bottom_sheet.png';
 import { showFlashMessage } from '../../utils/flashMessage';
 import { IN_WARNTY, OUT_WARNTY } from '../../utils/complainsStutus';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 const Gurantee = ({
    onSelectImagesPressed,
    images,
@@ -186,7 +187,12 @@ const Gurantee = ({
                                  }
                               />
                               {selectedButton == OUT_WARNTY && (
-                                 <CustomText text={`${Price} ريال`} />
+                                 <CustomText
+                                    text={`${Price} ريال`}
+                                    textStyle={{
+                                       fontSize: responsiveFontSize(1.6),
+                                    }}
+                                 />
                               )}
                            </View>
                         );

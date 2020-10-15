@@ -11,6 +11,7 @@ import {
    MAIN_COLOR,
    SURFACE_COLOR,
    MAIN_RED_COLOR,
+   PLACEHOLDER_COLOR,
 } from '../../constants/colors';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import { CustomText } from '../customText';
@@ -40,7 +41,11 @@ const CustomDropDown = ({
                }}>
                <CustomText
                   text={dropDownText != '' ? dropDownText : 'نوع البلاغ'}
-                  textStyle={{ paddingHorizontal: 20, alignSelf: 'center' }}
+                  textStyle={{
+                     paddingHorizontal: 20,
+                     alignSelf: 'center',
+                     color: !dropDownText ? PLACEHOLDER_COLOR : WHITE_COLOR,
+                  }}
                />
                <View
                   style={{
