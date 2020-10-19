@@ -39,14 +39,7 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
          case 'startDate':
             /* Reactotron.log(moment(date.timestamp).format('DD-MM-YYYY')); */
 
-            dispatch(
-               onSearchInputsChange(
-                  'startDate',
-                  moment(date)
-                     .format('DD-MM-YYYY')
-                     .toString()
-               )
-            );
+            dispatch(onSearchInputsChange('startDate', date));
             break;
 
          case 'endDate':
@@ -59,14 +52,7 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
                      .format('DD-MM-YYYY')
                      .toString()
                ); */
-               dispatch(
-                  onSearchInputsChange(
-                     'endDate',
-                     moment(date)
-                        .format('DD-MM-YYYY')
-                        .toString()
-                  )
-               );
+               dispatch(onSearchInputsChange('endDate', date));
             } else {
                modalMessage.current.showMessage({
                   type: 'danger',
@@ -84,7 +70,13 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
             { width: startDate && endDate ? '90%' : '100%' },
          ]}>
          <DateTimeButton
-            text={!startDate ? 'من تاريخ' : startDate}
+            text={
+               !startDate
+                  ? 'من تاريخ'
+                  : moment(startDate)
+                       .format('DD-MM-YYYY')
+                       .toString()
+            }
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
@@ -92,7 +84,13 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
             containerStyle={{ width: startDate && endDate ? '45%' : '47%' }}
          />
          <DateTimeButton
-            text={!endDate ? 'إلي تاريخ' : endDate}
+            text={
+               !endDate
+                  ? 'إلي تاريخ'
+                  : moment(endDate)
+                       .format('DD-MM-YYYY')
+                       .toString()
+            }
             iconEnd={'calendar'}
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}

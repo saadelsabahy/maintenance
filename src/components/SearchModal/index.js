@@ -191,7 +191,11 @@ const SearchModal = ({
                   />
                   {source == 0 && (
                      <CustomDropDown
-                        onDropDownPressed={() => menuRef.current.show()}
+                        onDropDownPressed={() => {
+                           console.log('pressed');
+                           console.log(menuRef.current);
+                           // menuRef.current.show();
+                        }}
                         menuStyle={styles.menuStyle}
                         onMenuItemPressed={label =>
                            onSearchDropdownPressed(label, menuRef.current)

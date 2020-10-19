@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
       fontFamily: 'DroidArabicKufi',
       alignItems: 'flex-start',
       justifyContent: 'center',
-      padding: 5,
+      padding: 0,
       writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
    },
    StartIcon: {

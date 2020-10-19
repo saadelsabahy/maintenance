@@ -175,7 +175,10 @@ const CustomBottomSheet = ({
                      renderItem={({ item, index }) => {
                         return (
                            <View style={{ ...styles.bottomSheetItem }}>
-                              <CustomText text={item.NameAr} />
+                              <CustomText
+                                 text={item.NameAr}
+                                 textStyle={styles.bottomSheetItemText}
+                              />
                               <CustomText text={`${+item.Price} ريال`} />
                            </View>
                         );
@@ -324,7 +327,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       alignItems: 'center',
       paddingHorizontal: 10,
-      flexWrap: 'wrap',
+      /*       flexWrap: 'wrap', */
    },
    signatureImageContainer: {
       width: SCREEN_WIDTH,
@@ -339,6 +342,9 @@ const styles = StyleSheet.create({
    sparePartsListContainer: {
       width: '100%',
       maxHeight: SCREEN_HEIGHT * 0.15,
+   },
+   bottomSheetItemText: {
+      width: '80%',
    },
 });
 

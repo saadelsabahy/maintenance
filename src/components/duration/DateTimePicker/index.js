@@ -16,6 +16,7 @@ const CustomDateTimePicker = ({
             mode={pickerMode}
             onConfirm={onConfirm}
             onCancel={onCancel}
+            maximumDate={new Date()}
             {...res}
          />
       </View>

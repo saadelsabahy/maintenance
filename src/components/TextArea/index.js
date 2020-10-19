@@ -43,6 +43,7 @@ const TextArea = ({
                placeholderTextColor={PLACEHOLDER_COLOR}
                selectionColor={MAIN_RED_COLOR}
                underlineColorAndroid={'transparent'}
+               multiline={true}
                {...res}
             />
          </View>

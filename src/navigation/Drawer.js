@@ -91,6 +91,12 @@ const DrawerNavigator = () => {
             width: '75%',
             backgroundColor: 'transparent',
          }}
+         screenOptions={({ navigation, route }) => {
+            console.log(navigation, route);
+            return {
+               swipeEnabled: route.name == 'DashBoardStack' ? true : false,
+            };
+         }}
          drawerContent={props => <CustomDrawer {...props} />}
          drawerContentOptions={{
             activeBackgroundColor: SURFACE_COLOR,

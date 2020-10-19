@@ -111,7 +111,6 @@ export const LoadPagination = (statusId, sort) => async (
 };
 
 export const onComplainPressed = (data, navigation, route) => () => {
-   console.log('data..', data);
    if (route.params && route.params.distination) {
       const { distination } = route.params;
 
@@ -142,6 +141,7 @@ export const onComplainPressed = (data, navigation, route) => () => {
 };
 /////////////////////////////////////////////search
 export const onSearchInputsChange = (inputName, inputValue) => dispatch => {
+   Reactotron.log(inputValue);
    switch (inputName) {
       case 'complainNumber':
          dispatch({ type: COMPLAIN_NUMBER_CHANGE, payload: inputValue });
@@ -182,15 +182,22 @@ export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
       endDate,
       searchPageNumber,
    } = getState().Complains;
-
+   Reactotron.log(
+      'sended',
+      `${new Date(startDate).getFullYear()}-${new Date(
+         startDate
+      ).getMonth()}-${new Date(startDate).getDay()}`
+   );
    try {
       dispatch({ type: SEARCH_SPINNER });
       const getSearchListResponse = await Api.get(
-         `Complians?From=${moment(startDate).format('MM/DD/YYYY')}&To=${moment(
+         `Complians?From=${`${new Date(startDate).getFullYear()}-${new Date(
+            startDate
+         ).getMonth()}-${new Date(startDate).getDay()}`}&To=${`${new Date(
             endDate
-         ).format(
-            'MM/DD/YYYY'
-         )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
+         ).getFullYear()}-${new Date(endDate).getMonth()}-${new Date(
+            endDate
+         ).getDay()}`}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
       if (getSearchListResponse.data.statusCode == 200) {
@@ -226,11 +233,13 @@ export const LoadSearchPagination = (source, sort) => async (
    try {
       dispatch({ type: SEARCH_PAGINATION_SPINNER });
       const searchPaginationtResponse = await Api.get(
-         `Complians?From=${moment(startDate).format('MM/DD/YYYY')}&To=${moment(
+         `Complians?From=${`${new Date(startDate).getFullYear()}-${new Date(
+            startDate
+         ).getMonth()}-${new Date(startDate).getDay()}`}&To=${`${new Date(
             endDate
-         ).format(
-            'MM/DD/YYYY'
-         )}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
+         ).getFullYear()}-${new Date(endDate).getMonth()}-${new Date(
+            endDate
+         ).getDay()}`}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
             1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 

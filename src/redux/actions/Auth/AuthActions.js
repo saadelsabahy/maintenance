@@ -18,11 +18,14 @@ import { BASE_URL } from '../../../apis';
 export const inputsChange = (inputName, inputValue) => {
    switch (inputName) {
       case 'loginName':
-         return { type: LOGIN_USER_NAME_CHANGE, payload: inputValue };
+         return { type: LOGIN_USER_NAME_CHANGE, payload: inputValue.trim() };
          break;
 
       case 'loginPassword':
-         return { type: LOGIN_USER_PASSWORD_CHANGE, payload: inputValue };
+         return {
+            type: LOGIN_USER_PASSWORD_CHANGE,
+            payload: inputValue.trim(),
+         };
          break;
    }
 };
