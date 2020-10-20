@@ -46,7 +46,7 @@ const MaterialDropDown = ({
                   borderBottomWidth: 0,
                   borderBottomColor: 'transparent',
                }} //Make UnderLine Transparent
-               fontSize={responsiveFontSize(2)}
+               fontSize={responsiveFontSize(1.7)}
                titleTextStyle={{ color: TEXT_COLOR }} //Color For Fixed Label Title
                itemTextStyle={styles.fontFamily}
                style={styles.inputStyle}
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
       fontFamily: 'DroidArabicKufi',
    },
    inputStyle: {
-      fontSize: responsiveFontSize(2.5),
+      fontSize: responsiveFontSize(1.7),
       fontFamily: 'DroidArabicKufi',
       textAlign: I18nManager.isRTL ? 'right' : 'left',
       height: '100%',

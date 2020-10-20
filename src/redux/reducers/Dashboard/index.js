@@ -28,7 +28,7 @@ export default (state = initialState, { type, payload }) => {
             dashboardError: false,
             dashboardSpinner: false,
             dashboardData: payload.dashData,
-            lastUpdate: moment().format('hh:mm:ss a'),
+            lastUpdate: moment().format('hh:mm a'),
             badge: payload.badge,
             contractors: payload.contractorsData,
          };

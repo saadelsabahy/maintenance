@@ -167,7 +167,7 @@ const DashBoard = ({ navigation }) => {
                            <DashBoardItem
                               text={dashboardInformation[StatusId].name}
                               number={Total}
-                              icon={dashboardInformation[StatusId].icon}
+                              icon={dashboardInformation[StatusId].image}
                               iconTtype={
                                  dashboardInformation[StatusId].iconType
                               }

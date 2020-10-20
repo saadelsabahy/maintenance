@@ -55,9 +55,11 @@ const SearchModal = ({
    contractors,
    selectedContractorId,
    userType,
+   complainType,
 }) => {
    const dispatch = useDispatch();
    const menuRef = useRef(null);
+   const dropDownRef = useRef(null);
    const modalFlashMessage = useRef(null);
 
    const [keyboardShow, setKeyboardShow] = useState(false);
@@ -190,29 +192,31 @@ const SearchModal = ({
                      value={plateNumber}
                   />
                   {source == 0 && (
-                     <CustomDropDown
-                        onDropDownPressed={() => {
-                           console.log('pressed');
-                           console.log(menuRef.current);
-                           // menuRef.current.show();
+                     <MaterialDropDown
+                        data={searchDropdownLabels}
+                        label={'نوع البلاغ'}
+                        containerStyle={styles.MaterialDropDownContainer}
+                        onChangeText={(value, index, data) => {
+                           onSearchDropdownPressed(value, data[index].id);
                         }}
-                        menuStyle={styles.menuStyle}
-                        onMenuItemPressed={label =>
-                           onSearchDropdownPressed(label, menuRef.current)
+                        value={
+                           complainType
+                              ? searchDropdownLabels.find(
+                                   item => item.id == complainType
+                                ).value
+                              : searchDropdownLabels[0].value
                         }
-                        menuContainerStyle={styles.menuContainerStyle}
-                        labels={searchDropdownLabels}
-                        refrence={menuRef}
-                        dropDownText={dropDownText}
+                        referance={c => (dropDownRef.current = c)}
                      />
                   )}
+
                   <View
                      style={{
-                        height: '20%',
-                        justifyContent: 'space-between',
+                        height: '15%',
                         width: '100%',
-                        alignItems: 'center',
                         flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                      }}>
                      <SearchDuration
                         modalMessage={modalFlashMessage}
@@ -242,7 +246,12 @@ const SearchModal = ({
                   <CustomButton
                      buttonContainerStyle={styles.button}
                      buttonTitle={'إلغاء'}
-                     onButtonPressed={onCancelSearch}
+                     onButtonPressed={() => {
+                        source == 0
+                           ? (dropDownRef.current.state.value = '')
+                           : null;
+                        onCancelSearch();
+                     }}
                   />
                </View>
             </KeyboardAwareScrollView>
@@ -294,6 +303,7 @@ const styles = StyleSheet.create({
    input: {
       backgroundColor: SURFACE_COLOR,
       paddingHorizontal: 10,
+      borderRadius: Math.round(SCREEN_WIDTH / 2 + SCREEN_HEIGHT / 2),
    },
    dropDwonButton: {
       width: '100%',
@@ -318,6 +328,10 @@ const styles = StyleSheet.create({
       textTransform: 'capitalize',
       fontSize: responsiveFontSize(1.7),
       alignSelf: 'center',
+      lineHeight: responsiveFontSize(1.7 * 2),
+   },
+   MaterialDropDownContainer: {
+      borderRadius: Math.round(SCREEN_WIDTH / 2 + SCREEN_HEIGHT / 2),
    },
 });
 

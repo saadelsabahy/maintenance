@@ -23,6 +23,7 @@ import WaitingView from '../screens/waitView';
 import WaitApproval from '../screens/WaitingApproval';
 import AddComplain from '../screens/addComplain';
 import Notifications from '../screens/notifications';
+import Reactotron from 'reactotron-react-native';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,17 @@ const DashboardStack = () => {
          }}
          initialRouteName={'Dashboard'}>
          <Stack.Screen name={'Dashboard'} component={DashBoard} />
-         <Stack.Screen name={'Notificatons'} component={Notifications} />
+         <Stack.Screen
+            name={'Notificatons'}
+            component={Notifications}
+            options={({ navigation }) => {
+               Reactotron.log(
+                  navigation.dangerouslyGetState().routes[1].name ==
+                     'Dashboard',
+                  navigation
+               );
+            }}
+         />
          <Stack.Screen name={'DashboardComplains'} component={Complains} />
          <Stack.Screen name={'waitView'} component={WaitingView} />
          <Stack.Screen name={'waitAprroval'} component={WaitApproval} />
@@ -92,7 +103,7 @@ const DrawerNavigator = () => {
             backgroundColor: 'transparent',
          }}
          screenOptions={({ navigation, route }) => {
-            console.log(navigation, route);
+            Reactotron.log('st..', navigation.dangerouslyGetState());
             return {
                swipeEnabled: route.name == 'DashBoardStack' ? true : false,
             };

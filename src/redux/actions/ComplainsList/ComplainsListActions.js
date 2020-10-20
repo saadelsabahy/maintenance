@@ -30,6 +30,17 @@ import Reactotron from 'reactotron-react-native';
 import { Q } from '@nozbe/watermelondb';
 import moment from 'moment';
 import { WAIT_PERVIEW, LATE_PERVIEW } from '../../../utils/complainsStutus';
+
+const formatDate = date => {
+   Reactotron.log({ date });
+   return (
+      date &&
+      `${new Date(date).getFullYear()}-${new Date(date).getMonth() +
+         1}-${new Date(date).getDate()}
+   `
+   );
+};
+
 /////////////////////////////complains feed
 export const getAllComplainsList = (statusId, sort) => async (
    dispatch,
@@ -141,7 +152,7 @@ export const onComplainPressed = (data, navigation, route) => () => {
 };
 /////////////////////////////////////////////search
 export const onSearchInputsChange = (inputName, inputValue) => dispatch => {
-   Reactotron.log(inputValue);
+   Reactotron.log({ inputValue });
    switch (inputName) {
       case 'complainNumber':
          dispatch({ type: COMPLAIN_NUMBER_CHANGE, payload: inputValue });
@@ -182,22 +193,15 @@ export const onSearchPressed = (source, sort) => async (dispatch, getState) => {
       endDate,
       searchPageNumber,
    } = getState().Complains;
-   Reactotron.log(
-      'sended',
-      `${new Date(startDate).getFullYear()}-${new Date(
-         startDate
-      ).getMonth()}-${new Date(startDate).getDay()}`
-   );
+   Reactotron.log('sended', startDate, endDate);
    try {
       dispatch({ type: SEARCH_SPINNER });
       const getSearchListResponse = await Api.get(
-         `Complians?From=${`${new Date(startDate).getFullYear()}-${new Date(
-            startDate
-         ).getMonth()}-${new Date(startDate).getDay()}`}&To=${`${new Date(
+         `Complians?From=${formatDate(startDate)}&To=${formatDate(
             endDate
-         ).getFullYear()}-${new Date(endDate).getMonth()}-${new Date(
-            endDate
-         ).getDay()}`}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
+         )}&ComplianId=${complainNumber}&plateNumber=${searchPlateNumber}&StatusId=${
+            complainType ? complainType : source
+         }&ContractorId=${searchContructorId}&PageIndex=${1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 
       if (getSearchListResponse.data.statusCode == 200) {
@@ -233,13 +237,11 @@ export const LoadSearchPagination = (source, sort) => async (
    try {
       dispatch({ type: SEARCH_PAGINATION_SPINNER });
       const searchPaginationtResponse = await Api.get(
-         `Complians?From=${`${new Date(startDate).getFullYear()}-${new Date(
-            startDate
-         ).getMonth()}-${new Date(startDate).getDay()}`}&To=${`${new Date(
+         `Complians?From=${formatDate(startDate)}&To=${formatDate(
             endDate
-         ).getFullYear()}-${new Date(endDate).getMonth()}-${new Date(
-            endDate
-         ).getDay()}`}&ComplianId=${complainNumber}&ComplianType=${complainType}&plateNumber=${searchPlateNumber}&StatusId=${source}&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
+         )}&ComplianId=${complainNumber}&plateNumber=${searchPlateNumber}&StatusId=${
+            complainType ? complainType : source
+         }&ContractorId=${searchContructorId}&PageIndex=${searchPageNumber +
             1}&PageSize=${searchRowsNumber}&Sort=${sort}`
       );
 

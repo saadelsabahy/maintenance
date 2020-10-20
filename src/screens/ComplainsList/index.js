@@ -1,18 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   FlatList,
-   Image,
-   ImageBackground,
-} from 'react-native';
-import {
-   WHITE_COLOR,
-   MAIN_COLOR,
-   SECONDART_COLOR,
-   SURFACE_COLOR,
-} from '../../constants/colors';
+import { View, StyleSheet, Image, ImageBackground } from 'react-native';
+import { SURFACE_COLOR } from '../../constants/colors';
 import { SearchModal, ListAndLoading } from '../../components';
 import { useIsFocused } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,6 +17,7 @@ import ListHeader from './Header';
 import withObservables from '@nozbe/with-observables';
 import BackgroundImage from '../../assets/images/app_bg.png';
 import AsyncStorage from '@react-native-community/async-storage';
+import { COMPLAINS_STATUS } from '../../utils/complainsStutus';
 const Complains = ({ navigation, route, complain }) => {
    const isFocused = useIsFocused();
    const dispatch = useDispatch();
@@ -159,10 +148,8 @@ const Complains = ({ navigation, route, complain }) => {
          );
       }
    };
-   const onSearchDropdownPressed = (label, menu) => {
-      dispatch(onSearchInputsChange('complainType', label.id));
-      setdropDownText(label.text);
-      menu.hide();
+   const onSearchDropdownPressed = (label, id) => {
+      dispatch(onSearchInputsChange('complainType', id));
    };
    const onCancelSearch = async () => {
       await dispatch(resetAllSearchInputs(toggleSearchModal));
@@ -214,17 +201,7 @@ const Complains = ({ navigation, route, complain }) => {
          <SearchModal
             isModalVisible={isModalVisible}
             onBackdropPress={hideSearchModal}
-            searchDropdownLabels={[
-               { id: 'null', text: 'جميع البلاغات' },
-               { id: '1', text: 'قيد المعاينه' },
-               { id: '2', text: 'قيد التعميد' },
-               { id: '3', text: 'قيد التنفيذ' },
-               { id: '4', text: 'تم الحل' },
-               { id: '5', text: 'مرفوض' },
-               { id: '14', text: 'متأخر المعاينه' },
-               { id: '15', text: 'متأخر التنفيذ' },
-               { id: '16', text: 'متأخر الاعتماد' },
-            ]}
+            searchDropdownLabels={COMPLAINS_STATUS}
             onSearchPressed={onSearch}
             complainNumber={complainNumber}
             complainStatus={complainStatus}
@@ -243,6 +220,7 @@ const Complains = ({ navigation, route, complain }) => {
             contractors={contractors}
             selectedContractorId={filterInput}
             userType={userType}
+            complainType={complainType}
          />
       </ImageBackground>
    );

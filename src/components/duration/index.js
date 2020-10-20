@@ -34,11 +34,10 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
    };
 
    const handleConfirm = date => {
+      Reactotron.log(new Date(date));
       hideDatePicker();
       switch (currentActive) {
          case 'startDate':
-            /* Reactotron.log(moment(date.timestamp).format('DD-MM-YYYY')); */
-
             dispatch(onSearchInputsChange('startDate', date));
             break;
 
@@ -47,11 +46,6 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
                moment(startDate, 'DD-MM-YYYY')
             );
             if (isEndDateValid) {
-               /*  setEndDate(
-                  moment(date)
-                     .format('DD-MM-YYYY')
-                     .toString()
-               ); */
                dispatch(onSearchInputsChange('endDate', date));
             } else {
                modalMessage.current.showMessage({
@@ -81,7 +75,7 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
             onPress={() => showDatePicker('startDate')}
-            containerStyle={{ width: startDate && endDate ? '45%' : '47%' }}
+            containerStyle={{ width: '49%', marginEnd: 5 }}
          />
          <DateTimeButton
             text={
@@ -95,7 +89,7 @@ const SearchDuration = ({ modalMessage, startDate, endDate }) => {
             iconEndType={'material-community'}
             iconEndColor={WHITE_COLOR}
             onPress={() => showDatePicker('endDate')}
-            containerStyle={{ width: startDate && endDate ? '45%' : '47%' }}
+            containerStyle={{ width: '49%' }}
          />
          <CustomDateTimePicker
             isDatePickerVisible={isDatePickerVisible}

@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       borderColor: TEXT_COLOR,
       borderWidth: 0.7,
-      paddingHorizontal: 10,
+      // paddingHorizontal: 10,
       paddingEnd: 0,
       backgroundColor: SURFACE_COLOR,
-      borderRadius: 10,
+      borderRadius: Math.round(SCREEN_WIDTH / 2 + SCREEN_HEIGHT / 2),
    },
    textContainer: {
       flex: 0.7,

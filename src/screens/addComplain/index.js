@@ -39,28 +39,7 @@ import {
 } from '../../redux/actions';
 import { useIsFocused } from '@react-navigation/native';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
-/* let vehiclesTypes = [
-   {
-      value: 'ضاغط',
-   },
-   {
-      value: 'حاويه',
-   },
-   {
-      value: 'مكنسه',
-   },
-   {
-      value: 'مكنه شطف اليه',
-   },
-]; */
-/* let contractorsNumbers = [
-   {
-      value: '80',
-   },
-   {
-      value: '81',
-   },
-]; */
+
 const AddComplain = ({ navigation }) => {
    const isFocused = useIsFocused();
    const vehiclesTypesRef = useRef(null);
@@ -153,6 +132,7 @@ const AddComplain = ({ navigation }) => {
             <View style={styles.headerTextContainer}>
                <CustomText text="اضافه بلاغ" />
             </View>
+            <View style={{ flex: 0.1 }} />
          </Header>
 
          {getContractorsAndVieheclesSpinner ? (

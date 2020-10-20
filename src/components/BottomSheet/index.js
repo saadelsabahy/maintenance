@@ -146,7 +146,7 @@ const CustomBottomSheet = ({
                      <CustomText
                         text={` تحريرا في ${moment().format('YYYY/MM/DD')}`}
                         textStyle={{
-                           marginVertical: SCREEN_HEIGHT > 850 ? 20 : 5,
+                           marginVertical: SCREEN_HEIGHT > 850 ? 20 : 10,
                         }}
                      />
                      <View
@@ -172,6 +172,7 @@ const CustomBottomSheet = ({
                      style={{
                         maxHeight: SCREEN_HEIGHT * 0.25,
                      }}
+                     persistentScrollbar={true}
                      renderItem={({ item, index }) => {
                         return (
                            <View style={{ ...styles.bottomSheetItem }}>
@@ -267,7 +268,7 @@ const CustomBottomSheet = ({
             ]}
             renderContent={renderInner}
             /*     renderHeader={renderHeader} */
-            enabledInnerScrolling={false}
+            enabledInnerScrolling={true}
             enabledBottomInitialAnimation
             initialSnap={2}
             ref={bottonSheetReferance}
