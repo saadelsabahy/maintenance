@@ -103,9 +103,11 @@ const DrawerNavigator = () => {
             backgroundColor: 'transparent',
          }}
          screenOptions={({ navigation, route }) => {
-            Reactotron.log('st..', navigation.dangerouslyGetState());
+            Reactotron.log('st..', route.state);
             return {
-               swipeEnabled: route.name == 'DashBoardStack' ? true : false,
+               // swipeEnabled:
+               //    route.state.routes[0].name == 'Dashboard' ? true : false,
+               // gestureEnabled:
             };
          }}
          drawerContent={props => <CustomDrawer {...props} />}

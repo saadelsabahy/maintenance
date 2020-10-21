@@ -60,7 +60,7 @@ export const getAllComplainsList = (statusId, sort) => async (
    try {
       dispatch({ type: GET_COMPLAINS_LIST_SPINNER });
       const getComplainsListResponse = await Api.get(
-         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&ComplianType=${complainType}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
+         `Complians?From=${dateFrom}&To=${dateTo}&ComplianId=${null}&plateNumber=${platNumber}&StatusId=${statusId}&ContractorId=${
             statusId && filterInput ? filterInput : contractorId
          }&PageIndex=${1}&PageSize=${rowsNumber}&Sort=${sort}`
       );
